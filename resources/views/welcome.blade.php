@@ -10,12 +10,14 @@
     <meta property="og:image" content="" />
     <meta name="format-detection" content="telephone=no">
     <!-- Scripts -->
-    {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
+    {{--
+    <script src="{{ asset('js/app.js') }}" defer></script> --}}
 
     <!-- Fonts -->
     <link rel="shortcut icon" type="image/png" href="{{ asset('storage/images/vistas/icono.png') }}" />
     <!-- Styles -->
-    {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
+    {{--
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
 
 
 
@@ -31,7 +33,8 @@
     <link href="{{ asset('vista/css/css-plugin-collections.css') }}" rel="stylesheet" />
     <!-- CSS | menuzord megamenu skins -->
     <link href="{{ asset('vista/css/menuzord-megamenu.css') }}" rel="stylesheet" />
-    {{-- <link id="menuzord-menu-skins" href="{{ asset('css/menuzord-skins/menuzord-boxed.css') }}" rel="stylesheet" /> --}}
+    {{--
+    <link id="menuzord-menu-skins" href="{{ asset('css/menuzord-skins/menuzord-boxed.css') }}" rel="stylesheet" /> --}}
     <!-- CSS | Main style file -->
     <link href="{{ asset('vista/css/style-main.css') }}" rel="stylesheet" type="text/css">
     <!-- CSS | Preloader Styles -->
@@ -72,6 +75,7 @@
                         <div class="col-md-9">
                             <div class="widget text-white">
                                 <ul class="list-inline xs-text-center text-white">
+                                    <li class="m-0 pl-10 pr-10"><a href="{{route('inicio')}}"><img src="{{asset('/storage/images/vistas/main.png')}}" width="170px"></a></li>
                                     <li class="m-0 pl-10 pr-10"> <a href="tel:+59174310408" class="text-white"><i
                                                 class="fa fa-phone text-white"></i> 123-456-789</a> </li>
                                     <li class="m-0 pl-10 pr-10">
@@ -108,7 +112,8 @@
                         <nav id="menuzord-right" class="menuzord blue no-bg">
                             <a class="menuzord-brand switchable-logo pull-left flip mb-15" href="{{URL('/') }}">
                                 <img class="logo-default" src="{{asset('storage/images/vistas/logob.png')}}" alt="">
-                                <img class="logo-scrolled-to-fixed" src="{{asset('storage/images/vistas/logoc.png')}}" alt="">
+                                <img class="logo-scrolled-to-fixed" src="{{asset('storage/images/vistas/logoc.png')}}"
+                                    alt="">
                             </a>
                             <ul class="menuzord-menu">
                                 <li><a href="{{ URL('empresas') }}">EMPRESAS</a>
@@ -223,7 +228,7 @@
         src="{{ asset('vista/js/revolution-slider/js/extensions/revolution.extension.kenburn.min.js') }}"></script>
     <script type="text/javascript"
         src="{{ asset('vista/js/revolution-slider/js/extensions/revolution.extension.layeranimation.min.js') }}">
-    </script>
+        </script>
     <script type="text/javascript"
         src="{{ asset('vista/js/revolution-slider/js/extensions/revolution.extension.migration.min.js') }}"></script>
     <script type="text/javascript"

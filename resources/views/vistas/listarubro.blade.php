@@ -11,6 +11,7 @@
         </section>
 
         <!-- Section: Event List -->
+
         <section>
             <div class="container mt-30 mb-30 pt-30 pb-0">
                 <div class="container mt-20">
@@ -52,7 +53,7 @@
                                                 <img class="img-fullwidth" src="{{ $rubro->imagen_rubro }}"
                                                     alt="..." />
                                             @else
-                                                <img class="img-fullwidth" src="{{asset('storage/images/vistas/1.png')}}"
+                                                <img class="img-fullwidth" src="{{asset('storage/images/rubros/1.png')}}"
                                                     alt="..." />
                                             @endif
                                         </div>

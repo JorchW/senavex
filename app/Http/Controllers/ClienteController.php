@@ -19,6 +19,7 @@ use Carbon\Carbon;
 class ClienteController extends Controller
 {
     public function index(){
+
         $productos = DB::table('productos')->get();
         $fechaActual = Carbon::now();
         $anioActual = substr($fechaActual,0,4);
@@ -151,7 +152,6 @@ class ClienteController extends Controller
         ->where([
             ['estado', 'activo']
         ])->orderByDesc('updated_at')->get();
-
         $rubros = DB::table('rubro')
         ->where([
             ['estado', 'activo'],
