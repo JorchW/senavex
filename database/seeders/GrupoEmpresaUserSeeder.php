@@ -13,6 +13,6 @@ class GrupoEmpresaUserSeeder extends Seeder
      */
     public function run()
     {
-        //
+        
     }
 }

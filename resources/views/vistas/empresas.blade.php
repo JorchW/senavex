@@ -131,8 +131,8 @@
                                             alt="" /></div>
                                     <div class="item"><img src="{{ asset('storage/images/vistas/nuestro.png') }}"
                                             alt="" /></div>
-                                    <div class="item">
-                                        <img src="{{ asset('storage/images/vistas/ministerio.jpg') }}" alt="" />
+                                    <div class="item"><img src="{{ asset('storage/images/vistas/ministerio.png') }}"  
+                                            alt="" />
                                     </div>
                                 </div>
                             </div>

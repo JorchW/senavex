@@ -14,7 +14,7 @@ class CreateProductosTable extends Migration
     public function up()
     {
         Schema::create('productos', function (Blueprint $table) {
-            $table->integer('id_producto')->autoIncrement();
+            $table->integer('id_producto');
             $table->string('cantidad_disponible');
             $table->string('nombre_producto');
             $table->string('imagen_producto');
@@ -42,6 +42,7 @@ class CreateProductosTable extends Migration
             $table->foreign('id_moneda')->references('id_moneda')->on('monedas');
 
             $table->foreign('id_empresa')->references('id_empresa')->on('empresas');
+            $table->primary('id_producto');
         });
     }
 

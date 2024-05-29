@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\EstadoEmpresas;
 use Illuminate\Database\Seeder;
 
 class GrupoEstadoEmpresaSeeder extends Seeder
@@ -13,6 +14,9 @@ class GrupoEstadoEmpresaSeeder extends Seeder
      */
     public function run()
     {
-        //
+        EstadoEmpresas::create([
+            "id_estado_empresa"=> 1,
+            "estado_empresa"=> "Activo"
+        ]);
     }
 }
