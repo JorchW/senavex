@@ -22,5 +22,6 @@ class DatabaseSeeder extends Seeder
         $this->call(MonedaSeeder::class);
         $this->call(UnidadMedidasSeeder::class);
         $this->call(ProductosSeeder::class);
+        $this->call(DirectorioSeeder::class);
     }
 }

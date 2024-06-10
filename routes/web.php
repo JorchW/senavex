@@ -1,5 +1,5 @@
 <?php
-
+use App\Models\DirectorioExportador;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 /*
@@ -80,3 +80,5 @@ Route::get('detalle-empresas/{id}', [App\Http\Controllers\ClienteController::cla
 
 Route::get('correo-lista', [App\Http\Controllers\HomeController::class, 'listaCorreo'])->name('correo-lista');
 Route::post('send-email/{id}',[App\Http\Controllers\MailController::class, 'sendEmail'])->name('send-email');
+
+Route::get('/directorio', function(){dd(DirectorioExportador::get());});

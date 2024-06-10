@@ -8,7 +8,7 @@
             background-image: url('https://agronomia.upea.bo/assets/pagina/assets/images/bg/bg3.jpg');
             background-position: 50% 0px;
           ">
-        </section>
+    </section>
 
         <!-- Section: Event List -->
         <section>
@@ -120,7 +120,7 @@
                             <br>
                             <br>
                         @endif
-                        <div class="pagination"> {{ $empresas->links(); }}</div>
+                        <div class="pagination"> {{ $empresas->links() }}</div>
                             
                     </div>
                     <div class="col-md-3">

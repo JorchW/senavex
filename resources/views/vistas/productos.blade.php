@@ -2,8 +2,13 @@
 @section('vista')
     <!-- Start main-content -->
     <div class="main-content">
-        <section class="inner-header divider parallax layer-overlay overlay-dark-5 pt-150"
-            data-bg-img="{{ asset('storage/images/vistas/hd.png') }}" style="background-position: 50% 0px"></section>
+    <section class="inner-header divider parallax layer-overlay overlay-dark-5 pt-150"
+            data-bg-img="https://agronomia.upea.bo/assets/pagina/assets/images/bg/bg3.jpg"
+            style="
+            background-image: url('https://agronomia.upea.bo/assets/pagina/assets/images/bg/bg3.jpg');
+            background-position: 50% 0px;
+          ">
+    </section>
         <!-- Section: Blog -->
         <section>
             <div class="container mt-30 mb-30 pt-30 pb-0">
@@ -101,7 +106,7 @@
                             <br>
                             <br>
                         @endif
-                        <div class="pagination"> {{ $productos->links(); }}</div>
+                        <div class="pagination"> {{ $productos->links() }}</div>
                         {{-- <div class="col-sm-3 col-md-3 col-lg-3">
                         <div class="services mb-sm-50 mt-20">
                             <div class="thumb">

@@ -50,7 +50,7 @@
                                     <div class="col-sm-4 pr-0 pr-sm-15">
                                         <div class="thumb pt-15 pb-15">
                                             @if (strlen($rubro->imagen_rubro) > 0)
-                                                <img class="img-fullwidth" src="{{ $rubro->imagen_rubro }}"
+                                                <img class="img-fullwidth" src="{{ $rubro->imagen_rubro }}" height="150px"
                                                     alt="..." />
                                             @else
                                                 <img class="img-fullwidth" src="{{asset('storage/images/rubros/1.png')}}"

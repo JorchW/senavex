@@ -12,18 +12,18 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    protected $connection="taypi";
+
+    protected $table="users";
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
+    protected $primaryKey= "id_user";
     protected $fillable = [
         'ci',
-        'nombres',
-        'primerApellido',
-        'segundoApellido',
-        'email',
-        'username',
         'password',
         'estado',
     ];

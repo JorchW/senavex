@@ -75,7 +75,6 @@
                         <div class="col-md-9">
                             <div class="widget text-white">
                                 <ul class="list-inline xs-text-center text-white">
-                                    <li class="m-0 pl-10 pr-10"><a href="{{route('inicio')}}"><img src="{{asset('/storage/images/vistas/main.png')}}" width="170px"></a></li>
                                     <li class="m-0 pl-10 pr-10"> <a href="tel:+59174310408" class="text-white"><i
                                                 class="fa fa-phone text-white"></i> 123-456-789</a> </li>
                                     <li class="m-0 pl-10 pr-10">
