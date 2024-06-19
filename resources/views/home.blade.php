@@ -62,10 +62,9 @@
         ***********************************-->
         <div class="nav-header">
             <a href="{{ URL('home') }}" class="brand-logo">
-                <img class="logo-abbr" src="{{ asset('/storage/images/vistas/icono.png') }}" height="50"
-                    width="50" alt="">
-                <img class="brand-title" src="{{ asset('/storage/images/vistas/senavex.png') }}" height="50"
-                    width="150" alt="">
+                <img src="{{ asset('/storage/images/vistas/icono.png') }}" height="50" width="50" alt="">
+                <img class="brand-title" src="{{ asset('/storage/images/vistas/senavex.png') }}" height="50" width="150"
+                    alt="">
 
             </a>
             <div class="nav-control">
@@ -184,21 +183,19 @@
                                 </div>
                             </li>
                             <li class="nav-item dropdown header-profile">
-                                <a class="nav-link" href="javascript:void(0);" role="button"
-                                    data-bs-toggle="dropdown">
+                                <a class="nav-link" href="javascript:void(0);" role="button" data-bs-toggle="dropdown">
                                     <div class="header-info me-3">
-                                        <span class="fs-16 font-w600 ">{{ Auth::user()->ci }}</span>
+                                        <span class="fs-16 font-w600 ">{{ Auth::user()->ci}}</span>
+                                        <span class="fs-16 font-w600">{{Auth::user()->persona->nombres}}</span>
                                         <small class="text-end fs-14 font-w400">{{ Auth::user()->email }}</small>
                                     </div>
-                                    <img src="{{ asset('admin/images/profile/pic1.jpg') }}" width="20"
-                                        alt="" />
+                                    <img src="{{ asset('admin/images/profile/pic1.jpg') }}" width="20" alt="" />
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end">
                                     {{-- <a href="app-profile.html" class="dropdown-item ai-icon">
                                         <svg id="icon-user1" xmlns="http://www.w3.org/2000/svg" class="text-primary"
-                                            width="18" height="18" viewBox="0 0 24 24" fill="none"
-                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                            stroke-linejoin="round">
+                                            width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                                             <circle cx="12" cy="7" r="4"></circle>
                                         </svg>
@@ -206,9 +203,8 @@
                                     </a>
                                     <a href="email-inbox.html" class="dropdown-item ai-icon">
                                         <svg id="icon-inbox" xmlns="http://www.w3.org/2000/svg" class="text-success"
-                                            width="18" height="18" viewBox="0 0 24 24" fill="none"
-                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                            stroke-linejoin="round">
+                                            width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <path
                                                 d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
                                             </path>
@@ -216,15 +212,12 @@
                                         </svg>
                                         <span class="ms-2">Inbox </span>
                                     </a> --}}
-                                    <a href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-												  document.getElementById('logout-form').submit();"
-                                        class="dropdown-item
+                                    <a href="{{ route('logout') }}" onclick="event.preventDefault();
+												  document.getElementById('logout-form').submit();" class="dropdown-item
                                         ai-icon">
                                         <svg id="icon-logout" xmlns="http://www.w3.org/2000/svg" class="text-danger"
-                                            width="18" height="18" viewBox="0 0 24 24" fill="none"
-                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                            stroke-linejoin="round">
+                                            width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
                                             <polyline points="16 17 21 12 16 7"></polyline>
                                             <line x1="21" y1="12" x2="9" y2="12">
@@ -232,8 +225,7 @@
                                         </svg>
                                         <span class="ms-2">{{ __('Cerrar Sesión') }} </span>
                                     </a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                        class="d-none">
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
                                 </div>
@@ -260,9 +252,9 @@
                         </a>
                     </li>
                     @foreach ($roles as $rol)
-                        @if ($rol->nombre_rol == 'Certificador')
+                        @if ($rol->rol == 'Certificador')
                             <li>
-                                <h5 class="nav-text"> {{ $rol->nombre_rol }}</h5>
+                                <h5 class="nav-text"> {{ $rol->rol }}</h5>
                             </li>
                             <li><a href="{{ URL('list-emp-admin') }}" class="ai-icon" aria-expanded="false">
                                     <i class="flaticon-013-checkmark"></i>
@@ -289,9 +281,15 @@
                                     <span class="nav-text">Correos</span>
                                 </a>
                             </li>
-                        @else
+                        @else 
                             <li>
-                                <h5 class="nav-text"> {{ $rol->nombre_rol }}</h5>
+                                <br>
+                                <div class="nav-text">
+                                    <h5 class="btn btn-outline-primary" style="border-radius:10px;">
+                                        <i class="flaticon-013-checkmark"></i>
+                                        Rol: {{ $rol->rol }}
+                                    </h5>
+                                </div>
                             </li>
                             {{-- <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                                     <i class="flaticon-050-info"></i>
@@ -299,33 +297,33 @@
                                 </a>
                                 <ul aria-expanded="false">
                                     @foreach ($empresas as $empresa)
-                                        @if ($empresa->estado == 'inactivo')
-                                            <li><a
-                                                    href="{{ URL('list-grupo-rubro-admin/' . Crypt::encryptString($empresa->id_empresa)) }}">
-                                                    {{ $empresa->razon_social_empresa }}
-                                                    <span class="badge badge-warning">Pendiente</span>
-                                                </a>
-                                            </li>
-                                        @elseif ($empresa->id_estado_empresa == '4' && $empresa->estado == 'activo')
-                                            <li><a
-                                                    href="{{ URL('list-grupo-rubro-admin/' . Crypt::encryptString($empresa->id_empresa)) }}">
-                                                    {{ $empresa->razon_social_empresa }}
-                                                    <span class="badge badge-success">Activo</span>
-                                                </a>
-                                            </li>
-                                        @elseif ($empresa->estado_ruex == '0')
-                                            <li><a href="#">
-                                                    {{ $empresa->razon_social_empresa }}
-                                                    <span class="badge badge-secondary">Sin Ruex</span>
-                                                </a>
-                                            </li>
-                                        @else
-                                            <li><a href="#">
-                                                    {{ $empresa->razon_social_empresa }}
-                                                    <span class="badge badge-secondary">Rechazado</span>
-                                                </a>
-                                            </li>
-                                        @endif
+                                    @if ($empresa->estado == 'inactivo')
+                                    <li><a
+                                            href="{{ URL('list-grupo-rubro-admin/' . Crypt::encryptString($empresa->id_empresa)) }}">
+                                            {{ $empresa->razon_social_empresa }}
+                                            <span class="badge badge-warning">Pendiente</span>
+                                        </a>
+                                    </li>
+                                    @elseif ($empresa->id_estado_empresa == '4' && $empresa->estado == 'activo')
+                                    <li><a
+                                            href="{{ URL('list-grupo-rubro-admin/' . Crypt::encryptString($empresa->id_empresa)) }}">
+                                            {{ $empresa->razon_social_empresa }}
+                                            <span class="badge badge-success">Activo</span>
+                                        </a>
+                                    </li>
+                                    @elseif ($empresa->estado_ruex == '0')
+                                    <li><a href="#">
+                                            {{ $empresa->razon_social_empresa }}
+                                            <span class="badge badge-secondary">Sin Ruex</span>
+                                        </a>
+                                    </li>
+                                    @else
+                                    <li><a href="#">
+                                            {{ $empresa->razon_social_empresa }}
+                                            <span class="badge badge-secondary">Rechazado</span>
+                                        </a>
+                                    </li>
+                                    @endif
                                     @endforeach
                                 </ul>
                             </li> --}}
@@ -335,34 +333,39 @@
                                 </a>
                                 <ul aria-expanded="false">
                                     @foreach ($empresas as $empresa)
-                                        @if ($empresa->estado == 'inactivo')
-                                            <li><a
-                                                    href="{{ URL('one-emp-admin/' . Crypt::encryptString($empresa->id_empresa)) }}">
-                                                    {{ $empresa->razon_social_empresa }}
-                                                    <span class="badge badge-warning">Pendiente</span>
-                                                </a>
-                                            </li>
-                                        @elseif ($empresa->id_estado_empresa == '4' && $empresa->estado == 'activo')
-                                            <li><a
-                                                    href="{{ URL('one-emp-admin/' . Crypt::encryptString($empresa->id_empresa)) }}">
-                                                    {{ $empresa->razon_social_empresa }}
-                                                    <span class="badge badge-success">Activo</span>
-                                                </a>
-                                            </li>
-                                            {{-- @elseif ($empresa->estado_ruex == '0')
-                                            <li><a href="#">
-                                                    {{ $empresa->razon_social_empresa }}
-                                                    <span class="badge badge-secondary">Sin Ruex</span>
-                                                </a>
-                                            </li> --}}
-                                        @else
-                                            <li><a href="#">
-                                                    {{ $empresa->razon_social_empresa }}
-                                                    <span class="badge badge-secondary">Rechazado</span>
-                                                </a>
-                                            </li>
-                                        @endif
+                                        <li>
+                                            <a href="{{ URL('one-emp-admin/' . Crypt::encryptString($empresa->id_empresa)) }}">
+                                                {{$empresa->razon_social }}
+                                            </a>
+                                        </li>
                                     @endforeach
+                                    {{--@foreach ($empresas as $empresa)
+                                    @if ($empresa->estado == 'inactivo')
+                                    <li><a href="{{ URL('one-emp-admin/' . Crypt::encryptString($empresa->id_empresa)) }}">
+                                            {{ $empresa->razon_social }}
+                                            <span class="badge badge-warning">Pendiente</span>
+                                        </a>
+                                    </li>
+                                    @elseif ($empresa->id_estado_empresa == '4' && $empresa->estado == 'activo')
+                                    <li><a href="{{ URL('one-emp-admin/' . Crypt::encryptString($empresa->id_empresa)) }}">
+                                            {{ $empresa->razon_social }}
+                                            <span class="badge badge-success">Activo</span>
+                                        </a>
+                                    </li>
+                                    {{-- @elseif ($empresa->estado_ruex == '0')
+                                    <li><a href="#">
+                                            {{ $empresa->razon_social_empresa }}
+                                            <span class="badge badge-secondary">Sin Ruex</span>
+                                        </a>
+                                    </li>
+                                    @else
+                                    <li><a href="#">
+                                            {{ $empresa->razon_social }}
+                                            <span class="badge badge-secondary">Rechazado</span>
+                                        </a>
+                                    </li>
+                                    @endif
+                                    @endforeach--}}
                                 </ul>
                             </li>
                             {{-- href="{{ URL ('list-prod-admin') }}" --}}
@@ -371,28 +374,27 @@
                                     <span class="nav-text">Productos</span>
                                 </a>
                                 <ul aria-expanded="false">
-                                    @foreach ($empresas as $empresa)
-                                        @if ($empresa->estado == 'inactivo')
-                                            <li><a href="{{ URL('list-prod-admin/' . Crypt::encryptString($empresa->id_empresa)) }}">
-                                                    {{ $empresa->razon_social_empresa }}
-                                                    <span class="badge badge-warning">Pendiente</span>
-                                                </a>
-                                            </li>
-                                        @elseif ($empresa->id_estado_empresa == '4' && $empresa->estado == 'activo')
-                                            <li><a
-                                                    href="{{ URL('list-prod-admin/' . Crypt::encryptString($empresa->id_empresa)) }}">
-                                                    {{ $empresa->razon_social_empresa }}
-                                                    <span class="badge badge-success">Activo</span>
-                                                </a>
-                                            </li>
-                                        @else
-                                            <li><a href="#">
-                                                    {{ $empresa->razon_social_empresa }}
-                                                    <span class="badge badge-secondary">Rechazado</span>
-                                                </a>
-                                            </li>
-                                        @endif
-                                    @endforeach
+                                    {{--@foreach ($empresas as $empresa)
+                                    @if ($empresa->estado == 'inactivo')
+                                    <li><a href="{{ URL('list-prod-admin/' . Crypt::encryptString($empresa->id_empresa)) }}">
+                                            {{ $empresa->razon_social }}
+                                            <span class="badge badge-warning">Pendiente</span>
+                                        </a>
+                                    </li>
+                                    @elseif ($empresa->id_estado_empresa == '4' && $empresa->estado == 'activo')
+                                    <li><a href="{{ URL('list-prod-admin/' . Crypt::encryptString($empresa->id_empresa)) }}">
+                                            {{ $empresa->razon_social }}
+                                            <span class="badge badge-success">Activo</span>
+                                        </a>
+                                    </li>
+                                    @else
+                                    <li><a href="#">
+                                            {{ $empresa->razon_social }}
+                                            <span class="badge badge-secondary">Rechazado</span>
+                                        </a>
+                                    </li>
+                                    @endif
+                                    @endforeach--}}
                                 </ul>
                             </li>
                             @break
@@ -430,8 +432,8 @@
         <div class="footer">
 
             <div class="copyright">
-                <p>Copyright © Diseñado y desarrollado por <a href="https://senavex.gob.bo/"
-                        target="_blank">Senavex</a> 2022</p>
+                <p>Copyright © Diseñado y desarrollado por <a href="https://senavex.gob.bo/" target="_blank">Senavex</a>
+                    2022</p>
             </div>
         </div>
         <!--**********************************
@@ -473,29 +475,30 @@
     <script src="{{ asset('admin/js/custom.min.js') }}"></script>
     <script src="{{ asset('admin/js/deznav-init.js') }}"></script>
     <script src="{{ asset('admin/js/demo.js') }}"></script>
-    {{-- <script src="admin/js/styleSwitcher.js"></script> --}}
+    {{--
+    <script src="admin/js/styleSwitcher.js"></script> --}}
 </body>
 <script>
-    $(document).ready(function() {
-        $(".UpperCase").on("keypress", function() {
+    $(document).ready(function () {
+        $(".UpperCase").on("keypress", function () {
             $input = $(this);
-            setTimeout(function() {
+            setTimeout(function () {
                 $input.val($input.val().toUpperCase());
             }, 0);
         })
 
-        $('.input-number').on('input', function() {
+        $('.input-number').on('input', function () {
             this.value = this.value.replace(/[^0-9]/g, '');
         })
 
-        $('.input-number-dec').on('input', function() {
+        $('.input-number-dec').on('input', function () {
             this.value = this.value.replace(/[^0-9,.]/g, '');
         })
 
         var validExtensions = ".png, .gif, .jpeg, .jpg";
         var allowedWeight = 1024;
 
-        $('.input-image').change(function() {
+        $('.input-image').change(function () {
             $('.text-image').text('');
             $('.img-src').attr('src', '');
             if (validateExtensionEmpresa(this)) {
@@ -539,13 +542,13 @@
             var reader = new FileReader();
             //Read the contents of Image File.
             reader.readAsDataURL(data.files[0]);
-            reader.onload = function(e) {
+            reader.onload = function (e) {
                 //Initiate the JavaScript Image object.
                 var image = new Image();
                 //Set the Base64 string return from FileReader as source.
                 image.src = e.target.result;
                 //Validate the File Height and Width.
-                image.onload = function() {
+                image.onload = function () {
                     var height = this.height;
                     var width = this.width;
                     console.log(height, width);
@@ -568,7 +571,7 @@
         function viewImage1(data) {
             if (data.files && data.files[0]) {
                 var reader = new FileReader();
-                reader.onload = function(e) {
+                reader.onload = function (e) {
                     $('.img-src').attr('src', e.target.result);
                 }
                 reader.readAsDataURL(data.files[0]);
@@ -578,7 +581,7 @@
 
 
 
-        $('.input-image-2').change(function() {
+        $('.input-image-2').change(function () {
             $('.text-image-2').text('');
             $('.img-src-2').attr('src', '');
             if (validateExtension(this)) {
@@ -623,13 +626,13 @@
             var reader = new FileReader();
             //Read the contents of Image File.
             reader.readAsDataURL(data.files[0]);
-            reader.onload = function(e) {
+            reader.onload = function (e) {
                 //Initiate the JavaScript Image object.
                 var image = new Image();
                 //Set the Base64 string return from FileReader as source.
                 image.src = e.target.result;
                 //Validate the File Height and Width.
-                image.onload = function() {
+                image.onload = function () {
                     var height = this.height;
                     var width = this.width;
                     console.log(height, width);
@@ -653,7 +656,7 @@
         function viewImage(data) {
             if (data.files && data.files[0]) {
                 var reader = new FileReader();
-                reader.onload = function(e) {
+                reader.onload = function (e) {
                     $('.img-src-2').attr('src', e.target.result);
                 }
                 reader.readAsDataURL(data.files[0]);

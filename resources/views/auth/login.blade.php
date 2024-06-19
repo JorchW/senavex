@@ -11,8 +11,8 @@
                         <div class="row no-gutters">
                             <div class="col-xl-12">
                                 <div class="auth-form">
-                                    <div class="text-center mb-3">
-                                        <a href=""><img src="{{asset('storage/images/vistas/logoc.png')}}" width="150px" alt=""></a>
+                                    <div class="text-center mb-3" style="background-color:#3c3c3c;border-radius:20px;">
+                                        <a href=""><img src="{{asset('storage/images/vistas/logoc.png')}}" style="width:250px;margin:auto;" alt=""></a>
                                     </div>
                                     <h4 class="text-center mb-4">Inicia sesión en tu cuenta</h4>
                                     <form method="POST" action="{{route('login')}}">

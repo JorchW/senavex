@@ -40,7 +40,6 @@ class CreateProductosTable extends Migration
             $table->foreign('id_categoria')->references('id_categoria')->on('categoria');
             $table->foreign('id_unidad_medida')->references('id_unidad_medida')->on('unidad_medidas');
             $table->foreign('id_moneda')->references('id_moneda')->on('monedas');
-
             $table->foreign('id_empresa')->references('id_empresa')->on('empresas');
             $table->primary('id_producto');
         });

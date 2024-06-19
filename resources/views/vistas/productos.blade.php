@@ -2,13 +2,17 @@
 @section('vista')
     <!-- Start main-content -->
     <div class="main-content">
-    <section class="inner-header divider parallax layer-overlay overlay-dark-5 pt-150"
+    {{--<section class="inner-header divider parallax layer-overlay overlay-dark-5 pt-150"
             data-bg-img="https://agronomia.upea.bo/assets/pagina/assets/images/bg/bg3.jpg"
             style="
             background-image: url('https://agronomia.upea.bo/assets/pagina/assets/images/bg/bg3.jpg');
             background-position: 50% 0px;
           ">
-    </section>
+    </section>--}}
+    <br>
+    <br>
+    <br>
+    <br>
         <!-- Section: Blog -->
         <section>
             <div class="container mt-30 mb-30 pt-30 pb-0">

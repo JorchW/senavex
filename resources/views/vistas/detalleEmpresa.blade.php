@@ -3,53 +3,56 @@
     <!-- Start main-content -->
     <div class="main-content">
         <!-- Section: inner-header -->
-        <section class="inner-header divider parallax layer-overlay overlay-dark-5 pt-150"
+        {{--<section class="inner-header divider parallax layer-overlay overlay-dark-5 pt-150"
             data-bg-img="https://agronomia.upea.bo/assets/pagina/assets/images/bg/bg3.jpg"
             style="
         background-image: url('https://agronomia.upea.bo/assets/pagina/assets/images/bg/bg3.jpg');
         background-position: 50% 0px;
       ">
-        </section>
-
+        </section>--}}
+        <br>
+        <br>
+        <br>
+        <br>
         <!-- Divider: Contact -->
         <section class="divider">
             <div class="container">
                 <h2 class="mt-0 line-height-1 line-bottom-edu">
-                    Bienvenido a <span class="text-theme-colored3">{{ $detEmpresa->razon_social_empresa }}</span>
+                    Bienvenido a <span class="text-theme-colored3">{{ $detEmpresa->razon_social }}</span>
                 </h2>
 
                 <div class="row pt-10">
                     <div class="col-md-4">
-                        <img class="img-fullwidth" src="{{ $detEmpresa->imagen_empresa }}" alt="" />
+                        {{--<img class="img-fullwidth" src="{{ $detEmpresa->imagen_empresa }}" alt="" />--}}
                     </div>
 
                     <div class="col-md-8">
-                        <h3 class="mt-10 mb-30">{{ $detEmpresa->razon_social_empresa }}</h3>
+                        <h3 class="mt-10 mb-30">{{ $detEmpresa->razon_social }}</h3>
                         <p class="lead">
-                            {{ $detEmpresa->descripcion_empresa }}
+                            {{ ucfirst(mb_strtolower($detEmpresa->descripcion_empresa)) }}
                         </p>
-
+                        
                         <ul class="list angle-double-right">
                             <li><strong>Teléfono:</strong> {{ $detEmpresa->telefono }}</li>
                             <li><strong>Correo electrónico:</strong> {{ $detEmpresa->email }}</li>
-                            <li><strong>Encargados:</strong> {{ $detEmpresa->nombre_1 }}  / {{ $detEmpresa->nombre_2 }}</li>
-                            <li><strong>Celulares:</strong> {{ $detEmpresa->celular_1 }} / {{ $detEmpresa->celular_2 }}</li>
+                            {{--<li><strong>Encargados:</strong> {{ $detEmpresa->nombre_1 }}  / {{ $detEmpresa->nombre_2 }}</li>--}}
+                            <li><strong>Celulares:</strong> {{ $detEmpresa->celular }}</li>
                             <li>
-                                <strong>Dirección:</strong>  {{ $detEmpresa->direccion }}
+                                <strong>Dirección:</strong>  {{ $detEmpresa->direccion_descriptiva }}
                             </li>
                         </ul>
                     </div>
                 </div>
                 <div class="mt-30 mb-0">
                     <ul class="styled-icons icon-circled m-0 pull-right">
-                        <li>
+                        {{--<li>
                             <a href="{{ $detEmpresa->facebook }}" target="_blank" data-bg-color="#3A5795" style="background: rgb(58, 87, 149) !important"><i
                                     class="fa fa-facebook text-white"></i></a>
                         </li>
                         <li>
                             <a href="{{ $detEmpresa->whatsapp }}" target="_blank" data-bg-color="#25D366" style="background: rgb(85, 238, 108) !important"><i
                                     class="fa fa-whatsapp text-white"></i></a>
-                        </li>
+                        </li>--}}
                         
                     </ul>
                 </div>
@@ -113,7 +116,7 @@
                                         </h5>
                                         <p>
                                             <font style="vertical-align: inherit">
-                                                <font style="vertical-align: inherit">O{{ $detEmpresa->direccion }}</font>
+                                                <font style="vertical-align: inherit">O{{ $detEmpresa->direccion_descriptiva }}</font>
                                             </font>
                                         </p>
                                     </div>
@@ -131,8 +134,8 @@
                                         </h5>
                                         <p>
                                             <font style="vertical-align: inherit">
-                                                <font style="vertical-align: inherit">{{ $detEmpresa->celular_1 }}</font> /
-                                                <font style="vertical-align: inherit">{{ $detEmpresa->celular_2 }}</font>
+                                                <font style="vertical-align: inherit">{{ $detEmpresa->telefono }}</font> /
+                                                <font style="vertical-align: inherit">{{ $detEmpresa->celular }}</font>
                                             </font>
                                         </p>
                                     </div>
@@ -162,7 +165,7 @@
 
                     <div class="col-md-7">
                         <!-- Google Map HTML Codes -->
-                            {!!$detEmpresa->ubicacion!!}
+                            {{--{!!$detEmpresa->ubicacion!!}--}}    
                     </div>
                 </div>
             </div>

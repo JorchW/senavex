@@ -1,17 +1,18 @@
 @extends('welcome')
 @section('vista')
     <!-- Start main-content -->
-    <div class="main-content">
-        <section class="inner-header divider parallax layer-overlay overlay-dark-5 pt-150"
+    {{--<section class="inner-header divider parallax layer-overlay overlay-dark-5 pt-150"
             data-bg-img="https://agronomia.upea.bo/assets/pagina/assets/images/bg/bg3.jpg"
             style="
-        background-image: url('https://agronomia.upea.bo/assets/pagina/assets/images/bg/bg3.jpg');
-        background-position: 50% 0px;
-      ">
-        </section>
-
+            background-image: url('https://agronomia.upea.bo/assets/pagina/assets/images/bg/bg3.jpg');
+            background-position: 50% 0px;
+          ">
+    </section>--}}
         <!-- Section: Event List -->
-
+        <br>
+        <br>
+        <br>
+        <br>
         <section>
             <div class="container mt-30 mb-30 pt-30 pb-0">
                 <div class="container mt-20">
@@ -49,19 +50,19 @@
                                 <div class="row">
                                     <div class="col-sm-4 pr-0 pr-sm-15">
                                         <div class="thumb pt-15 pb-15">
-                                            @if (strlen($rubro->imagen_rubro) > 0)
+                                            {{--@if (strlen($rubro->imagen_rubro) > 0)
                                                 <img class="img-fullwidth" src="{{ $rubro->imagen_rubro }}" height="150px"
                                                     alt="..." />
                                             @else
                                                 <img class="img-fullwidth" src="{{asset('storage/images/rubros/1.png')}}"
                                                     alt="..." />
-                                            @endif
+                                            @endif--}}
                                         </div>
                                     </div>
                                     <div class="col-sm-8 pl-0 pl-sm-15">
                                         <div class="event-details p-15 mt-20">
                                             <h4 class="text-theme-colored media-heading text-lowercase font-weight-500">
-                                                {{ $rubro->nombre_rubro }}
+                                                {{ $rubro->descripcion_rubro }}
                                             </h4>
                                             <a class="pull-right text-gray font-13 pb-5" href="{{URL('list-prod-rubros/'.Crypt::encryptString($rubro->id_rubro))}}"><i
                                                     class="fa fa-angle-double-right text-theme-colored"></i>

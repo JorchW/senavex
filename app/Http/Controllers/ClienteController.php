@@ -20,7 +20,7 @@ class ClienteController extends Controller
 {
     public function index(){
 
-        $productos = DB::table('productos')->get();
+        $productos = DB::table('directorio.directorio_productos')->get();
         $fechaActual = Carbon::now();
         $anioActual = substr($fechaActual,0,4);
         $mesActual = substr($fechaActual,5,2);
@@ -30,11 +30,9 @@ class ClienteController extends Controller
             $mes = substr($producto->created_at,5,2);
             $dia = substr($producto->created_at,8,2);
             if ($anio != $anioActual && $mes == $mesActual){
-                DB::table('productos')
-                ->where('id_producto',$producto->id_producto) 
-                ->update([
-                    'estado'           => 'eliminado',
-                ]);
+                DB::table('directorio.directorio_productos')
+                ->where('id_producto',$producto->id_producto);
+                //->update(['estado'=> 'eliminado',]);
             }
         }
         return view('vistas.inicio');
@@ -44,14 +42,14 @@ class ClienteController extends Controller
     ////////////////////////////////////////////////////////////////////////////////////////////////
     public function listaProductos(Request $request){
         $buscador_producto = trim($request->get('buscador_producto'));
-        $productos = DB::table('productos')
-        ->join('empresas', 'empresas.id_empresa', '=', 'productos.id_empresa')
-        ->join('monedas', 'monedas.id_moneda', '=', 'productos.id_moneda')
-        ->select('productos.*', 'monedas.*', 'empresas.*')
+        $productos = DB::table('directorio.directorio_productos')
+        ->join('empresas', 'empresas.id_empresa', '=', 'directorio_productos.id_empresa')
+        //->join('monedas', 'monedas.id_moneda', '=', 'productos.id_moneda')
+        ->select('directorio_productos.*', /**'monedas.*'*/ 'empresas.*')
         ->where([
-            ['productos.estado', 'activo'],
-            ['empresas.estado', 'activo'],
-            ['productos.nombre_producto', 'like', '%'.$buscador_producto.'%']
+            //['productos.estado', 'activo'],
+            //['empresas.estado', 'activo'],
+            //['productos.nombre_producto', 'like', '%'.$buscador_producto.'%']
         ])->orderByDesc('productos.updated_at','empresas.updated_at')->paginate(8);
 
 
@@ -89,38 +87,39 @@ class ClienteController extends Controller
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
     public function listaEmpresas(Request $request){
         $buscador_empresa = trim($request->get('buscador_empresa'));
+        $buscador_empresa_m = mb_strtolower($buscador_empresa, 'UTF-8');
         $empresas = DB::table('empresas')
-        ->where([
-            ['estado', 'activo'],
-            ['razon_social_empresa', 'like', '%'.$buscador_empresa.'%']
-        ])->orderByDesc('updated_at')->paginate(3);
+            ->where([
+                //['estado', 'activo'],
+                ['razon_social', 'ILIKE', '%'.$buscador_empresa_m.'%']
+            ])
+            ->orderByDesc('updated_at')->paginate(3);
 
-
-        return view ('vistas.empresas',[
+        return view('vistas.empresas', [
             'empresas' => $empresas,
             'buscador_empresa' => $buscador_empresa 
         ]);
     }
+    
     public function oneEmpresa($id){
         $idDes = Crypt::decryptString($id);
         $detEmpresa = DB::table('empresas')
                     ->where([
-                        ['estado', 'activo'],
+                        //['estado', 'activo'],
                         ['id_empresa',$idDes]
                     ])->first();
-        $productos = DB::table('productos')
-                        ->join('empresas', 'empresas.id_empresa', '=', 'productos.id_empresa')
-                        ->join('monedas', 'monedas.id_moneda', '=', 'productos.id_moneda')
-                        ->select('productos.*', 'monedas.*', 'empresas.*')
+        $productos = DB::table('directorio.directorio_productos')
+                        ->join('empresas', 'empresas.id_empresa', '=', 'directorio_productos.id_empresa')
+                        //->join('monedas', 'monedas.id_moneda', '=', 'productos.id_moneda')
+                        ->select('directorio_productos.*', /*'monedas.*'*/ 'empresas.*')
                         ->where([
-                            ['productos.estado', 'activo'],
-                            ['empresas.estado', 'activo'],
-                            ['productos.id_empresa',$idDes]
+                            //['productos.estado', 'activo'],
+                            //['empresas.estado', 'activo'],
+                            ['directorio_productos.id_empresa',$idDes]
                             
-                        ])->orderByDesc('productos.updated_at','empresas.updated_at')->get();
+                        ])->orderByDesc('directorio_productos.updated_at','empresas.updated_at')->get();
         return view('vistas.detalleEmpresa',[
             'detEmpresa' => $detEmpresa,
             'productos' => $productos
@@ -150,12 +149,12 @@ class ClienteController extends Controller
         $buscador_rubro = trim($request->get('buscador_rubro'));
         $empresas = DB::table('empresas')
         ->where([
-            ['estado', 'activo']
+            //['estado', 'activo']
         ])->orderByDesc('updated_at')->get();
-        $rubros = DB::table('rubro')
+        $rubros = DB::table('empresa_rubros')
         ->where([
-            ['estado', 'activo'],
-            ['nombre_rubro', 'like', '%'.$buscador_rubro.'%']
+            //['estado', 'activo'],
+            //['nombre_rubro', 'like', '%'.$buscador_rubro.'%']
         ])->orderByDesc('updated_at')->paginate(6, ['*'], 'page', null);
         // $rubros = DB::table('productos')
         //                 ->join('empresas', 'empresas.id_empresa', '=', 'productos.id_empresa')

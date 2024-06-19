@@ -9,13 +9,10 @@ class Rubro extends Model
 {
     use HasFactory;
 
-    protected $table = 'rubro';
+    protected $table = 'empresa_rubro';
     protected $primaryKey = 'id_rubro';
     
     protected $fillable = [
-        'nombre_rubro',
-        'abreviacion_rubro',
-        'imagen_rubro',
-        'estado',
+        'descripcion_rubro',
     ];
 }

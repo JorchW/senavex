@@ -105,7 +105,7 @@
                     </div>
                 </div>
             </div>
-            <div class="header-nav navbar-scrolltofixed navbar-sticky-animated">
+            <div class="header-nav navbar-scrolltofixed navbar-sticky-animated" style="background-color: #3c3c3c;">
                 <div class="header-nav-wrapper">
                     <div class="container">
                         <nav id="menuzord-right" class="menuzord blue no-bg">

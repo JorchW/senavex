@@ -46,32 +46,33 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
-     
-    public function login(Request $request){
+
+    public function login(Request $request)
+    {
         $request->validate([
-            'ci'=> 'required',
-            'password'=> 'required',
-            ], [
-                'ci.required' => 'El campo C.I. es obligatorio!',
-                //'email.email' =>'El campo Email debe ser una direccion de correo valida!',
-                'password.required' => 'El campo Contraseña es onligatorio'
-            ]);
+            'ci' => 'required',
+            'password' => 'required',
+        ], [
+            'ci.required' => 'El campo C.I. es obligatorio!',
+            'password.required' => 'El campo Contraseña es onligatorio'
+        ]);
 
-            if (Auth::attempt(['ci'=>$request->ci, 'password' => $request->password])){
-                return redirect()->intended($this->redirectPath());
-            } else {
-                return redirect()->back()->withErrors(['ci'=>'Las credenciales no coinciden con el registro!']);
-            }
-    } 
+        if (Auth::attempt(['ci' => $request->ci, 'password' => $request->password])) {
+            return redirect()->intended($this->redirectPath());
+        } else {
+            return redirect()->back()->withErrors(['ci' => 'Las credenciales no coinciden con el registro!']);
+        }
+    }
 
-    public function username(){
+    public function username()
+    {
         return 'ci';
     }
     /**
      * Create a new controller instance.
      *     */
 
-//    public function login(Request $request)
+    //    public function login(Request $request)
 //    {
 //        try {
 //            DB::beginTransaction();

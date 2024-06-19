@@ -8,26 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Productos extends Model
 {
     use HasFactory;
-    protected $table = 'productos';
+    protected $table = 'directorio.directorio_productos';
     protected $primaryKey = 'id_producto';
 
     protected $fillable = [
         'id_producto',
-        'cantidad_disponible',
-        'numero_producto',
-        'nombre_producto',
-        'imagen_producto',
-        'descripcion_producto',
-        'precio_producto',
-        'precio_producto_max',
-        'codigo_nandina',
-        'estrella',
-        'estado_producto',
-        'id_rubro',
+        'id_ddjj',
+        'path_file_photo1',
+        'path_file_photo2',
+        'path_file_photo3',
         'id_categoria',
-        'id_unidad_medida',
-        'id_moneda',
         'id_empresa',
-        'id_user',
+        'id_empresa_rubros',
     ];
 }
