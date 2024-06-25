@@ -247,7 +247,7 @@
                 <ul class="metismenu" id="menu">
                     <li><a class="ai-icon" href="{{ URL('select') }}" aria-expanded="false">
                             <i class="flaticon-025-dashboard"></i>
-                            <span class="nav-text">Inicio</span>
+                            <span class="nav-text">Seleccionar Empresa</span>
                         </a>
                     </li>
                     @foreach ($roles as $rol)
@@ -418,8 +418,10 @@
             Content body start
         ***********************************-->
         <div class="content-body">
-            @yield('content')
-
+            @yield('content')<blockquote class="blockquote text-center">
+                <p class="h2">Bienvenido a la Empresa:</p>
+                <span class="text-theme-colored3">{{$empresaselect->nombre_comercial}}</span>
+            </blockquote>
         </div>
         <!--**********************************
             Content body end
