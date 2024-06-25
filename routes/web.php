@@ -22,8 +22,8 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
+Route::get('/select',[App\Http\Controllers\HomeController::class, 'select'])->name('select');
+Route::get('/home/{id}', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('list-grupo-rubro-admin/{id}', [App\Http\Controllers\HomeController::class, 'listgrupRubEmp'])->name('list-grupo-rubro-admin');
 Route::post('crea-grup-rubro', [App\Http\Controllers\HomeController::class, 'agreGrupRubro'])->name('crea-grup-rubro');

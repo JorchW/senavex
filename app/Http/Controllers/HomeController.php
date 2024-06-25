@@ -37,14 +37,15 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index($id)
     {
+        $idDes = Crypt::decryptString($id);
         // $empresa = Empresa::where('id_user', Auth::id(),)->get(); 
         $empresas = DB::table('empresas')
             ->join('empresas_personas', 'empresas.id_empresa', '=', 'empresas_personas.id_empresa')
             ->join('personas', 'empresas_personas.id_persona', '=', 'personas.id_persona')
             ->join('users', 'personas.id_persona', '=', 'users.id_persona')
-            ->select('empresas.*','users.*')
+            ->select('empresas.*', 'users.*')
             ->where('id_user', Auth::id(), )->get();
 
         $rol = DB::table('rols')
@@ -53,6 +54,11 @@ class HomeController extends Controller
             ->join('users', 'personas.id_persona', '=', 'users.id_persona')
             ->select('rols.id_rol', 'rols.rol')
             ->where('id_user', Auth::id(), )->get();
+
+        $empresaselect = DB::table('empresas')
+            ->join('ruexs', 'empresas.id_empresa', '=', 'ruexs.id_empresa')
+            ->select('empresas.*', 'ruexs.*'/*,'estado_empresas.estado_empresa'*/)
+            ->where('empresas.id_empresa', $idDes, )->first();
 
         //$empresas = DB::table('empresas')
         //    ->join('empresas', 'grupo_empresa_user.id_empresa', '=', 'empresas.id_empresa')
@@ -71,10 +77,23 @@ class HomeController extends Controller
         //]);
         return view('admin.inicio', [
             'empresas' => $empresas,
-            'roles' => $rol
+            'roles' => $rol,
+            'empresaselect' => $empresaselect
         ]);
     }
 
+    public function select()
+    {
+        $empresas = DB::table('empresas')
+            ->join('empresas_personas', 'empresas.id_empresa', '=', 'empresas_personas.id_empresa')
+            ->join('personas', 'empresas_personas.id_persona', '=', 'personas.id_persona')
+            ->join('users', 'personas.id_persona', '=', 'users.id_persona')
+            ->select('empresas.*', 'users.*')
+            ->where('id_user', Auth::id(), )->get();
+        return view('admin.select', [
+            'empresas' => $empresas
+        ]);
+    }
 
     public function listProd($id)
     {
@@ -403,7 +422,7 @@ class HomeController extends Controller
             ->join('empresas_personas', 'empresas.id_empresa', '=', 'empresas_personas.id_empresa')
             ->join('personas', 'empresas_personas.id_persona', '=', 'personas.id_persona')
             ->join('users', 'personas.id_persona', '=', 'users.id_persona')
-            ->select('empresas.id_empresa','empresas.razon_social')
+            ->select('empresas.id_empresa', 'empresas.razon_social')
             ->where('id_user', Auth::id(), )->get();
 
         $rol = DB::table('rols')
@@ -412,11 +431,11 @@ class HomeController extends Controller
             ->join('users', 'personas.id_persona', '=', 'users.id_persona')
             ->select('rols.id_rol', 'rols.rol')
             ->where('id_user', Auth::id(), )->get();
-            
-        $empresasEdit = DB::table('empresas')
+
+        $empresaselect = DB::table('empresas')
             ->join('ruexs', 'empresas.id_empresa', '=', 'ruexs.id_empresa')
             ->select('empresas.*', 'ruexs.*'/*,'estado_empresas.estado_empresa'*/)
-            ->where('empresas.id_empresa', $idDes,)->first();
+            ->where('empresas.id_empresa', $idDes, )->first();
         //segundo comentario//$empresasEdit = Empresas::where('id_empresa', $idDes)->first();
 
         $imagen = DB::table('empresas')
@@ -427,7 +446,7 @@ class HomeController extends Controller
         return view('admin.onempresa', [
             'empresas' => $empresas,
             'roles' => $rol,
-            'empresasEdit' => $empresasEdit,
+            'empresaselect' => $empresaselect,
             'imagen' => $imagen
         ]);
     }
@@ -499,13 +518,13 @@ class HomeController extends Controller
 
     public function eliminarEmp($id)
     {
-        $idDes =Crypt::decryptString($id);
+        $idDes = Crypt::decryptString($id);
         Empresas::where('id_empresa', $idDes)->update(['estado' => 'inactivo']);
         return redirect()->route('home');
     }
     public function publicarEmp($id)
     {
-        $idDes =Crypt::decryptString($id);
+        $idDes = Crypt::decryptString($id);
         Empresas::where('id_empresa', $idDes)->update(['estado' => 'activo']);
         return redirect()->route('home');
     }

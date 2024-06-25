@@ -65,7 +65,6 @@
                 <img src="{{ asset('/storage/images/vistas/icono.png') }}" height="50" width="50" alt="">
                 <img class="brand-title" src="{{ asset('/storage/images/vistas/senavex.png') }}" height="50" width="150"
                     alt="">
-
             </a>
             <div class="nav-control">
                 <div class="hamburger">
@@ -245,170 +244,10 @@
         <div class="deznav">
             <div class="deznav-scroll">
                 <ul class="metismenu" id="menu">
-                    <li><a class="ai-icon" href="{{ URL('select') }}" aria-expanded="false">
-                            <i class="flaticon-025-dashboard"></i>
-                            <span class="nav-text">Inicio</span>
-                        </a>
+                    <li>
+                        <h5 class="nav-text">Ninguna Empresa Seleccionada...</h5>
                     </li>
-                    @foreach ($roles as $rol)
-                        @if ($rol->rol == 'Certificador')
-                            <li>
-                                <h5 class="nav-text"> {{ $rol->rol }}</h5>
-                            </li>
-                            <li><a href="{{ URL('list-emp-admin') }}" class="ai-icon" aria-expanded="false">
-                                    <i class="flaticon-013-checkmark"></i>
-                                    <span class="nav-text">Empresas</span>
-                                </a>
-                            </li>
-                            <li><a href="{{ URL('list-prod-admin') }}" class="ai-icon" aria-expanded="false">
-                                    <i class="flaticon-013-checkmark"></i>
-                                    <span class="nav-text">Productos</span>
-                                </a>
-                            </li>
-                            <li><a href="{{ URL('list-rubros-admin') }}" class="ai-icon" aria-expanded="false">
-                                    <i class="flaticon-013-checkmark"></i>
-                                    <span class="nav-text">Rubros</span>
-                                </a>
-                            </li>
-                            <li><a href="{{ URL('list-categorias-admin') }}" class="ai-icon" aria-expanded="false">
-                                    <i class="flaticon-013-checkmark"></i>
-                                    <span class="nav-text">Categorias</span>
-                                </a>
-                            </li>
-                            <li><a href="{{ URL('list-correo-admin') }}" class="ai-icon" aria-expanded="false">
-                                    <i class="flaticon-013-checkmark"></i>
-                                    <span class="nav-text">Correos</span>
-                                </a>
-                            </li>
-                        @else 
-                            <li>
-                                <br>
-                                <div class="nav-text">
-                                    <h5 class="btn btn-outline-primary" style="border-radius:10px;">
-                                        <i class="flaticon-013-checkmark"></i>
-                                        Rol: {{ $rol->rol }}
-                                    </h5>
-                                </div>
-                            </li>
-                            {{-- <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                                    <i class="flaticon-050-info"></i>
-                                    <span class="nav-text">Rubros</span>
-                                </a>
-                                <ul aria-expanded="false">
-                                    @foreach ($empresas as $empresa)
-                                    @if ($empresa->estado == 'inactivo')
-                                    <li><a
-                                            href="{{ URL('list-grupo-rubro-admin/' . Crypt::encryptString($empresa->id_empresa)) }}">
-                                            {{ $empresa->razon_social_empresa }}
-                                            <span class="badge badge-warning">Pendiente</span>
-                                        </a>
-                                    </li>
-                                    @elseif ($empresa->id_estado_empresa == '4' && $empresa->estado == 'activo')
-                                    <li><a
-                                            href="{{ URL('list-grupo-rubro-admin/' . Crypt::encryptString($empresa->id_empresa)) }}">
-                                            {{ $empresa->razon_social_empresa }}
-                                            <span class="badge badge-success">Activo</span>
-                                        </a>
-                                    </li>
-                                    @elseif ($empresa->estado_ruex == '0')
-                                    <li><a href="#">
-                                            {{ $empresa->razon_social_empresa }}
-                                            <span class="badge badge-secondary">Sin Ruex</span>
-                                        </a>
-                                    </li>
-                                    @else
-                                    <li><a href="#">
-                                            {{ $empresa->razon_social_empresa }}
-                                            <span class="badge badge-secondary">Rechazado</span>
-                                        </a>
-                                    </li>
-                                    @endif
-                                    @endforeach
-                                </ul>
-                            </li> --}}
-                            <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                                    <i class="flaticon-042-menu"></i>
-                                    <span class="nav-text">Editar Empresa</span>
-                                </a>
-                                <ul aria-expanded="false">
-                                    <li>
-                                        <a
-                                            href="{{ URL('one-emp-admin/' . Crypt::encryptString($empresaselect->id_empresa)) }}">
-                                            {{$empresaselect->nombre_comercial}}
-                                        </a>
-                                    </li>
-                                    {{--@foreach ($empresas as $empresa)
-                                    @if ($empresa->estado == 'inactivo')
-                                    <li><a href="{{ URL('one-emp-admin/' . Crypt::encryptString($empresa->id_empresa)) }}">
-                                            {{ $empresa->razon_social }}
-                                            <span class="badge badge-warning">Pendiente</span>
-                                        </a>
-                                    </li>
-                                    @elseif ($empresa->id_estado_empresa == '4' && $empresa->estado == 'activo')
-                                    <li><a href="{{ URL('one-emp-admin/' . Crypt::encryptString($empresa->id_empresa)) }}">
-                                            {{ $empresa->razon_social }}
-                                            <span class="badge badge-success">Activo</span>
-                                        </a>
-                                    </li>
-                                    {{-- @elseif ($empresa->estado_ruex == '0')
-                                    <li><a href="#">
-                                            {{ $empresa->razon_social_empresa }}
-                                            <span class="badge badge-secondary">Sin Ruex</span>
-                                        </a>
-                                    </li>
-                                    @else
-                                    <li><a href="#">
-                                            {{ $empresa->razon_social }}
-                                            <span class="badge badge-secondary">Rechazado</span>
-                                        </a>
-                                    </li>
-                                    @endif
-                                    @endforeach--}}
-                                </ul>
-                            </li>
-                            {{-- href="{{ URL ('list-prod-admin') }}" --}}
-                            <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                                    <i class="flaticon-086-star"></i>
-                                    <span class="nav-text">Productos</span>
-                                </a>
-                                <ul aria-expanded="false">
-                                    {{--@foreach ($empresas as $empresa)
-                                    @if ($empresa->estado == 'inactivo')
-                                    <li><a href="{{ URL('list-prod-admin/' . Crypt::encryptString($empresa->id_empresa)) }}">
-                                            {{ $empresa->razon_social }}
-                                            <span class="badge badge-warning">Pendiente</span>
-                                        </a>
-                                    </li>
-                                    @elseif ($empresa->id_estado_empresa == '4' && $empresa->estado == 'activo')
-                                    <li><a href="{{ URL('list-prod-admin/' . Crypt::encryptString($empresa->id_empresa)) }}">
-                                            {{ $empresa->razon_social }}
-                                            <span class="badge badge-success">Activo</span>
-                                        </a>
-                                    </li>
-                                    @else
-                                    <li><a href="#">
-                                            {{ $empresa->razon_social }}
-                                            <span class="badge badge-secondary">Rechazado</span>
-                                        </a>
-                                    </li>
-                                    @endif
-                                    @endforeach--}}
-                                </ul>
-                            </li>
-                            @break
-                        @endif
-
-                    @endforeach
-
-
-
-
-
-
-
                 </ul>
-
-
             </div>
         </div>
         <!--**********************************
@@ -419,7 +258,22 @@
         ***********************************-->
         <div class="content-body">
             @yield('content')
-
+            <blockquote class="blockquote text-center">
+                <p class="h2">Empresas</p>
+            </blockquote>
+            <div class="row">
+                @foreach($empresas as $empresa)
+                    <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">{{ $empresa->nombre_comercial }}</h5>
+                                <p class="card-text">NIT: {{ $empresa->nit }}</p>
+                                <a href="{{ URL('home/' . Crypt::encryptString($empresa ->id_empresa)) }}" class="btn btn-outline-primary">Entrar a Empresa</a>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
         </div>
         <!--**********************************
             Content body end

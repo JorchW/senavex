@@ -19,10 +19,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $primaryKey= "id_user";
-    public function empresas()
-{
-    return $this->hasMany(Empresas::class, 'user_id'); // 'user_id' es el campo de clave foránea en la tabla 'empresas'
-}
+    
     public function persona()
     {
         return $this->belongsTo(Persona::class, 'id_persona', 'id_persona');
