@@ -98,46 +98,55 @@ class HomeController extends Controller
     public function listProd($id)
     {
         $idDes = Crypt::decryptString($id);
-        $empresas = DB::table('grupo_empresa_user')
-            ->join('empresas', 'grupo_empresa_user.id_empresa', '=', 'empresas.id_empresa')
-            ->join('users', 'grupo_empresa_user.id_user', '=', 'users.id')
-            ->select('empresas.*')
-            ->where('id_user', Auth::id(), )->get();
-        $rol = DB::table('grupo_empresa_user')
-            ->join('users', 'grupo_empresa_user.id_user', '=', 'users.id')
-            ->join('rol', 'grupo_empresa_user.id_rol', '=', 'rol.id_rol')
-            ->select('rol.id_rol', 'rol.nombre_rol')
+        // $empresa = Empresa::where('id_user', Auth::id(),)->get(); 
+        $empresas = DB::table('empresas')
+            ->join('empresas_personas', 'empresas.id_empresa', '=', 'empresas_personas.id_empresa')
+            ->join('personas', 'empresas_personas.id_persona', '=', 'personas.id_persona')
+            ->join('users', 'personas.id_persona', '=', 'users.id_persona')
+            ->select('empresas.*', 'users.*')
             ->where('id_user', Auth::id(), )->get();
 
+        $rol = DB::table('rols')
+            ->join('empresas_personas', 'rols.id_rol', '=', 'empresas_personas.id_rol')
+            ->join('personas', 'empresas_personas.id_persona', '=', 'personas.id_persona')
+            ->join('users', 'personas.id_persona', '=', 'users.id_persona')
+            ->select('rols.id_rol', 'rols.rol')
+            ->where('id_user', Auth::id(), )->get();
 
+        $empresaselect = DB::table('empresas')
+            ->join('ruexs', 'empresas.id_empresa', '=', 'ruexs.id_empresa')
+            ->select('empresas.*', 'ruexs.*'/*,'estado_empresas.estado_empresa'*/)
+            ->where('empresas.id_empresa', $idDes, )->first();
 
         $productos = Productos::where('id_empresa', $idDes)
             ->orderBy('updated_at', 'desc')
             ->get();
-        $rubros = DB::table('grupo_rubro')
-            ->join('empresas', 'grupo_rubro.id_empresa', '=', 'empresas.id_empresa')
-            ->join('rubro', 'grupo_rubro.id_rubro', '=', 'rubro.id_rubro')
-            ->select('rubro.*')
-            ->where('grupo_rubro.id_empresa', $idDes)->get();
+            
+        //$rubros = DB::table('grupo_rubro')
+        //    ->join('empresas', 'grupo_rubro.id_empresa', '=', 'empresas.id_empresa')
+        //    ->join('rubro', 'grupo_rubro.id_rubro', '=', 'rubro.id_rubro')
+        //    ->select('rubro.*')
+        //    ->where('grupo_rubro.id_empresa', $idDes)->get();
         $categorias = array();
-        foreach ($rubros as $rubro) {
-            $cats = DB::table('categoria')
-                ->select('categoria.*')
-                ->where('id_rubro', $rubro->id_rubro)->get();
-            foreach ($cats as $cat) {
-                array_push($categorias, $cat);
-            }
-        }
-        $monedas = Monedas::all();
-        $medidas = UnidadMedidas::all();
+        //foreach ($rubros as $rubro) {
+        //    $cats = DB::table('categoria')
+        //        ->select('categoria.*')
+        //        ->where('id_rubro', $rubro->id_rubro)->get();
+        //    foreach ($cats as $cat) {
+        //        array_push($categorias, $cat);
+        //    }
+        //}
+        //$monedas = Monedas::all();
+        //$medidas = UnidadMedidas::all();
         return view('admin.listproducto', [
             'empresas' => $empresas,
             'roles' => $rol,
             'productos' => $productos,
-            'rubros' => $rubros,
+            //'rubros' => $rubros,
             'categorias' => $categorias,
-            'monedas' => $monedas,
-            'medidas' => $medidas,
+            'empresaselect' => $empresaselect,
+            //'monedas' => $monedas,
+            //'medidas' => $medidas,
             'idempresas' => $idDes
         ]);
     }

@@ -203,11 +203,11 @@
                             <select class="default-select form-control wide focus:outline-none" name="id_rubro"
                                 id="id_rubro" required>
                                 <option value="" selected></option>
-                                @foreach ($rubros as $rubro)
+                                {{--@foreach ($rubros as $rubro)
                                     <option value="{{ $rubro->id_rubro }}">
                                         {{ Str::limit($rubro->nombre_rubro, 60, $end = ' ...') }}
                                     </option>
-                                @endforeach
+                                @endforeach--}}
                             </select>
                         </div>
                         <div class="mb-3">
@@ -234,11 +234,11 @@
                                 <select class="default-select form-control wide focus:outline-none focus:ring-2"
                                     name="id_unidad_medida" id="id_unidad_medida" required autocomplete="off">
                                     <option value="" selected></option>
-                                    @foreach ($medidas as $medida)
+                                    {{--@foreach ($medidas as $medida)
                                         <option value="{{ $medida->id_unidad_medida }}">
                                             {{ $medida->nombre_unidad_medida }}
                                         </option>
-                                    @endforeach
+                                    @endforeach--}}
                                 </select>
                             </div>
                             <div class="mb-3 col-md-2">
@@ -271,10 +271,10 @@
                                 <select class="default-select form-control wide focus:outline-none" name="id_moneda"
                                     id="id_moneda" required>
                                     <option value="" selected></option>
-                                    @foreach ($monedas as $moneda)
+                                    {{--@foreach ($monedas as $moneda)
                                         <option value="{{ $moneda->id_moneda }}">
                                             {{ $moneda->nombre_moneda }}</option>
-                                    @endforeach
+                                    @endforeach--}}
                                 </select>
                             </div>
                             <div class="mb-3 col-md-3">

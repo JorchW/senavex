@@ -372,6 +372,10 @@
                                     <span class="nav-text">Productos</span>
                                 </a>
                                 <ul aria-expanded="false">
+                                    <li>
+                                        <a href="{{ URL('list-prod-admin/' . Crypt::encryptString($empresaselect->id_empresa)) }}">
+                                            Ver Productos</a>
+                                    </li>
                                     {{--@foreach ($empresas as $empresa)
                                     @if ($empresa->estado == 'inactivo')
                                     <li><a href="{{ URL('list-prod-admin/' . Crypt::encryptString($empresa->id_empresa)) }}">
