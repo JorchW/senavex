@@ -456,7 +456,7 @@ class HomeController extends Controller
         if ($data->hasFile('path_file_foto1')) {
             $file = $data->file('path_file_foto1');
             $dimensions = getimagesize($file);
-            if ($dimensions[0] != 650 || $dimensions[1] != 550) {
+            if ($dimensions[0] != 1920 || $dimensions[1] != 1080) {
                 return redirect()->back()->withInput()->withErrors(['path_file_foto1' => 'La imagen debe tener dimensiones de 650x550 px.']);
             }
             $endPath = public_path('/storage/images/empresas/empresa/' . $idDes . '/');
@@ -484,7 +484,7 @@ class HomeController extends Controller
         if ($data->hasFile('path_file_foto2')) {
             $file = $data->file('path_file_foto2');
             $dimensions = getimagesize($file);
-            if ($dimensions[0] != 650 || $dimensions[1] != 550) {
+            if ($dimensions[0] != 1080 || $dimensions[1] != 1080) {
                 return redirect()->back()->withInput()->withErrors(['path_file_foto1' => 'La imagen debe tener dimensiones de 650x550 px.']);
             }
             $endPath = public_path('/storage/images/empresas/logo/' . $idDes . '/');

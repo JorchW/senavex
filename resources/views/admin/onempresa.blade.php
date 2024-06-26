@@ -25,7 +25,7 @@
                         <input type="hidden" value="{{--{{$imagen->imagen_empresa}}--}}" id="imagen_empresa"
                             name="imagen_empresa" />
                         <div class="mb-3">
-                            <label class="text-black font-w500">Imagen de la Empresa (Dimensiones: 650x550 Pixeles):</label>
+                            <label class="text-black font-w500">Imagen de la Empresa (Dimensiones: (Ancho) 1920 x (Alto) 1080 Pixeles):</label>
                             <div class="input-group">
                                 <div class="form-file ">
                                     <input accept="image/png,image/jpeg,image/jpg" type="file"
@@ -44,7 +44,7 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label class="text-black font-w500">Logo de la Empresa (Dimensiones: 650x550 Pixeles):</label>
+                            <label class="text-black font-w500">Logo de la Empresa (Dimensiones: (Ancho) 1920 x (Alto) 1080 Pixeles):</label>
                             <div class="input-group">
                                 <div class="form-file ">
                                     <input accept="image/png,image/jpeg,image/jpg" type="file"
