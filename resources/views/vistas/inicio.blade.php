@@ -296,7 +296,7 @@
                         <a class="btn btn-default btn-circled btn-xl mt-10 mb-sm-30"
                             href="page-about1.html">Leer mas</a>
                     </div>
-                    <div class="col-sm-6 col-md-6">
+                    <div class="col-sm-6 col-md-6 text-center">
                         <img src="{{ asset('storage/images/vistas/logop.png') }}" alt="about">
                     </div>
                 </div>

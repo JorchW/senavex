@@ -50,7 +50,7 @@
                             <div class="upcoming-events bg-white-f3 mb-20">
                                 <div class="row">
                                     <div class="col-sm-4 pr-0 pr-sm-15">
-                                        <div class="thumb p-15">
+                                        <div class="event-details p-15 mt-20">
                                             @if (strlen($empresa->path_file_foto1) > 0)
                                             <img class="img-fullwidth" src="{{ $empresa->path_file_foto1 }}" alt="" />
                                             @else
@@ -128,7 +128,7 @@
                     <div class="sidebar sidebar-left mt-sm-30">
                         <div class="widget p-30">
                             <div class="owl-carousel-1col" data-dots="true">
-                                <div class="item"><img src="{{ asset('storage/images/vistas/senavex1.png') }}" alt="" />
+                                <div class="item"><img src="{{ asset('storage/images/vistas/senavex.png') }}" alt="" />
                                 </div>
                                 <div class="item"><img src="{{ asset('storage/images/vistas/nuestro.png') }}" alt="" />
                                 </div>

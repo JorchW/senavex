@@ -25,13 +25,17 @@
                         <input type="hidden" value="{{--{{$imagen->imagen_empresa}}--}}" id="imagen_empresa"
                             name="imagen_empresa" />
                         <div class="mb-3">
-                            <label class="text-black font-w500">Imagen de la Empresa (Dimensiones: (Ancho) 1920 x (Alto) 1080 Pixeles):</label>
+                            <label class="text-black font-w500">Imagen de la Empresa (Dimensiones: (Ancho) 1920 x (Alto)
+                                1080 Pixeles):</label>
                             <div class="input-group">
                                 <div class="form-file ">
                                     <input accept="image/png,image/jpeg,image/jpg" type="file"
                                         class="form-file-input form-control focus:outline-none input-image"
                                         name="path_file_foto1" id="path_file_foto1">
                                 </div>
+                            </div>
+                            <br>
+                            <div class="mb-3 row text-center">
                                 <div class='form-file'>
                                     @if($imagen && strlen($imagen->path_file_foto1) > 0)
                                         <img src="{{$imagen->path_file_foto1}}" height="250" width="250" alt="Imagen">
@@ -44,13 +48,17 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label class="text-black font-w500">Logo de la Empresa (Dimensiones: (Ancho) 1920 x (Alto) 1080 Pixeles):</label>
+                            <label class="text-black font-w500">Logo de la Empresa (Dimensiones: (Ancho) 1080 x (Alto)
+                                1080 Pixeles):</label>
                             <div class="input-group">
                                 <div class="form-file ">
                                     <input accept="image/png,image/jpeg,image/jpg" type="file"
                                         class="form-file-input form-control focus:outline-none input-image"
                                         name="path_file_foto2" id="path_file_foto2">
                                 </div>
+                            </div>
+                            <br>
+                            <div class="mb-3 row text-center">
                                 <div class='form-file'>
                                     @if($imagen && strlen($imagen->path_file_foto2) > 0)
                                         <img src="{{$imagen->path_file_foto2}}" height="250" width="250" alt="Imagen">
@@ -62,9 +70,13 @@
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
+                        <div class="mb-3 row text-center">
+                            <div class="form-file">
+                                <button type="submit" class="btn btn-primary">Subir Imagenes</button>
+                            </div>
+                        </div>
                         <div class="mb-3">
-                            <label class="text-black font-w500">Nombre de la
-                                Empresa</label>
+                            <label class="text-black font-w500">Nombre de la Empresa</label>
                             <input type="text" class="form-control form-control-lg focus:outline-none"
                                 style="font-weight:bolder; background-color:rgb(225, 225, 225);" name="razon_social"
                                 id="razon_social" value="{{$empresaselect->razon_social}}" readonly>
@@ -174,12 +186,6 @@
                                 <label class="text-black font-w500 ">Tiktok</label>
                                 <input type="text" class="form-control " name="tiktok" id="tiktok"
                                     value="{{--{{$empresasEdit->tiktok}}--}}">
-                            </div>
-                        </div>
-
-                        <div class="mb-3 row">
-                            <div class="col-lg-8 ms-auto">
-                                <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
                         </div>
                         {{-- <div class="form-group">

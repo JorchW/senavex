@@ -418,10 +418,11 @@
             Content body start
         ***********************************-->
         <div class="content-body">
-            @yield('content')<blockquote class="blockquote text-center">
+            <blockquote class="blockquote text-center">
                 <p class="h2">Bienvenido a la Empresa</p>
                 <span class="breadcrumb-item active">{{$empresaselect->nombre_comercial}}</span>
             </blockquote>
+            @yield('content')
         </div>
         <!--**********************************
             Content body end
