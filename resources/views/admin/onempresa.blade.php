@@ -25,7 +25,7 @@
                         <input type="hidden" value="{{--{{$imagen->imagen_empresa}}--}}" id="imagen_empresa"
                             name="imagen_empresa" />
                         <div class="mb-3">
-                            <label class="text-black font-w500">Imagen:</label>
+                            <label class="text-black font-w500">Imagen de la Empresa (Dimensiones: 650x550 Pixeles):</label>
                             <div class="input-group">
                                 <div class="form-file ">
                                     <input accept="image/png,image/jpeg,image/jpg" type="file"
@@ -39,7 +39,28 @@
                                 </div>
                             </div>
                             <p class="text-image-2"> </p>
-
+                            @error('path_file_foto1')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label class="text-black font-w500">Logo de la Empresa (Dimensiones: 650x550 Pixeles):</label>
+                            <div class="input-group">
+                                <div class="form-file ">
+                                    <input accept="image/png,image/jpeg,image/jpg" type="file"
+                                        class="form-file-input form-control focus:outline-none input-image"
+                                        name="path_file_foto2" id="path_file_foto2">
+                                </div>
+                                <div class='form-file'>
+                                    @if($imagen && strlen($imagen->path_file_foto2) > 0)
+                                        <img src="{{$imagen->path_file_foto2}}" height="250" width="250" alt="Imagen">
+                                    @endif
+                                </div>
+                            </div>
+                            <p class="text-image-2"> </p>
+                            @error('path_file_foto2')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
                         <div class="mb-3">
                             <label class="text-black font-w500">Nombre de la
@@ -53,7 +74,8 @@
                             <div class="mb-3 pt-3">
                                 <textarea class="form-control bg-transparent" maxlength="50" cols="30" rows="5"
                                     name="descripcion_empresa"
-                                    id="descripcion_empresa">{{$empresaselect->descripcion_empresa}}</textarea>
+                                    style="font-weight:bolder; background-color:rgb(225, 225, 225);"
+                                    id="descripcion_empresa" readonly>{{$empresaselect->descripcion_empresa}}</textarea>
                             </div>
                         </div>
                         <div class="row">
@@ -83,33 +105,39 @@
                             <div class="mb-3 col-md-6">
                                 <label class="text-black font-w500 ">Página Web</label>
                                 <input type="text" class="form-control focus:outline-none focus:ring-2" name="pag_web"
-                                    id="pag_web" value="{{$empresaselect->pag_web}}">
+                                    style="font-weight:bolder; background-color:rgb(225, 225, 225);" id="pag_web"
+                                    value="{{$empresaselect->pag_web}}" readonly>
                             </div>
                             <div class="mb-3 col-md-6">
                                 <label class="text-black font-w500 ">Correo Electronico</label>
                                 <input type="text" class="form-control focus:outline-none focus:ring-2" name="email"
-                                    id="email" value="{{$empresaselect->email}}" required>
+                                    style="font-weight:bolder; background-color:rgb(225, 225, 225);" id="email"
+                                    value="{{$empresaselect->email}}" readonly>
                             </div>
                             <div class="mb-3 col-md-6">
-                                <label class="text-black font-w500 ">Persona Encargado</label>
-                                <input type="text" class="form-control" name="nombre_1" id="nombre_1"
-                                    value="{{--{{$empresasEdit->nombre_1}}--}}">
+                                <label class="text-black font-w500 ">Persona Encargada</label>
+                                <input type="text" class="form-control" name="nombre_1"
+                                    style="font-weight:bolder; background-color:rgb(225, 225, 225);" id="nombre_1"
+                                    value="{{--{{$empresasEdit->nombre_1}}--}}" readonly>
                             </div>
                             <div class="mb-3 col-md-6">
-                                <label class="text-black font-w500 ">Persona Encargado</label>
-                                <input type="text" class="form-control" name="nombre_2" id="nombre_2"
-                                    value="{{--{{$empresasEdit->nombre_2}}--}}">
+                                <label class="text-black font-w500 ">Persona Encargada</label>
+                                <input type="text" class="form-control" name="nombre_2"
+                                    style="font-weight:bolder; background-color:rgb(225, 225, 225);" id="nombre_2"
+                                    value="{{--{{$empresasEdit->nombre_2}}--}}" readonly>
                             </div>
                             <div class="mb-3 col-md-6">
                                 <label class="text-black font-w500 ">Telefono</label>
-                                <input type="text" class="form-control " name="telefono" id="telefono"
-                                    value="{{$empresaselect->telefono}}">
+                                <input type="text" class="form-control " name="telefono"
+                                    style="font-weight:bolder; background-color:rgb(225, 225, 225);" id="telefono"
+                                    value="{{$empresaselect->telefono}}" readonly>
                             </div>
 
-                            <div class="mb-3 col-md-6">empresaselect
+                            <div class="mb-3 col-md-6">
                                 <label class="text-black font-w500 ">Celular</label>
-                                <input type="text" class="form-control " name="celular" id="celular"
-                                    value="{{$empresaselect->celular}}">
+                                <input type="text" class="form-control " name="celular"
+                                    style="font-weight:bolder; background-color:rgb(225, 225, 225);" id="celular"
+                                    value="{{$empresaselect->celular}}" readonly>
                             </div>
 
 
@@ -118,14 +146,17 @@
                                 <div class="post-input">
                                     <textarea class="form-control bg-transparent" cols="30" rows="5"
                                         name="direccion_descriptiva"
-                                        id="direccion_descriptiva">{{$empresaselect->direccion_descriptiva}}</textarea>
+                                        style="font-weight:bolder; background-color:rgb(225, 225, 225);"
+                                        id="direccion_descriptiva"
+                                        readonly>{{$empresaselect->direccion_descriptiva}}</textarea>
                                 </div>
                             </div>
                             <div class="mb-3 col-md-6">
                                 <label class="text-black font-w500 ">Ubicación Fiscal</label>
                                 <div class="post-input">
                                     <textarea class="form-control bg-transparent" cols="30" rows="5" name="ubicacion"
-                                        id="direccion_fiscal">{{$empresaselect->direccion_fiscal}}</textarea>
+                                        style="font-weight:bolder; background-color:rgb(225, 225, 225);"
+                                        id="direccion_fiscal" readonly>{{$empresaselect->direccion_fiscal}}</textarea>
                                 </div>
                             </div>
 

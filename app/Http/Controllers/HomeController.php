@@ -455,7 +455,11 @@ class HomeController extends Controller
         $idDes = Crypt::decryptString($id);
         if ($data->hasFile('path_file_foto1')) {
             $file = $data->file('path_file_foto1');
-            $endPath = public_path('/storage/images/empresas/' . $idDes . '/');
+            $dimensions = getimagesize($file);
+            if ($dimensions[0] != 650 || $dimensions[1] != 550) {
+                return redirect()->back()->withInput()->withErrors(['path_file_foto1' => 'La imagen debe tener dimensiones de 650x550 px.']);
+            }
+            $endPath = public_path('/storage/images/empresas/empresa/' . $idDes . '/');
             $filename = time() . '.' . $file->getClientOriginalExtension();
             $oldImagePath = DB::table('directorio.directorio_empresa_extras')
                 ->where('id_empresa', $idDes)
@@ -465,7 +469,7 @@ class HomeController extends Controller
             }
             $uploadSuccess = $file->move($endPath, $filename);
             if ($uploadSuccess) {
-                $direccionImagen = '/storage/images/empresas/' . $idDes . '/' . $filename;
+                $direccionImagen = '/storage/images/empresas/empresa/' . $idDes . '/' . $filename;
                 DB::table('directorio.directorio_empresa_extras')
                     ->updateOrInsert(
                         ['id_empresa' => $idDes],
@@ -476,6 +480,34 @@ class HomeController extends Controller
             }
         } else {
             $direccionImagen = '';
+        }
+        if ($data->hasFile('path_file_foto2')) {
+            $file = $data->file('path_file_foto2');
+            $dimensions = getimagesize($file);
+            if ($dimensions[0] != 650 || $dimensions[1] != 550) {
+                return redirect()->back()->withInput()->withErrors(['path_file_foto1' => 'La imagen debe tener dimensiones de 650x550 px.']);
+            }
+            $endPath = public_path('/storage/images/empresas/logo/' . $idDes . '/');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $oldImagePath = DB::table('directorio.directorio_empresa_extras')
+                ->where('id_empresa', $idDes)
+                ->value('path_file_foto2');
+            if ($oldImagePath && file_exists(public_path($oldImagePath))) {
+                unlink(public_path($oldImagePath));
+            }
+            $uploadSuccess = $file->move($endPath, $filename);
+            if ($uploadSuccess) {
+                $direccionImagen2 = '/storage/images/empresas/logo/' . $idDes . '/' . $filename;
+                DB::table('directorio.directorio_empresa_extras')
+                    ->updateOrInsert(
+                        ['id_empresa' => $idDes],
+                        ['path_file_foto2' => $direccionImagen2]
+                    );
+            } else {
+                $direccionImagen2 = '';
+            }
+        } else {
+            $direccionImagen2 = '';
         }
         //$direcion = '';
         //if ($data->hasFile('imagen_empresa')) {
@@ -513,7 +545,7 @@ class HomeController extends Controller
         //    'imagen_empresa'        => $direcion,
         //    'estado'                => 'inactivo',
         //]);
-        return redirect()->route('home');
+        return redirect()->back();
     }
 
     public function eliminarEmp($id)

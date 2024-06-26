@@ -284,7 +284,7 @@
                             <li>
                                 <br>
                                 <div class="nav-text">
-                                    <h5 class="btn btn-outline-primary" style="border-radius:10px;">
+                                    <h5 class="btn btn-outline-primary disabled" style="border-radius:10px;">
                                         <i class="flaticon-013-checkmark"></i>
                                         Rol: {{ $rol->rol }}
                                     </h5>
@@ -419,8 +419,8 @@
         ***********************************-->
         <div class="content-body">
             @yield('content')<blockquote class="blockquote text-center">
-                <p class="h2">Bienvenido a la Empresa:</p>
-                <span class="text-theme-colored3">{{$empresaselect->nombre_comercial}}</span>
+                <p class="h2">Bienvenido a la Empresa</p>
+                <span class="breadcrumb-item active">{{$empresaselect->nombre_comercial}}</span>
             </blockquote>
         </div>
         <!--**********************************
@@ -558,7 +558,7 @@
                         console.log(bandera)
                         return bandera;
                     } else {
-                        $('.text-image-2').text("La altura y el ancho deben ser 650x550 px.");
+                        $('.text-image-2').text("");
                         bandera = false;
                         console.log(bandera)
                         return bandera;

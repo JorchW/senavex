@@ -51,12 +51,12 @@
                                 <div class="row">
                                     <div class="col-sm-4 pr-0 pr-sm-15">
                                         <div class="thumb p-15">
-                                            {{--@if (strlen($empresa->imagen_empresa) > 0)
-                                            <img class="img-fullwidth" src="{{ $empresa->imagen_empresa }}" alt="" />
+                                            @if (strlen($empresa->path_file_foto1) > 0)
+                                            <img class="img-fullwidth" src="{{ $empresa->path_file_foto1 }}" alt="" />
                                             @else
                                             <img class="img-fullwidth" src="{{ asset('storage/images/vistas/senavex1.png') }}"
                                                 alt="" />
-                                            @endif--}}
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="col-sm-4 pl-0 pl-sm-15">
