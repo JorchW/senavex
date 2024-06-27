@@ -334,7 +334,11 @@
                                     <li>
                                         <a
                                             href="{{ URL('one-emp-admin/' . Crypt::encryptString($empresaselect->id_empresa)) }}">
+                                            @if ($empresaselect->razon_social=='')
                                             {{$empresaselect->nombre_comercial}}
+                                            @else
+                                            {{$empresaselect->razon_social}}
+                                            @endif
                                         </a>
                                     </li>
                                     {{--@foreach ($empresas as $empresa)

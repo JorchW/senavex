@@ -268,7 +268,7 @@
                             <div class="card-body d-flex flex-column">
                                 <h5 class="card-title">{{ $empresa->nombre_comercial }}</h5>
                                 <p class="card-text">NIT: {{ $empresa->nit }}</p>
-                                <a href="{{ URL('home/' . Crypt::encryptString($empresa ->id_empresa)) }}" class="btn btn-outline-primary">Entrar a Empresa</a>
+                                <a href="{{ URL('home/' . Crypt::encryptString($empresa->id_empresa)) }}" class="btn btn-outline-primary">Entrar a Empresa</a>
                             </div>
                         </div>
                     </div>

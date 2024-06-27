@@ -89,7 +89,7 @@ class HomeController extends Controller
             ->join('personas', 'empresas_personas.id_persona', '=', 'personas.id_persona')
             ->join('users', 'personas.id_persona', '=', 'users.id_persona')
             ->select('empresas.*', 'users.*')
-            ->where('users.id_user', Auth::id() )->get();
+            ->where('id_user', Auth::id(), )->get();
         return view('admin.select', [
             'empresas' => $empresas
         ]);
@@ -119,14 +119,14 @@ class HomeController extends Controller
             ->where('empresas.id_empresa', $idDes, )->first();
 
         $productos = DB::table('ddjjs as dj')
-            ->join('ddjj_datos_mercancias as dm','dj.id_ddjj','=','dm.id_ddjj')
-            ->join('acuerdos as a','a.id_acuerdo','=','dj.id_acuerdo')
-            ->join('empresas as e','dj.id_empresa','=','e.id_empresa')
+            ->join('ddjj_datos_mercancias as dm', 'dj.id_ddjj', '=', 'dm.id_ddjj')
+            ->join('acuerdos as a', 'a.id_acuerdo', '=', 'dj.id_acuerdo')
+            ->join('empresas as e', 'dj.id_empresa', '=', 'e.id_empresa')
             ->select('*')
-            ->where('dj.id_empresa',$idDes)
-            ->whereIn('dj.id_ddjj_estado',[6,9,10,11])
+            ->where('dj.id_empresa', $idDes)
+            ->whereIn('dj.id_ddjj_estado', [6, 9, 10, 11])
             ->orderBy('dj.updated_at', 'desc')->get();
-            
+
         //$rubros = DB::table('grupo_rubro')
         //    ->join('empresas', 'grupo_rubro.id_empresa', '=', 'empresas.id_empresa')
         //    ->join('rubro', 'grupo_rubro.id_rubro', '=', 'rubro.id_rubro')
@@ -190,51 +190,62 @@ class HomeController extends Controller
     public function oneProd($id)
     {
         $idDes = Crypt::decryptString($id);
-        $empresas = DB::table('grupo_empresa_user')
-            ->join('empresas', 'grupo_empresa_user.id_empresa', '=', 'empresas.id_empresa')
-            ->join('users', 'grupo_empresa_user.id_user', '=', 'users.id')
-            ->select('empresas.*')
-            ->where('id_user', Auth::id(), )->get();
-        $rol = DB::table('grupo_empresa_user')
-            ->join('users', 'grupo_empresa_user.id_user', '=', 'users.id')
-            ->join('rol', 'grupo_empresa_user.id_rol', '=', 'rol.id_rol')
-            ->select('rol.id_rol', 'rol.nombre_rol')
+        $empresas = DB::table('empresas')
+            ->join('empresas_personas', 'empresas.id_empresa', '=', 'empresas_personas.id_empresa')
+            ->join('personas', 'empresas_personas.id_persona', '=', 'personas.id_persona')
+            ->join('users', 'personas.id_persona', '=', 'users.id_persona')
+            ->select('empresas.*', 'users.*')
             ->where('id_user', Auth::id(), )->get();
 
+        $rol = DB::table('rols')
+            ->join('empresas_personas', 'rols.id_rol', '=', 'empresas_personas.id_rol')
+            ->join('personas', 'empresas_personas.id_persona', '=', 'personas.id_persona')
+            ->join('users', 'personas.id_persona', '=', 'users.id_persona')
+            ->select('rols.id_rol', 'rols.rol')
+            ->where('id_user', Auth::id(), )->get();
+
+        $empresaselect = DB::table('empresas')
+            ->join('ruexs', 'empresas.id_empresa', '=', 'ruexs.id_empresa')
+            ->select('empresas.*', 'ruexs.*'/*,'estado_empresas.estado_empresa'*/)
+            ->where('empresas.id_empresa', $idDes, )->first();
 
         // $productoEdit = Productos::where('id_producto', $idDes)->first();
-        $productoEdit = DB::table('productos')
-            ->join('rubro', 'productos.id_rubro', '=', 'rubro.id_rubro')
-            ->join('categoria', 'productos.id_categoria', '=', 'categoria.id_categoria')
-            ->join('unidad_medidas', 'productos.id_unidad_medida', '=', 'unidad_medidas.id_unidad_medida')
-            ->join('monedas', 'productos.id_moneda', '=', 'monedas.id_moneda')
-            ->select('productos.*', 'rubro.nombre_rubro', 'categoria.nombre_categoria', 'unidad_medidas.nombre_unidad_medida', 'monedas.abrv_moneda')
-            ->where('productos.id_producto', $idDes)->first();
+        $productoEdit = DB::table('ddjjs as dj')
+            ->join('ddjj_datos_mercancias as dm', 'dj.id_ddjj', '=', 'dm.id_ddjj')
+            ->join('acuerdos as a', 'a.id_acuerdo', '=', 'dj.id_acuerdo')
+            ->join('empresas as e', 'dj.id_empresa', '=', 'e.id_empresa')
+            ->select('*')
+            ->where('dj.id_empresa', $idDes)
+            ->whereIn('dj.id_ddjj_estado', [6, 9, 10, 11])
+            ->orderBy('dj.updated_at', 'desc')->first();
 
-        $rubros = DB::table('grupo_rubro')
-            ->join('empresas', 'grupo_rubro.id_empresa', '=', 'empresas.id_empresa')
-            ->join('rubro', 'grupo_rubro.id_rubro', '=', 'rubro.id_rubro')
-            ->select('rubro.*')
-            ->where('grupo_rubro.id_empresa', $productoEdit->id_empresa)->get();
+
+
+        //$rubros = DB::table('grupo_rubro')
+        //    ->join('empresas', 'grupo_rubro.id_empresa', '=', 'empresas.id_empresa')
+        //    ->join('rubro', 'grupo_rubro.id_rubro', '=', 'rubro.id_rubro')
+        //    ->select('rubro.*')
+        //    ->where('grupo_rubro.id_empresa', $productoEdit->id_empresa)->get();
         $categorias = array();
-        foreach ($rubros as $rubro) {
-            $cats = DB::table('categoria')
-                ->select('categoria.*')
-                ->where('id_rubro', $rubro->id_rubro)->get();
-            foreach ($cats as $cat) {
-                array_push($categorias, $cat);
-            }
-        }
-        $monedas = Monedas::all();
-        $medidas = UnidadMedidas::all();
+        //foreach ($rubros as $rubro) {
+        //    $cats = DB::table('categoria')
+        //        ->select('categoria.*')
+        //        ->where('id_rubro', $rubro->id_rubro)->get();
+        //    foreach ($cats as $cat) {
+        //        array_push($categorias, $cat);
+        //    }
+        //}
+        //$monedas = Monedas::all();
+        //$medidas = UnidadMedidas::all();
         return view('admin.editproducto', [
             'empresas' => $empresas,
             'roles' => $rol,
             'productoEdit' => $productoEdit,
-            'rubros' => $rubros,
+            //'rubros' => $rubros,
             'categorias' => $categorias,
-            'monedas' => $monedas,
-            'medidas' => $medidas
+            //'monedas' => $monedas,
+            //'medidas' => $medidas,
+            'empresaselect' => $empresaselect
         ]);
     }
     public function eliminarProd($id)

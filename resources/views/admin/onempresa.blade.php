@@ -79,7 +79,13 @@
                             <label class="text-black font-w500">Nombre de la Empresa</label>
                             <input type="text" class="form-control form-control-lg focus:outline-none"
                                 style="font-weight:bolder; background-color:rgb(225, 225, 225);" name="razon_social"
-                                id="razon_social" value="{{$empresaselect->razon_social}}" readonly>
+                                id="razon_social" value="
+                                @if ($empresaselect->razon_social == '')
+                                {{$empresaselect->nombre_comercial}}
+                                @else
+                                {{$empresaselect->razon_social}}
+                                @endif
+                                " readonly>
                         </div>
                         <div class="mb-3 read-content">
                             <label class="text-black font-w500">Descripción</label>
