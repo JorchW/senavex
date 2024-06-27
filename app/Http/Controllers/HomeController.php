@@ -89,7 +89,7 @@ class HomeController extends Controller
             ->join('personas', 'empresas_personas.id_persona', '=', 'personas.id_persona')
             ->join('users', 'personas.id_persona', '=', 'users.id_persona')
             ->select('empresas.*', 'users.*')
-            ->where('id_user', Auth::id(), )->get();
+            ->where('users.id_user', Auth::id() )->get();
         return view('admin.select', [
             'empresas' => $empresas
         ]);
@@ -118,9 +118,14 @@ class HomeController extends Controller
             ->select('empresas.*', 'ruexs.*'/*,'estado_empresas.estado_empresa'*/)
             ->where('empresas.id_empresa', $idDes, )->first();
 
-        $productos = Productos::where('id_empresa', $idDes)
-            ->orderBy('updated_at', 'desc')
-            ->get();
+        $productos = DB::table('ddjjs as dj')
+            ->join('ddjj_datos_mercancias as dm','dj.id_ddjj','=','dm.id_ddjj')
+            ->join('acuerdos as a','a.id_acuerdo','=','dj.id_acuerdo')
+            ->join('empresas as e','dj.id_empresa','=','e.id_empresa')
+            ->select('*')
+            ->where('dj.id_empresa',$idDes)
+            ->whereIn('dj.id_ddjj_estado',[6,9,10,11])
+            ->orderBy('dj.updated_at', 'desc')->get();
             
         //$rubros = DB::table('grupo_rubro')
         //    ->join('empresas', 'grupo_rubro.id_empresa', '=', 'empresas.id_empresa')

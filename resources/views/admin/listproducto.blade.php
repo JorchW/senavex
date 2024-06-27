@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="form-head mb-4 d-flex flex-wrap align-items-center">
             <div class="me-auto">
-                <h2 class="font-w600 mb-0">Lista de Productos</h2>
+                <h2 class="font-w600 mb-0">Lista de Productos de la Empresa</h2>
                 <p class="text-light"> </p>
             </div>
             {{-- <div class="input-group search-area2 d-xl-inline-flex mb-2 me-4">
@@ -93,20 +93,40 @@
                     <table id="example3" class="table customer-table display mb-4 fs-14 card-table">
                         <thead>
                             <tr>
-                                <th>Imagen</th>
-                                <th>Nombre Producto</th>
-                                <th>Descripcion</th>
-                                <th>Estado</th>
-                                <th>Fecha Creado</th>
-                                <th>Precio</th>
-                                <th></th>
+                                <th>Denominacion Comercial</th>
+                                <th>Caracteristicas</th>
+                                <th>Codigo Nandina</th>
+                                <th>Descripcion Nandinda</th>
+                                <th>Numero Directorio Exp.</th>
+                                <th>Acuerdo</th>
+                                <th>Sigla</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($productos as $producto)
                                 <tr>
-
-                                    <td><img class="rounded-rectangle" width="150" heigth="150"
+                                    <td>
+                                        {{$producto->denominacion_comercial}}
+                                    </td>
+                                    <td>
+                                        {{$producto->caracteristicas}}
+                                    </td>
+                                    <td>
+                                        {{$producto->codigo_nandina}}
+                                    </td>
+                                    <td>
+                                        {{$producto->descripcion_nandina}}
+                                    </td>
+                                    <td>
+                                        {{$producto->numero_ddjj}}
+                                    </td>
+                                    <td>
+                                        {{$producto->acuerdo}}
+                                    </td>
+                                    <td>
+                                        {{$producto->sigla}}
+                                    </td>
+                                    {{--<td><img class="rounded-rectangle" width="150" heigth="150"
                                             src="{{ $producto->imagen_producto }}" alt=""></td>
                                     <td>{{ $producto->nombre_producto }}</td>
                                     <td>{{ $producto->descripcion_producto }} <div class="bootstrap-badge">
@@ -144,10 +164,10 @@
                                                     stroke-linejoin="round" />
                                             </svg>
 
-                                        </a> --}}
+                                        </a>
                                         </div>
                                     </td>
-                                </tr>
+                                </tr>--}}
                             @endforeach
 
                     </table>
