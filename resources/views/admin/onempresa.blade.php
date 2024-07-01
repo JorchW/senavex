@@ -18,7 +18,7 @@
                 </div>--}}
                 <div class="modal-body">
                     <form method="POST"
-                        action="{{ URL('update-empr/' . Crypt::encryptString($empresaselect->id_empresa)) }}"
+                        action="{{ URL('update-empr/' . Crypt::encryptString($empresas->id_empresa)) }}"
                         enctype="multipart/form-data" autocomplete="off">
                         @csrf
                         @method('PUT')
@@ -80,10 +80,10 @@
                             <input type="text" class="form-control form-control-lg focus:outline-none"
                                 style="font-weight:bolder; background-color:rgb(225, 225, 225);" name="razon_social"
                                 id="razon_social" value="
-                                @if ($empresaselect->razon_social == '')
-                                {{$empresaselect->nombre_comercial}}
+                                @if ($empresas->razon_social == '')
+                                {{$empresas->nombre_comercial}}
                                 @else
-                                {{$empresaselect->razon_social}}
+                                {{$empresas->razon_social}}
                                 @endif
                                 " readonly>
                         </div>
@@ -93,7 +93,7 @@
                                 <textarea class="form-control bg-transparent" maxlength="50" cols="30" rows="5"
                                     name="descripcion_empresa"
                                     style="font-weight:bolder; background-color:rgb(225, 225, 225);"
-                                    id="descripcion_empresa" readonly>{{$empresaselect->descripcion_empresa}}</textarea>
+                                    id="descripcion_empresa" readonly>{{$empresas->descripcion_empresa}}</textarea>
                             </div>
                         </div>
                         <div class="row">
@@ -101,19 +101,19 @@
                                 <label class="text-black font-w500 ">Nit</label>
                                 <input type="text" class="form-control focus:outline-none focus:ring-2 input-number"
                                     style="font-weight:bolder; background-color:rgb(225, 225, 225);" name="nit" id="nit"
-                                    value="{{$empresaselect->nit}}" readonly>
+                                    value="{{$empresas->nit}}" readonly>
                             </div>
                             <div class="mb-3 col-md-3">
                                 <label class="text-black font-w500 ">Matricula</label>
                                 <input type="text" class="form-control focus:outline-none focus:ring-2 input-number"
                                     style="font-weight:bolder; background-color:rgb(225, 225, 225);" name="matricula"
-                                    id="matricula" value="{{$empresaselect->matricula}}" readonly>
+                                    id="matricula" value="{{$empresas->matricula}}" readonly>
                             </div>
                             <div class="mb-3 col-md-3">
                                 <label class="text-black font-w500 ">Ruex</label>
                                 <input type="text" class="form-control focus:outline-none focus:ring-2 input-number"
                                     name="ruex" style="font-weight:bolder; background-color:rgb(225, 225, 225);"
-                                    id="ruex" value="{{$empresaselect->ruex}}" readonly>
+                                    id="ruex" value="{{$empresas->ruex}}" readonly>
                             </div>
                             {{--<div class="mb-3 col-md-3">
                                 <label class="text-black font-w500 ">Teléfono</label>
@@ -124,13 +124,13 @@
                                 <label class="text-black font-w500 ">Página Web</label>
                                 <input type="text" class="form-control focus:outline-none focus:ring-2" name="pag_web"
                                     style="font-weight:bolder; background-color:rgb(225, 225, 225);" id="pag_web"
-                                    value="{{$empresaselect->pag_web}}" readonly>
+                                    value="{{$empresas->pag_web}}" readonly>
                             </div>
                             <div class="mb-3 col-md-6">
                                 <label class="text-black font-w500 ">Correo Electronico</label>
                                 <input type="text" class="form-control focus:outline-none focus:ring-2" name="email"
                                     style="font-weight:bolder; background-color:rgb(225, 225, 225);" id="email"
-                                    value="{{$empresaselect->email}}" readonly>
+                                    value="{{$empresas->email}}" readonly>
                             </div>
                             <div class="mb-3 col-md-6">
                                 <label class="text-black font-w500 ">Persona Encargada</label>
@@ -148,14 +148,14 @@
                                 <label class="text-black font-w500 ">Telefono</label>
                                 <input type="text" class="form-control " name="telefono"
                                     style="font-weight:bolder; background-color:rgb(225, 225, 225);" id="telefono"
-                                    value="{{$empresaselect->telefono}}" readonly>
+                                    value="{{$empresas->telefono}}" readonly>
                             </div>
 
                             <div class="mb-3 col-md-6">
                                 <label class="text-black font-w500 ">Celular</label>
                                 <input type="text" class="form-control " name="celular"
                                     style="font-weight:bolder; background-color:rgb(225, 225, 225);" id="celular"
-                                    value="{{$empresaselect->celular}}" readonly>
+                                    value="{{$empresas->celular}}" readonly>
                             </div>
 
 
@@ -166,7 +166,7 @@
                                         name="direccion_descriptiva"
                                         style="font-weight:bolder; background-color:rgb(225, 225, 225);"
                                         id="direccion_descriptiva"
-                                        readonly>{{$empresaselect->direccion_descriptiva}}</textarea>
+                                        readonly>{{$empresas->direccion_descriptiva}}</textarea>
                                 </div>
                             </div>
                             <div class="mb-3 col-md-6">
@@ -174,7 +174,7 @@
                                 <div class="post-input">
                                     <textarea class="form-control bg-transparent" cols="30" rows="5" name="ubicacion"
                                         style="font-weight:bolder; background-color:rgb(225, 225, 225);"
-                                        id="direccion_fiscal" readonly>{{$empresaselect->direccion_fiscal}}</textarea>
+                                        id="direccion_fiscal" readonly>{{$empresas->direccion_fiscal}}</textarea>
                                 </div>
                             </div>
 

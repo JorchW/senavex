@@ -14,11 +14,11 @@ class CreateDirectorioProductosTable extends Migration
     public function up()
     {
         Schema::create('directorio.directorio_productos', function (Blueprint $table) {
-            $table->bigInteger('id_producto');
+            $table->bigInteger('id_producto')->autoIncrement();
             $table->bigInteger('id_ddjj');
-            $table->string('path_file_photo1');
-            $table->string('path_file_photo2');
-            $table->string('path_file_photo3');
+            $table->string('path_file_photo1')->nullable();
+            $table->string('path_file_photo2')->nullable();
+            $table->string('path_file_photo3')->nullable();
             $table->bigInteger('id_categoria');
             $table->bigInteger('id_empresa');
             $table->bigInteger('id_empresa_rubros');

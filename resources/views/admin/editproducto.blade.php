@@ -18,7 +18,7 @@
             <div class="card">
                 <div class="modal-body">
                     <form method="POST"
-                        action="{{ URL('update-prod/' . Crypt::encryptString($productoEdit->id_empresa)) }}"
+                        action="{{ URL('update-prod/' . Crypt::encryptString($empresas->id_ddjj)) }}"
                         enctype="multipart/form-data" autocomplete="off">
                         @csrf
                         @method('PUT')
@@ -30,7 +30,7 @@
                             <label class="text-black font-w500">Denominacion del Producto:</label>
                             <input type="text" class="form-control form-control-lg focus:outline-none"
                                 placeholder="Introduzca el producto..." name="nombre_producto" id="nombre_producto"
-                                value="{{ $productoEdit->denominacion_comercial }}" readonly>
+                                value="{{ $empresas->denominacion_comercial }}" readonly>
                         </div>
                         <div class="mb-3">
                             <label class="text-black font-w500">Foto 1</label>
@@ -115,7 +115,7 @@
                             <label class="text-black font-w500">Numero DDJJ:</label>
                             <input type="text" class="form-control form-control-lg focus:outline-none"
                                 placeholder="Introduzca el producto..." name="nombre_producto" id="nombre_producto"
-                                value="{{ $productoEdit->numero_ddjj }}" readonly>
+                                value="{{ $empresas->numero_ddjj }}" readonly>
                         </div>
                         <div class="row">
                             <div class="mb-3 col-md-4">
@@ -123,70 +123,76 @@
                                 <input type="number" maxlength="10"
                                     class="form-control focus:outline-none focus:ring-2 input-number"
                                     name="codigo_nandina" id="codigo_nandina"
-                                    value="{{ $productoEdit->codigo_nandina }}" readonly>
+                                    value="{{ $empresas->codigo_nandina }}" readonly>
                             </div>
                         </div>
                         <div class="mb-3  read-content">
-                            <label class="text-black font-w500">Descripcion</label>
+                            <label class="text-black font-w500">Caracteristicas</label>
                             <div class="mb-3 pt-3">
                                 <textarea class="form-control focus:outline-none" maxlength="100" rows="4"
                                     name="descripcion_producto" id="descripcion_producto"
-                                    required>{{--{{ $productoEdit->descripcion_producto }}--}}</textarea>
+                                    readonly>{{ $empresas->caracteristicas }}</textarea>
                             </div>
                         </div>
-                        <div class="mb-3">
+                        {{--<div class="mb-3">
                             <label class="text-black font-w500">Rubro</label>
                             <select class="default-select form-control focus:outline-none" name="id_rubro" id="id_rubro"
                                 required>
-                                <option value="{{--{{ $productoEdit->id_rubro }}--}}" selected>
-                                    {{ $productoEdit->denominacion_comercial }}
+                                <option value="{{--{{ $productoEdit->id_rubro }}" selected>
+                                    {{ $empresas->denominacion_comercial }}
                                 </option>
-                                {{--@foreach ($rubros as $rubro)
+                                @foreach ($rubros as $rubro)
                                 <option value="{{ $rubro->id_rubro }}">
                                     {{ Str::limit($rubro->nombre_rubro, 100, $end = ' ...') }}
                                 </option>
-                                @endforeach--}}
+                                @endforeach
                             </select>
-                        </div>
-                        <div class="mb-3">
+                        </div>--}}
+                        {{--<div class="mb-3">
                             <label class="text-black font-w500">Categoria</label>
                             <select class="default-select form-control focus:outline-none" id="limit-selection"
                                 multiple="multiple" name="id_categoria" id="id_categoria" required>
-                                <option value="{{--{{ $productoEdit->id_categoria }}--}}" selected>
-                                    hola{{--{{ $productoEdit->nombre_categoria }}--}}</option>
+                                <option value="{{--{{ $productoEdit->id_categoria }}" selected>
+                                    hola{{--{{ $productoEdit->nombre_categoria }}</option>
                                 {{--@foreach ($categorias as $categoria)
                                 <option value="{{ $categoria->id_categoria }}">
                                     {{ Str::limit($categoria->descripcion_corta, 100, $end = ' ...') }}
                                 </option>
-                                @endforeach--}}
+                                @endforeach
                             </select>
-                        </div>
+                        </div>--}}
                         <div class="row">
                             <div class="mb-3 col-md-4">
-                                <label class="text-black font-w500">Medida</label>
+                                <label class="text-black font-w500">Acuerdo</label>
                                 <input type="text" class="form-control focus:outline-none focus:ring-2"
                                     name="numero_producto" id="numero_producto"
-                                    value="{{--{{ $productoEdit->numero_producto }}--}}" required>
+                                    value="{{ $empresas->acuerdo }}" readonly>
                             </div>
-                            <div class="mb-3 col-md-6">
+                            <div class="mb-3 col-md-4">
+                                <label class="text-black font-w500">Sigla</label>
+                                <input type="text" class="form-control focus:outline-none focus:ring-2"
+                                    name="numero_producto" id="numero_producto"
+                                    value="{{ $empresas->sigla }}" readonly>
+                            </div>
+                            {{--<div class="mb-3 col-md-6">
                                 <label class="text-black font-w500">Unidad de Medida</label>
                                 <select class="default-select form-control wide focus:outline-none focus:ring-2"
                                     name="id_unidad_medida" id="id_unidad_medida" required autocomplete="off">
-                                    <option value="{{--{{ $productoEdit->id_unidad_medida }}--}}" selected>
-                                        nombre de unidad{{--{{ $productoEdit->nombre_unidad_medida }}--}}</option>
-                                    {{--@foreach ($medidas as $medida)
+                                    <option value="{{ $productoEdit->id_unidad_medida }}" selected>
+                                        nombre de unidad{{ $productoEdit->nombre_unidad_medida }}</option>
+                                    @foreach ($medidas as $medida)
                                     <option value="{{ $medida->id_unidad_medida }}">
                                         {{ $medida->nombre_unidad_medida }}
                                     </option>
-                                    @endforeach--}}
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="mb-3 col-md-2">
                                 <label class="text-black font-w500">Estrella</label>
                                 <select class="default-select form-control wide focus:outline-none focus:ring-2"
                                     name="estrella" id="estrella" required>
-                                    <option value="{{--{{ $productoEdit->estrella }}--}}" selected>
-                                        estrella{{--{{ $productoEdit->estrella }}--}}</option>
+                                    <option value="{{ $productoEdit->estrella }}" selected>
+                                        estrella{{ $productoEdit->estrella }}</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -198,34 +204,33 @@
                                 <label class="text-black font-w500 ">Precio</label>
                                 <input type="text" class="form-control focus:outline-none focus:ring-2 input-number-dec"
                                     name="precio_producto" id="precio_producto"
-                                    value="{{--{{ $productoEdit->precio_producto }}--}}" required>
+                                    value="{{ $productoEdit->precio_producto }}" required>
                             </div>
                             <div class="mb-3 col-md-3">
                                 <label class="text-black font-w500 ">Precio Max.</label>
                                 <input type="text" class="form-control focus:outline-none focus:ring-2 input-number-dec"
                                     name="precio_producto_max" id="precio_producto_max"
-                                    value="{{--{{ $productoEdit->precio_producto_max }}--}}" required>
+                                    value="{{ $productoEdit->precio_producto_max }}" required>
                             </div>
                             <div class="mb-3 col-md-3">
                                 <label class="text-black font-w500">Moneda</label>
                                 <select class="default-select form-control wide focus:outline-none" name="id_moneda"
                                     id="id_moneda" required>
-                                    <option value="{{--{{ $productoEdit->id_moneda }}--}}" selected>
-                                        {{--{{ $productoEdit->abrv_moneda }}--}}</option>
-                                    {{--@foreach ($monedas as $moneda)
+                                    <option value="{{ $productoEdit->id_moneda }}" selected>
+                                        {{ $productoEdit->abrv_moneda }}</option>
+                                    @foreach ($monedas as $moneda)
                                     <option value="{{ $moneda->id_moneda }}">
                                         {{ $moneda->nombre_moneda }}</option>
-                                    @endforeach--}}
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="mb-3 col-md-3">
                                 <label class="text-black font-w500 ">Cantidad Disponible</label>
                                 <input type="text" class="form-control focus:outline-none focus:ring-2 input-number"
                                     name="cantidad_disponible" id="cantidad_disponible"
-                                    value="{{--{{ $productoEdit->cantidad_disponible }}--}}" required>
+                                    value="{{ $productoEdit->cantidad_disponible }}" required>
                             </div>
-                        </div>
-
+                        </div>--}}
                         <div class="mb-3 row">
                             <div class="col-lg-8 ms-auto">
                                 <button type="submit" class="btn btn-primary">Submit</button>

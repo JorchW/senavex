@@ -19,7 +19,7 @@ class CreateDirectorioEmpresaExtrasTable extends Migration
             $table->string('path_file_foto2')->nullable();
             $table->bigInteger('id_empresa');
             $table->timestamps();
-            $table->foreign('id_empresa')->references('id_empresa')->on('public.empresas');
+            $table->foreign('id_empresa')->references('id_empresa')->on('empresas');
         });
     }
 

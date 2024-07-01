@@ -90,7 +90,7 @@
                                 <li class="m-0 pl-10">
                                     @if (Route::has('login'))
                                         @auth
-                                            <a href="{{ url('home') }}" target="_blank" class="text-white"><i
+                                            <a href="{{ url('select') }}" target="_blank" class="text-white"><i
                                                     class="fa fa-user-o mr-5 text-white"></i>
                                                 Home </a>
                                         @else

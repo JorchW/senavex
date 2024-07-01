@@ -97,13 +97,13 @@
                             {{--<th>Caracteristicas<br></th>
                             <th>Codigo Nandina</th>
                             <th>Descripcion Nandinda</th>--}}
-                            <th>numero ddjj</th>
+                            <th>nro ddjj</th>
                             <th>acuerdo</th>
                             <th>sigla</th>
                             <th>foto 1</th>
                             <th>foto 3</th>
                             <th>foto 2</th>
-                            <th>subir imagenes</th>
+                            <th>subir fotos</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -181,7 +181,7 @@
                                     </div>
                                 </td>
                             </tr>--}}
-                            <td><a href="{{ URL('one-prod-admin/' . Crypt::encryptString($producto->id_empresa)) }}"  class="btn btn-outline-primary">Editar</a></td>
+                            <td><a href="{{ URL('one-prod-admin/' . Crypt::encryptString($producto->id_ddjj)) }}"  class="btn btn-outline-primary">Editar</a></td>
                             {{--<td><a href="javascript:void(0);" class="btn btn-outline-primary" data-bs-toggle="modal"
                                     data-bs-target="#addNewCustomer">Subir Fotos</a></td>--}}
                         @endforeach
@@ -190,7 +190,7 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="addNewCustomer">
+<!--<div class="modal fade" id="addNewCustomer">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -331,31 +331,5 @@
             </div>
         </div>
     </div>
-</div>
+</div>-->
 @endsection
-select * from directorio.directorio_empresa_extras
-
-select * from directorio.directorio_productos
-
-select * from empresas where id_empresa='1725'
-select * from empresas where id_empresa='4'
-
-select distinct u.ci,u.pass,* from empresas e 
-	join empresas_personas ep on e.id_empresa=ep.id_empresa
-	join personas p on ep.id_persona=p.id_persona
-	join users u on p.id_persona=u.id_persona
-	where e.id_empresa='912'
-
-select * from 
-	
-select b.denominacion_comercial,b.caracteristicas,b.codigo_nandina,
-	b.descripcion_nandina, a.numero_ddjj, c.acuerdo,c.sigla from ddjjs a 
-	inner join ddjj_datos_mercancias b on a.id_ddjj=b.id_ddjj 
-	inner join acuerdos c on c.id_acuerdo=a.id_acuerdo
-	inner join empresas e on a.id_empresa=e.id_empresa
-where e.id_empresa='912'
-and a.id_ddjj_estado in ('6','9','10','11')
-
-select * from empresas where razon_social='%MINERA D COBRE%'	
-
-select * from users

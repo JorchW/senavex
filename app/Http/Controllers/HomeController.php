@@ -42,11 +42,12 @@ class HomeController extends Controller
         $idDes = Crypt::decryptString($id);
         // $empresa = Empresa::where('id_user', Auth::id(),)->get(); 
         $empresas = DB::table('empresas')
+            ->join('ruexs', 'empresas.id_empresa', '=', 'ruexs.id_empresa')
             ->join('empresas_personas', 'empresas.id_empresa', '=', 'empresas_personas.id_empresa')
             ->join('personas', 'empresas_personas.id_persona', '=', 'personas.id_persona')
             ->join('users', 'personas.id_persona', '=', 'users.id_persona')
-            ->select('empresas.*', 'users.*')
-            ->where('id_user', Auth::id(), )->get();
+            ->select('empresas.*', 'users.*', 'ruexs.*')
+            ->where('empresas.id_empresa', $idDes)->first();
 
         $rol = DB::table('rols')
             ->join('empresas_personas', 'rols.id_rol', '=', 'empresas_personas.id_rol')
@@ -54,11 +55,6 @@ class HomeController extends Controller
             ->join('users', 'personas.id_persona', '=', 'users.id_persona')
             ->select('rols.id_rol', 'rols.rol')
             ->where('id_user', Auth::id(), )->get();
-
-        $empresaselect = DB::table('empresas')
-            ->join('ruexs', 'empresas.id_empresa', '=', 'ruexs.id_empresa')
-            ->select('empresas.*', 'ruexs.*'/*,'estado_empresas.estado_empresa'*/)
-            ->where('empresas.id_empresa', $idDes, )->first();
 
         //$empresas = DB::table('empresas')
         //    ->join('empresas', 'grupo_empresa_user.id_empresa', '=', 'empresas.id_empresa')
@@ -77,19 +73,19 @@ class HomeController extends Controller
         //]);
         return view('admin.inicio', [
             'empresas' => $empresas,
-            'roles' => $rol,
-            'empresaselect' => $empresaselect
+            'roles' => $rol
         ]);
     }
 
     public function select()
     {
         $empresas = DB::table('empresas')
+            ->join('ruexs', 'empresas.id_empresa', '=', 'ruexs.id_empresa')
             ->join('empresas_personas', 'empresas.id_empresa', '=', 'empresas_personas.id_empresa')
             ->join('personas', 'empresas_personas.id_persona', '=', 'personas.id_persona')
             ->join('users', 'personas.id_persona', '=', 'users.id_persona')
-            ->select('empresas.*', 'users.*')
-            ->where('id_user', Auth::id(), )->get();
+            ->select('empresas.*', 'users.*', 'ruexs.*')
+            ->where('id_user', Auth::id())->get();
         return view('admin.select', [
             'empresas' => $empresas
         ]);
@@ -100,11 +96,12 @@ class HomeController extends Controller
         $idDes = Crypt::decryptString($id);
         // $empresa = Empresa::where('id_user', Auth::id(),)->get(); 
         $empresas = DB::table('empresas')
+            ->join('ruexs', 'empresas.id_empresa', '=', 'ruexs.id_empresa')
             ->join('empresas_personas', 'empresas.id_empresa', '=', 'empresas_personas.id_empresa')
             ->join('personas', 'empresas_personas.id_persona', '=', 'personas.id_persona')
             ->join('users', 'personas.id_persona', '=', 'users.id_persona')
-            ->select('empresas.*', 'users.*')
-            ->where('id_user', Auth::id(), )->get();
+            ->select('empresas.*', 'users.*', 'ruexs.*')
+            ->where('empresas.id_empresa', $idDes)->first();
 
         $rol = DB::table('rols')
             ->join('empresas_personas', 'rols.id_rol', '=', 'empresas_personas.id_rol')
@@ -113,19 +110,13 @@ class HomeController extends Controller
             ->select('rols.id_rol', 'rols.rol')
             ->where('id_user', Auth::id(), )->get();
 
-        $empresaselect = DB::table('empresas')
-            ->join('ruexs', 'empresas.id_empresa', '=', 'ruexs.id_empresa')
-            ->select('empresas.*', 'ruexs.*'/*,'estado_empresas.estado_empresa'*/)
-            ->where('empresas.id_empresa', $idDes, )->first();
-
         $productos = DB::table('ddjjs as dj')
             ->join('ddjj_datos_mercancias as dm', 'dj.id_ddjj', '=', 'dm.id_ddjj')
             ->join('acuerdos as a', 'a.id_acuerdo', '=', 'dj.id_acuerdo')
             ->join('empresas as e', 'dj.id_empresa', '=', 'e.id_empresa')
             ->select('*')
             ->where('dj.id_empresa', $idDes)
-            ->whereIn('dj.id_ddjj_estado', [6, 9, 10, 11])
-            ->orderBy('dj.updated_at', 'desc')->get();
+            ->whereIn('dj.id_ddjj_estado', [6, 9, 10, 11])->get();
 
         //$rubros = DB::table('grupo_rubro')
         //    ->join('empresas', 'grupo_rubro.id_empresa', '=', 'empresas.id_empresa')
@@ -149,7 +140,6 @@ class HomeController extends Controller
             'productos' => $productos,
             //'rubros' => $rubros,
             'categorias' => $categorias,
-            'empresaselect' => $empresaselect,
             //'monedas' => $monedas,
             //'medidas' => $medidas,
             'idempresas' => $idDes
@@ -190,12 +180,14 @@ class HomeController extends Controller
     public function oneProd($id)
     {
         $idDes = Crypt::decryptString($id);
-        $empresas = DB::table('empresas')
-            ->join('empresas_personas', 'empresas.id_empresa', '=', 'empresas_personas.id_empresa')
-            ->join('personas', 'empresas_personas.id_persona', '=', 'personas.id_persona')
-            ->join('users', 'personas.id_persona', '=', 'users.id_persona')
-            ->select('empresas.*', 'users.*')
-            ->where('id_user', Auth::id(), )->get();
+        $empresas = DB::table('ddjjs as dj')
+        ->join('ddjj_datos_mercancias as dm', 'dj.id_ddjj', '=', 'dm.id_ddjj')
+        ->join('acuerdos as a', 'a.id_acuerdo', '=', 'dj.id_acuerdo')
+        ->join('empresas as e', 'dj.id_empresa', '=', 'e.id_empresa')
+        ->select('*')
+        ->where('dj.id_ddjj', $idDes)
+        ->whereIn('dj.id_ddjj_estado', [6, 9, 10, 11])
+        ->orderBy('dj.updated_at', 'desc')->first();
 
         $rol = DB::table('rols')
             ->join('empresas_personas', 'rols.id_rol', '=', 'empresas_personas.id_rol')
@@ -204,20 +196,15 @@ class HomeController extends Controller
             ->select('rols.id_rol', 'rols.rol')
             ->where('id_user', Auth::id(), )->get();
 
-        $empresaselect = DB::table('empresas')
-            ->join('ruexs', 'empresas.id_empresa', '=', 'ruexs.id_empresa')
-            ->select('empresas.*', 'ruexs.*'/*,'estado_empresas.estado_empresa'*/)
-            ->where('empresas.id_empresa', $idDes, )->first();
-
         // $productoEdit = Productos::where('id_producto', $idDes)->first();
-        $productoEdit = DB::table('ddjjs as dj')
-            ->join('ddjj_datos_mercancias as dm', 'dj.id_ddjj', '=', 'dm.id_ddjj')
-            ->join('acuerdos as a', 'a.id_acuerdo', '=', 'dj.id_acuerdo')
-            ->join('empresas as e', 'dj.id_empresa', '=', 'e.id_empresa')
-            ->select('*')
-            ->where('dj.id_empresa', $idDes)
-            ->whereIn('dj.id_ddjj_estado', [6, 9, 10, 11])
-            ->orderBy('dj.updated_at', 'desc')->first();
+        //$productoEdit = DB::table('ddjjs as dj')
+        //    ->join('ddjj_datos_mercancias as dm', 'dj.id_ddjj', '=', 'dm.id_ddjj')
+        //    ->join('acuerdos as a', 'a.id_acuerdo', '=', 'dj.id_acuerdo')
+        //    ->join('empresas as e', 'dj.id_empresa', '=', 'e.id_empresa')
+        //    ->select('*')
+        //    ->where('dj.id_ddjj')
+        //    ->whereIn('dj.id_ddjj_estado', [6, 9, 10, 11])
+        //    ->orderBy('dj.updated_at', 'desc')->first();
 
 
 
@@ -240,12 +227,10 @@ class HomeController extends Controller
         return view('admin.editproducto', [
             'empresas' => $empresas,
             'roles' => $rol,
-            'productoEdit' => $productoEdit,
             //'rubros' => $rubros,
-            'categorias' => $categorias,
+            'categorias' => $categorias
             //'monedas' => $monedas,
             //'medidas' => $medidas,
-            'empresaselect' => $empresaselect
         ]);
     }
     public function eliminarProd($id)
@@ -444,11 +429,12 @@ class HomeController extends Controller
     {
         $idDes = Crypt::decryptString($id);
         $empresas = DB::table('empresas')
+            ->join('ruexs', 'empresas.id_empresa', '=', 'ruexs.id_empresa')
             ->join('empresas_personas', 'empresas.id_empresa', '=', 'empresas_personas.id_empresa')
             ->join('personas', 'empresas_personas.id_persona', '=', 'personas.id_persona')
             ->join('users', 'personas.id_persona', '=', 'users.id_persona')
-            ->select('empresas.id_empresa', 'empresas.razon_social')
-            ->where('id_user', Auth::id(), )->get();
+            ->select('empresas.*', 'users.*', 'ruexs.*')
+            ->where('empresas.id_empresa', $idDes)->first();
 
         $rol = DB::table('rols')
             ->join('empresas_personas', 'rols.id_rol', '=', 'empresas_personas.id_rol')
@@ -456,12 +442,6 @@ class HomeController extends Controller
             ->join('users', 'personas.id_persona', '=', 'users.id_persona')
             ->select('rols.id_rol', 'rols.rol')
             ->where('id_user', Auth::id(), )->get();
-
-        $empresaselect = DB::table('empresas')
-            ->join('ruexs', 'empresas.id_empresa', '=', 'ruexs.id_empresa')
-            ->select('empresas.*', 'ruexs.*'/*,'estado_empresas.estado_empresa'*/)
-            ->where('empresas.id_empresa', $idDes, )->first();
-        //segundo comentario//$empresasEdit = Empresas::where('id_empresa', $idDes)->first();
 
         $imagen = DB::table('empresas')
             ->join('directorio.directorio_empresa_extras', 'empresas.id_empresa', '=', 'directorio_empresa_extras.id_empresa')
@@ -471,7 +451,6 @@ class HomeController extends Controller
         return view('admin.onempresa', [
             'empresas' => $empresas,
             'roles' => $rol,
-            'empresaselect' => $empresaselect,
             'imagen' => $imagen
         ]);
     }

@@ -333,11 +333,11 @@
                                 <ul aria-expanded="false">
                                     <li>
                                         <a
-                                            href="{{ URL('one-emp-admin/' . Crypt::encryptString($empresaselect->id_empresa)) }}">
-                                            @if ($empresaselect->razon_social=='')
-                                            {{$empresaselect->nombre_comercial}}
+                                            href="{{ URL('one-emp-admin/' . Crypt::encryptString($empresas->id_empresa)) }}">
+                                            @if ($empresas->razon_social=='')
+                                            {{$empresas->nombre_comercial}}
                                             @else
-                                            {{$empresaselect->razon_social}}
+                                            {{$empresas->razon_social}}
                                             @endif
                                         </a>
                                     </li>
@@ -377,7 +377,7 @@
                                 </a>
                                 <ul aria-expanded="false">
                                     <li>
-                                        <a href="{{ URL('list-prod-admin/' . Crypt::encryptString($empresaselect->id_empresa)) }}">
+                                        <a href="{{ URL('list-prod-admin/' . Crypt::encryptString($empresas->id_empresa)) }}">
                                             Ver Productos</a>
                                     </li>
                                     {{--@foreach ($empresas as $empresa)
@@ -428,7 +428,7 @@
         <div class="content-body">
             <blockquote class="blockquote text-center">
                 <p class="h2">Bienvenido a la Empresa</p>
-                <span class="breadcrumb-item active">{{$empresaselect->nombre_comercial}}</span>
+                <span class="breadcrumb-item active">{{$empresas->nombre_comercial}}</span>
             </blockquote>
             @yield('content')
         </div>
