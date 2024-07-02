@@ -71,7 +71,7 @@
                             @enderror
                         </div>
                         <div class="mb-3 row text-center">
-                            <div class="form-file">
+                            <div class="">
                                 <button type="submit" class="btn btn-primary">Subir Imagenes</button>
                             </div>
                         </div>
@@ -79,13 +79,7 @@
                             <label class="text-black font-w500">Nombre de la Empresa</label>
                             <input type="text" class="form-control form-control-lg focus:outline-none"
                                 style="font-weight:bolder; background-color:rgb(225, 225, 225);" name="razon_social"
-                                id="razon_social" value="
-                                @if ($empresas->razon_social == '')
-                                {{$empresas->nombre_comercial}}
-                                @else
-                                {{$empresas->razon_social}}
-                                @endif
-                                " readonly>
+                                id="razon_social" value="{{$empresas->nombre_comercial}}" readonly>
                         </div>
                         <div class="mb-3 read-content">
                             <label class="text-black font-w500">Descripción</label>

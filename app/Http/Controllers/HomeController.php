@@ -80,11 +80,10 @@ class HomeController extends Controller
     public function select()
     {
         $empresas = DB::table('empresas')
-            ->join('ruexs', 'empresas.id_empresa', '=', 'ruexs.id_empresa')
             ->join('empresas_personas', 'empresas.id_empresa', '=', 'empresas_personas.id_empresa')
             ->join('personas', 'empresas_personas.id_persona', '=', 'personas.id_persona')
             ->join('users', 'personas.id_persona', '=', 'users.id_persona')
-            ->select('empresas.*', 'users.*', 'ruexs.*')
+            ->select('empresas.*', 'users.*')
             ->where('id_user', Auth::id())->get();
         return view('admin.select', [
             'empresas' => $empresas
@@ -181,13 +180,15 @@ class HomeController extends Controller
     {
         $idDes = Crypt::decryptString($id);
         $empresas = DB::table('ddjjs as dj')
-        ->join('ddjj_datos_mercancias as dm', 'dj.id_ddjj', '=', 'dm.id_ddjj')
-        ->join('acuerdos as a', 'a.id_acuerdo', '=', 'dj.id_acuerdo')
-        ->join('empresas as e', 'dj.id_empresa', '=', 'e.id_empresa')
-        ->select('*')
-        ->where('dj.id_ddjj', $idDes)
-        ->whereIn('dj.id_ddjj_estado', [6, 9, 10, 11])
-        ->orderBy('dj.updated_at', 'desc')->first();
+            ->join('ddjj_datos_mercancias as dm', 'dj.id_ddjj', '=', 'dm.id_ddjj')
+            ->join('acuerdos as a', 'a.id_acuerdo', '=', 'dj.id_acuerdo')
+            ->join('empresas as e', 'dj.id_empresa', '=', 'e.id_empresa')
+            ->join('empresa_categorias as ec', 'e.id_categoria', '=', 'ec.id_categoria')
+            ->join('empresas_rubros as er', 'e.id_empresa', '=', 'er.id_empresa')
+            ->select('*')
+            ->where('dj.id_ddjj', $idDes)
+            ->whereIn('dj.id_ddjj_estado', [6, 9, 10, 11])
+            ->orderBy('dj.updated_at', 'desc')->first();
 
         $rol = DB::table('rols')
             ->join('empresas_personas', 'rols.id_rol', '=', 'empresas_personas.id_rol')
@@ -196,6 +197,14 @@ class HomeController extends Controller
             ->select('rols.id_rol', 'rols.rol')
             ->where('id_user', Auth::id(), )->get();
 
+        $imagen = DB::table('ddjjs as dj')
+            ->join('directorio.directorio_productos as dp', 'dj.id_ddjj', '=', 'dp.id_ddjj')
+            ->select('*')
+            ->where('dj.id_ddjj', $idDes)
+            ->whereIn('dj.id_ddjj_estado', [6, 9, 10, 11])->first();
+
+        $rubros = DB::table('empresa_rubros')
+            ->select('*')->get();
         // $productoEdit = Productos::where('id_producto', $idDes)->first();
         //$productoEdit = DB::table('ddjjs as dj')
         //    ->join('ddjj_datos_mercancias as dm', 'dj.id_ddjj', '=', 'dm.id_ddjj')
@@ -213,7 +222,7 @@ class HomeController extends Controller
         //    ->join('rubro', 'grupo_rubro.id_rubro', '=', 'rubro.id_rubro')
         //    ->select('rubro.*')
         //    ->where('grupo_rubro.id_empresa', $productoEdit->id_empresa)->get();
-        $categorias = array();
+        //$categorias = array();
         //foreach ($rubros as $rubro) {
         //    $cats = DB::table('categoria')
         //        ->select('categoria.*')
@@ -228,7 +237,8 @@ class HomeController extends Controller
             'empresas' => $empresas,
             'roles' => $rol,
             //'rubros' => $rubros,
-            'categorias' => $categorias
+            'imagen' => $imagen,
+            'rubros' => $rubros
             //'monedas' => $monedas,
             //'medidas' => $medidas,
         ]);
@@ -313,43 +323,133 @@ class HomeController extends Controller
     public function updateProd($id, Request $data)
     {
         $idDes = Crypt::decryptString($id);
-        $direcion = '';
-        if ($data->hasFile('imagen_producto')) {
-            $file = $data->file('imagen_producto');
-            $endPath = 'storage/images/producto/' . $idDes . '/';
-
-            // if(File::exists($endPath))
-            // {
-            //     File::delete($endPath);
-            // }
-            $fileName = time() . '-' . $file->getClientOriginalName();
-            $uploadSuccess = $data->file('imagen_producto')->move($endPath, $fileName);
-            $direcion = $endPath . $fileName;
-        }
-        if (strlen($direcion) < 5) {
-            $direcion = $data->imagen_producto;
+        if ($data->hasFile('path_file_photo1')) {
+            $file = $data->file('path_file_photo1');
+            $dimensions = getimagesize($file);
+            if ($dimensions[0] != 1920 || $dimensions[1] != 1920) {
+                return redirect()->back()->withInput()->withErrors(['path_file_photo1' => 'La imagen debe tener dimensiones de 1920x1920 px.']);
+            }
+            $endPath = public_path('/storage/images/productos/foto1/' . $idDes . '/');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $oldImagePath = DB::table('directorio.directorio_productos')
+                ->where('id_ddjj', $idDes)
+                ->value('path_file_photo1');
+            if ($oldImagePath && file_exists(public_path($oldImagePath))) {
+                unlink(public_path($oldImagePath));
+            }
+            $uploadSuccess = $file->move($endPath, $filename);
+            if ($uploadSuccess) {
+                $direccionImagen = '/storage/images/productos/foto1/' . $idDes . '/' . $filename;
+                DB::table('directorio.directorio_productos')
+                    ->updateOrInsert(
+                        [
+                            'id_ddjj' => $idDes
+                        ],
+                        ['path_file_photo1' => $direccionImagen]
+                    );
+            } else {
+                $direccionImagen = '';
+            }
         } else {
-            $direcion = URL($direcion);
+            $direccionImagen = '';
         }
-        Productos::where('id_producto', $data->id_producto)->update([
-            'cantidad_disponible' => $data->cantidad_disponible ?? '',
-            'nombre_producto' => $data->nombre_producto,
-            'imagen_producto' => $direcion,
-            'descripcion_producto' => $data->descripcion_producto,
-            'precio_producto' => $data->precio_producto,
-            'precio_producto_max' => $data->precio_producto_max ?? '',
-            'codigo_nandina' => $data->codigo_nandina,
-            'estrella' => $data->estrella,
-            'estado_producto' => 'normal',
-            'id_rubro' => $data->id_rubro,
-            'id_categoria' => $data->id_categoria,
-            'numero_producto' => $data->numero_producto ?? '',
-            'id_unidad_medida' => $data->id_unidad_medida,
-            'id_moneda' => $data->id_moneda,
-            'id_empresa' => $idDes,
-            'estado' => 'inactivo',
-        ]);
-        return redirect()->route('home');
+        if ($data->hasFile('path_file_photo2')) {
+            $file = $data->file('path_file_photo2');
+            $dimensions = getimagesize($file);
+            if ($dimensions[0] != 1920 || $dimensions[1] != 1920) {
+                return redirect()->back()->withInput()->withErrors(['path_file_photo2' => 'La imagen debe tener dimensiones de 1920x1920 px.']);
+            }
+            $endPath = public_path('/storage/images/productos/foto2/' . $idDes . '/');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $oldImagePath = DB::table('directorio.directorio_productos')
+                ->where('id_ddjj', $idDes)
+                ->value('path_file_photo2');
+            if ($oldImagePath && file_exists(public_path($oldImagePath))) {
+                unlink(public_path($oldImagePath));
+            }
+            $uploadSuccess = $file->move($endPath, $filename);
+            if ($uploadSuccess) {
+                $direccionImagen2 = '/storage/images/productos/foto2/' . $idDes . '/' . $filename;
+                DB::table('directorio.directorio_productos')
+                    ->updateOrInsert(
+                        [
+                            'id_ddjj' => $idDes
+                        ],
+                        ['path_file_photo2' => $direccionImagen2]
+                    );
+            } else {
+                $direccionImagen2 = '';
+            }
+        } else {
+            $direccionImagen2 = '';
+        }
+        if ($data->hasFile('path_file_photo3')) {
+            $file = $data->file('path_file_photo3');
+            $dimensions = getimagesize($file);
+            if ($dimensions[0] != 1920 || $dimensions[1] != 1920) {
+                return redirect()->back()->withInput()->withErrors(['path_file_photo3' => 'La imagen debe tener dimensiones de 1920x1920 px.']);
+            }
+            $endPath = public_path('/storage/images/productos/foto3/' . $idDes . '/');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $oldImagePath = DB::table('directorio.directorio_productos')
+                ->where('id_ddjj', $idDes)
+                ->value('path_file_photo3');
+            if ($oldImagePath && file_exists(public_path($oldImagePath))) {
+                unlink(public_path($oldImagePath));
+            }
+            $uploadSuccess = $file->move($endPath, $filename);
+            if ($uploadSuccess) {
+                $direccionImagen3 = '/storage/images/productos/foto3/' . $idDes . '/' . $filename;
+                DB::table('directorio.directorio_productos')
+                    ->updateOrInsert(
+                        [
+                            'id_ddjj' => $idDes
+                        ],
+                        ['path_file_photo3' => $direccionImagen3]
+                    );
+            } else {
+                $direccionImagen3 = '';
+            }
+        } else {
+            $direccionImagen3 = '';
+        }
+        //$idDes = Crypt::decryptString($id);
+        //$direcion = '';
+        //if ($data->hasFile('imagen_producto')) {
+        //    $file = $data->file('imagen_producto');
+        //    $endPath = 'storage/images/producto/' . $idDes . '/';
+        //    // if(File::exists($endPath))
+        //    // {
+        //    //     File::delete($endPath);
+        //    // }
+        //    $fileName = time() . '-' . $file->getClientOriginalName();
+        //    $uploadSuccess = $data->file('imagen_producto')->move($endPath, $fileName);
+        //    $direcion = $endPath . $fileName;
+        //}
+        //if (strlen($direcion) < 5) {
+        //    $direcion = $data->imagen_producto;
+        //} else {
+        //    $direcion = URL($direcion);
+        //}
+        //Productos::where('id_producto', $data->id_producto)->update([
+        //    'cantidad_disponible' => $data->cantidad_disponible ?? '',
+        //    'nombre_producto' => $data->nombre_producto,
+        //    'imagen_producto' => $direcion,
+        //    'descripcion_producto' => $data->descripcion_producto,
+        //    'precio_producto' => $data->precio_producto,
+        //    'precio_producto_max' => $data->precio_producto_max ?? '',
+        //    'codigo_nandina' => $data->codigo_nandina,
+        //    'estrella' => $data->estrella,
+        //    'estado_producto' => 'normal',
+        //    'id_rubro' => $data->id_rubro,
+        //    'id_categoria' => $data->id_categoria,
+        //    'numero_producto' => $data->numero_producto ?? '',
+        //    'id_unidad_medida' => $data->id_unidad_medida,
+        //    'id_moneda' => $data->id_moneda,
+        //    'id_empresa' => $idDes,
+        //    'estado' => 'inactivo',
+        //]);
+        return redirect()->back();
     }
 
     /////////////////////////////////   //////////////////////////////  //////////////////////////////////
@@ -461,7 +561,7 @@ class HomeController extends Controller
             $file = $data->file('path_file_foto1');
             $dimensions = getimagesize($file);
             if ($dimensions[0] != 1920 || $dimensions[1] != 1080) {
-                return redirect()->back()->withInput()->withErrors(['path_file_foto1' => 'La imagen debe tener dimensiones de 650x550 px.']);
+                return redirect()->back()->withInput()->withErrors(['path_file_foto1' => 'La imagen debe tener dimensiones de 1920x1080 px.']);
             }
             $endPath = public_path('/storage/images/empresas/empresa/' . $idDes . '/');
             $filename = time() . '.' . $file->getClientOriginalExtension();
@@ -489,7 +589,7 @@ class HomeController extends Controller
             $file = $data->file('path_file_foto2');
             $dimensions = getimagesize($file);
             if ($dimensions[0] != 1080 || $dimensions[1] != 1080) {
-                return redirect()->back()->withInput()->withErrors(['path_file_foto1' => 'La imagen debe tener dimensiones de 650x550 px.']);
+                return redirect()->back()->withInput()->withErrors(['path_file_foto1' => 'La imagen debe tener dimensiones de 1080x1080 px.']);
             }
             $endPath = public_path('/storage/images/empresas/logo/' . $idDes . '/');
             $filename = time() . '.' . $file->getClientOriginalExtension();

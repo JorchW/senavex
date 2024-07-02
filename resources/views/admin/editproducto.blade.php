@@ -38,19 +38,19 @@
                                 <div class="form-file ">
                                     <input accept="image/png,image/jpeg,image/jpg" type="file"
                                         class="form-file-input form-control focus:outline-none input-image"
-                                        name="path_file_foto1" id="path_file_foto1">
+                                        name="path_file_photo1" id="path_file_photo1">
                                 </div>
                             </div>
                             <br>
                             <div class="mb-3 row text-center">
                                 <div class='form-file'>
-                                    {{--@if($imagen && strlen($imagen->path_file_foto1) > 0)
-                                        <img src="{{$imagen->path_file_foto1}}" height="250" width="250" alt="Imagen">
-                                    @endif--}}
+                                    @if($imagen && strlen($imagen->path_file_photo1) > 0)
+                                        <img src="{{$imagen->path_file_photo1}}" height="250" width="250" alt="Imagen">
+                                    @endif
                                 </div>
                             </div>
                             <p class="text-image-2"> </p>
-                            @error('path_file_foto1')
+                            @error('path_file_photo1')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
@@ -60,19 +60,19 @@
                                 <div class="form-file ">
                                     <input accept="image/png,image/jpeg,image/jpg" type="file"
                                         class="form-file-input form-control focus:outline-none input-image"
-                                        name="path_file_foto2" id="path_file_foto2">
+                                        name="path_file_photo2" id="path_file_photo2">
                                 </div>
                             </div>
                             <br>
                             <div class="mb-3 row text-center">
                                 <div class='form-file'>
-                                    {{--@if($imagen && strlen($imagen->path_file_foto2) > 0)
-                                        <img src="{{$imagen->path_file_foto2}}" height="250" width="250" alt="Imagen">
-                                    @endif--}}
+                                    @if($imagen && strlen($imagen->path_file_photo2) > 0)
+                                        <img src="{{$imagen->path_file_photo2}}" height="250" width="250" alt="Imagen">
+                                    @endif
                                 </div>
                             </div>
                             <p class="text-image-2"> </p>
-                            @error('path_file_foto2')
+                            @error('path_file_photo2')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
@@ -82,21 +82,38 @@
                                 <div class="form-file ">
                                     <input accept="image/png,image/jpeg,image/jpg" type="file"
                                         class="form-file-input form-control focus:outline-none input-image"
-                                        name="path_file_foto3" id="path_file_foto3">
+                                        name="path_file_photo3" id="path_file_photo3">
                                 </div>
                             </div>
                             <br>
                             <div class="mb-3 row text-center">
                                 <div class='form-file'>
-                                    {{--@if($imagen && strlen($imagen->path_file_foto3) > 0)
-                                        <img src="{{$imagen->path_file_foto3}}" height="250" width="250" alt="Imagen">
-                                    @endif--}}
+                                    @if($imagen && strlen($imagen->path_file_photo3) > 0)
+                                        <img src="{{$imagen->path_file_photo3}}" height="250" width="250" alt="Imagen">
+                                    @endif
                                 </div>
                             </div>
                             <p class="text-image-2"> </p>
-                            @error('path_file_foto3')
+                            @error('path_file_photo3')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
+                        </div>
+                        
+                        <div class="mb-3">
+                        <label class="text-black font-w500">Rubro</label>
+                            <select class="form-control focus:outline-none" name="id_rubro" name="id_rubro">
+                                <option>Seleccione un rubro...</option>
+                                @foreach ($rubros as $rubro)
+                                <option value="{{ $rubro->id_rubro }}">
+                                    {{mb_strtolower(Str::limit($rubro->descripcion_rubro, 100, $end = ' ...'))}}
+                                </option>
+                                @endforeach
+                            </select> 
+                        </div>
+                        <div class="mb-3 row text-center">
+                            <div class="">
+                                <button type="submit" class="btn btn-primary">Enviar Datos</button>
+                            </div>
                         </div>
                         {{--<div class="mb-3">
                             <label class="text-black font-w500">Imagen</label>
@@ -231,11 +248,6 @@
                                     value="{{ $productoEdit->cantidad_disponible }}" required>
                             </div>
                         </div>--}}
-                        <div class="mb-3 row">
-                            <div class="col-lg-8 ms-auto">
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </div>
-                        </div>
                     </form>
 
                 </div>
