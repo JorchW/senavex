@@ -52,7 +52,7 @@
                                     <div class="col-sm-4 pr-0 pr-sm-15">
                                         <div class="event-details p-15 mt-20">
                                             @if (strlen($empresa->path_file_foto1) > 0)
-                                            <img class="img-fullwidth" src="{{ $empresa->path_file_foto1 }}" alt="" />
+                                            <img  src="{{ $empresa->path_file_foto1 }}" alt="" />
                                             @else
                                             <img class="img-fullwidth" src="{{ asset('storage/images/vistas/senavex1.png') }}"
                                                 alt="" />

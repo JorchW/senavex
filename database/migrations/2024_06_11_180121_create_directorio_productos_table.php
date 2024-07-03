@@ -25,7 +25,7 @@ class CreateDirectorioProductosTable extends Migration
             $table->timestamps();
             $table->foreign('id_categoria')->references('id_categoria')->on('directorio.directorio_categoria');
             $table->foreign('id_empresa')->references('id_empresa')->on('public.empresas');
-            $table->foreign('id_empresa_rubro')->references('id_empresa_rubro')->on('public.empresas_rubros');
+            $table->foreign('id_empresa_rubro')->references('id_rubro')->on('public.empresa_rubros');
         });
     }
 

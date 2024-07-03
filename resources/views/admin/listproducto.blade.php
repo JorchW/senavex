@@ -90,7 +90,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="table-responsive rounded">
-                <table id="example3" class="table customer-table display mb-4 fs-14 card-table">
+                <table id="example3" class="table customer-table display mb-4 fs-14 card-table text-center">
                     <thead>
                         <tr>
                             <th>denominacion</th>
@@ -101,8 +101,8 @@
                             <th>acuerdo</th>
                             <th>sigla</th>
                             <th>foto 1</th>
-                            <th>foto 3</th>
                             <th>foto 2</th>
+                            <th>foto 3</th>
                             <th>subir fotos</th>
                         </tr>
                     </thead>
@@ -131,13 +131,37 @@
                                     {{$producto->sigla}}
                                 </td>
                                 <td>
-
+                                    <div class="event-details p-15 mt-20">
+                                        @if (strlen($producto->path_file_photo1) > 0)
+                                            <img class="img-fullwidth rounded border border-primary shadow"
+                                                src="{{ $producto->path_file_photo1 }}" alt="" width="200px">
+                                        @else
+                                            <img class="img-fullwidth rounded border border-primary shadow"
+                                                src="{{ asset('storage/images/vistas/senavex1.png') }}" alt="" width="200px">
+                                        @endif
+                                    </div>
                                 </td>
                                 <td>
-
+                                    <div class="event-details p-15 mt-20">
+                                        @if (strlen($producto->path_file_photo2) > 0)
+                                            <img class="img-fullwidth rounded border border-primary shadow"
+                                                src="{{ $producto->path_file_photo2 }}" alt="" width="200px">
+                                        @else
+                                            <img class="img-fullwidth rounded border border-primary shadow"
+                                                src="{{ asset('storage/images/vistas/senavex1.png') }}" alt="" width="200px">
+                                        @endif
+                                    </div>
                                 </td>
                                 <td>
-                                    
+                                    <div class="event-details p-15 mt-20">
+                                        @if (strlen($producto->path_file_photo3) > 0)
+                                            <img class="img-fullwidth rounded border border-primary shadow"
+                                                src="{{ $producto->path_file_photo3 }}" alt="" width="200px">
+                                        @else
+                                            <img class="img-fullwidth rounded border border-primary shadow"
+                                                src="{{ asset('storage/images/vistas/senavex1.png') }}" alt="" width="200px">
+                                        @endif
+                                    </div>
                                 </td>
                                 {{--<td><img class="rounded-rectangle" width="150" heigth="150"
                                         src="{{ $producto->imagen_producto }}" alt=""></td>
@@ -181,7 +205,8 @@
                                     </div>
                                 </td>
                             </tr>--}}
-                            <td><a href="{{ URL('one-prod-admin/' . Crypt::encryptString($producto->id_ddjj)) }}"  class="btn btn-outline-primary">Editar</a></td>
+                            <td><a href="{{ URL('one-prod-admin/' . Crypt::encryptString($producto->id_ddjj)) }}"
+                                    class="btn btn-outline-primary">Editar</a></td>
                             {{--<td><a href="javascript:void(0);" class="btn btn-outline-primary" data-bs-toggle="modal"
                                     data-bs-target="#addNewCustomer">Subir Fotos</a></td>--}}
                         @endforeach

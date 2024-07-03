@@ -45,7 +45,7 @@
                             <div class="mb-3 row text-center">
                                 <div class='form-file'>
                                     @if($imagen && strlen($imagen->path_file_photo1) > 0)
-                                        <img src="{{$imagen->path_file_photo1}}" height="250" width="250" alt="Imagen">
+                                        <img class="img-fullwidth rounded border border-primary shadow" src="{{$imagen->path_file_photo1}}" height="250" width="250" alt="Imagen">
                                     @endif
                                 </div>
                             </div>
@@ -67,7 +67,7 @@
                             <div class="mb-3 row text-center">
                                 <div class='form-file'>
                                     @if($imagen && strlen($imagen->path_file_photo2) > 0)
-                                        <img src="{{$imagen->path_file_photo2}}" height="250" width="250" alt="Imagen">
+                                        <img class="img-fullwidth rounded border border-primary shadow" src="{{$imagen->path_file_photo2}}" height="250" width="250" alt="Imagen">
                                     @endif
                                 </div>
                             </div>
@@ -89,7 +89,7 @@
                             <div class="mb-3 row text-center">
                                 <div class='form-file'>
                                     @if($imagen && strlen($imagen->path_file_photo3) > 0)
-                                        <img src="{{$imagen->path_file_photo3}}" height="250" width="250" alt="Imagen">
+                                        <img class="img-fullwidth rounded border border-primary shadow" src="{{$imagen->path_file_photo3}}" height="250" width="250" alt="Imagen">
                                     @endif
                                 </div>
                             </div>
@@ -98,10 +98,17 @@
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
-                        
                         <div class="mb-3">
-                        <label class="text-black font-w500">Rubro</label>
-                            <select class="form-control focus:outline-none" name="id_rubro" name="id_rubro">
+                            <label class="text-black font-w500">Rubro Actual</label>
+                            @forelse ($rubrosel as $r)
+                                <input type="text" class="form-control" value="{{ $r->descripcion_rubro }}" readonly>
+                            @empty
+                                <input type="text" class="form-control" value="Aun no Selecciono un Rubro...!" readonly>
+                            @endforelse
+                        </div>
+                        <div class="mb-3">
+                        <label class="text-black font-w500">Seleccionar Rubro</label>
+                            <select class="form-control focus:outline-none" name="id_rubro" id="id_rubro">
                                 <option>Seleccione un rubro...</option>
                                 @foreach ($rubros as $rubro)
                                 <option value="{{ $rubro->id_rubro }}">
@@ -110,6 +117,7 @@
                                 @endforeach
                             </select> 
                         </div>
+                        <input type="hidden" name="id_empresa" value="{{ $empresas->id_empresa }}">
                         <div class="mb-3 row text-center">
                             <div class="">
                                 <button type="submit" class="btn btn-primary">Enviar Datos</button>

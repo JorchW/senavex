@@ -110,6 +110,7 @@ class HomeController extends Controller
             ->where('id_user', Auth::id(), )->get();
 
         $productos = DB::table('ddjjs as dj')
+            ->leftjoin('directorio.directorio_productos as dp', 'dj.id_ddjj', '=', 'dp.id_ddjj')
             ->join('ddjj_datos_mercancias as dm', 'dj.id_ddjj', '=', 'dm.id_ddjj')
             ->join('acuerdos as a', 'a.id_acuerdo', '=', 'dj.id_acuerdo')
             ->join('empresas as e', 'dj.id_empresa', '=', 'e.id_empresa')
@@ -184,8 +185,7 @@ class HomeController extends Controller
             ->join('acuerdos as a', 'a.id_acuerdo', '=', 'dj.id_acuerdo')
             ->join('empresas as e', 'dj.id_empresa', '=', 'e.id_empresa')
             ->join('empresa_categorias as ec', 'e.id_categoria', '=', 'ec.id_categoria')
-            ->join('empresas_rubros as er', 'e.id_empresa', '=', 'er.id_empresa')
-            ->select('*')
+            ->select('e.id_empresa','*')
             ->where('dj.id_ddjj', $idDes)
             ->whereIn('dj.id_ddjj_estado', [6, 9, 10, 11])
             ->orderBy('dj.updated_at', 'desc')->first();
@@ -200,10 +200,15 @@ class HomeController extends Controller
         $imagen = DB::table('ddjjs as dj')
             ->join('directorio.directorio_productos as dp', 'dj.id_ddjj', '=', 'dp.id_ddjj')
             ->select('*')
-            ->where('dj.id_ddjj', $idDes)
-            ->whereIn('dj.id_ddjj_estado', [6, 9, 10, 11])->first();
+            ->where('dj.id_ddjj', $idDes)->first();
 
-        $rubros = DB::table('empresa_rubros')
+        $rubrosel = DB::table('ddjjs as dj')
+            ->join('directorio.directorio_productos as dp', 'dj.id_ddjj', '=', 'dp.id_ddjj')
+            ->join('empresa_rubros as er', 'dp.id_empresa_rubro', '=', 'er.id_rubro')
+            ->select('*')
+            ->where('dj.id_ddjj', $idDes)->get();
+
+        $rubros = DB::table('empresa_rubros as er')
             ->select('*')->get();
         // $productoEdit = Productos::where('id_producto', $idDes)->first();
         //$productoEdit = DB::table('ddjjs as dj')
@@ -238,6 +243,7 @@ class HomeController extends Controller
             'roles' => $rol,
             //'rubros' => $rubros,
             'imagen' => $imagen,
+            'rubrosel' => $rubrosel,
             'rubros' => $rubros
             //'monedas' => $monedas,
             //'medidas' => $medidas,
@@ -322,12 +328,21 @@ class HomeController extends Controller
     }
     public function updateProd($id, Request $data)
     {
+        $id_rubro = $data->input('id_rubro');
+        $id_empresa = $data->input('id_empresa');
+        $data->validate([
+            'id_rubro' => 'required|integer|exists:empresa_rubros,id_rubro',
+            'path_file_photo1' => 'image|dimensions:width=1920,height=1920',
+            'path_file_photo2' => 'image|dimensions:width=1920,height=1920',
+            'path_file_photo3' => 'image|dimensions:width=1920,height=1920',
+        ]);
+
         $idDes = Crypt::decryptString($id);
         if ($data->hasFile('path_file_photo1')) {
             $file = $data->file('path_file_photo1');
             $dimensions = getimagesize($file);
             if ($dimensions[0] != 1920 || $dimensions[1] != 1920) {
-                return redirect()->back()->withInput()->withErrors(['path_file_photo1' => 'La imagen debe tener dimensiones de 1920x1920 px.']);
+                return redirect()->back()->withInput()->withErrors(['path_file_photo1' => 'La imagen debe tener dimensiones de 1920x1920 px. o formato no Valido!']);
             }
             $endPath = public_path('/storage/images/productos/foto1/' . $idDes . '/');
             $filename = time() . '.' . $file->getClientOriginalExtension();
@@ -357,7 +372,7 @@ class HomeController extends Controller
             $file = $data->file('path_file_photo2');
             $dimensions = getimagesize($file);
             if ($dimensions[0] != 1920 || $dimensions[1] != 1920) {
-                return redirect()->back()->withInput()->withErrors(['path_file_photo2' => 'La imagen debe tener dimensiones de 1920x1920 px.']);
+                return redirect()->back()->withInput()->withErrors(['path_file_photo2' => 'La imagen debe tener dimensiones de 1920x1920 px. o formato no Valido!']);
             }
             $endPath = public_path('/storage/images/productos/foto2/' . $idDes . '/');
             $filename = time() . '.' . $file->getClientOriginalExtension();
@@ -387,7 +402,7 @@ class HomeController extends Controller
             $file = $data->file('path_file_photo3');
             $dimensions = getimagesize($file);
             if ($dimensions[0] != 1920 || $dimensions[1] != 1920) {
-                return redirect()->back()->withInput()->withErrors(['path_file_photo3' => 'La imagen debe tener dimensiones de 1920x1920 px.']);
+                return redirect()->back()->withInput()->withErrors(['path_file_photo3' => 'La imagen debe tener dimensiones de 1920x1920 px. o formato no Valido!']);
             }
             $endPath = public_path('/storage/images/productos/foto3/' . $idDes . '/');
             $filename = time() . '.' . $file->getClientOriginalExtension();
@@ -449,6 +464,13 @@ class HomeController extends Controller
         //    'id_empresa' => $idDes,
         //    'estado' => 'inactivo',
         //]);
+        DB::table('directorio.directorio_productos')
+            ->where('id_ddjj', $idDes)
+            ->update([
+                'id_empresa_rubro' => $id_rubro,
+                'id_empresa' => $id_empresa,
+            ]);
+
         return redirect()->back();
     }
 
@@ -561,7 +583,7 @@ class HomeController extends Controller
             $file = $data->file('path_file_foto1');
             $dimensions = getimagesize($file);
             if ($dimensions[0] != 1920 || $dimensions[1] != 1080) {
-                return redirect()->back()->withInput()->withErrors(['path_file_foto1' => 'La imagen debe tener dimensiones de 1920x1080 px.']);
+                return redirect()->back()->withInput()->withErrors(['path_file_foto1' => 'La imagen debe tener dimensiones de 1920x1080 px. y formato no Valido!']);
             }
             $endPath = public_path('/storage/images/empresas/empresa/' . $idDes . '/');
             $filename = time() . '.' . $file->getClientOriginalExtension();
@@ -589,7 +611,7 @@ class HomeController extends Controller
             $file = $data->file('path_file_foto2');
             $dimensions = getimagesize($file);
             if ($dimensions[0] != 1080 || $dimensions[1] != 1080) {
-                return redirect()->back()->withInput()->withErrors(['path_file_foto1' => 'La imagen debe tener dimensiones de 1080x1080 px.']);
+                return redirect()->back()->withInput()->withErrors(['path_file_foto1' => 'La imagen debe tener dimensiones de 1080x1080 px. o formato no Valido!']);
             }
             $endPath = public_path('/storage/images/empresas/logo/' . $idDes . '/');
             $filename = time() . '.' . $file->getClientOriginalExtension();

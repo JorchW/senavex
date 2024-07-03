@@ -17,8 +17,7 @@
                     <a href="javascript:void(0);" class="btn-close" data-bs-dismiss="modal"></a>
                 </div>--}}
                 <div class="modal-body">
-                    <form method="POST"
-                        action="{{ URL('update-empr/' . Crypt::encryptString($empresas->id_empresa)) }}"
+                    <form method="POST" action="{{ URL('update-empr/' . Crypt::encryptString($empresas->id_empresa)) }}"
                         enctype="multipart/form-data" autocomplete="off">
                         @csrf
                         @method('PUT')
@@ -38,7 +37,11 @@
                             <div class="mb-3 row text-center">
                                 <div class='form-file'>
                                     @if($imagen && strlen($imagen->path_file_foto1) > 0)
-                                        <img src="{{$imagen->path_file_foto1}}" height="250" width="250" alt="Imagen">
+                                        <img class="img-fullwidth rounded border border-primary shadow"
+                                            src="{{$imagen->path_file_foto1}}" height="100%" width="250" alt="Imagen">
+                                    @else
+                                        <img class="img-fullwidth rounded border border-primary shadow"
+                                            src="{{ asset('storage/images/vistas/senavex1.png') }}" height="100%" width="250" alt="" >
                                     @endif
                                 </div>
                             </div>
@@ -61,7 +64,11 @@
                             <div class="mb-3 row text-center">
                                 <div class='form-file'>
                                     @if($imagen && strlen($imagen->path_file_foto2) > 0)
-                                        <img src="{{$imagen->path_file_foto2}}" height="250" width="250" alt="Imagen">
+                                        <img class="img-fullwidth rounded border border-primary shadow"
+                                            src="{{$imagen->path_file_foto2}}" height="100%" width="250" alt="Imagen">
+                                    @else
+                                        <img class="img-fullwidth rounded border border-primary shadow"
+                                            src="{{ asset('storage/images/vistas/senavex1.png') }}"  height="100%" width="250" alt="">
                                     @endif
                                 </div>
                             </div>
