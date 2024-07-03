@@ -16,9 +16,8 @@
                     data-version="5.0.7">
                     <ul>
                         <!-- SLIDE 1 -->
-                        <li data-index="rs-1" data-transition="slidingoverlayhorizontal"
-                            data-slotamount="default" data-easein="default" data-easeout="default"
-                            data-masterspeed="default"
+                        <li data-index="rs-1" data-transition="slidingoverlayhorizontal" data-slotamount="default"
+                            data-easein="default" data-easeout="default" data-masterspeed="default"
                             data-thumb="{{ asset('storage/images/vistas/inicio1.png') }}" data-rotate="0"
                             data-fstransition="fade" data-fsmasterspeed="1500" data-fsslotamount="7"
                             data-saveperformance="off" data-title="Make an Impact">
@@ -30,8 +29,7 @@
                             <!-- LAYER NR. 1 -->
                             <div class="tp-caption tp-shape tp-shapewrapper tp-resizeme rs-parallaxlevel-0"
                                 id="slide-1-layer-1" data-x="['center','center','center','center']"
-                                data-hoffset="['0','0','0','0']"
-                                data-y="['middle','middle','middle','middle']"
+                                data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']"
                                 data-voffset="['0','0','0','0']" data-width="full" data-height="full"
                                 data-whitespace="normal" data-transform_idle="o:1;"
                                 data-transform_in="opacity:0;s:1500;e:Power3.easeInOut;"
@@ -40,145 +38,58 @@
                                 style="z-index: 5;background-color:rgba(0, 0, 0, 0.5);border-color:rgba(0, 0, 0, 1.00);">
                             </div>
                             <!-- LAYER NR. 2 -->
-                            <div class="tp-caption tp-resizeme text-white rs-parallaxlevel-0"
-                                id="slide-1-layer-2" data-x="['left','left','left','left']"
-                                data-hoffset="['50','50','50','30']" data-y="['top','top','top','top']"
-                                data-voffset="['220','200','170','190']" data-fontsize="['56','46','40','36']"
-                                data-lineheight="['70','60','50','45']"
-                                data-fontweight="['800','700','700','700']"
-                                data-width="['700','650','600','420']" data-height="none"
-                                data-whitespace="normal" data-transform_idle="o:1;"
+                            <div class="tp-caption tp-resizeme text-white rs-parallaxlevel-0" id="slide-1-layer-2"
+                                data-x="['left','left','left','left']" data-hoffset="['50','50','50','30']"
+                                data-y="['top','top','top','top']" data-voffset="['220','200','170','190']"
+                                data-fontsize="['56','46','40','36']" data-lineheight="['70','60','50','45']"
+                                data-fontweight="['800','700','700','700']" data-width="['700','650','600','420']"
+                                data-height="none" data-whitespace="normal" data-transform_idle="o:1;"
                                 data-transform_in="y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;s:1500;e:Power3.easeInOut;"
                                 data-transform_out="auto:auto;s:1000;e:Power3.easeInOut;"
                                 data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
-                                data-mask_out="x:0;y:0;s:inherit;e:inherit;" data-start="1000"
-                                data-splitin="none" data-splitout="none" data-responsive_offset="on"
+                                data-mask_out="x:0;y:0;s:inherit;e:inherit;" data-start="1000" data-splitin="none"
+                                data-splitout="none" data-responsive_offset="on"
                                 style="z-index: 6; min-width: 600px; max-width: 600px; white-space: normal;">
                                 Directorio de <span class="text-theme-coloredv">Exportadores</span>
                             </div>
                             <!-- LAYER NR. 3 -->
-                            <div class="tp-caption tp-resizeme text-white rs-parallaxlevel-0"
+                            <div class="tp-caption tp-resizeme text-white rs-parallaxlevel-0 rounded-circle"
                                 id="slide-1-layer-3" data-x="['left','left','left','left']"
                                 data-hoffset="['50','50','50','30']" data-y="['top','top','top','top']"
                                 data-voffset="['380','320','280','280']" data-fontsize="['18','18','16','13']"
-                                data-lineheight="['30','30','28','25']"
-                                data-fontweight="['600','600','600','600']"
-                                data-width="['700','650','600','420']" data-height="none"
-                                data-whitespace="nowrap" data-transform_idle="o:1;"
+                                data-lineheight="['30','30','28','25']" data-fontweight="['600','600','600','600']"
+                                data-width="['700','650','600','420']" data-height="none" data-whitespace="nowrap"
+                                data-transform_idle="o:1;"
                                 data-transform_in="y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;s:1500;e:Power3.easeInOut;"
                                 data-transform_out="auto:auto;s:1000;e:Power3.easeInOut;"
                                 data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
-                                data-mask_out="x:0;y:0;s:inherit;e:inherit;" data-start="1000"
-                                data-splitin="none" data-splitout="none" data-responsive_offset="on"
-                                style="z-index: 7; white-space: nowrap;">Directorio Exportador te ofrece<br>
-                                muchos productos para para la población en general.
-                            </div>
-
-
-
-                            <!-- SLIDE 3 -->
-                        <li data-index="rs-3" data-transition="slidingoverlayhorizontal"
-                            data-slotamount="default" data-easein="default" data-easeout="default"
-                            data-masterspeed="default"
-                            data-thumb="{{ asset('storage/images/vistas/inicio2.png') }}" data-rotate="0"
-                            data-fstransition="fade" data-fsmasterspeed="1500" data-fsslotamount="7"
-                            data-saveperformance="off" data-title="Make an Impact">
-                            <!-- MAIN IMAGE -->
-                            <img src="{{ asset('storage/images/vistas/inicio2.png') }}" alt=""
-                                data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat"
-                                data-bgparallax="10" class="rev-slidebg" data-no-retina>
-                            <!-- LAYERS -->
-                            <!-- LAYER NR. 1 -->
-                            <div class="tp-caption tp-shape tp-shapewrapper tp-resizeme rs-parallaxlevel-0"
-                                id="slide-3-layer-1" data-x="['center','center','center','center']"
-                                data-hoffset="['0','0','0','0']"
-                                data-y="['middle','middle','middle','middle']"
-                                data-voffset="['0','0','0','0']" data-width="full" data-height="full"
-                                data-whitespace="normal" data-transform_idle="o:1;"
-                                data-transform_in="opacity:0;s:1500;e:Power3.easeInOut;"
-                                data-transform_out="opacity:0;s:1000;e:Power3.easeInOut;s:1000;e:Power3.easeInOut;"
-                                data-start="1000" data-basealign="slide" data-responsive_offset="on"
-                                style="z-index: 5;background-color:rgba(0, 0, 0, 0.5);border-color:rgba(0, 0, 0, 1.00);">
-                            </div>
-                            <!-- LAYER NR. 2 -->
-                            <div class="tp-caption tp-resizeme text-white rs-parallaxlevel-0"
-                                id="slide-3-layer-2" data-x="['center','center','center','center']"
-                                data-hoffset="['310','200','100','0']" data-y="['top','top','top','top']"
-                                data-voffset="['170','150','1200','140']"
-                                data-fontsize="['56','46','40','36']" data-lineheight="['70','60','50','45']"
-                                data-fontweight="['800','700','700','700']"
-                                data-width="['700','650','500','420']" data-height="none"
-                                data-whitespace="normal" data-transform_idle="o:1;"
-                                data-transform_in="y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;s:1500;e:Power3.easeInOut;"
-                                data-transform_out="auto:auto;s:1000;e:Power3.easeInOut;"
-                                data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
-                                data-mask_out="x:0;y:0;s:inherit;e:inherit;" data-start="1000"
-                                data-splitin="none" data-splitout="none" data-responsive_offset="on"
-                                style="z-index: 6; min-width: 600px; max-width: 600px; white-space: normal;">
-                                Registrate y <span class="text-theme-colored2">Haz</span> conocer tus <span
-                                    class="text-theme-color-2">productos</span>
-                            </div>
-                            <!-- LAYER NR. 3 -->
-                            <div class="tp-caption tp-resizeme text-white rs-parallaxlevel-0"
-                                id="slide-3-layer-3" data-x="['center','center','center','center']"
-                                data-hoffset="['310','200','100','0']" data-y="['top','top','top','top']"
-                                data-voffset="['330','270','230','230']" data-fontsize="['18','18','16','13']"
-                                data-lineheight="['30','30','28','25']"
-                                data-fontweight="['600','600','600','600']"
-                                data-width="['700','650','500','420']" data-height="none"
-                                data-whitespace="nowrap" data-transform_idle="o:1;"
-                                data-transform_in="y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;s:1500;e:Power3.easeInOut;"
-                                data-transform_out="auto:auto;s:1000;e:Power3.easeInOut;"
-                                data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
-                                data-mask_out="x:0;y:0;s:inherit;e:inherit;" data-start="1000"
-                                data-splitin="none" data-splitout="none" data-responsive_offset="on"
-                                style="z-index: 7; white-space: nowrap;">Tienes productos de Exportacion y
-                                nadie los conoce?<br>
-                            </div>
-                            <!-- LAYER NR. 3 -->
-                            <div class="tp-caption tp-resizeme text-white rs-parallaxlevel-0"
-                                id="slide-3-layer-3" data-x="['center','center','center','center']"
-                                data-hoffset="['310','200','100','0']" data-y="['top','top','top','top']"
-                                data-voffset="['410','340','310','310']" data-fontsize="['18','18','16','16']"
-                                data-lineheight="['30','30','30','30']"
-                                data-fontweight="['600','600','600','600']"
-                                data-width="['700','650','500','420']" data-height="none"
-                                data-whitespace="nowrap" data-transform_idle="o:1;"
-                                data-transform_in="y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;s:1500;e:Power3.easeInOut;"
-                                data-transform_out="auto:auto;s:1000;e:Power3.easeInOut;"
-                                data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
-                                data-mask_out="x:0;y:0;s:inherit;e:inherit;" data-start="1000"
-                                data-splitin="none" data-splitout="none" data-responsive_offset="on"
-                                style="z-index: 7; white-space: nowrap;"><a href="https://taypi.senavex.gob.bo"
-                                    class="btn btn-dark btn-theme-coloredn btn-xl">Obten tu RUEX y sube tus Productos</a>
-                            </div>
-                            <!-- LAYER NR. 4 -->
-                            <div class="tp-caption rs-parallaxlevel-0" id="slide-3-layer-4"
-                                data-x="['center','center','center','center']"
-                                data-hoffset="['310','33','0','0']" data-y="['top','top','top','top']"
-                                data-voffset="['360','290','260','260']"
-                                data-width="['700','650','600','420']" data-height="none"
-                                data-whitespace="nowrap" data-transform_idle="o:1;"
-                                data-transform_hover="o:1;rX:0;rY:0;rZ:0;z:0;s:300;e:Power1.easeInOut;"
-                                data-transform_in="y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;s:1500;e:Power3.easeInOut;"
-                                data-transform_out="auto:auto;s:1000;e:Power3.easeInOut;"
-                                data-mask_in="x:0px;y:0px;" data-mask_out="x:0;y:0;" data-start="1000"
-                                data-splitin="none" data-splitout="none" data-responsive_offset="on"
-                                data-responsive="off"
-                                style="z-index: 8; white-space: nowrap;outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;">
+                                data-mask_out="x:0;y:0;s:inherit;e:inherit;" data-start="1000" data-splitin="none"
+                                data-splitout="none" data-responsive_offset="on"
+                                style="z-index: 7; white-space: nowrap;">
+                                <div class="search-form">
+                                    <form method="" class="search-form" action="{{route('productos')}}">
+                                        <div class="input-group">
+                                            <input type="text" id="buscador" name="buscador"
+                                                class="form-control search-input mt-5 btn-circled" placeholder="Buscar productos..." />
+                                            <span class="input-group-btn">
+                                                <button type="submit" class="btn btn-colored btn-circled btn-xl btn-theme-colored2 mt-1 mb-sm-30">
+                                                <i class="fa fa-search"></i> Buscar</button>
+                                            </span>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </li>
                     </ul>
-                    <div class="tp-bannertimer tp-bottom"
-                        style="height: 5px; background-color: rgba(166, 216, 236, 1.00);"></div>
+                    {{--<div class="tp-bannertimer tp-bottom"
+                        style="height: 5px; background-color: rgba(166, 216, 236, 1.00);"></div>--}}
                 </div>
             </div>
-
             <!-- END REVOLUTION SLIDER -->
             <script type="text/javascript">
                 var tpj = jQuery;
                 var revapi34;
-                tpj(document).ready(function() {
+                tpj(document).ready(function () {
                     if (tpj("#rev_slider_home").revolution == undefined) {
                         revslider_showDoubleJqueryError("#rev_slider_home");
                     } else {
@@ -236,7 +147,7 @@
                                     h_offset: 0,
                                     v_offset: 30,
                                     space: 5,
-                                    tmp: '<span class="tp-bullet-img-wrap"><span class="tp-bullet-image"></span></span>'
+                                    //tmp: '<span class="tp-bullet-img-wrap"><span class="tp-bullet-image"></span></span>'
                                 }
                             },
                             viewPort: {
@@ -293,8 +204,8 @@
                             tincidunt ullamcorper.</p>
                         <a class="btn btn-colored btn-circled btn-xl btn-theme-colored2 mt-10 mb-sm-30"
                             href="page-about1.html">Leer mas</a>
-                        <a class="btn btn-default btn-circled btn-xl mt-10 mb-sm-30"
-                            href="page-about1.html">Leer mas</a>
+                        <a class="btn btn-default btn-circled btn-xl mt-10 mb-sm-30" href="page-about1.html">Leer
+                            mas</a>
                     </div>
                     <div class="col-sm-6 col-md-6 text-center">
                         <img src="{{ asset('storage/images/vistas/logop.png') }}" alt="about">

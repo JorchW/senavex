@@ -84,7 +84,7 @@ class HomeController extends Controller
             ->join('personas', 'empresas_personas.id_persona', '=', 'personas.id_persona')
             ->join('users', 'personas.id_persona', '=', 'users.id_persona')
             ->select('empresas.*', 'users.*')
-            ->where('id_user', Auth::id())->get();
+            ->where('id_user', Auth::id())->distinct()->get();
         return view('admin.select', [
             'empresas' => $empresas
         ]);
