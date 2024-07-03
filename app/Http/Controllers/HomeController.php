@@ -185,7 +185,7 @@ class HomeController extends Controller
             ->join('acuerdos as a', 'a.id_acuerdo', '=', 'dj.id_acuerdo')
             ->join('empresas as e', 'dj.id_empresa', '=', 'e.id_empresa')
             ->join('empresa_categorias as ec', 'e.id_categoria', '=', 'ec.id_categoria')
-            ->select('e.id_empresa','*')
+            ->select('e.id_empresa', '*')
             ->where('dj.id_ddjj', $idDes)
             ->whereIn('dj.id_ddjj_estado', [6, 9, 10, 11])
             ->orderBy('dj.updated_at', 'desc')->first();
@@ -209,6 +209,15 @@ class HomeController extends Controller
             ->where('dj.id_ddjj', $idDes)->get();
 
         $rubros = DB::table('empresa_rubros as er')
+            ->select('*')->get();
+
+        $categoriasel = DB::table('ddjjs as dj')
+            ->join('directorio.directorio_productos as dp', 'dj.id_ddjj', '=', 'dp.id_ddjj')
+            ->join('directorio.directorio_categoria as dc', 'dp.id_categoria', '=', 'dc.id_categoria')
+            ->select('*')
+            ->where('dj.id_ddjj', $idDes)->get();
+
+        $categorias = DB::table('directorio.directorio_categoria')
             ->select('*')->get();
         // $productoEdit = Productos::where('id_producto', $idDes)->first();
         //$productoEdit = DB::table('ddjjs as dj')
@@ -244,7 +253,9 @@ class HomeController extends Controller
             //'rubros' => $rubros,
             'imagen' => $imagen,
             'rubrosel' => $rubrosel,
-            'rubros' => $rubros
+            'rubros' => $rubros,
+            'categoriasel' => $categoriasel,
+            'categorias' => $categorias
             //'monedas' => $monedas,
             //'medidas' => $medidas,
         ]);
@@ -330,11 +341,12 @@ class HomeController extends Controller
     {
         $id_rubro = $data->input('id_rubro');
         $id_empresa = $data->input('id_empresa');
+        $id_categoria = $data->input('id_categoria');
         $data->validate([
-            'id_rubro' => 'required|integer|exists:empresa_rubros,id_rubro',
-            'path_file_photo1' => 'image|dimensions:width=1920,height=1920',
-            'path_file_photo2' => 'image|dimensions:width=1920,height=1920',
-            'path_file_photo3' => 'image|dimensions:width=1920,height=1920',
+
+            'path_file_photo1' => '',
+            'path_file_photo2' => '',
+            'path_file_photo3' => '',
         ]);
 
         $idDes = Crypt::decryptString($id);
@@ -468,6 +480,7 @@ class HomeController extends Controller
             ->where('id_ddjj', $idDes)
             ->update([
                 'id_empresa_rubro' => $id_rubro,
+                'id_categoria' => $id_categoria,
                 'id_empresa' => $id_empresa,
             ]);
 

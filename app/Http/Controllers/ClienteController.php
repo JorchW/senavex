@@ -149,14 +149,16 @@ class ClienteController extends Controller
 
     public function listaRubros(Request $request){
         $buscador_rubro = trim($request->get('buscador_rubro'));
-        $empresas = DB::table('empresas')
-        ->where([
-            //['estado', 'activo']
-        ])->orderByDesc('updated_at')->get();
+        //$empresas = DB::table('empresas')
+        //->where([
+        //    //['estado', 'activo']
+        //])->orderByDesc('updated_at')->get();
+        $buscador_rubro = strtoupper($buscador_rubro);
         $rubros = DB::table('empresa_rubros')
+        ->select('*')
         ->where([
             //['estado', 'activo'],
-            //['nombre_rubro', 'like', '%'.$buscador_rubro.'%']
+            ['descripcion_rubro', 'like', '%'.$buscador_rubro.'%']
         ])->orderByDesc('updated_at')->paginate(6, ['*'], 'page', null);
         // $rubros = DB::table('productos')
         //                 ->join('empresas', 'empresas.id_empresa', '=', 'productos.id_empresa')
@@ -169,7 +171,7 @@ class ClienteController extends Controller
         //                 ])->orderByDesc('productos.updated_at','empresas.updated_at')->get();
 
         return view ('vistas.listarubro',[
-            'empresas' => $empresas,
+            //'empresas' => $empresas,
             'rubros' => $rubros,
             'buscador_rubro'    => $buscador_rubro
         ]);

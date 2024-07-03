@@ -17,8 +17,7 @@
             @endif
             <div class="card">
                 <div class="modal-body">
-                    <form method="POST"
-                        action="{{ URL('update-prod/' . Crypt::encryptString($empresas->id_ddjj)) }}"
+                    <form method="POST" action="{{ URL('update-prod/' . Crypt::encryptString($empresas->id_ddjj)) }}"
                         enctype="multipart/form-data" autocomplete="off">
                         @csrf
                         @method('PUT')
@@ -45,7 +44,8 @@
                             <div class="mb-3 row text-center">
                                 <div class='form-file'>
                                     @if($imagen && strlen($imagen->path_file_photo1) > 0)
-                                        <img class="img-fullwidth rounded border border-primary shadow" src="{{$imagen->path_file_photo1}}" height="250" width="250" alt="Imagen">
+                                        <img class="img-fullwidth rounded border border-primary shadow"
+                                            src="{{$imagen->path_file_photo1}}" height="250" width="250" alt="Imagen">
                                     @endif
                                 </div>
                             </div>
@@ -67,7 +67,8 @@
                             <div class="mb-3 row text-center">
                                 <div class='form-file'>
                                     @if($imagen && strlen($imagen->path_file_photo2) > 0)
-                                        <img class="img-fullwidth rounded border border-primary shadow" src="{{$imagen->path_file_photo2}}" height="250" width="250" alt="Imagen">
+                                        <img class="img-fullwidth rounded border border-primary shadow"
+                                            src="{{$imagen->path_file_photo2}}" height="250" width="250" alt="Imagen">
                                     @endif
                                 </div>
                             </div>
@@ -89,7 +90,8 @@
                             <div class="mb-3 row text-center">
                                 <div class='form-file'>
                                     @if($imagen && strlen($imagen->path_file_photo3) > 0)
-                                        <img class="img-fullwidth rounded border border-primary shadow" src="{{$imagen->path_file_photo3}}" height="250" width="250" alt="Imagen">
+                                        <img class="img-fullwidth rounded border border-primary shadow"
+                                            src="{{$imagen->path_file_photo3}}" height="250" width="250" alt="Imagen">
                                     @endif
                                 </div>
                             </div>
@@ -99,24 +101,42 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label class="text-black font-w500">Rubro Actual</label>
                             @forelse ($rubrosel as $r)
+                                <label class="text-black font-w500">Rubro Actual</label>
                                 <input type="text" class="form-control" value="{{ $r->descripcion_rubro }}" readonly>
                             @empty
-                                <input type="text" class="form-control" value="Aun no Selecciono un Rubro...!" readonly>
+                                <div class="mb-3">
+                                    <label class="text-black font-w500">Seleccionar Rubro</label>
+                                    <select class="form-control focus:outline-none" name="id_rubro" id="id_rubro">
+                                        <option>Seleccione un rubro...</option>
+                                        @foreach ($rubros as $rubro)
+                                            <option value="{{ $rubro->id_rubro }}">
+                                                {{mb_strtolower(Str::limit($rubro->descripcion_rubro, 100, $end = ' ...'))}}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             @endforelse
                         </div>
                         <div class="mb-3">
-                        <label class="text-black font-w500">Seleccionar Rubro</label>
-                            <select class="form-control focus:outline-none" name="id_rubro" id="id_rubro">
-                                <option>Seleccione un rubro...</option>
-                                @foreach ($rubros as $rubro)
-                                <option value="{{ $rubro->id_rubro }}">
-                                    {{mb_strtolower(Str::limit($rubro->descripcion_rubro, 100, $end = ' ...'))}}
-                                </option>
-                                @endforeach
-                            </select> 
+                            @forelse ($categoriasel as $c)
+                                <label class="text-black font-w500">Rubro Actual</label>
+                                <input type="text" class="form-control" value="{{ $c->descripcion }}" readonly>
+                            @empty
+                                <div class="mb-3">
+                                    <label class="text-black font-w500">Seleccionar Categoria</label>
+                                    <select class="form-control focus:outline-none" name="id_categoria" id="id_categoria">
+                                        <option>Seleccione una Categoria...</option>
+                                        @foreach ($categorias as $categoria)
+                                            <option value="{{ $categoria->id_categoria }}">
+                                                {{mb_strtolower(Str::limit($categoria->descripcion, 100, $end = ' ...'))}}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            @endforelse
                         </div>
+
                         <input type="hidden" name="id_empresa" value="{{ $empresas->id_empresa }}">
                         <div class="mb-3 row text-center">
                             <div class="">
@@ -147,8 +167,8 @@
                                 <label class="text-black font-w500 ">Codigo Nandina</label>
                                 <input type="number" maxlength="10"
                                     class="form-control focus:outline-none focus:ring-2 input-number"
-                                    name="codigo_nandina" id="codigo_nandina"
-                                    value="{{ $empresas->codigo_nandina }}" readonly>
+                                    name="codigo_nandina" id="codigo_nandina" value="{{ $empresas->codigo_nandina }}"
+                                    readonly>
                             </div>
                         </div>
                         <div class="mb-3  read-content">
@@ -190,14 +210,13 @@
                             <div class="mb-3 col-md-4">
                                 <label class="text-black font-w500">Acuerdo</label>
                                 <input type="text" class="form-control focus:outline-none focus:ring-2"
-                                    name="numero_producto" id="numero_producto"
-                                    value="{{ $empresas->acuerdo }}" readonly>
+                                    name="numero_producto" id="numero_producto" value="{{ $empresas->acuerdo }}"
+                                    readonly>
                             </div>
                             <div class="mb-3 col-md-4">
                                 <label class="text-black font-w500">Sigla</label>
                                 <input type="text" class="form-control focus:outline-none focus:ring-2"
-                                    name="numero_producto" id="numero_producto"
-                                    value="{{ $empresas->sigla }}" readonly>
+                                    name="numero_producto" id="numero_producto" value="{{ $empresas->sigla }}" readonly>
                             </div>
                             {{--<div class="mb-3 col-md-6">
                                 <label class="text-black font-w500">Unidad de Medida</label>

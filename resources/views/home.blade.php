@@ -327,7 +327,7 @@
                                 </ul>
                             </li> --}}
                             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                                    <i class="flaticon-042-menu"></i>
+                                    <i class="bi bi-wrench"></i>
                                     <span class="nav-text">Editar Empresa</span>
                                 </a>
                                 <ul aria-expanded="false">
