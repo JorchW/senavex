@@ -37,10 +37,22 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+    public function select()
+    {
+        $empresas = DB::table('empresas')
+            ->join('empresas_personas', 'empresas.id_empresa', '=', 'empresas_personas.id_empresa')
+            ->join('personas', 'empresas_personas.id_persona', '=', 'personas.id_persona')
+            ->join('users', 'personas.id_persona', '=', 'users.id_persona')
+            ->select('empresas.*', 'users.*')
+            ->where('id_user', Auth::id())->distinct()->get();
+        return view('admin.select', [
+            'empresas' => $empresas
+        ]);
+    }
     public function index($id)
     {
         $idDes = Crypt::decryptString($id);
-        // $empresa = Empresa::where('id_user', Auth::id(),)->get(); 
+
         $empresas = DB::table('empresas')
             ->join('ruexs', 'empresas.id_empresa', '=', 'ruexs.id_empresa')
             ->join('empresas_personas', 'empresas.id_empresa', '=', 'empresas_personas.id_empresa')
@@ -56,44 +68,16 @@ class HomeController extends Controller
             ->select('rols.id_rol', 'rols.rol')
             ->where('id_user', Auth::id(), )->get();
 
-        //$empresas = DB::table('empresas')
-        //    ->join('empresas', 'grupo_empresa_user.id_empresa', '=', 'empresas.id_empresa')
-        //    ->join('users', 'grupo_empresa_user.id_user', '=', 'users.id')
-        //    ->select('empresas.*')
-        //    ->where('id_user', Auth::id(),)->get();
-//
-        //$rol = DB::table('grupo_empresa_user')
-        //    ->join('users', 'grupo_empresa_user.id_user', '=', 'users.id')
-        //    ->join('rol', 'grupo_empresa_user.id_rol', '=', 'rol.id_rol')
-        //    ->select('rol.id_rol','rol.nombre_rol')
-        //    ->where('id_user', Auth::id(),)->get();
-        //return view('admin.inicio', [
-        //    'empresas' => $empresas,
-        //    'roles'=>$rol
-        //]);
         return view('admin.inicio', [
             'empresas' => $empresas,
             'roles' => $rol
         ]);
     }
 
-    public function select()
-    {
-        $empresas = DB::table('empresas')
-            ->join('empresas_personas', 'empresas.id_empresa', '=', 'empresas_personas.id_empresa')
-            ->join('personas', 'empresas_personas.id_persona', '=', 'personas.id_persona')
-            ->join('users', 'personas.id_persona', '=', 'users.id_persona')
-            ->select('empresas.*', 'users.*')
-            ->where('id_user', Auth::id())->distinct()->get();
-        return view('admin.select', [
-            'empresas' => $empresas
-        ]);
-    }
-
     public function listProd($id)
     {
         $idDes = Crypt::decryptString($id);
-        // $empresa = Empresa::where('id_user', Auth::id(),)->get(); 
+ 
         $empresas = DB::table('empresas')
             ->join('ruexs', 'empresas.id_empresa', '=', 'ruexs.id_empresa')
             ->join('empresas_personas', 'empresas.id_empresa', '=', 'empresas_personas.id_empresa')
@@ -118,30 +102,10 @@ class HomeController extends Controller
             ->where('dj.id_empresa', $idDes)
             ->whereIn('dj.id_ddjj_estado', [6, 9, 10, 11])->get();
 
-        //$rubros = DB::table('grupo_rubro')
-        //    ->join('empresas', 'grupo_rubro.id_empresa', '=', 'empresas.id_empresa')
-        //    ->join('rubro', 'grupo_rubro.id_rubro', '=', 'rubro.id_rubro')
-        //    ->select('rubro.*')
-        //    ->where('grupo_rubro.id_empresa', $idDes)->get();
-        $categorias = array();
-        //foreach ($rubros as $rubro) {
-        //    $cats = DB::table('categoria')
-        //        ->select('categoria.*')
-        //        ->where('id_rubro', $rubro->id_rubro)->get();
-        //    foreach ($cats as $cat) {
-        //        array_push($categorias, $cat);
-        //    }
-        //}
-        //$monedas = Monedas::all();
-        //$medidas = UnidadMedidas::all();
         return view('admin.listproducto', [
             'empresas' => $empresas,
             'roles' => $rol,
             'productos' => $productos,
-            //'rubros' => $rubros,
-            'categorias' => $categorias,
-            //'monedas' => $monedas,
-            //'medidas' => $medidas,
             'idempresas' => $idDes
         ]);
     }
@@ -185,7 +149,7 @@ class HomeController extends Controller
             ->join('acuerdos as a', 'a.id_acuerdo', '=', 'dj.id_acuerdo')
             ->join('empresas as e', 'dj.id_empresa', '=', 'e.id_empresa')
             ->join('empresa_categorias as ec', 'e.id_categoria', '=', 'ec.id_categoria')
-            ->select('e.id_empresa', '*')
+            ->select('e.id_empresa','*')
             ->where('dj.id_ddjj', $idDes)
             ->whereIn('dj.id_ddjj_estado', [6, 9, 10, 11])
             ->orderBy('dj.updated_at', 'desc')->first();
@@ -211,53 +175,12 @@ class HomeController extends Controller
         $rubros = DB::table('empresa_rubros as er')
             ->select('*')->get();
 
-        $categoriasel = DB::table('ddjjs as dj')
-            ->join('directorio.directorio_productos as dp', 'dj.id_ddjj', '=', 'dp.id_ddjj')
-            ->join('directorio.directorio_categoria as dc', 'dp.id_categoria', '=', 'dc.id_categoria')
-            ->select('*')
-            ->where('dj.id_ddjj', $idDes)->get();
-
-        $categorias = DB::table('directorio.directorio_categoria')
-            ->select('*')->get();
-        // $productoEdit = Productos::where('id_producto', $idDes)->first();
-        //$productoEdit = DB::table('ddjjs as dj')
-        //    ->join('ddjj_datos_mercancias as dm', 'dj.id_ddjj', '=', 'dm.id_ddjj')
-        //    ->join('acuerdos as a', 'a.id_acuerdo', '=', 'dj.id_acuerdo')
-        //    ->join('empresas as e', 'dj.id_empresa', '=', 'e.id_empresa')
-        //    ->select('*')
-        //    ->where('dj.id_ddjj')
-        //    ->whereIn('dj.id_ddjj_estado', [6, 9, 10, 11])
-        //    ->orderBy('dj.updated_at', 'desc')->first();
-
-
-
-        //$rubros = DB::table('grupo_rubro')
-        //    ->join('empresas', 'grupo_rubro.id_empresa', '=', 'empresas.id_empresa')
-        //    ->join('rubro', 'grupo_rubro.id_rubro', '=', 'rubro.id_rubro')
-        //    ->select('rubro.*')
-        //    ->where('grupo_rubro.id_empresa', $productoEdit->id_empresa)->get();
-        //$categorias = array();
-        //foreach ($rubros as $rubro) {
-        //    $cats = DB::table('categoria')
-        //        ->select('categoria.*')
-        //        ->where('id_rubro', $rubro->id_rubro)->get();
-        //    foreach ($cats as $cat) {
-        //        array_push($categorias, $cat);
-        //    }
-        //}
-        //$monedas = Monedas::all();
-        //$medidas = UnidadMedidas::all();
         return view('admin.editproducto', [
             'empresas' => $empresas,
             'roles' => $rol,
-            //'rubros' => $rubros,
             'imagen' => $imagen,
             'rubrosel' => $rubrosel,
-            'rubros' => $rubros,
-            'categoriasel' => $categoriasel,
-            'categorias' => $categorias
-            //'monedas' => $monedas,
-            //'medidas' => $medidas,
+            'rubros' => $rubros
         ]);
     }
     public function eliminarProd($id)
@@ -341,12 +264,11 @@ class HomeController extends Controller
     {
         $id_rubro = $data->input('id_rubro');
         $id_empresa = $data->input('id_empresa');
-        $id_categoria = $data->input('id_categoria');
         $data->validate([
-
-            'path_file_photo1' => '',
-            'path_file_photo2' => '',
-            'path_file_photo3' => '',
+            'id_rubro' => 'required|integer|exists:empresa_rubros,id_rubro',
+            'path_file_photo1' => 'image|dimensions:width=1920,height=1920',
+            'path_file_photo2' => 'image|dimensions:width=1920,height=1920',
+            'path_file_photo3' => 'image|dimensions:width=1920,height=1920',
         ]);
 
         $idDes = Crypt::decryptString($id);
@@ -440,47 +362,11 @@ class HomeController extends Controller
         } else {
             $direccionImagen3 = '';
         }
-        //$idDes = Crypt::decryptString($id);
-        //$direcion = '';
-        //if ($data->hasFile('imagen_producto')) {
-        //    $file = $data->file('imagen_producto');
-        //    $endPath = 'storage/images/producto/' . $idDes . '/';
-        //    // if(File::exists($endPath))
-        //    // {
-        //    //     File::delete($endPath);
-        //    // }
-        //    $fileName = time() . '-' . $file->getClientOriginalName();
-        //    $uploadSuccess = $data->file('imagen_producto')->move($endPath, $fileName);
-        //    $direcion = $endPath . $fileName;
-        //}
-        //if (strlen($direcion) < 5) {
-        //    $direcion = $data->imagen_producto;
-        //} else {
-        //    $direcion = URL($direcion);
-        //}
-        //Productos::where('id_producto', $data->id_producto)->update([
-        //    'cantidad_disponible' => $data->cantidad_disponible ?? '',
-        //    'nombre_producto' => $data->nombre_producto,
-        //    'imagen_producto' => $direcion,
-        //    'descripcion_producto' => $data->descripcion_producto,
-        //    'precio_producto' => $data->precio_producto,
-        //    'precio_producto_max' => $data->precio_producto_max ?? '',
-        //    'codigo_nandina' => $data->codigo_nandina,
-        //    'estrella' => $data->estrella,
-        //    'estado_producto' => 'normal',
-        //    'id_rubro' => $data->id_rubro,
-        //    'id_categoria' => $data->id_categoria,
-        //    'numero_producto' => $data->numero_producto ?? '',
-        //    'id_unidad_medida' => $data->id_unidad_medida,
-        //    'id_moneda' => $data->id_moneda,
-        //    'id_empresa' => $idDes,
-        //    'estado' => 'inactivo',
-        //]);
+
         DB::table('directorio.directorio_productos')
             ->where('id_ddjj', $idDes)
             ->update([
                 'id_empresa_rubro' => $id_rubro,
-                'id_categoria' => $id_categoria,
                 'id_empresa' => $id_empresa,
             ]);
 
@@ -648,42 +534,7 @@ class HomeController extends Controller
         } else {
             $direccionImagen2 = '';
         }
-        //$direcion = '';
-        //if ($data->hasFile('imagen_empresa')) {
-        //    $file = $data->file('imagen_empresa');
-        //    $endPath = 'storage/images/empresas/' . $idDes . '/';
-        //    $fileName = time() . '-' . $file->getClientOriginalName();
-        //    $uploadSuccess = $data->file('imagen_empresa')->move($endPath, $fileName);
-        //    $direcion = $endPath . $fileName;
-        //}
-        //if (strlen($direcion) < 5){
-        //    $direcion =$data->imagen_empresa??'';
-        //}
-        //else {
-        //    $direcion = URL($direcion);
-        //}
-        //Empresas::where('id_empresa', $idDes)->update([
-        //    'razon_social_empresa'  => $data->razon_social_empresa ?? '',
-        //    'descripcion_empresa'   => $data->descripcion_empresa??'',
-        //    'nit'                   => $data->nit ?? '',
-        //    'matricula'             => $data->matricula ?? '',
-        //    'telefono'              => $data->telefono ?? 0,
-        //    'celular_1'             => $data->celular_1 ?? 0,
-        //    'nombre_1'              => $data->nombre_1?? '',
-        //    'celular_2'             => $data->celular_2?? 0,
-        //    'nombre_2'              => $data->nombre_2?? '',
-        //    'email'                 => $data->email ?? '',
-        //    'pag_web'               => $data->pag_web ?? '',
-        //    'ruex'                  => $data->ruex ?? '',
-        //    'estado_ruex'           => $data->estado_ruex ?? 0,
-        //    'direccion'             => $data->direccion ?? '',
-        //    'ubicacion'             => $data->ubicacion ?? '',
-        //    'facebook'              => $data->facebook ?? '',
-        //    'whatsapp'              => $data->whatsapp ?? '',
-        //    'tiktok'                => $data->tiktok ?? '',
-        //    'imagen_empresa'        => $direcion,
-        //    'estado'                => 'inactivo',
-        //]);
+
         return redirect()->back();
     }
 

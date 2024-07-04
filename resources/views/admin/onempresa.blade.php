@@ -12,10 +12,6 @@
     <div class="row">
         <div class="col-xl-12 col-lg-12">
             <div class="card">
-                {{--<div class="modal-header">
-                    <h5 class="modal-title">{{$empresasEdit->estado_empresa}}</h5>
-                    <a href="javascript:void(0);" class="btn-close" data-bs-dismiss="modal"></a>
-                </div>--}}
                 <div class="modal-body">
                     <form method="POST" action="{{ URL('update-empr/' . Crypt::encryptString($empresas->id_empresa)) }}"
                         enctype="multipart/form-data" autocomplete="off">
@@ -116,11 +112,6 @@
                                     name="ruex" style="font-weight:bolder; background-color:rgb(225, 225, 225);"
                                     id="ruex" value="{{$empresas->ruex}}" readonly>
                             </div>
-                            {{--<div class="mb-3 col-md-3">
-                                <label class="text-black font-w500 ">Teléfono</label>
-                                <input type="text" class="form-control focus:outline-none focus:ring-2" name="telefono"
-                                    id="telefono" value="{{$empresasEdit->telefono}}" required>
-                            </div>--}}
                             <div class="mb-3 col-md-6">
                                 <label class="text-black font-w500 ">Página Web</label>
                                 <input type="text" class="form-control focus:outline-none focus:ring-2" name="pag_web"
@@ -158,8 +149,6 @@
                                     style="font-weight:bolder; background-color:rgb(225, 225, 225);" id="celular"
                                     value="{{$empresas->celular}}" readonly>
                             </div>
-
-
                             <div class="mb-3 col-md-6">
                                 <label class="text-black font-w500 ">Dirección</label>
                                 <div class="post-input">
@@ -178,7 +167,6 @@
                                         id="direccion_fiscal" readonly>{{$empresas->direccion_fiscal}}</textarea>
                                 </div>
                             </div>
-
                             <div class="mb-3 col-md-4">
                                 <label class="text-black font-w500 ">Facebook</label>
                                 <input type="text" class="form-control " name="facebook" id="facebook"
@@ -195,12 +183,7 @@
                                     value="{{--{{$empresasEdit->tiktok}}--}}">
                             </div>
                         </div>
-                        {{-- <div class="form-group">
-                            <button type="button" class="btn btn-primary center">Create</button>
-                        </div> --}}
-
                     </form>
-
                 </div>
             </div>
         </div>

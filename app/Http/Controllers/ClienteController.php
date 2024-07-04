@@ -19,22 +19,6 @@ use Carbon\Carbon;
 class ClienteController extends Controller
 {
     public function index(){
-
-        $productos = DB::table('directorio.directorio_productos')->get();
-        $fechaActual = Carbon::now();
-        $anioActual = substr($fechaActual,0,4);
-        $mesActual = substr($fechaActual,5,2);
-        $diaActual = substr($fechaActual,8,2);
-        foreach ($productos as $producto) {
-            $anio = substr($producto->created_at,0,4);
-            $mes = substr($producto->created_at,5,2);
-            $dia = substr($producto->created_at,8,2);
-            if ($anio != $anioActual && $mes == $mesActual){
-                DB::table('directorio.directorio_productos')
-                ->where('id_producto',$producto->id_producto);
-                //->update(['estado'=> 'eliminado',]);
-            }
-        }
         return view('vistas.inicio');
     }
 
@@ -44,12 +28,8 @@ class ClienteController extends Controller
         $buscador_producto = trim($request->get('buscador_producto'));
         $productos = DB::table('directorio.directorio_productos')
         ->join('empresas', 'empresas.id_empresa', '=', 'directorio_productos.id_empresa')
-        //->join('monedas', 'monedas.id_moneda', '=', 'productos.id_moneda')
-        ->select('directorio_productos.*', /**'monedas.*'*/ 'empresas.*')
+        ->select('directorio_productos.*','empresas.*')
         ->where([
-            //['productos.estado', 'activo'],
-            //['empresas.estado', 'activo'],
-            //['productos.nombre_producto', 'like', '%'.$buscador_producto.'%']
         ])->orderByDesc('productos.updated_at','empresas.updated_at')->paginate(8);
 
 
@@ -94,7 +74,6 @@ class ClienteController extends Controller
         ->leftJoin('directorio.directorio_empresa_extras as de','e.id_empresa','=','de.id_empresa')
         ->select('e.*','de.path_file_foto1')
             ->where([
-                //['estado', 'activo'],
                 ['e.razon_social', 'ILIKE', '%'.$buscador_empresa_m.'%']
             ])
             ->orderByDesc('updated_at')->paginate(3);
@@ -109,16 +88,12 @@ class ClienteController extends Controller
         $idDes = Crypt::decryptString($id);
         $detEmpresa = DB::table('empresas')
                     ->where([
-                        //['estado', 'activo'],
                         ['id_empresa',$idDes]
                     ])->first();
         $productos = DB::table('directorio.directorio_productos')
                         ->join('empresas', 'empresas.id_empresa', '=', 'directorio_productos.id_empresa')
-                        //->join('monedas', 'monedas.id_moneda', '=', 'productos.id_moneda')
-                        ->select('directorio_productos.*', /*'monedas.*'*/ 'empresas.*')
+                        ->select('directorio_productos.*','empresas.*')
                         ->where([
-                            //['productos.estado', 'activo'],
-                            //['empresas.estado', 'activo'],
                             ['directorio_productos.id_empresa',$idDes]
                             
                         ])->orderByDesc('directorio_productos.updated_at','empresas.updated_at')->get();
@@ -149,29 +124,14 @@ class ClienteController extends Controller
 
     public function listaRubros(Request $request){
         $buscador_rubro = trim($request->get('buscador_rubro'));
-        //$empresas = DB::table('empresas')
-        //->where([
-        //    //['estado', 'activo']
-        //])->orderByDesc('updated_at')->get();
         $buscador_rubro = strtoupper($buscador_rubro);
         $rubros = DB::table('empresa_rubros')
         ->select('*')
         ->where([
-            //['estado', 'activo'],
             ['descripcion_rubro', 'like', '%'.$buscador_rubro.'%']
         ])->orderByDesc('updated_at')->paginate(6, ['*'], 'page', null);
-        // $rubros = DB::table('productos')
-        //                 ->join('empresas', 'empresas.id_empresa', '=', 'productos.id_empresa')
-        //                 ->join('rubro', 'rubros.id_rubro', '=', 'productos.id_rubro')
-        //                 ->select('rubro.*')
-        //                 ->where([
-        //                     ['productos.estado', 'activo'],
-        //                     ['empresas.estado', 'activo'],
-        //                     ['rubro.estado','activo'],
-        //                 ])->orderByDesc('productos.updated_at','empresas.updated_at')->get();
 
         return view ('vistas.listarubro',[
-            //'empresas' => $empresas,
             'rubros' => $rubros,
             'buscador_rubro'    => $buscador_rubro
         ]);

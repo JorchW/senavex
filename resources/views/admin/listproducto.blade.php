@@ -3,49 +3,12 @@
 @section('content')
 <div class="container-fluid">
     <div class="form-head mb-4 d-flex flex-wrap align-items-center">
-
-        {{-- <div class="input-group search-area2 d-xl-inline-flex mb-2 me-4">
-            <button class="input-group-text"><i class="flaticon-381-search-2 text-primary"></i></button>
-            <input type="text" class="form-control" placeholder="Search here...">
-        </div>
-        <div class="dropdown custom-dropdown mb-2 period-btn">
-            <div class="btn btn-sm  d-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false"
-                role="button">
-                <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M22.167 5.83362H21.0003V3.50028C21.0003 3.19087 20.8774 2.89412 20.6586 2.67533C20.4398 2.45653 20.143 2.33362 19.8336 2.33362C19.5242 2.33362 19.2275 2.45653 19.0087 2.67533C18.7899 2.89412 18.667 3.19087 18.667 3.50028V5.83362H9.33362V3.50028C9.33362 3.19087 9.2107 2.89412 8.99191 2.67533C8.77312 2.45653 8.47637 2.33362 8.16695 2.33362C7.85753 2.33362 7.56079 2.45653 7.34199 2.67533C7.1232 2.89412 7.00028 3.19087 7.00028 3.50028V5.83362H5.83362C4.90536 5.83362 4.01512 6.20237 3.35874 6.85874C2.70237 7.51512 2.33362 8.40536 2.33362 9.33362V10.5003H25.667V9.33362C25.667 8.40536 25.2982 7.51512 24.6418 6.85874C23.9854 6.20237 23.0952 5.83362 22.167 5.83362Z"
-                        fill="#0E8A74" />
-                    <path
-                        d="M2.33362 22.1669C2.33362 23.0952 2.70237 23.9854 3.35874 24.6418C4.01512 25.2982 4.90536 25.6669 5.83362 25.6669H22.167C23.0952 25.6669 23.9854 25.2982 24.6418 24.6418C25.2982 23.9854 25.667 23.0952 25.667 22.1669V12.8336H2.33362V22.1669Z"
-                        fill="#0E8A74" />
-                </svg>
-                <div class="text-left ms-3">
-                    <span class="d-block text-black text-start">Change Periode</span>
-                    <small class="d-block text-light">August 28th - October 28th, 2021</small>
-                </div>
-                <i class="fa fa-caret-down text-light scale5 ms-3"></i>
-            </div>
-            <div class="dropdown-menu dropdown-menu-end">
-                <a class="dropdown-item" href="#">October 29th - November 29th, 2021</a>
-                <a class="dropdown-item" href="#">July 27th - Auguts 27th, 2021</a>
-            </div>
-        </div> --}}
     </div>
     <div class="row mb-4 align-items-center">
         <div class="me-auto">
             <h2 class="font-w600 mb-0">Lista de Productos</h2>
             <p class="text-light"> </p>
         </div>
-        {{--<div class="col-xl-3 col-lg-4 mb-4 mb-lg-0">
-            @if (count($productos) < 12) <a href="javascript:void(0);"
-                class="btn btn-secondary  btn-lg btn-block rounded text-white" data-bs-toggle="modal"
-                data-bs-target="#addNewCustomer">+Nuevo Producto</a>
-                @else
-                <a href="javascript:void(0);" class="btn btn-secondary  btn-lg btn-block rounded text-white"
-                    data-bs-toggle="modal" data-bs-target="#">+Nuevo Producto</a>
-                @endif
-                <!-- Add Order -->
-        </div>--}}
         <div class="col-xl-9 col-lg-8">
             <div class="card m-0 ">
                 <div class="card-body py-3 py-md-2">
@@ -67,21 +30,8 @@
                             <div class="media-body">
                                 <p class="mb-1 fs-12 ">Total Productos</p>
                                 <h3 class="mb-0 font-w600 fs-22">{{ count($productos) }} Productos</h3>
-                                {{--@if (count($productos) < 12) <h3 class="mb-0 font-w600 fs-22">{{ count($productos)
-                                    }} Productos</h3>
-                                    @else
-                                    <h3 class="mb-0 font-w600 fs-22">{{ count($productos) }} Productos llego a su
-                                        máximo
-                                        de productos</h3>
-                                    @endif--}}
                             </div>
                         </div>
-                        {{-- <div>
-                            <a href="javascript:void(0);" class="btn btn-outline-primary rounded"><i
-                                    class="fa fa-check-square me-2 scale4" aria-hidden="true"></i>Active</a>
-                            <a href="javascript:void(0);" class="btn btn-outline-warning rounded ms-2">Edit</a>
-                            <a href="javascript:void(0);" class="btn btn-danger rounded ms-2">Delete</a>
-                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -94,9 +44,6 @@
                     <thead>
                         <tr>
                             <th>denominacion</th>
-                            {{--<th>Caracteristicas<br></th>
-                            <th>Codigo Nandina</th>
-                            <th>Descripcion Nandinda</th>--}}
                             <th>nro ddjj</th>
                             <th>acuerdo</th>
                             <th>sigla</th>
@@ -112,15 +59,6 @@
                                 <td>
                                     {{$producto->denominacion_comercial}}
                                 </td>
-                                {{--<td>
-                                    {{$producto->caracteristicas}}
-                                </td>
-                                <td>
-                                    {{$producto->codigo_nandina}}
-                                </td>
-                                <td>
-                                    {{$producto->descripcion_nandina}}
-                                </td>--}}
                                 <td>
                                     {{$producto->numero_ddjj}}
                                 </td>
@@ -163,198 +101,12 @@
                                         @endif
                                     </div>
                                 </td>
-                                {{--<td><img class="rounded-rectangle" width="150" heigth="150"
-                                        src="{{ $producto->imagen_producto }}" alt=""></td>
-                                <td>{{ $producto->nombre_producto }}</td>
-                                <td>{{ $producto->descripcion_producto }} <div class="bootstrap-badge">
-                                </td>
-                                @if ($producto->estado == 'inactivo')
-                                <td><span class="badge badge-secondary">{{ $producto->estado }}</span> </td>
-                                @elseif ($producto->estado == 'activo')
-                                <td><span class="badge badge-success">{{ $producto->estado }}</span> </td>
-                                @elseif ($producto->estado == 'observado')
-                                <td><span class="badge badge-warning">{{ $producto->estado }}</span> </td>
-                                @endif
-                                <td>{{ $producto->created_at }}</td>
-                                <td class="text-secondary font-w500">Bs. {{ $producto->precio_producto }}</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a
-                                            href="{{ URL('one-prod-admin/' . Crypt::encryptString($producto->id_producto)) }}">
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M17 3C17.2626 2.73735 17.5744 2.52901 17.9176 2.38687C18.2608 2.24473 18.6286 2.17157 19 2.17157C19.3714 2.17157 19.7392 2.24473 20.0824 2.38687C20.4256 2.52901 20.7374 2.73735 21 3C21.2626 3.26264 21.471 3.57444 21.6131 3.9176C21.7553 4.26077 21.8284 4.62856 21.8284 5C21.8284 5.37143 21.7553 5.73923 21.6131 6.08239C21.471 6.42555 21.2626 6.73735 21 7L7.5 20.5L2 22L3.5 16.5L17 3Z"
-                                                    stroke="#FF7B31" stroke-width="2" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                            </svg>
-                                        </a>
-
-                                        {{-- <a href="javascript:void(0);" class="ms-4">
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M3 6H5H21" stroke="#FF3131" stroke-width="2" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                                <path
-                                                    d="M8 6V4C8 3.46957 8.21071 2.96086 8.58579 2.58579C8.96086 2.21071 9.46957 2 10 2H14C14.5304 2 15.0391 2.21071 15.4142 2.58579C15.7893 2.96086 16 3.46957 16 4V6M19 6V20C19 20.5304 18.7893 21.0391 18.4142 21.4142C18.0391 21.7893 17.5304 22 17 22H7C6.46957 22 5.96086 21.7893 5.58579 21.4142C5.21071 21.0391 5 20.5304 5 20V6H19Z"
-                                                    stroke="#FF3131" stroke-width="2" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                            </svg>
-
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>--}}
                             <td><a href="{{ URL('one-prod-admin/' . Crypt::encryptString($producto->id_ddjj)) }}"
                                     class="btn btn-outline-primary">Editar</a></td>
-                            {{--<td><a href="javascript:void(0);" class="btn btn-outline-primary" data-bs-toggle="modal"
-                                    data-bs-target="#addNewCustomer">Subir Fotos</a></td>--}}
                         @endforeach
                 </table>
             </div>
         </div>
     </div>
 </div>
-<!--<div class="modal fade" id="addNewCustomer">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Agregar Producto</h5>
-                <a href="javascript:void(0);" class="btn-close" data-bs-dismiss="modal"></a>
-            </div>
-            <div class="modal-body">
-                <form method="POST" action="{{ URL('update-prod/' . Crypt::encryptString($idempresas)) }}"
-                    enctype="multipart/form-data" autocomplete="off">
-                    @csrf
-                    <div class="mb-3">
-                        <label class="text-black font-w500">imagen_producto</label>
-                        <div class="input-group">
-                            <div class="form-file ">
-                                <input accept="image/png,image/jpeg,image/jpg" type="file"
-                                    class="form-file-input form-control focus:outline-none input-image-2"
-                                    name="imagen_producto" id="imagen_producto" required>
-                            </div>
-                        </div>
-                        <p class="text-image-2"> </p>
-                    </div>
-                    <div class="row">
-                        <div class="mb-3 col-md-8">
-                            <label class="text-black font-w500">Nombre del
-                                Producto</label>
-                            <input type="text" class="form-control focus:outline-none" name="nombre_producto"
-                                id="nombre_producto" required>
-                        </div>
-                        <div class="mb-3 col-md-4">
-                            <label class="text-black font-w500 ">Codigo Nandina</label>
-                            <input type="text" maxlength="10"
-                                class="form-control focus:outline-none focus:ring-2 input-number" name="codigo_nandina"
-                                id="codigo_nandina">
-                        </div>
-                    </div>
-                    <div class="mb-3 read-content">
-                        <label class="text-black font-w500">Descripcion</label>
-                        <div class="mb-3 pt-3">
-                            <textarea class="form-control focus:outline-none" maxlength="100" rows="4"
-                                name="descripcion_producto" id="descripcion_producto" required></textarea>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label class="text-black font-w500">Rubro</label>
-                        <select class="default-select form-control wide focus:outline-none" name="id_rubro"
-                            id="id_rubro" required>
-                            <option value="" selected></option>
-                            {{--@foreach ($rubros as $rubro)
-                            <option value="{{ $rubro->id_rubro }}">
-                                {{ Str::limit($rubro->nombre_rubro, 60, $end = ' ...') }}
-                            </option>
-                            @endforeach--}}
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label class="text-black font-w500">Categoria</label>
-                        <select class="default-select form-control wide focus:outline-none" name="id_categoria"
-                            id="id_categoria" required>
-                            <option value="" selected></option>
-                            @foreach ($categorias as $categoria)
-                                <option value="{{ $categoria->id_categoria }}">
-                                    {{ Str::limit($categoria->descripcion_corta, 60, $end = ' ...') }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="row">
-                        <div class="mb-3 col-md-4">
-                            <label class="text-black font-w500">Medida</label>
-                            <input type="text" class="form-control focus:outline-none focus:ring-2"
-                                name="numero_producto" id="numero_producto" required>
-                        </div>
-                        <div class="mb-3 col-md-6">
-                            <label class="text-black font-w500">Unidad de Medida</label>
-                            <select class="default-select form-control wide focus:outline-none focus:ring-2"
-                                name="id_unidad_medida" id="id_unidad_medida" required autocomplete="off">
-                                <option value="" selected></option>
-                                {{--@foreach ($medidas as $medida)
-                                <option value="{{ $medida->id_unidad_medida }}">
-                                    {{ $medida->nombre_unidad_medida }}
-                                </option>
-                                @endforeach--}}
-                            </select>
-                        </div>
-                        <div class="mb-3 col-md-2">
-                            <label class="text-black font-w500">Estrella</label>
-                            <select class="default-select form-control wide focus:outline-none focus:ring-2"
-                                name="estrella" id="estrella" required>
-                                <option value="" selected></option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                            </select>
-                        </div>
-                        <div class="mb-3 col-md-3">
-                            <label class="text-black font-w500">Precio Max.</label>
-                            <input type="number" class="form-control" name="precio_producto_max"
-                                id="precio_producto_max" required>
-                        </div>
-                        <div class="mb-3 col-md-3">
-                            <label class="text-black font-w500">Precio</label>
-                            <input type="number" class="form-control focus:outline-none focus:ring-2"
-                                name="precio_producto" id="precio_producto" required>
-                        </div>
-
-                        <div class="mb-3 col-md-3">
-                            <label class="text-black font-w500">Moneda</label>
-                            <select class="default-select form-control wide focus:outline-none" name="id_moneda"
-                                id="id_moneda" required>
-                                <option value="" selected></option>
-                                {{--@foreach ($monedas as $moneda)
-                                <option value="{{ $moneda->id_moneda }}">
-                                    {{ $moneda->nombre_moneda }}</option>
-                                @endforeach--}}
-                            </select>
-                        </div>
-                        <div class="mb-3 col-md-3">
-                            <label class="text-black font-w500 ">Cant. Disp.</label>
-                            <input type="text" class="form-control focus:outline-none focus:ring-2 input-number"
-                                name="cantidad_disponible" id="cantidad_disponible" required>
-                        </div>
-
-                    </div>
-
-                    <div class="mb-3 row">
-                        <div class="col-lg-8 ms-auto">
-                            <button type="submit" class="btn btn-primary">Enviar</button>
-                        </div>
-                    </div>
-                    {{-- <div class="form-group">
-                        <button type="button" class="btn btn-primary center">Create</button>
-                    </div> --}}
-
-                </form>
-
-            </div>
-        </div>
-    </div>
-</div>-->
 @endsection

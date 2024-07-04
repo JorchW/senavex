@@ -53,31 +53,28 @@
                                 Directorio de <span class="text-theme-coloredv">Exportadores</span>
                             </div>
                             <!-- LAYER NR. 3 -->
-                            <div class="tp-caption tp-resizeme text-white rs-parallaxlevel-0 rounded-circle"
-                                id="slide-1-layer-3" data-x="['left','left','left','left']"
-                                data-hoffset="['50','50','50','30']" data-y="['top','top','top','top']"
-                                data-voffset="['380','320','280','280']" data-fontsize="['18','18','16','13']"
-                                data-lineheight="['30','30','28','25']" data-fontweight="['600','600','600','600']"
-                                data-width="['700','650','600','420']" data-height="none" data-whitespace="nowrap"
-                                data-transform_idle="o:1;"
+                            <div  class="tp-caption tp-resizeme text-white rs-parallaxlevel-0 rounded-circle"  id="slide-1-layer-3"
+                                data-x="['left','left','left','left']" data-hoffset="['50','50','50','30']"
+                                data-y="['top','top','top','top']" data-voffset="['380','320','280','280']"
+                                data-fontsize="['18','18','16','13']" data-lineheight="['40','30','28','25']"
+                                data-fontweight="['10','10','10','10']" data-width="['1000','650','600','420']"
+                                data-height="none" data-whitespace="normal" data-transform_idle="o:1;"
                                 data-transform_in="y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;s:1500;e:Power3.easeInOut;"
                                 data-transform_out="auto:auto;s:1000;e:Power3.easeInOut;"
                                 data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
                                 data-mask_out="x:0;y:0;s:inherit;e:inherit;" data-start="1000" data-splitin="none"
                                 data-splitout="none" data-responsive_offset="on"
-                                style="z-index: 7; white-space: nowrap;">
-                                <div class="search-form">
-                                    <form method="" class="search-form" action="{{route('productos')}}">
-                                        <div class="input-group">
-                                            <input type="text" id="buscador" name="buscador"
-                                                class="form-control search-input mt-5 btn-circled" placeholder="Buscar productos..." />
-                                            <span class="input-group-btn">
-                                                <button type="submit" class="btn btn-colored btn-circled btn-xl btn-theme-colored2 mt-1 mb-sm-30">
-                                                <i class="fa fa-search"></i> Buscar</button>
-                                            </span>
-                                        </div>
-                                    </form>
-                                </div>
+                                style="z-index: 6; min-width: 600px; max-width: 600px; white-space: normal;">
+                                <form action="{{ route('productos') }}" method="GET" class="slider-search-form"
+                                    style="max-width: 100%; margin: 0 auto; text-align: center;">
+                                    <input class="btn-circled" type="text" name="query"
+                                        placeholder="Buscar Productos..."
+                                        style="width: 70%; padding: 10px; font-size: 18px;">
+                                    <button class="btn-circled btn-theme-colored2" type="submit"
+                                        style="padding: 10px 20px; font-size: 18px;">
+                                        <i class="fa fa-search"></i> Buscar
+                                    </button>
+                                </form>
                             </div>
                         </li>
                     </ul>
