@@ -101,8 +101,13 @@
                                         @endif
                                     </div>
                                 </td>
-                            <td><a href="{{ URL('one-prod-admin/' . Crypt::encryptString($producto->id_ddjj)) }}"
-                                    class="btn btn-outline-primary">Editar</a></td>
+                            <td>
+                                <a href="{{ URL('one-prod-admin/' . Crypt::encryptString($producto->id_ddjj)) }}"
+                                    class="btn btn-outline-primary">Editar</a>
+                                
+                                <a href="{{ URL('publicar-prod-admin/' . Crypt::encryptString($producto->id_ddjj)) }}"
+                                    class="btn btn-outline-primary">Enviar a revisión</a>
+                            </td>
                         @endforeach
                 </table>
             </div>

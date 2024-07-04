@@ -38,8 +38,7 @@ Route::put('update-prod/{id}', [App\Http\Controllers\HomeController::class, 'upd
 Route::get('one-prod-admin/{id}', [App\Http\Controllers\HomeController::class, 'oneProd'])->name('one-prod-admin');
 Route::get('eliminar-prod-admin/{id}', [App\Http\Controllers\HomeController::class, 'eliminarProd'])->name('eliminar-prod-admin');
 Route::get('observar-prod-admin/{id}', [App\Http\Controllers\HomeController::class, 'observadoProd'])->name('observar-prod-admin');
-Route::get('publicar-prod-admin/{id}', [App\Http\Controllers\HomeController::class, 'publicarProd'])->name('publicar-prod-admin');
-
+Route::get('publicar-prod-admin/{id}', [App\Http\Controllers\RevisionController::class, 'publicarProd'])->name('publicar-prod-admin');
 
 Route::get('list-rubros-admin', [App\Http\Controllers\HomeController::class, 'listRubro'])->name('list-rubros-admin');
 Route::get('one-rubros-admin/{id}', [App\Http\Controllers\HomeController::class, 'oneRubro'])->name('one-rubros-admin');
