@@ -175,12 +175,23 @@ class HomeController extends Controller
         $rubros = DB::table('empresa_rubros as er')
             ->select('*')->get();
 
+        $categoriasel = DB::table('ddjjs as dj')
+            ->join('directorio.directorio_productos as dp', 'dj.id_ddjj', '=', 'dp.id_ddjj')
+            ->join('directorio.directorio_categoria as dc', 'dp.id_categoria', '=', 'dc.id_categoria')
+            ->select('*')
+            ->where('dj.id_ddjj', $idDes)->get();
+
+        $categorias = DB::table('directorio.directorio_categoria')
+            ->select('*')->get();
+
         return view('admin.editproducto', [
             'empresas' => $empresas,
             'roles' => $rol,
             'imagen' => $imagen,
             'rubrosel' => $rubrosel,
-            'rubros' => $rubros
+            'rubros' => $rubros,
+            'categoriasel' => $categoriasel,
+            'categorias' => $categorias
         ]);
     }
     public function eliminarProd($id)
