@@ -48,12 +48,13 @@
                                             src="{{$imagen->path_file_photo1}}" height="250" width="250" alt="Imagen">
                                     @endif
                                 </div>
+                                @error('path_file_photo1')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <p class="text-image-2"> </p>
-                            @error('path_file_photo1')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
                         </div>
+
                         <div class="mb-3">
                             <label class="text-black font-w500">Foto 2</label>
                             <div class="input-group">
@@ -71,12 +72,13 @@
                                             src="{{$imagen->path_file_photo2}}" height="250" width="250" alt="Imagen">
                                     @endif
                                 </div>
+                                @error('path_file_photo2')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <p class="text-image-2"> </p>
-                            @error('path_file_photo2')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
                         </div>
+
                         <div class="mb-3">
                             <label class="text-black font-w500">Foto 3</label>
                             <div class="input-group">
@@ -94,47 +96,49 @@
                                             src="{{$imagen->path_file_photo3}}" height="250" width="250" alt="Imagen">
                                     @endif
                                 </div>
+                                @error('path_file_photo3')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <p class="text-image-2"> </p>
-                            @error('path_file_photo3')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
                         </div>
+
                         <div class="mb-3">
-                            @forelse ($rubrosel as $r)
-                                <label class="text-black font-w500">Rubro Actual</label>
-                                <input type="text" class="form-control" value="{{ $r->descripcion_rubro }}" readonly>
-                            @empty
-                                <div class="mb-3">
-                                    <label class="text-black font-w500">Seleccionar Rubro</label>
-                                    <select class="form-control focus:outline-none" name="id_rubro" id="id_rubro">
-                                        <option>Seleccione un rubro...</option>
-                                        @foreach ($rubros as $rubro)
-                                            <option value="{{ $rubro->id_rubro }}">
-                                                {{mb_strtolower(Str::limit($rubro->descripcion_rubro, 100, $end = ' ...'))}}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            @endforelse
+                            <div class="mb-3">
+                                <label class="text-black font-w500">Seleccionar Rubro</label>
+                                <select class="form-control focus:outline-none" name="id_rubro" id="id_rubro">
+                                    @foreach ($rubrosel as $r)
+                                        <option>{{mb_strtolower($r->descripcion_rubro)}}</option>
+                                    @endforeach
+                                    @foreach ($rubros as $rubro)
+                                        <option value="{{ $rubro->id_rubro }}">
+                                            {{mb_strtolower(Str::limit($rubro->descripcion_rubro, 100, $end = ' ...'))}}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('id_rubro')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
                         </div>
+
                         <div class="mb-3">
-                            @forelse ($categoriasel as $c)
-                                <label class="text-black font-w500">Rubro Actual</label>
-                                <input type="text" class="form-control" value="{{ $c->descripcion }}" readonly>
-                            @empty
-                                <div class="mb-3">
-                                    <label class="text-black font-w500">Seleccionar Categoria</label>
-                                    <select class="form-control focus:outline-none" name="id_categoria" id="id_categoria">
-                                        <option>Seleccione una Categoria...</option>
-                                        @foreach ($categorias as $categoria)
-                                            <option value="{{ $categoria->id_categoria }}">
-                                                {{mb_strtolower(Str::limit($categoria->descripcion, 100, $end = ' ...'))}}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            @endforelse
+                            <div class="mb-3">
+                                <label class="text-black font-w500">Seleccionar Categoria</label>
+                                <select class="form-control focus:outline-none" name="id_categoria" id="id_categoria">
+                                    @foreach ($categoriasel as $c)
+                                        <option>{{$c->descripcion}}</option>
+                                    @endforeach    
+                                    @foreach ($categorias as $categoria)
+                                        <option value="{{ $categoria->id_categoria }}">
+                                            {{mb_strtolower(Str::limit($categoria->descripcion, 100, $end = ' ...'))}}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('id_categoria')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
                         </div>
 
                         <input type="hidden" name="id_empresa" value="{{ $empresas->id_empresa }}">
