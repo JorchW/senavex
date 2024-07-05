@@ -169,18 +169,10 @@ class HomeController extends Controller
         $rubros = DB::table('empresa_rubros')->get();
 
         $rubrosel = DB::table('ddjjs')
-        ->join('directorio.directorio_productos as dp','ddjjs.id_ddjj','=','dp.id_ddjj')
-        ->join('empresa_rubros as er','dp.id_empresa_rubro','=','er.id_rubro')
-        ->select('er.*')
-        ->where('ddjjs.id_ddjj',$idDes)->get();
-
-        $categorias = DB::table('directorio.directorio_categoria')->get();
-
-        $categoriasel = DB::table('ddjjs')
-        ->join('directorio.directorio_productos as dp','ddjjs.id_ddjj','=','dp.id_ddjj')
-        ->join('directorio.directorio_categoria as dc','dp.id_categoria','=','dc.id_categoria')
-        ->select('dc.*')
-        ->where('ddjjs.id_ddjj',$idDes)->get();
+            ->join('directorio.directorio_productos as dp', 'ddjjs.id_ddjj', '=', 'dp.id_ddjj')
+            ->join('empresa_rubros as er', 'dp.id_empresa_rubro', '=', 'er.id_rubro')
+            ->select('er.*')
+            ->where('ddjjs.id_ddjj', $idDes)->get();
 
         return view('admin.editproducto', [
             'empresas' => $empresas,
@@ -188,8 +180,6 @@ class HomeController extends Controller
             'imagen' => $imagen,
             'rubros' => $rubros,
             'rubrosel' => $rubrosel,
-            'categorias' => $categorias,
-            'categoriasel' => $categoriasel,
         ]);
     }
     public function eliminarProd($id)
@@ -271,19 +261,17 @@ class HomeController extends Controller
     }
     public function updateProd($id, Request $data)
     {
-        $id_categoria = $data->input('id_categoria');
+        $idDes = Crypt::decryptString($id);
         $id_empresa = $data->input('id_empresa');
         $id_rubro =$data-> input('id_rubro');
 
         $data->validate([
-            'id_categoria' => 'required|integer',
             'id_empresa' => 'required|integer',
             'id_rubro' => 'required|integer',
             'path_file_photo1' => 'required|image|dimensions:width=1920,height=1920',
             'path_file_photo2' => 'required|image|dimensions:width=1920,height=1920',
             'path_file_photo3' => 'required|image|dimensions:width=1920,height=1920',
         ], [
-            'id_categoria.integer' => 'La categoría es Obligatorio.',
             'id_empresa.integer' => 'La empresa es Obligatorio.',
             'id_rubro.integer' => 'El rubro es Obligatorio.',
             'path_file_photo1.required' => 'La foto 1 es Obligatorio.',
@@ -294,7 +282,7 @@ class HomeController extends Controller
             'path_file_photo3.dimensions' => 'La foto 3 debe tener dimensiones de 1920x1920 píxeles.',
         ]);
 
-        $idDes = Crypt::decryptString($id);
+
         if ($data->hasFile('path_file_photo1')) {
             $file = $data->file('path_file_photo1');
             $dimensions = getimagesize($file);
@@ -379,7 +367,6 @@ class HomeController extends Controller
         DB::table('directorio.directorio_productos')
             ->where('id_ddjj', $idDes)
             ->update([
-                'id_categoria' => $id_categoria,
                 'id_empresa' => $id_empresa,
                 'id_empresa_rubro' => $id_rubro,
             ]);

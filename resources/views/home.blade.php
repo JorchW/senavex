@@ -186,8 +186,8 @@
                                 <a class="nav-link" href="javascript:void(0);" role="button" data-bs-toggle="dropdown">
                                     <div class="header-info me-3">
                                         <span class="fs-16 font-w600">{{Auth::user()->persona->nombres}}</span>
-                                        <span class="fs-16 font-w600 ">{{ Auth::user()->ci}}</span>
-                                        <small class="text-end fs-14 font-w400">{{ Auth::user()->email }}</small>
+                                        <span class="fs-16 font-w600 ">{{Auth::user()->ci}}</span>
+                                        <small class="text-end fs-14 font-w400">{{Auth::user()->email }}</small>
                                     </div>
                                     <img src="{{ asset('admin/images/profile/pic1.jpg') }}" width="20" alt="" />
                                 </a>

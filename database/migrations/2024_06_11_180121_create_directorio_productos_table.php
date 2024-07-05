@@ -19,11 +19,9 @@ class CreateDirectorioProductosTable extends Migration
             $table->string('path_file_photo1')->nullable();
             $table->string('path_file_photo2')->nullable();
             $table->string('path_file_photo3')->nullable();
-            $table->bigInteger('id_categoria')->nullable();
             $table->bigInteger('id_empresa')->nullable();
             $table->bigInteger('id_empresa_rubro')->nullable();
             $table->timestamps();
-            $table->foreign('id_categoria')->references('id_categoria')->on('directorio.directorio_categoria');
             $table->foreign('id_empresa')->references('id_empresa')->on('public.empresas');
             $table->foreign('id_empresa_rubro')->references('id_rubro')->on('public.empresa_rubros');
         });

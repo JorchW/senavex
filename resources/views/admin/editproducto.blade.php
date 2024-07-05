@@ -124,7 +124,7 @@
                                         <option>Seleccione un Rubro</option>
                                     @else
                                         @foreach ($rubrosel as $r)
-                                            <option>{{mb_strtolower($r->descripcion_rubro)}}</option>
+                                            <option value="{{$r->id_rubro}}">{{mb_strtolower($r->descripcion_rubro)}}</option>
                                         @endforeach
                                     @endif
                                     <option disabled>Seleccion de Rubros:</option>
@@ -140,36 +140,6 @@
                                     </div>
                                 @enderror
                             </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <div class="mb-3">
-                                <label class="text-black font-w500">Seleccionar Categoria</label>
-                                <select class="form-control focus:outline-none" name="id_categoria" id="id_categoria">
-                                    @if ($categoriasel->isEmpty())
-                                        <option>Seleccione una Categoria</option>
-                                    @else
-                                        @foreach ($categoriasel as $c)
-                                            <option>{{mb_strtolower($c->descripcion)}}</option>
-                                        @endforeach
-                                    @endif
-                                    <option disabled>Seleccion de Categorias:</option>
-                                    @foreach ($categorias as $categoria)
-                                        <option value="{{ $categoria->id_categoria }}">
-                                            {{Str::limit($categoria->descripcion, 100, $end = ' ...')}}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                @error('id_categoria')
-                                    <div class="alert alert-danger alert-dismissable">
-                                        <strong class="text-danger">{{ $message }}</strong>
-                                    </div>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="alert alert-primary" role="alert">
-                            <strong>Nota: </strong>Puede cambiar tanto el rubro como la categoria indefinidamente.
                         </div>
 
                         <input type="hidden" name="id_empresa" value="{{ $empresas->id_empresa }}">
