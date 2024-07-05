@@ -28,11 +28,12 @@
                         <div class="mb-3">
                             <label class="text-black font-w500">Denominacion del Producto:</label>
                             <input type="text" class="form-control form-control-lg focus:outline-none"
+                                style="font-weight:bolder; background-color:rgb(225, 225, 225);"
                                 placeholder="Introduzca el producto..." name="nombre_producto" id="nombre_producto"
                                 value="{{ $empresas->denominacion_comercial }}" readonly>
                         </div>
                         <div class="mb-3">
-                            <label class="text-black font-w500">Foto 1</label>
+                            <label class="text-black font-w500">Foto 1 del Producto</label>
                             <div class="input-group">
                                 <div class="form-file ">
                                     <input accept="image/png,image/jpeg,image/jpg" type="file"
@@ -48,15 +49,18 @@
                                             src="{{$imagen->path_file_photo1}}" height="250" width="250" alt="Imagen">
                                     @endif
                                 </div>
-                                @error('path_file_photo1')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
                             </div>
                             <p class="text-image-2"> </p>
+
+                            @error('path_file_photo1')
+                                <div class="alert alert-danger alert-dismissable">
+                                    <strong class="text-danger">{{ $message }}</strong>
+                                </div>
+                            @enderror
                         </div>
 
                         <div class="mb-3">
-                            <label class="text-black font-w500">Foto 2</label>
+                            <label class="text-black font-w500">Foto 2 del Producto</label>
                             <div class="input-group">
                                 <div class="form-file ">
                                     <input accept="image/png,image/jpeg,image/jpg" type="file"
@@ -72,15 +76,17 @@
                                             src="{{$imagen->path_file_photo2}}" height="250" width="250" alt="Imagen">
                                     @endif
                                 </div>
-                                @error('path_file_photo2')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
                             </div>
                             <p class="text-image-2"> </p>
+                            @error('path_file_photo2')
+                                <div class="alert alert-danger alert-dismissable">
+                                    <strong class="text-danger">{{ $message }}</strong>
+                                </div>
+                            @enderror
                         </div>
 
                         <div class="mb-3">
-                            <label class="text-black font-w500">Foto 3</label>
+                            <label class="text-black font-w500">Foto 3 del Producto</label>
                             <div class="input-group">
                                 <div class="form-file ">
                                     <input accept="image/png,image/jpeg,image/jpg" type="file"
@@ -96,20 +102,32 @@
                                             src="{{$imagen->path_file_photo3}}" height="250" width="250" alt="Imagen">
                                     @endif
                                 </div>
-                                @error('path_file_photo3')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
                             </div>
+                            @error('path_file_photo3')
+                                <div class="alert alert-danger alert-dismissable">
+                                    <strong class="text-danger">{{ $message }}</strong>
+                                </div>
+                            @enderror
                             <p class="text-image-2"> </p>
+                        </div>
+
+                        <div class="alert alert-primary" role="alert">
+                            <strong>Nota: </strong>Todas las fotos deben tener una dimension de 1920(Ancho) x
+                            1920(Alto) pixeles(px).
                         </div>
 
                         <div class="mb-3">
                             <div class="mb-3">
                                 <label class="text-black font-w500">Seleccionar Rubro</label>
                                 <select class="form-control focus:outline-none" name="id_rubro" id="id_rubro">
-                                    @foreach ($rubrosel as $r)
-                                        <option>{{mb_strtolower($r->descripcion_rubro)}}</option>
-                                    @endforeach
+                                    @if ($rubrosel->isEmpty())
+                                        <option>Seleccione un Rubro</option>
+                                    @else
+                                        @foreach ($rubrosel as $r)
+                                            <option>{{mb_strtolower($r->descripcion_rubro)}}</option>
+                                        @endforeach
+                                    @endif
+                                    <option disabled>Seleccion de Rubros:</option>
                                     @foreach ($rubros as $rubro)
                                         <option value="{{ $rubro->id_rubro }}">
                                             {{mb_strtolower(Str::limit($rubro->descripcion_rubro, 100, $end = ' ...'))}}
@@ -117,7 +135,9 @@
                                     @endforeach
                                 </select>
                                 @error('id_rubro')
-                                    <span class="text-danger">{{ $message }}</span>
+                                    <div class="alert alert-danger alert-dismissable">
+                                        <strong class="text-danger">{{ $message }}</strong>
+                                    </div>
                                 @enderror
                             </div>
                         </div>
@@ -126,62 +146,80 @@
                             <div class="mb-3">
                                 <label class="text-black font-w500">Seleccionar Categoria</label>
                                 <select class="form-control focus:outline-none" name="id_categoria" id="id_categoria">
-                                    @foreach ($categoriasel as $c)
-                                        <option>{{$c->descripcion}}</option>
-                                    @endforeach    
+                                    @if ($categoriasel->isEmpty())
+                                        <option>Seleccione una Categoria</option>
+                                    @else
+                                        @foreach ($categoriasel as $c)
+                                            <option>{{mb_strtolower($c->descripcion)}}</option>
+                                        @endforeach
+                                    @endif
+                                    <option disabled>Seleccion de Categorias:</option>
                                     @foreach ($categorias as $categoria)
                                         <option value="{{ $categoria->id_categoria }}">
-                                            {{mb_strtolower(Str::limit($categoria->descripcion, 100, $end = ' ...'))}}
+                                            {{Str::limit($categoria->descripcion, 100, $end = ' ...')}}
                                         </option>
                                     @endforeach
                                 </select>
                                 @error('id_categoria')
-                                    <span class="text-danger">{{ $message }}</span>
+                                    <div class="alert alert-danger alert-dismissable">
+                                        <strong class="text-danger">{{ $message }}</strong>
+                                    </div>
                                 @enderror
                             </div>
+                        </div>
+
+                        <div class="alert alert-primary" role="alert">
+                            <strong>Nota: </strong>Puede cambiar tanto el rubro como la categoria indefinidamente.
                         </div>
 
                         <input type="hidden" name="id_empresa" value="{{ $empresas->id_empresa }}">
                         <div class="mb-3 row text-center">
                             <div class="">
-                                <button type="submit" class="btn btn-primary">Enviar Datos</button>
+                                <button type="submit" class="btn btn-primary">Subir</button>
                             </div>
                         </div>
-                        <div class="mb-3">
-                            <label class="text-black font-w500">Numero DDJJ:</label>
-                            <input type="text" class="form-control form-control-lg focus:outline-none"
-                                placeholder="Introduzca el producto..." name="nombre_producto" id="nombre_producto"
-                                value="{{ $empresas->numero_ddjj }}" readonly>
+                        <br>
+                        <div class="row">
+                            <div class="mb-3 col-md-5">
+                                <label class="text-black font-w500">Numero DDJJ:</label>
+                                <input type="text" class="form-control form-control-lg focus:outline-none"
+                                    style="font-weight:bolder; background-color:rgb(225, 225, 225);"
+                                    placeholder="Introduzca el producto..." name="nombre_producto" id="nombre_producto"
+                                    value="{{ $empresas->numero_ddjj }}" readonly>
+                            </div>
+                            <div class="mb-3 col-md-5">
+                                <label class="text-black font-w500">Acuerdo</label>
+                                <input type="text" class="form-control form-control-lg focus:outline-none"
+                                    style="font-weight:bolder; background-color:rgb(225, 225, 225);"
+                                    name="numero_producto" id="numero_producto" value="{{ $empresas->acuerdo }}"
+                                    readonly>
+                            </div>
                         </div>
                         <div class="row">
-                            <div class="mb-3 col-md-4">
+                            <div class="mb-3 col-md-5">
                                 <label class="text-black font-w500 ">Codigo Nandina</label>
                                 <input type="number" maxlength="10"
-                                    class="form-control focus:outline-none focus:ring-2 input-number"
+                                    class="form-control form-control-lg focus:outline-none"
+                                    style="font-weight:bolder; background-color:rgb(225, 225, 225);"
                                     name="codigo_nandina" id="codigo_nandina" value="{{ $empresas->codigo_nandina }}"
                                     readonly>
+                            </div>
+                            <div class="mb-3 col-md-5">
+                                <label class="text-black font-w500">Sigla</label>
+                                <input type="text" class="form-control form-control-lg focus:outline-none"
+                                    style="font-weight:bolder; background-color:rgb(225, 225, 225);"
+                                    name="numero_producto" id="numero_producto" value="{{ $empresas->sigla }}" readonly>
                             </div>
                         </div>
                         <div class="mb-3  read-content">
                             <label class="text-black font-w500">Caracteristicas</label>
                             <div class="mb-3 pt-3">
-                                <textarea class="form-control focus:outline-none" maxlength="100" rows="4"
-                                    name="descripcion_producto" id="descripcion_producto"
+                                <textarea class="form-control form-control-lg focus:outline-none"
+                                    style="font-weight:bolder; background-color:rgb(225, 225, 225);" maxlength="100"
+                                    rows="4" name="descripcion_producto" id="descripcion_producto"
                                     readonly>{{ $empresas->caracteristicas }}</textarea>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="mb-3 col-md-4">
-                                <label class="text-black font-w500">Acuerdo</label>
-                                <input type="text" class="form-control focus:outline-none focus:ring-2"
-                                    name="numero_producto" id="numero_producto" value="{{ $empresas->acuerdo }}"
-                                    readonly>
-                            </div>
-                            <div class="mb-3 col-md-4">
-                                <label class="text-black font-w500">Sigla</label>
-                                <input type="text" class="form-control focus:outline-none focus:ring-2"
-                                    name="numero_producto" id="numero_producto" value="{{ $empresas->sigla }}" readonly>
-                            </div>
                     </form>
                 </div>
             </div>

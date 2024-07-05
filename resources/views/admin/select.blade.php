@@ -257,23 +257,24 @@
             Content body start
         ***********************************-->
         <div class="content-body">
-            @yield('content')
             <blockquote class="blockquote text-center">
                 <p class="h2">Empresas</p>
             </blockquote>
-            <div class="row">
+            <div class="row text-center">
                 @foreach($empresas as $empresa)
                     <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
-                        <div class="card h-100 shadow-sm">
+                        <div class="card h-100 shadow-lg" style="background-color: #f8f9fa; border-radius: 40px;border: 1px solid #006400;">
                             <div class="card-body d-flex flex-column">
                                 <h5 class="card-title">{{ $empresa->nombre_comercial }}</h5>
                                 <p class="card-text">NIT: {{ $empresa->nit }}</p>
-                                <a href="{{ URL('home/' . Crypt::encryptString($empresa->id_empresa)) }}" class="btn btn-outline-primary">Entrar a Empresa</a>
+                                <a href="{{ URL('home/' . Crypt::encryptString($empresa->id_empresa)) }}"
+                                    class="btn btn-outline-primary mt-auto">Entrar a Empresa</a>
                             </div>
                         </div>
                     </div>
                 @endforeach
             </div>
+            @yield('content')
         </div>
         <!--**********************************
             Content body end

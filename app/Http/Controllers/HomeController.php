@@ -491,13 +491,19 @@ class HomeController extends Controller
     }
     public function updateEmp($id, Request $data)
     {
+        $data->validate([
+            'path_file_foto1' => 'required|image|dimensions:width=1920,height=1080',
+            'path_file_foto2' => 'required|image|dimensions:width=1080,height=1080',
+        ], [
+            'path_file_foto1.required' => 'La Imagen de la Empresa es Obligatorio.',
+            'path_file_foto1.dimensions' => 'La Imagen debe tener dimensiones de 1920x1080 píxeles.',
+            'path_file_foto2.required' => 'El Logo de la Empresa es Obligatorio.',
+            'path_file_foto2.dimensions' => 'El Logo debe tener dimensiones de 1080x1080 píxeles.',
+        ]);
         $idDes = Crypt::decryptString($id);
         if ($data->hasFile('path_file_foto1')) {
             $file = $data->file('path_file_foto1');
             $dimensions = getimagesize($file);
-            if ($dimensions[0] != 1920 || $dimensions[1] != 1080) {
-                return redirect()->back()->withInput()->withErrors(['path_file_foto1' => 'La imagen debe tener dimensiones de 1920x1080 px. y formato no Valido!']);
-            }
             $endPath = public_path('/storage/images/empresas/empresa/' . $idDes . '/');
             $filename = time() . '.' . $file->getClientOriginalExtension();
             $oldImagePath = DB::table('directorio.directorio_empresa_extras')
@@ -523,9 +529,6 @@ class HomeController extends Controller
         if ($data->hasFile('path_file_foto2')) {
             $file = $data->file('path_file_foto2');
             $dimensions = getimagesize($file);
-            if ($dimensions[0] != 1080 || $dimensions[1] != 1080) {
-                return redirect()->back()->withInput()->withErrors(['path_file_foto1' => 'La imagen debe tener dimensiones de 1080x1080 px. o formato no Valido!']);
-            }
             $endPath = public_path('/storage/images/empresas/logo/' . $idDes . '/');
             $filename = time() . '.' . $file->getClientOriginalExtension();
             $oldImagePath = DB::table('directorio.directorio_empresa_extras')
