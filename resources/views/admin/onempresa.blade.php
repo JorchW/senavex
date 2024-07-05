@@ -20,8 +20,13 @@
                         <input type="hidden" value="{{--{{$imagen->imagen_empresa}}--}}" id="imagen_empresa"
                             name="imagen_empresa" />
                         <div class="mb-3">
-                            <label class="text-black font-w500">Imagen de la Empresa (Dimensiones: (Ancho) 1920 x (Alto)
-                                1080 Pixeles):</label>
+                            <label class="text-black font-w500">Nombre de la Empresa</label>
+                            <input type="text" class="form-control form-control-lg focus:outline-none"
+                                style="font-weight:bolder; background-color:rgb(225, 225, 225);" name="razon_social"
+                                id="razon_social" value="{{$empresas->nombre_comercial}}" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label class="text-black font-w500">Imagen de la Empresa</label>
                             <div class="input-group">
                                 <div class="form-file ">
                                     <input accept="image/png,image/jpeg,image/jpg" type="file"
@@ -37,18 +42,25 @@
                                             src="{{$imagen->path_file_foto1}}" height="100%" width="250" alt="Imagen">
                                     @else
                                         <img class="img-fullwidth rounded border border-primary shadow"
-                                            src="{{ asset('storage/images/vistas/senavex1.png') }}" height="100%" width="250" alt="" >
+                                            src="{{ asset('storage/images/vistas/senavex1.png') }}" height="100%"
+                                            width="250" alt="">
                                     @endif
                                 </div>
                             </div>
                             <p class="text-image-2"> </p>
                             @error('path_file_foto1')
-                                <span class="text-danger">{{ $message }}</span>
+                                <div class="alert alert-danger alert-dismissable">
+                                    <strong>{{ $message }}</strong>
+                                </div>
                             @enderror
                         </div>
+
+                        <div class="alert alert-primary" role="alert">
+                            <strong>Nota: </strong>La imagen de la Empresa debe tener una dimension de 1920(Ancho) x
+                            1080(Alto) pixeles(px).
+                        </div>
                         <div class="mb-3">
-                            <label class="text-black font-w500">Logo de la Empresa (Dimensiones: (Ancho) 1080 x (Alto)
-                                1080 Pixeles):</label>
+                            <label class="text-black font-w500">Logo de la Empresa</label>
                             <div class="input-group">
                                 <div class="form-file ">
                                     <input accept="image/png,image/jpeg,image/jpg" type="file"
@@ -64,33 +76,36 @@
                                             src="{{$imagen->path_file_foto2}}" height="100%" width="250" alt="Imagen">
                                     @else
                                         <img class="img-fullwidth rounded border border-primary shadow"
-                                            src="{{ asset('storage/images/vistas/senavex1.png') }}"  height="100%" width="250" alt="">
+                                            src="{{ asset('storage/images/vistas/senavex1.png') }}" height="100%"
+                                            width="250" alt="">
                                     @endif
                                 </div>
                             </div>
                             <p class="text-image-2"> </p>
                             @error('path_file_foto2')
-                                <span class="text-danger">{{ $message }}</span>
+                                <div class="alert alert-danger alert-dismissable">
+                                    <strong>{{$message}}</strong>
+                                </div>
                             @enderror
                         </div>
+
+                        <div class="alert alert-primary" role="alert">
+                            <strong>Nota: </strong>El logo de la Empresa debe tener una dimension de 1080(Ancho) x
+                            1080(Alto) pixeles(px).
+                        </div>
+
                         <div class="mb-3 row text-center">
                             <div class="">
-                                <button type="submit" class="btn btn-primary">Subir Imagenes</button>
+                                <button type="submit" class="btn btn-primary">Subir</button>
                             </div>
-                        </div>
-                        <div class="mb-3">
-                            <label class="text-black font-w500">Nombre de la Empresa</label>
-                            <input type="text" class="form-control form-control-lg focus:outline-none"
-                                style="font-weight:bolder; background-color:rgb(225, 225, 225);" name="razon_social"
-                                id="razon_social" value="{{$empresas->nombre_comercial}}" readonly>
                         </div>
                         <div class="mb-3 read-content">
                             <label class="text-black font-w500">Descripción</label>
                             <div class="mb-3 pt-3">
-                                <textarea class="form-control bg-transparent" maxlength="50" cols="30" rows="5"
-                                    name="descripcion_empresa"
-                                    style="font-weight:bolder; background-color:rgb(225, 225, 225);"
-                                    id="descripcion_empresa" readonly>{{$empresas->descripcion_empresa}}</textarea>
+                                <textarea class="form-control form-control-lg focus:outline-none"
+                                    style="font-weight:bolder; background-color:rgb(225, 225, 225);" maxlength="50"
+                                    cols="30" rows="5" name="descripcion_empresa" id="descripcion_empresa"
+                                    readonly>{{ucfirst(mb_strtolower($empresas->descripcion_empresa))}}</textarea>
                             </div>
                         </div>
                         <div class="row">
@@ -152,19 +167,19 @@
                             <div class="mb-3 col-md-6">
                                 <label class="text-black font-w500 ">Dirección</label>
                                 <div class="post-input">
-                                    <textarea class="form-control bg-transparent" cols="30" rows="5"
-                                        name="direccion_descriptiva"
-                                        style="font-weight:bolder; background-color:rgb(225, 225, 225);"
-                                        id="direccion_descriptiva"
+                                    <textarea class="form-control form-control-lg focus:outline-none"
+                                        style="font-weight:bolder; background-color:rgb(225, 225, 225);" cols="30"
+                                        rows="5" name="direccion_descriptiva" id="direccion_descriptiva"
                                         readonly>{{$empresas->direccion_descriptiva}}</textarea>
                                 </div>
                             </div>
                             <div class="mb-3 col-md-6">
                                 <label class="text-black font-w500 ">Ubicación Fiscal</label>
                                 <div class="post-input">
-                                    <textarea class="form-control bg-transparent" cols="30" rows="5" name="ubicacion"
-                                        style="font-weight:bolder; background-color:rgb(225, 225, 225);"
-                                        id="direccion_fiscal" readonly>{{$empresas->direccion_fiscal}}</textarea>
+                                    <textarea class="form-control form-control-lg focus:outline-none"
+                                        style="font-weight:bolder; background-color:rgb(225, 225, 225);" cols="30"
+                                        rows="5" name="ubicacion" id="direccion_fiscal"
+                                        readonly>{{$empresas->direccion_fiscal}}</textarea>
                                 </div>
                             </div>
                             <div class="mb-3 col-md-4">
