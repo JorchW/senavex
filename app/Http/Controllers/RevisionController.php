@@ -64,7 +64,12 @@ class RevisionController extends Controller
             'id_persona' => Auth::id(),
         ]);
 
-        return redirect()->route('home');
+        return redirect()->route('list-prod-admin', ['id' => $productos->id_empresa]);
+
+        /*return response()->json([
+            'message' => 'Solicitud de envio correcta.',
+            'data' => []
+        ], 200);*/
     }
 
     private function asignarRevisor()
