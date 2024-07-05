@@ -6,7 +6,7 @@
     </div>
     <div class="row mb-4 align-items-center">
         <div class="me-auto">
-            <h2 class="font-w600 mb-0">Lista de Productos5</h2>
+            <h2 class="font-w600 mb-0">Lista de Productos Publicados</h2>
             <p class="text-light"> </p>
         </div>
         <div class="col-xl-9 col-lg-8">
@@ -50,7 +50,6 @@
                             <th>foto 1</th>
                             <th>foto 2</th>
                             <th>foto 3</th>
-                            <th>subir fotos</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -100,14 +99,7 @@
                                                 src="{{ asset('storage/images/vistas/senavex1.png') }}" alt="" width="200px">
                                         @endif
                                     </div>
-                                </td>
-                            <td>
-                                <a href="{{ URL('one-prod-admin/' . Crypt::encryptString($producto->id_ddjj)) }}"
-                                    class="btn btn-outline-primary">Editar</a>
-                                
-                                <a href="{{ URL('publicar-prod-admin/' . Crypt::encryptString($producto->id_ddjj)) }}"
-                                    class="btn btn-outline-primary">Enviar a revisión</a>
-                            </td>
+                                </td>                            
                         @endforeach
                 </table>
             </div>

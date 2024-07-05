@@ -6,7 +6,7 @@
     </div>
     <div class="row mb-4 align-items-center">
         <div class="me-auto">
-            <h2 class="font-w600 mb-0">Lista de Productos5</h2>
+            <h2 class="font-w600 mb-0">Lista de Productos Rechazadas</h2>
             <p class="text-light"> </p>
         </div>
         <div class="col-xl-9 col-lg-8">
@@ -102,16 +102,62 @@
                                     </div>
                                 </td>
                             <td>
+                                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                    data-product-sigla="{{ $producto->sigla }}" data-product-observaciones="{{ $producto->solicitud_observaciones }}">
+                                    👁️Leer motivo de rechazo
+                                </button>
+
                                 <a href="{{ URL('one-prod-admin/' . Crypt::encryptString($producto->id_ddjj)) }}"
-                                    class="btn btn-outline-primary">Editar</a>
+                                    class="btn btn-outline-primary">✏️Editar</a>
                                 
-                                <a href="{{ URL('publicar-prod-admin/' . Crypt::encryptString($producto->id_ddjj)) }}"
-                                    class="btn btn-outline-primary">Enviar a revisión</a>
+                                <a href="{{ URL('list-prod-rechazadas/' . Crypt::encryptString($producto->id_empresa)) }}"
+                                    class="btn btn-outline-primary">✅Enviar a revisión</a>
                             </td>
                         @endforeach
                 </table>
             </div>
         </div>
     </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                    <!-- Add your modal content here -->
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get the modal element
+        var modal = document.getElementById('exampleModal');
+
+        // Get the button that triggers the modal
+        var button = document.querySelector('[data-bs-target="#exampleModal"]');
+
+        // Add an event listener to the button
+        button.addEventListener('click', function() {
+            // Get the product ID and name from the data attributes
+            var productSigla = button.getAttribute('data-product-sigla');
+            var productObservaciones = button.getAttribute('data-product-observaciones');
+
+            
+            var modalTitle = modal.querySelector('.modal-title');
+            var modalBody = modal.querySelector('.modal-body');
+
+            modalTitle.textContent = 'Acuerdo :' + productSigla;
+            modalBody.textContent = 'Observacion :' + productObservaciones;
+        });
+
+    </script>
 </div>
 @endsection

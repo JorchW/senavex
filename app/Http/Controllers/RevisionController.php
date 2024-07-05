@@ -34,7 +34,6 @@ class RevisionController extends Controller
     
     public function publicarProd(Request $request,$id)
     {
-        //dump(Auth::id());
 
         $id_ddjj = Crypt::decryptString($id);
 
@@ -65,11 +64,6 @@ class RevisionController extends Controller
         ]);
 
         return redirect()->route('list-prod-admin', ['id' => $productos->id_empresa]);
-
-        /*return response()->json([
-            'message' => 'Solicitud de envio correcta.',
-            'data' => []
-        ], 200);*/
     }
 
     private function asignarRevisor()
@@ -205,5 +199,79 @@ class RevisionController extends Controller
             "f_fin" => $f_fin,
         ];
         return $array_asignacion;
+    }
+
+    public function listProdRechazadas($id)
+    {
+        $idDes = Crypt::decryptString($id);
+
+        $empresas = DB::table('empresas')
+            ->join('ruexs', 'empresas.id_empresa', '=', 'ruexs.id_empresa')
+            ->join('empresas_personas', 'empresas.id_empresa', '=', 'empresas_personas.id_empresa')
+            ->join('personas', 'empresas_personas.id_persona', '=', 'personas.id_persona')
+            ->join('users', 'personas.id_persona', '=', 'users.id_persona')
+            ->select('empresas.*', 'users.*', 'ruexs.*')
+            ->where('empresas.id_empresa', $idDes)->first();
+
+        $rol = DB::table('rols')
+            ->join('empresas_personas', 'rols.id_rol', '=', 'empresas_personas.id_rol')
+            ->join('personas', 'empresas_personas.id_persona', '=', 'personas.id_persona')
+            ->join('users', 'personas.id_persona', '=', 'users.id_persona')
+            ->select('rols.id_rol', 'rols.rol')
+            ->where('id_user', Auth::id(), )->get();
+
+        $productos = DB::table('ddjjs as dj')
+            ->leftjoin('directorio.directorio_productos as dp', 'dj.id_ddjj', '=', 'dp.id_ddjj')
+            ->join('directorio.producto_solicituds as dps', 'dps.id_producto', '=', 'dp.id_producto')
+            ->join('ddjj_datos_mercancias as dm', 'dj.id_ddjj', '=', 'dm.id_ddjj')
+            ->join('acuerdos as a', 'a.id_acuerdo', '=', 'dj.id_acuerdo')
+            ->join('empresas as e', 'dj.id_empresa', '=', 'e.id_empresa')
+            ->select('*')
+            ->where('dj.id_empresa', $idDes)
+            ->whereIn('dps.id_producto_solicitud_estado', [3])->get();
+
+        return view('listas_exportador.rechazadas', [
+            'empresas' => $empresas,
+            'roles' => $rol,
+            'productos' => $productos,
+            'idempresas' => $idDes
+        ]);
+    }
+
+    public function listProdPublicados($id)
+    {
+        $idDes = Crypt::decryptString($id);
+
+        $empresas = DB::table('empresas')
+            ->join('ruexs', 'empresas.id_empresa', '=', 'ruexs.id_empresa')
+            ->join('empresas_personas', 'empresas.id_empresa', '=', 'empresas_personas.id_empresa')
+            ->join('personas', 'empresas_personas.id_persona', '=', 'personas.id_persona')
+            ->join('users', 'personas.id_persona', '=', 'users.id_persona')
+            ->select('empresas.*', 'users.*', 'ruexs.*')
+            ->where('empresas.id_empresa', $idDes)->first();
+
+        $rol = DB::table('rols')
+            ->join('empresas_personas', 'rols.id_rol', '=', 'empresas_personas.id_rol')
+            ->join('personas', 'empresas_personas.id_persona', '=', 'personas.id_persona')
+            ->join('users', 'personas.id_persona', '=', 'users.id_persona')
+            ->select('rols.id_rol', 'rols.rol')
+            ->where('id_user', Auth::id(), )->get();
+
+        $productos = DB::table('ddjjs as dj')
+            ->leftjoin('directorio.directorio_productos as dp', 'dj.id_ddjj', '=', 'dp.id_ddjj')
+            ->join('directorio.producto_solicituds as dps', 'dps.id_producto', '=', 'dp.id_producto')
+            ->join('ddjj_datos_mercancias as dm', 'dj.id_ddjj', '=', 'dm.id_ddjj')
+            ->join('acuerdos as a', 'a.id_acuerdo', '=', 'dj.id_acuerdo')
+            ->join('empresas as e', 'dj.id_empresa', '=', 'e.id_empresa')
+            ->select('*')
+            ->where('dj.id_empresa', $idDes)
+            ->whereIn('dps.id_producto_solicitud_estado', [3])->get();
+
+        return view('listas_exportador.publicados', [
+            'empresas' => $empresas,
+            'roles' => $rol,
+            'productos' => $productos,
+            'idempresas' => $idDes
+        ]);
     }
 }
