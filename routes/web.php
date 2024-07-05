@@ -40,6 +40,7 @@ Route::get('eliminar-prod-admin/{id}', [App\Http\Controllers\HomeController::cla
 Route::get('observar-prod-admin/{id}', [App\Http\Controllers\HomeController::class, 'observadoProd'])->name('observar-prod-admin');
 Route::get('publicar-prod-admin/{id}', [App\Http\Controllers\RevisionController::class, 'publicarProd'])->name('publicar-prod-admin');
 Route::get('list-prod-rechazadas/{id}', [App\Http\Controllers\RevisionController::class, 'listProdRechazadas'])->name('list-prod-rechazadas');
+Route::get('list-prod-publicados/{id}', [App\Http\Controllers\RevisionController::class, 'listProdPublicados'])->name('list-prod-publicados');
 
 Route::get('list-rubros-admin', [App\Http\Controllers\HomeController::class, 'listRubro'])->name('list-rubros-admin');
 Route::get('one-rubros-admin/{id}', [App\Http\Controllers\HomeController::class, 'oneRubro'])->name('one-rubros-admin');
