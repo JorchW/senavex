@@ -378,8 +378,19 @@
                                 <ul aria-expanded="false">
                                     <li>
                                         <a href="{{ URL('list-prod-admin/' . Crypt::encryptString($empresas->id_empresa)) }}">
-                                            Ver Productos</a>
+                                            Por publicar</a>
                                     </li>
+
+                                    <li>
+                                        <a href="{{ URL('list-prod-admin/' . Crypt::encryptString($empresas->id_empresa)) }}">
+                                            Rechazados</a>
+                                    </li>
+
+                                    <li>
+                                        <a href="{{ URL('list-prod-admin/' . Crypt::encryptString($empresas->id_empresa)) }}">
+                                            Publicados</a>
+                                    </li>
+
                                     {{--@foreach ($empresas as $empresa)
                                     @if ($empresa->estado == 'inactivo')
                                     <li><a href="{{ URL('list-prod-admin/' . Crypt::encryptString($empresa->id_empresa)) }}">
