@@ -32,13 +32,14 @@ Route::get('eliminar-grupo-rubros-admin/{id}', [App\Http\Controllers\HomeControl
 Route::get('list-prod-admin/{id}', [App\Http\Controllers\HomeController::class, 'listProd'])->name('list-prod-admin');
 Route::post('crea-prod/{id}', [App\Http\Controllers\HomeController::class, 'agreProd'])->name('crea-prod');
 
-Route::get('list-prod-admin', [App\Http\Controllers\HomeController::class, 'listProdT'])->name('list-prod-admin');
+//Route::get('list-prod-admin', [App\Http\Controllers\HomeController::class, 'listProdT'])->name('list-prod-admin');
 Route::put('update-prod/{id}', [App\Http\Controllers\HomeController::class, 'updateProd'])->name('update-prod');
 
 Route::get('one-prod-admin/{id}', [App\Http\Controllers\HomeController::class, 'oneProd'])->name('one-prod-admin');
 Route::get('eliminar-prod-admin/{id}', [App\Http\Controllers\HomeController::class, 'eliminarProd'])->name('eliminar-prod-admin');
 Route::get('observar-prod-admin/{id}', [App\Http\Controllers\HomeController::class, 'observadoProd'])->name('observar-prod-admin');
 Route::get('publicar-prod-admin/{id}', [App\Http\Controllers\RevisionController::class, 'publicarProd'])->name('publicar-prod-admin');
+Route::get('list-prod-rechazadas/{id}', [App\Http\Controllers\RevisionController::class, 'listProdRechazadas'])->name('list-prod-rechazadas');
 
 Route::get('list-rubros-admin', [App\Http\Controllers\HomeController::class, 'listRubro'])->name('list-rubros-admin');
 Route::get('one-rubros-admin/{id}', [App\Http\Controllers\HomeController::class, 'oneRubro'])->name('one-rubros-admin');

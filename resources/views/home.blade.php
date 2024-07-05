@@ -382,8 +382,8 @@
                                     </li>
 
                                     <li>
-                                        <a href="{{ URL('list-prod-admin/' . Crypt::encryptString($empresas->id_empresa)) }}">
-                                            Rechazados</a>
+                                        <a href="{{ URL('list-prod-rechazadas/' . Crypt::encryptString($empresas->id_empresa)) }}">
+                                            Rechazadas</a>
                                     </li>
 
                                     <li>
