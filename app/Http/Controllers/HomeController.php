@@ -264,6 +264,7 @@ class HomeController extends Controller
     {
         $idDes = Crypt::decryptString($id);
         $id_empresa = $data->input('id_empresa');
+        $id_rubro =$data-> input('id_rubro');
         $data->validate([
             'id_empresa' => 'required|integer',
             'id_rubro' => 'required|integer',
@@ -378,7 +379,6 @@ class HomeController extends Controller
             ->update([
                 'id_empresa' => $id_empresa,
                 'id_empresa_rubro' => $id_rubro,
-                'id_empresa' => $id_empresa,
             ]);
 
         return redirect()->back();
