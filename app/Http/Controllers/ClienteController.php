@@ -18,11 +18,13 @@ use Carbon\Carbon;
 
 class ClienteController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         return view('vistas.inicio');
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////
-    public function productosBusqueda(Request $request){
+    public function productosBusqueda(Request $request)
+    {
 
         $descripcion_busqueda = $request->get('descripcion_busqueda');
 
@@ -32,148 +34,163 @@ class ClienteController extends Controller
                             inner join ddjj_datos_mercancias ddm on ddm.id_ddjj = d.id_ddjj
                             inner join directorio.directorio_productos ddp on ddp.id_ddjj =  d.id_ddjj
                             inner join directorio.producto_solicituds dps on dps.id_producto = ddp.id_producto
-                            where ddm.denominacion_comercial like '%".$descripcion_busqueda."%'
+                            where ddm.denominacion_comercial like '%" . $descripcion_busqueda . "%'
                             and e.id_estado_empresa = 4 and d.id_ddjj_estado in (6, 9, 10, 11) ";
         $result_busqueda = DB::select($sql_busqueda);
 
-        return view ('vistas.busqueda_productos',[
+        return view('vistas.busqueda_productos', [
             'result_busqueda' => $result_busqueda,
             'descripcion_busqueda' => $descripcion_busqueda,
         ]);
     }
-    public function oneProducto($id){
+    public function oneProducto($id)
+    {
         $idDes = Crypt::decryptString($id);
-        $detProducto = DB::table('productos')
-                    ->join('empresas', 'empresas.id_empresa', '=', 'productos.id_empresa')
-                    ->join('monedas', 'monedas.id_moneda', '=', 'productos.id_moneda')
-                    ->select('productos.*', 'monedas.*', 'empresas.*')
-                    ->where([
-                        ['productos.estado', 'activo'],
-                        ['empresas.estado', 'activo'],
-                        ['productos.id_producto',$idDes]
-                    ])->orderByDesc('productos.updated_at','empresas.updated_at')->first();
-        $productos = DB::table('productos')
-                        ->join('empresas', 'empresas.id_empresa', '=', 'productos.id_empresa')
-                        ->join('monedas', 'monedas.id_moneda', '=', 'productos.id_moneda')
-                        ->select('productos.*', 'monedas.*', 'empresas.*')
-                        ->where([
-                            ['productos.estado', 'activo'],
-                            ['empresas.estado', 'activo'],
-                            ['productos.id_rubro',$detProducto->id_rubro]
-                        ])->orderByDesc('productos.updated_at','empresas.updated_at')->get();
-                        
-        return view('vistas.detalleProducto',[
+        $detProducto = DB::table('ddjjs as d')
+            ->join('empresas as e', 'd.id_empresa', '=', 'e.id_empresa')
+            ->leftjoin('directorio.directorio_empresa_extras as dee','dee.id_empresa','=','e.id_empresa')
+            ->join('ddjj_datos_mercancias as ddm', 'ddm.id_ddjj', '=', 'd.id_ddjj')
+            ->join('directorio.directorio_productos as ddp', 'ddp.id_ddjj', '=', 'd.id_ddjj')
+            ->join('empresa_rubros as er','ddp.id_empresa_rubro','=','er.id_rubro')
+            ->join('directorio.producto_solicituds as dps','dps.id_producto','=','ddp.id_producto')
+            ->select('e.*','ddp.*','ddm.*','dee.*','er.*')
+            ->where('ddp.id_producto',$idDes)->first();
+        //"SELECT d.id_ddjj, ddm.denominacion_comercial, e.id_empresa, e.razon_social, ddp.id_producto, ddp.path_file_photo1, ddp.path_file_photo2, ddp.path_file_photo3    
+        //                    from ddjjs d
+        //                    inner join empresas e on e.id_empresa = d.id_empresa
+        //                    inner join ddjj_datos_mercancias ddm on ddm.id_ddjj = d.id_ddjj
+        //                    inner join directorio.directorio_productos ddp on ddp.id_ddjj =  d.id_ddjj
+        //                    inner join directorio.producto_solicituds dps on dps.id_producto = ddp.id_producto
+        //                    where ddm.denominacion_comercial like '%" . $descripcion_busqueda . "%'
+        //                    and e.id_estado_empresa = 4 and d.id_ddjj_estado in (6, 9, 10, 11) ";
+        //$productos = DB::table('productos')
+        //                ->join('empresas', 'empresas.id_empresa', '=', 'productos.id_empresa')
+        //                ->join('monedas', 'monedas.id_moneda', '=', 'productos.id_moneda')
+        //                ->select('productos.*', 'monedas.*', 'empresas.*')
+        //                ->where([
+        //                    ['productos.estado', 'activo'],
+        //                    ['empresas.estado', 'activo'],
+        //                    ['productos.id_rubro',$detProducto->id_rubro]
+        //                ])->orderByDesc('productos.updated_at','empresas.updated_at')->get();
+
+        return view('vistas.detalleProducto', [
             'detProducto' => $detProducto,
-            'productos' => $productos,
+            //'productos' => $productos,
         ]);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public function listaEmpresas(Request $request){
+    public function listaEmpresas(Request $request)
+    {
         $buscador_empresa = trim($request->get('buscador_empresa'));
         $buscador_empresa_m = mb_strtolower($buscador_empresa, 'UTF-8');
         $empresas = DB::table('empresas as e')
-        ->leftJoin('directorio.directorio_empresa_extras as de','e.id_empresa','=','de.id_empresa')
-        ->select('e.*','de.path_file_foto1')
+            ->leftJoin('directorio.directorio_empresa_extras as de', 'e.id_empresa', '=', 'de.id_empresa')
+            ->select('e.*', 'de.path_file_foto1')
             ->where([
-                ['e.razon_social', 'ILIKE', '%'.$buscador_empresa_m.'%']
+                ['e.razon_social', 'ILIKE', '%' . $buscador_empresa_m . '%']
             ])
             ->orderByDesc('updated_at')->paginate(3);
 
         return view('vistas.empresas', [
             'empresas' => $empresas,
-            'buscador_empresa' => $buscador_empresa 
+            'buscador_empresa' => $buscador_empresa
         ]);
     }
-    
-    public function oneEmpresa($id){
+
+    public function oneEmpresa($id)
+    {
         $idDes = Crypt::decryptString($id);
         $detEmpresa = DB::table('empresas')
-                    ->where([
-                        ['id_empresa',$idDes]
-                    ])->first();
+            ->where([
+                ['id_empresa', $idDes]
+            ])->first();
         $productos = DB::table('directorio.directorio_productos')
-                        ->join('empresas', 'empresas.id_empresa', '=', 'directorio_productos.id_empresa')
-                        ->select('directorio_productos.*','empresas.*')
-                        ->where([
-                            ['directorio_productos.id_empresa',$idDes]
-                            
-                        ])->orderByDesc('directorio_productos.updated_at','empresas.updated_at')->get();
-        return view('vistas.detalleEmpresa',[
+            ->join('empresas', 'empresas.id_empresa', '=', 'directorio_productos.id_empresa')
+            ->select('directorio_productos.*', 'empresas.*')
+            ->where([
+                ['directorio_productos.id_empresa', $idDes]
+
+            ])->orderByDesc('directorio_productos.updated_at', 'empresas.updated_at')->get();
+        return view('vistas.detalleEmpresa', [
             'detEmpresa' => $detEmpresa,
             'productos' => $productos
         ]);
     }
-    public function listaProductosEmpresa($id){
+    public function listaProductosEmpresa($id)
+    {
         $idDes = Crypt::decryptString($id);
         $productos = DB::table('productos')
-        ->join('empresas', 'empresas.id_empresa', '=', 'productos.id_empresa')
-        ->join('monedas', 'monedas.id_moneda', '=', 'productos.id_moneda')
-        ->select('productos.*', 'monedas.*', 'empresas.*')
-        ->where([
-            ['productos.estado', 'activo'],
-            ['empresas.estado', 'activo'],
-            ['empresas.id_empresa',$idDes]
-        ])->orderByDesc('productos.updated_at','empresas.updated_at')->paginate(8);
+            ->join('empresas', 'empresas.id_empresa', '=', 'productos.id_empresa')
+            ->join('monedas', 'monedas.id_moneda', '=', 'productos.id_moneda')
+            ->select('productos.*', 'monedas.*', 'empresas.*')
+            ->where([
+                ['productos.estado', 'activo'],
+                ['empresas.estado', 'activo'],
+                ['empresas.id_empresa', $idDes]
+            ])->orderByDesc('productos.updated_at', 'empresas.updated_at')->paginate(8);
 
 
-        return view ('vistas.productos_emp_rub',[
+        return view('vistas.productos_emp_rub', [
             'productos' => $productos,
             'titulo' => 'Empresas'
         ]);
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////    
 
-    public function listaRubros(Request $request){
+    public function listaRubros(Request $request)
+    {
         $buscador_rubro = trim($request->get('buscador_rubro'));
         $buscador_rubro = strtoupper($buscador_rubro);
         $rubros = DB::table('empresa_rubros')
-        ->select('*')
-        ->where([
-            ['descripcion_rubro', 'like', '%'.$buscador_rubro.'%']
-        ])->orderByDesc('updated_at')->paginate(6, ['*'], 'page', null);
+            ->select('*')
+            ->where([
+                ['descripcion_rubro', 'like', '%' . $buscador_rubro . '%']
+            ])->orderByDesc('updated_at')->paginate(6, ['*'], 'page', null);
 
-        return view ('vistas.listarubro',[
+        return view('vistas.listarubro', [
             'rubros' => $rubros,
-            'buscador_rubro'    => $buscador_rubro
+            'buscador_rubro' => $buscador_rubro
         ]);
     }
-    public function oneRubro($id){
+    public function oneRubro($id)
+    {
         $idDes = Crypt::decryptString($id);
         $detEmpresa = DB::table('empresas')
-                    ->where([
-                        ['estado', 'activo'],
-                        ['id_empresa',$idDes]
-                    ])->first();
+            ->where([
+                ['estado', 'activo'],
+                ['id_empresa', $idDes]
+            ])->first();
         $productos = DB::table('productos')
-                        ->join('empresas', 'empresas.id_empresa', '=', 'productos.id_empresa')
-                        ->join('monedas', 'monedas.id_moneda', '=', 'productos.id_moneda')
-                        ->select('productos.*', 'monedas.*', 'empresas.*')
-                        ->where([
-                            ['productos.estado', 'activo'],
-                            ['empresas.estado', 'activo'],
-                            ['productos.id_empresa',$idDes]
-                        ])->orderByDesc('productos.updated_at','empresas.updated_at')->get();
-        return view('vistas.detalleEmpresa',[
+            ->join('empresas', 'empresas.id_empresa', '=', 'productos.id_empresa')
+            ->join('monedas', 'monedas.id_moneda', '=', 'productos.id_moneda')
+            ->select('productos.*', 'monedas.*', 'empresas.*')
+            ->where([
+                ['productos.estado', 'activo'],
+                ['empresas.estado', 'activo'],
+                ['productos.id_empresa', $idDes]
+            ])->orderByDesc('productos.updated_at', 'empresas.updated_at')->get();
+        return view('vistas.detalleEmpresa', [
             'detEmpresa' => $detEmpresa,
             'productos' => $productos
         ]);
     }
-    public function listaProductosRubro($id){
+    public function listaProductosRubro($id)
+    {
         $idDes = Crypt::decryptString($id);
         $productos = DB::table('productos')
-        ->join('empresas', 'empresas.id_empresa', '=', 'productos.id_empresa')
-        ->join('monedas', 'monedas.id_moneda', '=', 'productos.id_moneda')
-        ->join('rubro', 'rubro.id_rubro', '=', 'productos.id_rubro')
-        ->select('productos.*', 'monedas.*', 'empresas.*')
-        ->where([
-            ['productos.estado', 'activo'],
-            ['empresas.estado', 'activo'],
-            ['productos.id_rubro',$idDes]
-        ])->orderByDesc('productos.updated_at','empresas.updated_at')->get();
+            ->join('empresas', 'empresas.id_empresa', '=', 'productos.id_empresa')
+            ->join('monedas', 'monedas.id_moneda', '=', 'productos.id_moneda')
+            ->join('rubro', 'rubro.id_rubro', '=', 'productos.id_rubro')
+            ->select('productos.*', 'monedas.*', 'empresas.*')
+            ->where([
+                ['productos.estado', 'activo'],
+                ['empresas.estado', 'activo'],
+                ['productos.id_rubro', $idDes]
+            ])->orderByDesc('productos.updated_at', 'empresas.updated_at')->get();
 
-        return view ('vistas.productos_emp_rub',[
+        return view('vistas.productos_emp_rub', [
             'productos' => $productos,
             'titulo' => 'Rubros'
         ]);
