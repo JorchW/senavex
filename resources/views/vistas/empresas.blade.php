@@ -18,7 +18,7 @@
                 <div class="row">
                     <div class="col-md-8">
                         <h2 class="mt-0 line-height-1">
-                            Listado de <span class="text-theme-colored3">Empresas</span>
+                            Listado de <span class="text-theme-colored3">Empresas.</span>
                         </h2>
                     </div>
 
@@ -43,7 +43,6 @@
                 </div>
             </div>
             <div class="row">
-
                 <div class="col-md-9 blog-pull-right">
                     @if (count($empresas) > 0)
                         @foreach ($empresas as $empresa)
@@ -80,8 +79,7 @@
                                         <div class="event-count p-15 mt-15">
                                             <ul>
                                                 <li class="mb-10 text-theme-colored">
-                                                    <i class="fa fa-clock-o mr-5"></i> de 8:30 am - 6:00
-                                                    pm
+                                                    <i class="fa fa-clock-o mr-5"></i> {{$empresa->telefono}} - {{$empresa->email}}
                                                 </li>
                                                 <li class="text-theme-colored">
                                                     <i class="fa fa-map-marker mr-5"></i> {{$empresa->pag_web}}
@@ -111,7 +109,6 @@
                         <br>
                         <h1> Lo siento no se </h1>
                         <h1> encontraron empresas </h1>
-
                         <br>
                         <br>
                         <br>
@@ -122,9 +119,9 @@
                         <br>
                     @endif
                     <div class="pagination"> {{ $empresas->links() }}</div>
-
                 </div>
-                <div class="col-md-3">
+
+                {{--<div class="col-md-3">
                     <div class="sidebar sidebar-left mt-sm-30">
                         <div class="widget p-30">
                             <div class="owl-carousel-1col" data-dots="true">
@@ -159,69 +156,9 @@
                                     </ul>
                                 </div>
                             </div>
-                        </div>
-
-                        {{-- <div class="widget">
-                            <h5 class="widget-title line-bottom">
-                                <font style="vertical-align: inherit">
-                                    <font style="vertical-align: inherit">Publicados
-                                    </font>
-                                </font><span class="text-theme-colored3">
-                                    <font style="vertical-align: inherit">
-                                        <font style="vertical-align: inherit">Recientes</font>
-                                    </font>
-                                </span>
-                            </h5>
-                            <div class="product-list">
-                                <div class="media">
-                                    <a class="media-left pull-left flip" href="#">
-                                        <img class="media-object thumb" width="60" src="p1.jpg" alt="" />
-                                    </a>
-                                    <div class="media-body">
-                                        <h5 class="media-heading product-title mb-0">
-                                            <a href="#">TITULO PRODUCTO</a>
-                                        </h5>
-                                        <h5 class="media-heading product-title mb-0">
-                                            <a href="#">nombre empresa</a>
-                                        </h5>
-
-                                        <span class="price">$37.00</span>
-                                    </div>
-                                </div>
-                                <div class="media">
-                                    <a class="media-left pull-left flip" href="#">
-                                        <img class="media-object thumb" width="60" src="p1.jpg" alt="" />
-                                    </a>
-                                    <div class="media-body">
-                                        <h5 class="media-heading product-title mb-0">
-                                            <a href="#">TITULO PRODUCTO</a>
-                                        </h5>
-                                        <h5 class="media-heading product-title mb-0">
-                                            <a href="#">nombre empresa</a>
-                                        </h5>
-
-                                        <span class="price">$37.00</span>
-                                    </div>
-                                </div>
-                                <div class="media">
-                                    <a class="media-left pull-left flip" href="#">
-                                        <img class="media-object thumb" width="60" src="p1.jpg" alt="" />
-                                    </a>
-                                    <div class="media-body">
-                                        <h5 class="media-heading product-title mb-0">
-                                            <a href="#">TITULO PRODUCTO</a>
-                                        </h5>
-                                        <h5 class="media-heading product-title mb-0">
-                                            <a href="#">nombre empresa</a>
-                                        </h5>
-
-                                        <span class="price">$37.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> --}}
+                        </div>                       
                     </div>
-                </div>
+                </div>--}}
             </div>
         </div>
     </section>

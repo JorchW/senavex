@@ -332,8 +332,7 @@
                                 </a>
                                 <ul aria-expanded="false">
                                     <li>
-                                        <a
-                                            href="{{ URL('one-emp-admin/' . Crypt::encryptString($empresas->id_empresa)) }}">
+                                        <a href="{{ URL('one-emp-admin/' . Crypt::encryptString($empresas->id_empresa)) }}">
                                             @if ($empresas->razon_social=='')
                                             {{$empresas->nombre_comercial}}
                                             @else

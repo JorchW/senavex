@@ -75,8 +75,8 @@
                         <div class="col-md-9">
                             <div class="widget text-white">
                                 <ul class="list-inline xs-text-center text-white">
-                                    <li class="m-0 pl-10 pr-10"> <a href="tel:+59174310408" class="text-white"><i
-                                                class="fa fa-phone text-white"></i> 123-456-789</a> </li>
+                                    <li class="m-0 pl-10 pr-10"> <a href="https://api.whatsapp.com/send?phone=59169907596" class="text-white"><i
+                                                class="fa fa-phone text-white"></i>2-2113621 * 2-2111823 * 2-2141862 - Call Center 591 +69907596 (Whatsapp)</a> </li>
                                     <li class="m-0 pl-10 pr-10">
                                         <a href="mailto:senaxe@gmail.com" class="text-white"><i
                                                 class="fa fa-envelope-o text-white mr-5"></i> senavex@gmail.com</a>
@@ -150,7 +150,7 @@
                 <div class="col-md-4">
                     <div class="widget dark">
                         <img class="mt-10" alt="" src="{{asset('storage/images/vistas/logob.png')}}">
-                        <p class="text-white">Servicio Nacional de Verificacion de Exportaciones</p>
+                        <p class="text-white">Servicio Nacional de Verificación de Exportaciones</p>
 
                     </div>
                 </div>
@@ -160,7 +160,7 @@
                         <div class="latest-posts">
                             <ul class="list mt-5">
                                 <li class="m-0 pl-10 pr-10"> <i class="fa fa-phone text-theme-colored2 mr-5"></i> <a
-                                        class="text-gray" href="tel:123-456-789">123-456-789</a> </li>
+                                        class="text-gray" href="https://api.whatsapp.com/send?phone=59169907596">2-2113621 * 2-2111823 * 2-2141862 - Call Center 591 +69907596 (Whatsapp)</a> </li>
                                 <li class="m-0 pl-10 pr-10"> <i class="fa fa-envelope-o text-theme-colored2 mr-5"></i>
                                     <a class="text-gray" href="mailto::senavex@gmail.com"
                                         target="_blank">senavex@gmail.com</a>
@@ -175,10 +175,10 @@
                 </div>
                 <div class="col-md-4">
                     <div class="widget dark">
-                        <h4 class="widget-title">Horario de apertura</h4>
+                        <h4 class="widget-title">Horario de atención</h4>
                         <div class="opening-hours">
                             <ul class="list-border">
-                                <li class="clearfix text-white">Miércoles - Jueves : 8.00 am - 6.00 pm
+                                <li class="clearfix text-white">Lunes a Viernes : 8:30 am - 12:30 pm y 12:30 am - 18:30 pm
                                 </li>
                             </ul>
                         </div>
@@ -200,7 +200,7 @@
             <div class="container pt-10 pb-10">
                 <div class="row text-center">
                     <div class="col-md-12 sm-text-center">
-                        <p class="font-13 text-black-777 m-0">Derechos de autor &copy;2022. Directorio exportador</p>
+                        <p class="font-13 text-black-777 m-0">Derechos de autor &copy;2024. Senavex</p>
                     </div>
 
                 </div>
