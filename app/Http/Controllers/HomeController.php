@@ -95,11 +95,13 @@ class HomeController extends Controller
 
         $productos = DB::table('ddjjs as dj')
             ->leftjoin('directorio.directorio_productos as dp', 'dj.id_ddjj', '=', 'dp.id_ddjj')
+            ->leftjoin('directorio.producto_solicituds as dps', 'dps.id_producto', '=', 'dp.id_producto')
             ->join('ddjj_datos_mercancias as dm', 'dj.id_ddjj', '=', 'dm.id_ddjj')
             ->join('acuerdos as a', 'a.id_acuerdo', '=', 'dj.id_acuerdo')
             ->join('empresas as e', 'dj.id_empresa', '=', 'e.id_empresa')
             ->select('*')
             ->where('dj.id_empresa', $idDes)
+            ->whereNull('dps.id_producto_solicitud')
             ->whereIn('dj.id_ddjj_estado', [6, 9, 10, 11])->get();
 
         return view('admin.listproducto', [
