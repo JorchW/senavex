@@ -110,7 +110,7 @@
                     <div class="container">
                         <nav id="menuzord-right" class="menuzord blue no-bg">
                             <a class="menuzord-brand switchable-logo pull-left flip mb-15" href="{{URL('/') }}">
-                                <img class="logo-default" src="{{asset('storage/images/vistas/logob.png')}}" alt="">
+                                <img class="logo-default" src="{{asset('storage/images/vistas/logoc.png')}}" alt="">
                                 <img class="logo-scrolled-to-fixed" src="{{asset('storage/images/vistas/logoc.png')}}"
                                     alt="">
                             </a>
