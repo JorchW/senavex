@@ -193,18 +193,14 @@
             <div class="section-content">
                 <div class="row">
                     <div class="col-sm-6 col-md-6">
-                        <h2 class="mt-0 mt-sm-30 line-height-1 line-bottom-edu">Bienvenido a <span
-                                class="text-theme-colored3">Directorio Exportador</span></h2>
-                        <p class="font-15">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-                            aliquam erat nec ultricies. Ut lobortis, magna nec rhoncus vestibulum, neque quam
-                            mattis ipsum, vel bibendum erat</p>
-                        <p class="font-15">Suspendisse dui enim, vehicula ac tempus sed, ullamcorper pretium
-                            mauris. Ut vel pellentesque felis, sit amet laoreet sem. Nunc lacinia mauris a felis
-                            tincidunt ullamcorper.</p>
+                        <h2 class="mt-0 mt-sm-30 line-height-1 line-bottom-edu">Bienvenido al Directorio Exportador<span
+                                class="text-theme-colored3"> "Hecho en Bolivia"</span></h2>
+                        <p class="font-15">Busca, selecciona y contactate directamente con el productor Boliviano</p>
+                        <p class="font-15">El Directorio Exportador verifica que los productos ofrecidos cuentan con la
+                            Declaración Jurada de Origen
+                        </p>
                         <a class="btn btn-colored btn-circled btn-xl btn-theme-colored2 mt-10 mb-sm-30"
                             href="page-about1.html">Leer mas</a>
-                        <a class="btn btn-default btn-circled btn-xl mt-10 mb-sm-30" href="page-about1.html">Leer
-                            mas</a>
                     </div>
                     <div class="col-sm-6 col-md-6 text-center">
                         <img src="{{ asset('storage/images/vistas/logop.png') }}" alt="about">
@@ -220,10 +216,9 @@
                 <div class="row">
                     <div class="col-sm-12 col-md-6">
                         <img src="{{ asset('storage/images/vistas/nuestro1.png') }}" alt="">
-
                     </div>
 
-                    <div class="col-xs-12 col-sm-6 col-md-4 wow fadeInLeft ml-70" data-wow-duration="1s"
+                    {{--<div class="col-xs-12 col-sm-6 col-md-4 wow fadeInLeft ml-70" data-wow-duration="1s"
                         data-wow-delay="0.3s"
                         style="visibility: visible; animation-duration: 1s; animation-delay: 0.3s;">
                         <div class="mt-15">
@@ -241,8 +236,7 @@
                                 <h2 class="line-bottom-edu text-muted">Rubros</h2>
                             </a>
                         </div>
-
-                    </div>
+                    </div>--}}
                 </div>
 
                 <div class="row mt-30 pt-15">
@@ -250,11 +244,10 @@
                         <img src="{{asset('storage/images/vistas/isos.png')}}" alt="">
 
                     </div>
-
-
                 </div>
             </div>
         </div>
+    </section>
 </div>
 
 @endsection

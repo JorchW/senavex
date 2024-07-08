@@ -67,18 +67,23 @@ class ClienteController extends Controller
             'productos' => $productos,
         ]);
     }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+    
     public function listaEmpresas(Request $request){
         $buscador_empresa = trim($request->get('buscador_empresa'));
         $buscador_empresa_m = mb_strtolower($buscador_empresa, 'UTF-8');
+
         $empresas = DB::table('empresas as e')
         ->leftJoin('directorio.directorio_empresa_extras as de','e.id_empresa','=','de.id_empresa')
         ->select('e.*','de.path_file_foto1')
             ->where([
                 ['e.razon_social', 'ILIKE', '%'.$buscador_empresa_m.'%']
             ])
+            ->whereIn('e.id_empresa', function ($query) {
+                $query->select('dps.id_empresa')
+                    ->from('directorio.producto_solicituds as dps')
+                    ->where('dps.id_producto_solicitud_estado', 2)
+                    ->groupBy('dps.id_empresa');
+            })
             ->orderByDesc('updated_at')->paginate(3);
 
         return view('vistas.empresas', [
