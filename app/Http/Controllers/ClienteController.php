@@ -149,6 +149,7 @@ class ClienteController extends Controller
             'titulo' => 'Empresas'
         ]);
     }
+<<<<<<< HEAD
     ////////////////////////////////////////////////////////////////////////////////////////////////    
 
     public function listaRubros(Request $request)
@@ -160,6 +161,19 @@ class ClienteController extends Controller
             ->where([
                 ['descripcion_rubro', 'like', '%' . $buscador_rubro . '%']
             ])->orderByDesc('updated_at')->paginate(6, ['*'], 'page', null);
+=======
+    
+    public function listaRubros(Request $request){
+        $buscador_rubro = trim($request->get('buscador_rubro'));
+        $buscador_rubro = strtoupper($buscador_rubro);
+        $rubros = DB::table('empresa_rubros')
+        ->select('*')
+        ->where([
+            ['descripcion_rubro', 'like', '%'.$buscador_rubro.'%']
+        ])->orderBy('id_rubro')->paginate(6, ['*'], 'page', null);
+
+        dump($rubros);
+>>>>>>> bd5bc300d35deea46528c991d575b81fd905c652
 
         return view('vistas.listarubro', [
             'rubros' => $rubros,

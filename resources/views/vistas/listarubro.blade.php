@@ -19,7 +19,7 @@
                     <div class="row">
                         <div class="col-md-8">
                             <h2 class="mt-0 line-height-1">
-                                Lista de <span class="text-theme-colored3">Rubros</span>
+                                Lista de <span class="text-theme-colored3">Rubros 5</span>
                             </h2>
                         </div>
                         <div class="col-md-4">
@@ -61,7 +61,7 @@
                                     </div>
                                     <div class="col-sm-8 pl-0 pl-sm-15">
                                         <div class="event-details p-15 mt-20">
-                                            <h4 class="text-theme-colored media-heading text-lowercase font-weight-500">
+                                            <h4 class="text-theme-colored media-heading font-weight-500">
                                                 {{ $rubro->descripcion_rubro }}
                                             </h4>
                                             <a class="pull-right text-gray font-13 pb-5" href="{{URL('list-prod-rubros/'.Crypt::encryptString($rubro->id_rubro))}}"><i
@@ -78,8 +78,7 @@
                             <br>
                             <br>
                             <h1> Lo siento no se  </h1>
-                            <h1>  encontraron Rubros </h1>
-                            
+                            <h1>  encontraron Rubros </h1>                            
                             <br>
                             <br>
                             <br>

@@ -580,10 +580,8 @@ class HomeController extends Controller
             ->select('rol.id_rol', 'rol.nombre_rol')
             ->where('id_user', Auth::id(), )->get();
 
-
-
-
         $rubros = Rubro::all();
+        
         return view('admin.listrubro', [
             'empresas' => $empresas,
             'roles' => $rol,
