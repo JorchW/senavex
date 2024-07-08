@@ -21,8 +21,6 @@ class ClienteController extends Controller
     public function index(){
         return view('vistas.inicio');
     }
-
-
     ////////////////////////////////////////////////////////////////////////////////////////////////
     public function productosBusqueda(Request $request){
 
@@ -35,16 +33,8 @@ class ClienteController extends Controller
                             inner join directorio.directorio_productos ddp on ddp.id_ddjj =  d.id_ddjj
                             inner join directorio.producto_solicituds dps on dps.id_producto = ddp.id_producto
                             where ddm.denominacion_comercial like '%".$descripcion_busqueda."%'
-                            and e.id_estado_empresa = 4";
+                            and e.id_estado_empresa = 4 and d.id_ddjj_estado in (6, 9, 10, 11) ";
         $result_busqueda = DB::select($sql_busqueda);
-
-        /*$buscador_producto = trim($request->get('buscador_producto'));
-        $productos = DB::table('directorio.directorio_productos')
-        ->join('empresas', 'empresas.id_empresa', '=', 'directorio_productos.id_empresa')
-        ->select('directorio_productos.*','empresas.*')
-        ->where([
-        ])->orderByDesc('productos.updated_at','empresas.updated_at')->paginate(8);*/
-
 
         return view ('vistas.busqueda_productos',[
             'result_busqueda' => $result_busqueda,

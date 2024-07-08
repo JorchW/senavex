@@ -72,12 +72,7 @@
                                     <div class="services-details clearfix">
                                         <div class="p-20 p-sm-15 bg-lighter">
                                             <h4 class="mt-0 line-height-1">
-                                                <a
-                                                    href="{{ URL('detalle-producto/' . Crypt::encryptString($producto->id_producto)) }}">
-
-                                                    {{ Str::limit($producto->denominacion_comercial, 25, $end = ' ...') }}
-
-                                                </a>
+                                                {{ $producto->denominacion_comercial }}                                                
                                             </h4>
                                             <div class="clearfix"></div>
                                             <ul class="list-inline mt-15 mb-10 clearfix">

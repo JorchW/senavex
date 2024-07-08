@@ -63,7 +63,9 @@ class RevisionController extends Controller
             'id_persona' => Auth::id(),
         ]);
 
-        return redirect()->route('list-prod-admin', ['id' => $productos->id_empresa]);
+        $encrypted_id_empresa = Crypt::encryptString($productos->id_empresa);
+
+        return redirect()->route('list-prod-admin', ['id' => $encrypted_id_empresa]);
     }
 
     private function asignarRevisor()
@@ -84,16 +86,21 @@ class RevisionController extends Controller
                                 where dps.id_producto_solicitud is not null	
                             order by ddp.id_producto desc
                         ) a	group by a.id_producto";
-        $result_producto = DB::select($query_producto);        
-        $ultimo_id_producto = $result_producto[0]->id_producto;
+        $result_producto = DB::select($query_producto); 
         
-        $query_solicitud = " SELECT dps.id_revisor
-                                from directorio.producto_solicituds dps
-                                where dps.id_producto = ?
-                                order by dps.id_producto_solicitud desc
-                            limit 1";
-        $result_solicitud = DB::select($query_solicitud,[$ultimo_id_producto]);        
-        $ultimo_id_revisor = $result_solicitud[0]->id_revisor;
+        if (count($result_producto) == 0){
+            $ultimo_id_revisor =  $certificadores[0]->id_persona;
+        } else {
+            $ultimo_id_producto = $result_producto[0]->id_producto;
+            
+            $query_solicitud = " SELECT dps.id_revisor
+                                    from directorio.producto_solicituds dps
+                                    where dps.id_producto = ?
+                                    order by dps.id_producto_solicitud desc
+                                limit 1";
+            $result_solicitud = DB::select($query_solicitud,[$ultimo_id_producto]);        
+            $ultimo_id_revisor = $result_solicitud[0]->id_revisor;
+        }        
         
         /*BUSQUEDA DE ULTIMO REVISOR PARA INICIAR INDEX*/
         $count = count($certificadores);
@@ -265,7 +272,7 @@ class RevisionController extends Controller
             ->join('empresas as e', 'dj.id_empresa', '=', 'e.id_empresa')
             ->select('*')
             ->where('dj.id_empresa', $idDes)
-            ->whereIn('dps.id_producto_solicitud_estado', [3])->get();
+            ->whereIn('dps.id_producto_solicitud_estado', [2])->get();
 
         return view('listas_exportador.publicados', [
             'empresas' => $empresas,
