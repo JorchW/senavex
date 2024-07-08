@@ -24,18 +24,31 @@ class ClienteController extends Controller
 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
-    public function listaProductos(Request $request){
-        $buscador_producto = trim($request->get('buscador_producto'));
+    public function productosBusqueda(Request $request){
+
+        $descripcion_busqueda = $request->get('descripcion_busqueda');
+
+        $sql_busqueda = "SELECT d.id_ddjj, ddm.denominacion_comercial, e.id_empresa, e.razon_social, ddp.id_producto, ddp.path_file_photo1, ddp.path_file_photo2, ddp.path_file_photo3    
+                            from ddjjs d
+                            inner join empresas e on e.id_empresa = d.id_empresa
+                            inner join ddjj_datos_mercancias ddm on ddm.id_ddjj = d.id_ddjj
+                            inner join directorio.directorio_productos ddp on ddp.id_ddjj =  d.id_ddjj
+                            inner join directorio.producto_solicituds dps on dps.id_producto = ddp.id_producto
+                            where ddm.denominacion_comercial like '%".$descripcion_busqueda."%'
+                            and e.id_estado_empresa = 4";
+        $result_busqueda = DB::select($sql_busqueda);
+
+        /*$buscador_producto = trim($request->get('buscador_producto'));
         $productos = DB::table('directorio.directorio_productos')
         ->join('empresas', 'empresas.id_empresa', '=', 'directorio_productos.id_empresa')
         ->select('directorio_productos.*','empresas.*')
         ->where([
-        ])->orderByDesc('productos.updated_at','empresas.updated_at')->paginate(8);
+        ])->orderByDesc('productos.updated_at','empresas.updated_at')->paginate(8);*/
 
 
-        return view ('vistas.productos',[
-            'productos' => $productos,
-            'buscador_producto' => $buscador_producto,
+        return view ('vistas.busqueda_productos',[
+            'result_busqueda' => $result_busqueda,
+            'descripcion_busqueda' => $descripcion_busqueda,
         ]);
     }
     public function oneProducto($id){

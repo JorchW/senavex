@@ -65,9 +65,10 @@
                                 data-mask_out="x:0;y:0;s:inherit;e:inherit;" data-start="1000" data-splitin="none"
                                 data-splitout="none" data-responsive_offset="on"
                                 style="z-index: 6; min-width: 600px; max-width: 600px; white-space: normal;">
+                                
                                 <form action="{{ route('productos') }}" method="GET" class="slider-search-form"
                                     style="max-width: 100%; margin: 0 auto; text-align: center;">
-                                    <input class="btn-circled" type="text" name="query"
+                                    <input class="btn-circled" type="text" name="descripcion_busqueda" id="descripcion_busqueda"
                                         placeholder="Buscar Productos..."
                                         style="width: 70%; padding: 10px; font-size: 18px;">
                                     <button class="btn-circled btn-theme-colored2" type="submit"
@@ -75,6 +76,7 @@
                                         <i class="fa fa-search"></i> Buscar
                                     </button>
                                 </form>
+
                             </div>
                         </li>
                     </ul>
