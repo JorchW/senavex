@@ -71,12 +71,12 @@
                                     </div>--}}
                                     <div class="services-details clearfix">
                                         <div class="p-20 p-sm-15 bg-lighter">                                            
-                                            <div class="col-sm-6 col-md-6 text-center">
+                                            <h4 class="mt-0 line-height-1">
+                                                {{ $producto->denominacion_comercial }}                                       
+                                            </h4>
+                                            <div class="col-sm-12 col-md-12 text-center">
                                                 <img src="{{ asset('storage/images/vistas/distintivo.png') }}" alt="distintivo">
                                             </div>
-                                            <h4 class="mt-0 line-height-1">
-                                                {{ $producto->denominacion_comercial }}                                                
-                                            </h4>
                                             <div class="clearfix"></div>
                                             <ul class="list-inline mt-15 mb-10 clearfix">
                                                 <li class="pull-left flip pr-0 clearfix">
