@@ -47,10 +47,7 @@
                             <th>nro ddjj</th>
                             <th>acuerdo</th>
                             <th>sigla</th>
-                            <th>foto 1</th>
-                            <th>foto 2</th>
-                            <th>foto 3</th>
-                            <th>subir fotos</th>
+                            <th>subir Contenido</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -69,45 +66,13 @@
                                     {{$producto->sigla}}
                                 </td>
                                 <td>
-                                    <div class="event-details p-15 mt-20">
-                                        @if (strlen($producto->path_file_photo1) > 0)
-                                            <img class="img-fullwidth rounded border border-primary shadow"
-                                                src="{{ $producto->path_file_photo1 }}" alt="" width="200px">
-                                        @else
-                                            <img class="img-fullwidth rounded border border-primary shadow"
-                                                src="{{ asset('storage/images/vistas/senavex1.png') }}" alt="" width="200px">
-                                        @endif
-                                    </div>
+                                    <a href="{{ URL('one-prod-admin/' . Crypt::encryptString($producto->id_ddjj)) }}"
+                                        class="btn btn-outline-primary">Editar</a>
+                                    <br>
+                                    <a href="{{ URL('publicar-prod-admin/' . Crypt::encryptString($producto->id_ddjj)) }}"
+                                        class="btn btn-outline-primary">Enviar a revisión</a>
                                 </td>
-                                <td>
-                                    <div class="event-details p-15 mt-20">
-                                        @if (strlen($producto->path_file_photo2) > 0)
-                                            <img class="img-fullwidth rounded border border-primary shadow"
-                                                src="{{ $producto->path_file_photo2 }}" alt="" width="200px">
-                                        @else
-                                            <img class="img-fullwidth rounded border border-primary shadow"
-                                                src="{{ asset('storage/images/vistas/senavex1.png') }}" alt="" width="200px">
-                                        @endif
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="event-details p-15 mt-20">
-                                        @if (strlen($producto->path_file_photo3) > 0)
-                                            <img class="img-fullwidth rounded border border-primary shadow"
-                                                src="{{ $producto->path_file_photo3 }}" alt="" width="200px">
-                                        @else
-                                            <img class="img-fullwidth rounded border border-primary shadow"
-                                                src="{{ asset('storage/images/vistas/senavex1.png') }}" alt="" width="200px">
-                                        @endif
-                                    </div>
-                                </td>
-                            <td>
-                                <a href="{{ URL('one-prod-admin/' . Crypt::encryptString($producto->id_ddjj)) }}"
-                                    class="btn btn-outline-primary">Editar</a>
-                                
-                                <a href="{{ URL('publicar-prod-admin/' . Crypt::encryptString($producto->id_ddjj)) }}"
-                                    class="btn btn-outline-primary">Enviar a revisión</a>
-                            </td>
+                            </tr>
                         @endforeach
                 </table>
             </div>

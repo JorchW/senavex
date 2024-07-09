@@ -227,7 +227,7 @@ class RevisionController extends Controller
             ->select('rols.id_rol', 'rols.rol')
             ->where('id_user', Auth::id(), )->get();
 
-        dd($productos = DB::table('ddjjs as dj')
+        $productos = DB::table('ddjjs as dj')
             ->leftjoin('directorio.directorio_productos as dp', 'dj.id_ddjj', '=', 'dp.id_ddjj')
             ->join('directorio.producto_solicituds as dps', 'dps.id_producto', '=', 'dp.id_producto')
             ->join('ddjj_datos_mercancias as dm', 'dj.id_ddjj', '=', 'dm.id_ddjj')
@@ -235,7 +235,7 @@ class RevisionController extends Controller
             ->join('empresas as e', 'dj.id_empresa', '=', 'e.id_empresa')
             ->select('*')
             ->where('dj.id_empresa', $idDes)
-            ->whereIn('dps.id_producto_solicitud_estado', [3])->get());
+            ->whereIn('dps.id_producto_solicitud_estado', [3])->get();
 
         return view('listas_exportador.rechazadas', [
             'empresas' => $empresas,

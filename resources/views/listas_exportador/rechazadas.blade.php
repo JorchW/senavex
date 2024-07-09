@@ -47,72 +47,27 @@
                             <th>nro ddjj</th>
                             <th>acuerdo</th>
                             <th>sigla</th>
-                            <th>foto 1</th>
-                            <th>foto 2</th>
-                            <th>foto 3</th>
-                            <th>subir fotos</th>
+                            <th>subir contenido</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($productos as $producto)
                             <tr>
-                                <td>
-                                    {{$producto->denominacion_comercial}}
-                                </td>
-                                <td>
-                                    {{$producto->numero_ddjj}}
-                                </td>
-                                <td>
-                                    {{$producto->acuerdo}}
-                                </td>
-                                <td>
-                                    {{$producto->sigla}}
-                                </td>
-                                <td>
-                                    <div class="event-details p-15 mt-20">
-                                        @if (strlen($producto->path_file_photo1) > 0)
-                                            <img class="img-fullwidth rounded border border-primary shadow"
-                                                src="{{ $producto->path_file_photo1 }}" alt="" width="200px">
-                                        @else
-                                            <img class="img-fullwidth rounded border border-primary shadow"
-                                                src="{{ asset('storage/images/vistas/senavex1.png') }}" alt="" width="200px">
-                                        @endif
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="event-details p-15 mt-20">
-                                        @if (strlen($producto->path_file_photo2) > 0)
-                                            <img class="img-fullwidth rounded border border-primary shadow"
-                                                src="{{ $producto->path_file_photo2 }}" alt="" width="200px">
-                                        @else
-                                            <img class="img-fullwidth rounded border border-primary shadow"
-                                                src="{{ asset('storage/images/vistas/senavex1.png') }}" alt="" width="200px">
-                                        @endif
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="event-details p-15 mt-20">
-                                        @if (strlen($producto->path_file_photo3) > 0)
-                                            <img class="img-fullwidth rounded border border-primary shadow"
-                                                src="{{ $producto->path_file_photo3 }}" alt="" width="200px">
-                                        @else
-                                            <img class="img-fullwidth rounded border border-primary shadow"
-                                                src="{{ asset('storage/images/vistas/senavex1.png') }}" alt="" width="200px">
-                                        @endif
-                                    </div>
-                                </td>
-                            <td>
-                                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                    data-product-sigla="{{ $producto->sigla }}" data-product-observaciones="{{ $producto->solicitud_observaciones }}">
-                                    👁️Leer motivo de rechazo
-                                </button>
 
-                                <a href="{{ URL('one-prod-admin/' . Crypt::encryptString($producto->id_ddjj)) }}"
-                                    class="btn btn-outline-primary">✏️Editar</a>
-                                
-                                <a href="{{ URL('list-prod-rechazadas/' . Crypt::encryptString($producto->id_empresa)) }}"
-                                    class="btn btn-outline-primary">✅Enviar a revisión</a>
-                            </td>
+                                <td>
+                                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal" data-product-sigla="{{ $producto->sigla }}"
+                                        data-product-observaciones="{{ $producto->solicitud_observaciones }}">
+                                        👁️Leer motivo de rechazo
+                                    </button>
+
+                                    <a href="{{ URL('one-prod-admin/' . Crypt::encryptString($producto->id_ddjj)) }}"
+                                        class="btn btn-outline-primary">✏️Editar</a>
+
+                                    <a href="{{ URL('list-prod-rechazadas/' . Crypt::encryptString($producto->id_empresa)) }}"
+                                        class="btn btn-outline-primary">✅Enviar a revisión</a>
+                                </td>
+                            </tr>
                         @endforeach
                 </table>
             </div>
@@ -145,12 +100,12 @@
         var button = document.querySelector('[data-bs-target="#exampleModal"]');
 
         // Add an event listener to the button
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function () {
             // Get the product ID and name from the data attributes
             var productSigla = button.getAttribute('data-product-sigla');
             var productObservaciones = button.getAttribute('data-product-observaciones');
 
-            
+
             var modalTitle = modal.querySelector('.modal-title');
             var modalBody = modal.querySelector('.modal-body');
 
