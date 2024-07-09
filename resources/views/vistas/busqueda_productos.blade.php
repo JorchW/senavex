@@ -75,7 +75,7 @@
                                                 <img src="{{ asset('storage/images/vistas/distintivo.png') }}" alt="distintivo">
                                             </div>
                                             <h4 class="mt-0 line-height-1">
-                                                {{ $producto->denominacion_comercial }}                                                
+                                                {{ $producto->denominacion_comercial }}                                       
                                             </h4>
                                             <div class="clearfix"></div>
                                             <ul class="list-inline mt-15 mb-10 clearfix">
