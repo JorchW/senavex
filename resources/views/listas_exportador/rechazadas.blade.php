@@ -53,7 +53,18 @@
                     <tbody>
                         @foreach ($productos as $producto)
                             <tr>
-
+                                <td>
+                                    {{$producto->denominacion_comercial}}
+                                </td>
+                                <td>
+                                    {{$producto->numero_ddjj}}
+                                </td>
+                                <td>
+                                    {{$producto->acuerdo}}
+                                </td>
+                                <td>
+                                    {{$producto->sigla}}
+                                </td>
                                 <td>
                                     <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
                                         data-bs-target="#exampleModal" data-product-sigla="{{ $producto->sigla }}"
