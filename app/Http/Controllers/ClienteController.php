@@ -178,23 +178,23 @@ class ClienteController extends Controller
             'productos' => $productos
         ]);
     }
-    public function listaProductosRubro($id)
+    public function listaProductosRubro($id_rubro)
     {
-        $idDes = Crypt::decryptString($id);
-        $productos = DB::table('productos')
-            ->join('empresas', 'empresas.id_empresa', '=', 'productos.id_empresa')
-            ->join('monedas', 'monedas.id_moneda', '=', 'productos.id_moneda')
-            ->join('rubro', 'rubro.id_rubro', '=', 'productos.id_rubro')
-            ->select('productos.*', 'monedas.*', 'empresas.*')
-            ->where([
-                ['productos.estado', 'activo'],
-                ['empresas.estado', 'activo'],
-                ['productos.id_rubro', $idDes]
-            ])->orderByDesc('productos.updated_at', 'empresas.updated_at')->get();
+        $idDes = Crypt::decryptString($id_rubro);
 
-        return view('vistas.productos_emp_rub', [
-            'productos' => $productos,
-            'titulo' => 'Rubros'
+        $sql_busqueda = "SELECT d.id_ddjj, ddm.denominacion_comercial, e.id_empresa, e.razon_social, ddp.id_producto, ddp.path_file_photo1, ddp.path_file_photo2, ddp.path_file_photo3    
+                            from ddjjs d
+                            inner join empresas e on e.id_empresa = d.id_empresa
+                            inner join ddjj_datos_mercancias ddm on ddm.id_ddjj = d.id_ddjj
+                            inner join directorio.directorio_productos ddp on ddp.id_ddjj =  d.id_ddjj
+                            inner join directorio.producto_solicituds dps on dps.id_producto = ddp.id_producto
+                            where ddp.id_empresa_rubro = $idDes
+                            and e.id_estado_empresa = 4 and d.id_ddjj_estado in (6, 9, 10, 11)";
+        $result_busqueda = DB::select($sql_busqueda);
+
+        return view('vistas.busqueda_productos', [
+            'result_busqueda' => $result_busqueda,
+            'descripcion_busqueda' => '',
         ]);
     }
 }

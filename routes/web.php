@@ -73,7 +73,7 @@ Route::get('Inicio', [App\Http\Controllers\ClienteController::class, 'index'])->
 Route::get('empresas', [App\Http\Controllers\ClienteController::class, 'listaEmpresas'])->name('empresas');
 Route::get('rubros', [App\Http\Controllers\ClienteController::class, 'listaRubros'])->name('rubros');
 Route::get('list-prod-empresas/{id}', [App\Http\Controllers\ClienteController::class, 'listaProductosEmpresa'])->name('list-prod-empresas');
-Route::get('list-prod-rubros/{id}', [App\Http\Controllers\ClienteController::class, 'listaProductosRubro'])->name('list-prod-rubros');
+Route::get('list-prod-rubros/{id_rubro}', [App\Http\Controllers\ClienteController::class, 'listaProductosRubro'])->name('list-prod-rubros');
 Route::get('productos', [App\Http\Controllers\ClienteController::class, 'productosBusqueda'])->name('productos');
 Route::get('detalle-producto/{id}', [App\Http\Controllers\ClienteController::class, 'oneProducto'])->name('detalle-producto');
 Route::get('detalle-empresas/{id}', [App\Http\Controllers\ClienteController::class, 'oneEmpresa'])->name('detalle-empresas');

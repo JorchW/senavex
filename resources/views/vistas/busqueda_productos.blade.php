@@ -70,7 +70,10 @@
                                         <img class="img-fullwidth" alt="Imagen" src="{{ $producto->path_file_photo1 }}" />
                                     </div>--}}
                                     <div class="services-details clearfix">
-                                        <div class="p-20 p-sm-15 bg-lighter">
+                                        <div class="p-20 p-sm-15 bg-lighter">                                            
+                                            <div class="col-sm-6 col-md-6 text-center">
+                                                <img src="{{ asset('storage/images/vistas/distintivo.jpg') }}" alt="distintivo">
+                                            </div>
                                             <h4 class="mt-0 line-height-1">
                                                 {{ $producto->denominacion_comercial }}                                                
                                             </h4>
@@ -103,8 +106,7 @@
                         <br>
                         <br>
                         <br>
-                    @endif  
-
+                    @endif
               </div>
             </div>
 
