@@ -19,7 +19,7 @@
                     <div class="row">
                         <div class="col-md-8">
                             <h2 class="mt-0 line-height-1">
-                                Lista de <span class="text-theme-colored3">Rubros 5</span>
+                                Lista de <span class="text-theme-colored3">Rubros</span>
                             </h2>
                         </div>
                         <div class="col-md-4">
