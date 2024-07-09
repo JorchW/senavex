@@ -108,7 +108,8 @@ class ClienteController extends Controller
         $idDes = Crypt::decryptString($id);
         $detEmpresa = DB::table('empresas as e')
         ->join('directorio.directorio_empresa_extras as dee','e.id_empresa','=','dee.id_empresa')
-        ->select('*')->first();
+        ->select('*')
+        ->where('e.id_empresa',$idDes)->first();
             
         $productos = DB::table('directorio.directorio_productos')
             ->join('empresas', 'empresas.id_empresa', '=', 'directorio_productos.id_empresa')
@@ -125,15 +126,16 @@ class ClienteController extends Controller
     public function listaProductosEmpresa($id)
     {
         $idDes = Crypt::decryptString($id);
-        $productos = DB::table('ddjjs as d')
-        ->join('empresas as e', 'd.id_empresa', '=', 'e.id_empresa')
-        ->leftjoin('directorio.directorio_empresa_extras as dee','dee.id_empresa','=','e.id_empresa')
-        ->join('ddjj_datos_mercancias as ddm', 'ddm.id_ddjj', '=', 'd.id_ddjj')
-        ->join('directorio.directorio_productos as ddp', 'ddp.id_ddjj', '=', 'd.id_ddjj')
-        ->join('empresa_rubros as er','ddp.id_empresa_rubro','=','er.id_rubro')
-        ->join('directorio.producto_solicituds as dps','dps.id_producto','=','ddp.id_producto')
-        ->select('e.*','ddp.*','ddm.*','dee.*','er.*')
-        ->where('e.id_empresa',$idDes)->get();
+
+        $productos = DB::table('ddjjs as dj')
+            ->leftjoin('directorio.directorio_productos as dp', 'dj.id_ddjj', '=', 'dp.id_ddjj')
+            ->join('directorio.producto_solicituds as dps', 'dps.id_producto', '=', 'dp.id_producto')
+            ->join('ddjj_datos_mercancias as dm', 'dj.id_ddjj', '=', 'dm.id_ddjj')
+            ->join('acuerdos as a', 'a.id_acuerdo', '=', 'dj.id_acuerdo')
+            ->join('empresas as e', 'dj.id_empresa', '=', 'e.id_empresa')
+            ->select('*')
+            ->where('e.id_empresa', $idDes)
+            ->whereIn('dps.id_producto_solicitud_estado', [2])->get();
 
         return view('vistas.productos_emp_rub', [
             'productos' => $productos,
