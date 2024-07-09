@@ -76,7 +76,6 @@
                                         <i class="fa fa-search"></i> Buscar
                                     </button>
                                 </form>
-
                             </div>
                         </li>
                     </ul>
