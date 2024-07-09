@@ -106,10 +106,10 @@ class ClienteController extends Controller
     public function oneEmpresa($id)
     {
         $idDes = Crypt::decryptString($id);
-        $detEmpresa = DB::table('empresas')
-            ->where([
-                ['id_empresa', $idDes]
-            ])->first();
+        $detEmpresa = DB::table('empresas as e')
+        ->join('directorio.directorio_empresa_extras as dee','e.id_empresa','=','dee.id_empresa')
+        ->select('*')->first();
+            
         $productos = DB::table('directorio.directorio_productos')
             ->join('empresas', 'empresas.id_empresa', '=', 'directorio_productos.id_empresa')
             ->select('directorio_productos.*', 'empresas.*')
@@ -125,16 +125,15 @@ class ClienteController extends Controller
     public function listaProductosEmpresa($id)
     {
         $idDes = Crypt::decryptString($id);
-        $productos = DB::table('productos')
-            ->join('empresas', 'empresas.id_empresa', '=', 'productos.id_empresa')
-            ->join('monedas', 'monedas.id_moneda', '=', 'productos.id_moneda')
-            ->select('productos.*', 'monedas.*', 'empresas.*')
-            ->where([
-                ['productos.estado', 'activo'],
-                ['empresas.estado', 'activo'],
-                ['empresas.id_empresa', $idDes]
-            ])->orderByDesc('productos.updated_at', 'empresas.updated_at')->paginate(8);
-
+        $productos = DB::table('ddjjs as d')
+        ->join('empresas as e', 'd.id_empresa', '=', 'e.id_empresa')
+        ->leftjoin('directorio.directorio_empresa_extras as dee','dee.id_empresa','=','e.id_empresa')
+        ->join('ddjj_datos_mercancias as ddm', 'ddm.id_ddjj', '=', 'd.id_ddjj')
+        ->join('directorio.directorio_productos as ddp', 'ddp.id_ddjj', '=', 'd.id_ddjj')
+        ->join('empresa_rubros as er','ddp.id_empresa_rubro','=','er.id_rubro')
+        ->join('directorio.producto_solicituds as dps','dps.id_producto','=','ddp.id_producto')
+        ->select('e.*','ddp.*','ddm.*','dee.*','er.*')
+        ->where('e.id_empresa',$idDes)->get();
 
         return view('vistas.productos_emp_rub', [
             'productos' => $productos,
