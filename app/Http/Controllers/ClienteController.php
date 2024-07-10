@@ -25,7 +25,6 @@ class ClienteController extends Controller
     ////////////////////////////////////////////////////////////////////////////////////////////////
     public function productosBusqueda(Request $request)
     {
-
         $descripcion_busqueda = $request->get('descripcion_busqueda');
 
         $sql_busqueda = "SELECT d.id_ddjj, ddm.denominacion_comercial, e.id_empresa, e.razon_social, ddp.id_producto, ddp.path_file_photo1, ddp.path_file_photo2, ddp.path_file_photo3    
@@ -36,11 +35,23 @@ class ClienteController extends Controller
                             inner join directorio.producto_solicituds dps on dps.id_producto = ddp.id_producto
                             where ddm.denominacion_comercial like '%" . $descripcion_busqueda . "%'
                             and e.id_estado_empresa = 4 and d.id_ddjj_estado in (6, 9, 10, 11) ";
+
+
+        $productos = DB::table('ddjjs as d')
+            ->join('empresas as e', 'e.id_empresa', '=', 'd.id_empresa')
+            ->join('ddjj_datos_mercancias as ddm', 'ddm.id_ddjj', '=', 'd.id_ddjj')
+            ->join('directorio.directorio_productos as ddp', 'ddp.id_ddjj', '=', 'd.id_ddjj')
+            ->join('directorio.producto_solicituds as dps', 'dps.id_producto', '=', 'ddp.id_producto')
+            ->select('*')
+            ->where('ddm.denominacion_comercial', 'like', '%' . $descripcion_busqueda . '%')
+            ->whereIn('dps.id_producto_solicitud_estado', [2])->get();
+            
         $result_busqueda = DB::select($sql_busqueda);
 
         return view('vistas.busqueda_productos', [
+            'productos' => $productos,
             'result_busqueda' => $result_busqueda,
-            'descripcion_busqueda' => $descripcion_busqueda,
+            'descripcion_busqueda' => $descripcion_busqueda
         ]);
     }
     public function oneProducto($id)
@@ -48,13 +59,13 @@ class ClienteController extends Controller
         $idDes = Crypt::decryptString($id);
         $detProducto = DB::table('ddjjs as d')
             ->join('empresas as e', 'd.id_empresa', '=', 'e.id_empresa')
-            ->leftjoin('directorio.directorio_empresa_extras as dee','dee.id_empresa','=','e.id_empresa')
+            ->leftjoin('directorio.directorio_empresa_extras as dee', 'dee.id_empresa', '=', 'e.id_empresa')
             ->join('ddjj_datos_mercancias as ddm', 'ddm.id_ddjj', '=', 'd.id_ddjj')
             ->join('directorio.directorio_productos as ddp', 'ddp.id_ddjj', '=', 'd.id_ddjj')
-            ->join('empresa_rubros as er','ddp.id_empresa_rubro','=','er.id_rubro')
-            ->join('directorio.producto_solicituds as dps','dps.id_producto','=','ddp.id_producto')
-            ->select('e.*','ddp.*','ddm.*','dee.*','er.*')
-            ->where('ddp.id_producto',$idDes)->first();
+            ->join('empresa_rubros as er', 'ddp.id_empresa_rubro', '=', 'er.id_rubro')
+            ->join('directorio.producto_solicituds as dps', 'dps.id_producto', '=', 'ddp.id_producto')
+            ->select('e.*', 'ddp.*', 'ddm.*', 'dee.*', 'er.*')
+            ->where('ddp.id_producto', $idDes)->first();
         //"SELECT d.id_ddjj, ddm.denominacion_comercial, e.id_empresa, e.razon_social, ddp.id_producto, ddp.path_file_photo1, ddp.path_file_photo2, ddp.path_file_photo3    
         //                    from ddjjs d
         //                    inner join empresas e on e.id_empresa = d.id_empresa
@@ -78,16 +89,17 @@ class ClienteController extends Controller
             //'productos' => $productos,
         ]);
     }
-    
-    public function listaEmpresas(Request $request){
+
+    public function listaEmpresas(Request $request)
+    {
         $buscador_empresa = trim($request->get('buscador_empresa'));
-        $buscador_empresa_m = mb_strtolower($buscador_empresa, 'UTF-8');
+
 
         $empresas = DB::table('empresas as e')
             ->leftJoin('directorio.directorio_empresa_extras as de', 'e.id_empresa', '=', 'de.id_empresa')
             ->select('e.*', 'de.path_file_foto1')
             ->where([
-                ['e.razon_social', 'ILIKE', '%' . $buscador_empresa_m . '%']
+                ['e.razon_social', 'ILIKE', '%' . $buscador_empresa . '%']
             ])
             ->whereIn('e.id_empresa', function ($query) {
                 $query->select('dps.id_empresa')
@@ -107,10 +119,10 @@ class ClienteController extends Controller
     {
         $idDes = Crypt::decryptString($id);
         $detEmpresa = DB::table('empresas as e')
-        ->join('directorio.directorio_empresa_extras as dee','e.id_empresa','=','dee.id_empresa')
-        ->select('*')
-        ->where('e.id_empresa',$idDes)->first();
-            
+            ->join('directorio.directorio_empresa_extras as dee', 'e.id_empresa', '=', 'dee.id_empresa')
+            ->select('*')
+            ->where('e.id_empresa', $idDes)->first();
+
         $productos = DB::table('directorio.directorio_productos')
             ->join('empresas', 'empresas.id_empresa', '=', 'directorio_productos.id_empresa')
             ->select('directorio_productos.*', 'empresas.*')
@@ -142,15 +154,16 @@ class ClienteController extends Controller
             'titulo' => 'Empresas'
         ]);
     }
-    
-    public function listaRubros(Request $request){
+
+    public function listaRubros(Request $request)
+    {
         $buscador_rubro = trim($request->get('buscador_rubro'));
         $buscador_rubro = strtoupper($buscador_rubro);
         $rubros = DB::table('empresa_rubros')
-        ->select('*')
-        ->where([
-            ['descripcion_rubro', 'like', '%'.$buscador_rubro.'%']
-        ])->orderBy('id_rubro')->paginate(6, ['*'], 'page', null);
+            ->select('*')
+            ->where([
+                ['descripcion_rubro', 'like', '%' . $buscador_rubro . '%']
+            ])->orderBy('id_rubro')->paginate(6, ['*'], 'page', null);
 
         return view('vistas.listarubro', [
             'rubros' => $rubros,
