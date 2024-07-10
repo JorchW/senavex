@@ -46,8 +46,8 @@
 
             <div class="row multi-row-clearfix">
                 <div id="blog-posts-wrapper" class="blog-posts">
-                    @if (count($productos) > 0)
-                        @foreach ($productos as $producto)
+                    @if (count($result_busqueda) > 0)
+                        @foreach ($result_busqueda as $producto)
                             <div class="col-sm-3 col-md-3 col-lg-3">
                                 <div class="services mb-sm-50 mt-20">
                                     <div class="thumb">

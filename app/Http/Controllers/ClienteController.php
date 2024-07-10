@@ -34,22 +34,24 @@ class ClienteController extends Controller
                             inner join directorio.directorio_productos ddp on ddp.id_ddjj =  d.id_ddjj
                             inner join directorio.producto_solicituds dps on dps.id_producto = ddp.id_producto
                             where ddm.denominacion_comercial like '%" . $descripcion_busqueda . "%'
-                            and e.id_estado_empresa = 4 and d.id_ddjj_estado in (6, 9, 10, 11) ";
+                            and e.id_estado_empresa = 4 and d.id_ddjj_estado in (6, 9, 10, 11)  and dps.id_producto_solicitud_estado = 2";
 
 
-        $productos = DB::table('ddjjs as d')
-            ->join('empresas as e', 'e.id_empresa', '=', 'd.id_empresa')
-            ->join('ddjj_datos_mercancias as ddm', 'ddm.id_ddjj', '=', 'd.id_ddjj')
-            ->join('directorio.directorio_productos as ddp', 'ddp.id_ddjj', '=', 'd.id_ddjj')
-            ->join('directorio.producto_solicituds as dps', 'dps.id_producto', '=', 'ddp.id_producto')
-            ->select('*')
-            ->where('ddm.denominacion_comercial', 'like', '%' . $descripcion_busqueda . '%')
-            ->whereIn('dps.id_producto_solicitud_estado', [2])->get();
+        //$productos = DB::table('ddjjs as d')
+        //    ->join('empresas as e', 'e.id_empresa', '=', 'd.id_empresa')
+        //    ->join('ddjj_datos_mercancias as ddm', 'ddm.id_ddjj', '=', 'd.id_ddjj')
+        //    ->join('directorio.directorio_productos as ddp', 'ddp.id_ddjj', '=', 'd.id_ddjj')
+        //    ->join('directorio.producto_solicituds as dps', 'dps.id_producto', '=', 'ddp.id_producto')
+        //    ->select('*')
+        //    ->where('ddm.denominacion_comercial', 'like', '%' . $descripcion_busqueda . '%')
+        //    ->whereIn('e.id_estado_empresa',[4])
+        //    ->whereIn('d.id_ddjj_estado',[6,9,10,11])
+        //    ->whereIn('dps.id_producto_solicitud_estado', [2])->get();
             
         $result_busqueda = DB::select($sql_busqueda);
 
         return view('vistas.busqueda_productos', [
-            'productos' => $productos,
+        //    'productos' => $productos,
             'result_busqueda' => $result_busqueda,
             'descripcion_busqueda' => $descripcion_busqueda
         ]);
@@ -203,7 +205,7 @@ class ClienteController extends Controller
                             inner join directorio.directorio_productos ddp on ddp.id_ddjj =  d.id_ddjj
                             inner join directorio.producto_solicituds dps on dps.id_producto = ddp.id_producto
                             where ddp.id_empresa_rubro = $idDes
-                            and e.id_estado_empresa = 4 and d.id_ddjj_estado in (6, 9, 10, 11)";
+                            and e.id_estado_empresa = 4 and d.id_ddjj_estado in (6, 9, 10, 11) and dps.id_producto_solicitud_estado = 2";
         $result_busqueda = DB::select($sql_busqueda);
 
         return view('vistas.busqueda_productos', [
