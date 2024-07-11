@@ -75,8 +75,8 @@
                         <div class="col-md-9">
                             <div class="widget text-white">
                                 <ul class="list-inline xs-text-center text-white">
-                                    <li class="m-0 pl-10 pr-10"> <a href="https://api.whatsapp.com/send?phone=59169907596" class="text-white"><i
-                                                class="fa fa-phone text-white"></i>2-2113621 * 2-2111823 * 2-2141862 - Call Center 591 +69907596 (Whatsapp)</a> </li>
+                                    <li class="m-0 pl-10 pr-10"> <a href="https://api.whatsapp.com/send?phone=59169907596" class="text-white">
+                                    <img src="{{ asset('storage/images/whatsapp.png') }}" alt="about" width="15" height="15"> Call Center 591 +69907596</a> </li>
                                     <li class="m-0 pl-10 pr-10">
                                         <a href="mailto:senaxe@gmail.com" class="text-white"><i
                                                 class="fa fa-envelope-o text-white mr-5"></i> senavex@gmail.com</a>
@@ -159,8 +159,8 @@
                         <h4 class="widget-title">Contactos</h4>
                         <div class="latest-posts">
                             <ul class="list mt-5">
-                                <li class="m-0 pl-10 pr-10"> <i class="fa fa-phone text-theme-colored2 mr-5"></i> <a
-                                        class="text-gray" href="https://api.whatsapp.com/send?phone=59169907596">2-2113621 * 2-2111823 * 2-2141862 - Call Center 591 +69907596 (Whatsapp)</a> </li>
+                                <li class="m-0 pl-10 pr-10"> <img src="{{ asset('storage/images/whatsapp.png') }}" alt="about" width="15" height="15"> <a
+                                        class="text-gray" href="https://api.whatsapp.com/send?phone=59169907596">Call Center 591 +69907596</a> </li>
                                 <li class="m-0 pl-10 pr-10"> <i class="fa fa-envelope-o text-theme-colored2 mr-5"></i>
                                     <a class="text-gray" href="mailto::senavex@gmail.com"
                                         target="_blank">senavex@gmail.com</a>
