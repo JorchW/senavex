@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\File;
 
 use Illuminate\Contracts\Encryption\DecryptException;
+use PHPUnit\Framework\Constraint\IsEmpty;
 use PHPUnit\Framework\MockObject\ReturnValueNotConfiguredException;
 
 
@@ -77,7 +78,7 @@ class HomeController extends Controller
     public function listProd($id)
     {
         $idDes = Crypt::decryptString($id);
- 
+
         $empresas = DB::table('empresas')
             ->join('ruexs', 'empresas.id_empresa', '=', 'ruexs.id_empresa')
             ->join('empresas_personas', 'empresas.id_empresa', '=', 'empresas_personas.id_empresa')
@@ -151,7 +152,7 @@ class HomeController extends Controller
             ->join('acuerdos as a', 'a.id_acuerdo', '=', 'dj.id_acuerdo')
             ->join('empresas as e', 'dj.id_empresa', '=', 'e.id_empresa')
             ->join('empresa_categorias as ec', 'e.id_categoria', '=', 'ec.id_categoria')
-            ->select('e.id_empresa','*')
+            ->select('e.id_empresa', '*')
             ->where('dj.id_ddjj', $idDes)
             ->whereIn('dj.id_ddjj_estado', [6, 9, 10, 11])
             ->orderBy('dj.updated_at', 'desc')->first();
@@ -265,7 +266,7 @@ class HomeController extends Controller
     {
         $idDes = Crypt::decryptString($id);
         $id_empresa = $data->input('id_empresa');
-        $id_rubro =$data-> input('id_rubro');
+        $id_rubro = $data->input('id_rubro');
         $data->validate([
             'id_empresa' => 'required|integer',
             'id_rubro' => 'required|integer',
@@ -469,6 +470,11 @@ class HomeController extends Controller
             ->select('empresas.*', 'users.*', 'ruexs.*')
             ->where('empresas.id_empresa', $idDes)->first();
 
+        $directorioempresa = DB::table('directorio.directorio_empresa_extras as dee')
+            ->join('empresas as e', 'dee.id_empresa', '=', 'e.id_empresa')
+            ->select('dee.*')
+            ->where('e.id_empresa', $idDes)->first();
+
         $rol = DB::table('rols')
             ->join('empresas_personas', 'rols.id_rol', '=', 'empresas_personas.id_rol')
             ->join('personas', 'empresas_personas.id_persona', '=', 'personas.id_persona')
@@ -483,6 +489,7 @@ class HomeController extends Controller
 
         return view('admin.onempresa', [
             'empresas' => $empresas,
+            'directorioempresa' => $directorioempresa,
             'roles' => $rol,
             'imagen' => $imagen
         ]);
@@ -490,6 +497,34 @@ class HomeController extends Controller
     public function updateEmp($id, Request $data)
     {
         $idDes = Crypt::decryptString($id);
+
+        $telefono = $data->input('telefono');
+        $celular = $data->input('celular');
+        $facebook = $data->input('facebook');
+        $instagram = $data->input('instagram');
+        $tiktok = $data->input('tiktok');
+        $mail = $data->input('mail');
+        $paginaweb = $data->input('paginaweb');
+
+        $data->validate([
+            'mail' => 'email',
+            'path_file_foto1' => 'required|image|dimensions:width=1920,height=1080',
+            'path_file_foto2' => 'required|image|dimensions:width=1080,height=1080',
+        ], [
+            'telefono.required' => 'El Telefono es Obligatorio.',
+            'celular.required' => 'El Celular es Obligatorio.',
+            'facebook.required' => 'El facebook es Obligatorio.',
+            'instagram.required' => 'El Instagram es Obligatorio.',
+            'tiktok.required' => 'El Tiktok es Obligatorio.',
+            'mail.email' => 'Introduzca una direccion de correo Valida.',
+            'pag_web.required' => 'La Pagina Web es Obligatoria.',
+            'path_file_foto1.required' => 'Imagen de la Empresa Obligatorio',
+            'path_file_foto1.dimensions' => 'La imagen debe tener dimensiones de 1920x1080 px.',
+            'path_file_foto2.required' => 'El Logo de la Empresa es Obligatorio.',
+            'path_file_foto2.dimensions' => 'El Logo debe tener dimensiones de 1080x1080 px.',
+        ]);
+
+
         if ($data->hasFile('path_file_foto1')) {
             $file = $data->file('path_file_foto1');
             $dimensions = getimagesize($file);
@@ -547,6 +582,36 @@ class HomeController extends Controller
             $direccionImagen2 = '';
         }
 
+        $data->validate([
+            'mail' => 'email',
+            'path_file_foto1' => 'required|image|dimensions:width=1920,height=1080',
+            'path_file_foto2' => 'required|image|dimensions:width=1080,height=1080',
+        ], [
+            'telefono.required' => 'El Telefono es Obligatorio.',
+            'celular.required' => 'El Celular es Obligatorio.',
+            'facebook.required' => 'El facebook es Obligatorio.',
+            'instagram.required' => 'El Instagram es Obligatorio.',
+            'tiktok.required' => 'El Tiktok es Obligatorio.',
+            'mail.email' => 'Introduzca una direccion de correo Valida.',
+            'pag_web.required' => 'La Pagina Web es Obligatoria.',
+            'path_file_foto1.required' => 'Imagen de la Empresa Obligatorio',
+            'path_file_foto1.dimensions' => 'La imagen debe tener dimensiones de 1920x1080 px.',
+            'path_file_foto2.required' => 'El Logo de la Empresa es Obligatorio.',
+            'path_file_foto2.dimensions' => 'El Logo debe tener dimensiones de 1080x1080 px.',
+        ]);
+
+        DB::table('directorio.directorio_empresa_extras')
+            ->where('id_empresa', $idDes)
+            ->update([
+                'telefono' => $telefono,
+                'celular' => $celular,
+                'facebook' => $facebook,
+                'instagram' => $instagram,
+                'tiktok' => $tiktok,
+                'mail' => $mail,
+                'paginaweb' => $paginaweb,
+            ]);
+
         return redirect()->back();
     }
 
@@ -582,7 +647,7 @@ class HomeController extends Controller
             ->where('id_user', Auth::id(), )->get();
 
         $rubros = Rubro::all();
-        
+
         return view('admin.listrubro', [
             'empresas' => $empresas,
             'roles' => $rol,

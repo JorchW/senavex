@@ -16,6 +16,8 @@ class CreateDirectorioProductosTable extends Migration
         Schema::create('directorio.directorio_productos', function (Blueprint $table) {
             $table->bigInteger('id_producto')->autoIncrement();
             $table->bigInteger('id_ddjj');
+            $table->string('nombre_comercial')->nullable();
+            $table->string('descripcion')->nullable();
             $table->string('path_file_photo1')->nullable();
             $table->string('path_file_photo2')->nullable();
             $table->string('path_file_photo3')->nullable();

@@ -682,6 +682,10 @@
             }
         }
     });
+    function soloNumeros(e) {
+        var key = window.Event ? e.which : e.keyCode;
+        return ((key >= 48 && key <= 57) || (key == 8)) && e.key !== "e";
+    }
 </script>
 <!-- Mirrored from Senavex.dexignzone.com/xhtml/index.html?theme=3 by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 05 Aug 2021 15:36:58 GMT -->
 
