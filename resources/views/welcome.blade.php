@@ -76,11 +76,7 @@
                             <div class="widget text-white">
                                 <ul class="list-inline xs-text-center text-white">
                                     <li class="m-0 pl-10 pr-10"> <a href="https://api.whatsapp.com/send?phone=59169907596" class="text-white">
-                                    <img src="{{ asset('storage/images/vistas/whatsapp.png') }}" alt="about" width="15" height="15"> Call Center 591 +69907596</a> </li>
-                                    <li class="m-0 pl-10 pr-10">
-                                        <a href="mailto:senaxe@gmail.com" class="text-white"><i
-                                                class="fa fa-envelope-o text-white mr-5"></i> senavex@gmail.com</a>
-                                    </li>
+                                    <img src="{{ asset('storage/images/vistas/whatsapp.png') }}" alt="about" width="15" height="15"> Call Center 591 +69907596</a> </li>                                    
                                 </ul>
                             </div>
                         </div>
@@ -147,51 +143,25 @@
         <div class="container pt-40 pb-10">
 
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="widget dark">
                         <img class="mt-10" alt="" src="{{asset('storage/images/vistas/logob.png')}}">
                         <p class="text-white">Servicio Nacional de Verificación de Exportaciones</p>
 
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="widget dark ml-30 pl-5">
                         <h4 class="widget-title">Contactos</h4>
                         <div class="latest-posts">
                             <ul class="list mt-5">
-                                <li class="m-0 pl-10 pr-10"> <img src="{{ asset('storage/images/vistas/whatsapp.png') }}" alt="about" width="15" height="15"> <a
-                                        class="text-gray" href="https://api.whatsapp.com/send?phone=59169907596">Call Center 591 +69907596</a> </li>
-                                <li class="m-0 pl-10 pr-10"> <i class="fa fa-envelope-o text-theme-colored2 mr-5"></i>
-                                    <a class="text-gray" href="mailto::senavex@gmail.com"
-                                        target="_blank">senavex@gmail.com</a>
-                                </li>
-                                <li class="m-0 pl-10 pr-10"> <i class="fa fa-globe text-theme-colored2 mr-5"></i> <a
-                                        class="text-gray" href="https://www.senavex.gob.bo/"
-                                        target="_blank">www.senavex.gob.bo</a> </li>
+                                <li class="m-0 pl-10 pr-10"> <img src="{{ asset('storage/images/vistas/whatsapp.png') }}" alt="about" width="15" height="15">
+                                    <a class="text-gray" href="https://api.whatsapp.com/send?phone=59169907596">Call Center 591 +69907596</a>
+                                </li>                                
                             </ul>
 
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="widget dark">
-                        <h4 class="widget-title">Horario de atención</h4>
-                        <div class="opening-hours">
-                            <ul class="list-border">
-                                <li class="clearfix text-white">Lunes a Viernes : 8:30 am - 12:30 pm y 12:30 am - 18:30 pm
-                                </li>
-                            </ul>
-                        </div>
-                        <ul class="styled-icons icon-dark icon-circled icon-sm">
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-skype"></i></a></li>
-                            <li><a href="#"><i class="fa fa-youtube"></i></a></li>
-                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                            <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                        </ul>
-                    </div>
-
                 </div>
             </div>
 
