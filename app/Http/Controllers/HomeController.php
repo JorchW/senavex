@@ -169,7 +169,6 @@ class HomeController extends Controller
             ->select('*')
             ->where('dj.id_ddjj', $idDes)->first();
 
-
         $rubrosel = DB::table('ddjjs')
             ->join('directorio.directorio_productos as dp', 'ddjjs.id_ddjj', '=', 'dp.id_ddjj')
             ->join('empresa_rubros as er', 'dp.id_empresa_rubro', '=', 'er.id_rubro')
@@ -177,7 +176,9 @@ class HomeController extends Controller
             ->where('ddjjs.id_ddjj', $idDes)->get();
 
         $rubros = DB::table('empresa_rubros as er')
-            ->select('*')->get();
+            ->join('empresas_rubros as ers', 'ers.id_rubro', '=', 'er.id_rubro')
+            ->select('er.*')
+            ->where('ers.id_empresa', $empresas->id_empresa)->get();
 
         return view('admin.editproducto', [
             'empresas' => $empresas,
