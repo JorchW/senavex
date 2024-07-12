@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<!-- Mirrored from Senavex.dexignzone.com/xhtml/index.html?theme=3 by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 05 Aug 2021 15:36:19 GMT -->
-
 <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Senavex : Directorio Exportador" />
@@ -12,31 +8,17 @@
     <meta property="og:description" content="Senavex : Directorio Exportador" />
     <meta property="og:image" content="" />
     <meta name="format-detection" content="telephone=no">
-
-    <!-- PAGE TITLE HERE -->
     <title>Senavex : Directorio Exportador</title>
-
-    <!-- FAVICONS ICON -->
     <link rel="shortcut icon" type="image/png" href="{{ asset('storage/images/vistas/icono.png') }}" />
-
-    <!-- Datatable -->
     <link href="{{ asset('admin/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
-
     <link rel="stylesheet" href="{{ asset('admin/vendor/chartist/css/chartist.min.css') }}">
     <link href="{{ asset('admin/vendor/sweetalert2/dist/sweetalert2.min.css') }}" rel="stylesheet">
     <link href="{{ asset('admin/vendor/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css') }}"
         rel="stylesheet">
     <link href="{{ asset('admin/vendor/jquery-nice-select/css/nice-select.css') }}" rel="stylesheet">
-    <!-- Style css -->
     <link href="{{ asset('admin/css/style.css') }}" rel="stylesheet">
-
 </head>
-
 <body>
-
-    <!--*******************
-        Preloader start
-    ********************-->
     <div id="preloader">
         <div class="loader">
             <div class="loader--dot"></div>
@@ -48,24 +30,12 @@
             <div class="loader--text"></div>
         </div>
     </div>
-    <!--*******************
-        Preloader end
-    ********************-->
-
-    <!--**********************************
-        Main wrapper start
-    ***********************************-->
     <div id="main-wrapper">
-
-        <!--**********************************
-            Nav header start
-        ***********************************-->
         <div class="nav-header">
             <a href="{{ URL('select') }}" class="brand-logo">
                 <img src="{{ asset('/storage/images/vistas/icono.png') }}" height="50" width="50" alt="">
                 <img class="brand-title" src="{{ asset('/storage/images/vistas/senavex.png') }}" height="50" width="150"
                     alt="">
-
             </a>
             <div class="nav-control">
                 <div class="hamburger">
@@ -73,14 +43,6 @@
                 </div>
             </div>
         </div>
-        <!--**********************************
-            Nav header end
-        ***********************************-->
-
-
-        <!--**********************************
-            Header start
-        ***********************************-->
         <div class="header">
             <div class="header-content">
                 <nav class="navbar navbar-expand">
@@ -192,26 +154,6 @@
                                     <img src="{{ asset('admin/images/profile/pic1.jpg') }}" width="20" alt="" />
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end">
-                                    {{-- <a href="app-profile.html" class="dropdown-item ai-icon">
-                                        <svg id="icon-user1" xmlns="http://www.w3.org/2000/svg" class="text-primary"
-                                            width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                                            <circle cx="12" cy="7" r="4"></circle>
-                                        </svg>
-                                        <span class="ms-2">Profile </span>
-                                    </a>
-                                    <a href="email-inbox.html" class="dropdown-item ai-icon">
-                                        <svg id="icon-inbox" xmlns="http://www.w3.org/2000/svg" class="text-success"
-                                            width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path
-                                                d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
-                                            </path>
-                                            <polyline points="22,6 12,13 2,6"></polyline>
-                                        </svg>
-                                        <span class="ms-2">Inbox </span>
-                                    </a> --}}
                                     <a href="{{ route('logout') }}" onclick="event.preventDefault();
 												  document.getElementById('logout-form').submit();" class="dropdown-item
                                         ai-icon">
@@ -235,52 +177,15 @@
                 </nav>
             </div>
         </div>
-        <!--**********************************
-            Header end ti-comment-alt
-        ***********************************-->
-
-        <!--**********************************
-            Sidebar start
-        ***********************************-->
         <div class="deznav">
             <div class="deznav-scroll">
                 <ul class="metismenu" id="menu">
                     <li><a class="ai-icon" href="{{ URL('select') }}" aria-expanded="false">
                             <i class="flaticon-025-dashboard"></i>
-                            <span class="nav-text">Seleccionar Empresa</span>
+                            <span class="nav-text">Seleccionar Otra Empresa</span>
                         </a>
                     </li>
                     @foreach ($roles as $rol)
-                        @if ($rol->rol == 'Certificador')
-                            <li>
-                                <h5 class="nav-text"> {{ $rol->rol }}</h5>
-                            </li>
-                            <li><a href="{{ URL('list-emp-admin') }}" class="ai-icon" aria-expanded="false">
-                                    <i class="flaticon-013-checkmark"></i>
-                                    <span class="nav-text">Empresas</span>
-                                </a>
-                            </li>
-                            <li><a href="{{ URL('list-prod-admin') }}" class="ai-icon" aria-expanded="false">
-                                    <i class="flaticon-013-checkmark"></i>
-                                    <span class="nav-text">Productos</span>
-                                </a>
-                            </li>
-                            <li><a href="{{ URL('list-rubros-admin') }}" class="ai-icon" aria-expanded="false">
-                                    <i class="flaticon-013-checkmark"></i>
-                                    <span class="nav-text">Rubros</span>
-                                </a>
-                            </li>
-                            <li><a href="{{ URL('list-categorias-admin') }}" class="ai-icon" aria-expanded="false">
-                                    <i class="flaticon-013-checkmark"></i>
-                                    <span class="nav-text">Categorias</span>
-                                </a>
-                            </li>
-                            <li><a href="{{ URL('list-correo-admin') }}" class="ai-icon" aria-expanded="false">
-                                    <i class="flaticon-013-checkmark"></i>
-                                    <span class="nav-text">Correos</span>
-                                </a>
-                            </li>
-                        @else 
                             <li>
                                 <br>
                                 <div class="nav-text">
@@ -290,42 +195,6 @@
                                     </h5>
                                 </div>
                             </li>
-                            {{-- <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                                    <i class="flaticon-050-info"></i>
-                                    <span class="nav-text">Rubros</span>
-                                </a>
-                                <ul aria-expanded="false">
-                                    @foreach ($empresas as $empresa)
-                                    @if ($empresa->estado == 'inactivo')
-                                    <li><a
-                                            href="{{ URL('list-grupo-rubro-admin/' . Crypt::encryptString($empresa->id_empresa)) }}">
-                                            {{ $empresa->razon_social_empresa }}
-                                            <span class="badge badge-warning">Pendiente</span>
-                                        </a>
-                                    </li>
-                                    @elseif ($empresa->id_estado_empresa == '4' && $empresa->estado == 'activo')
-                                    <li><a
-                                            href="{{ URL('list-grupo-rubro-admin/' . Crypt::encryptString($empresa->id_empresa)) }}">
-                                            {{ $empresa->razon_social_empresa }}
-                                            <span class="badge badge-success">Activo</span>
-                                        </a>
-                                    </li>
-                                    @elseif ($empresa->estado_ruex == '0')
-                                    <li><a href="#">
-                                            {{ $empresa->razon_social_empresa }}
-                                            <span class="badge badge-secondary">Sin Ruex</span>
-                                        </a>
-                                    </li>
-                                    @else
-                                    <li><a href="#">
-                                            {{ $empresa->razon_social_empresa }}
-                                            <span class="badge badge-secondary">Rechazado</span>
-                                        </a>
-                                    </li>
-                                    @endif
-                                    @endforeach
-                                </ul>
-                            </li> --}}
                             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                                     <i class="bi bi-wrench"></i>
                                     <span class="nav-text">Editar Empresa</span>
@@ -340,36 +209,8 @@
                                             @endif
                                         </a>
                                     </li>
-                                    {{--@foreach ($empresas as $empresa)
-                                    @if ($empresa->estado == 'inactivo')
-                                    <li><a href="{{ URL('one-emp-admin/' . Crypt::encryptString($empresa->id_empresa)) }}">
-                                            {{ $empresa->razon_social }}
-                                            <span class="badge badge-warning">Pendiente</span>
-                                        </a>
-                                    </li>
-                                    @elseif ($empresa->id_estado_empresa == '4' && $empresa->estado == 'activo')
-                                    <li><a href="{{ URL('one-emp-admin/' . Crypt::encryptString($empresa->id_empresa)) }}">
-                                            {{ $empresa->razon_social }}
-                                            <span class="badge badge-success">Activo</span>
-                                        </a>
-                                    </li>
-                                    {{-- @elseif ($empresa->estado_ruex == '0')
-                                    <li><a href="#">
-                                            {{ $empresa->razon_social_empresa }}
-                                            <span class="badge badge-secondary">Sin Ruex</span>
-                                        </a>
-                                    </li>
-                                    @else
-                                    <li><a href="#">
-                                            {{ $empresa->razon_social }}
-                                            <span class="badge badge-secondary">Rechazado</span>
-                                        </a>
-                                    </li>
-                                    @endif
-                                    @endforeach--}}
                                 </ul>
                             </li>
-                            {{-- href="{{ URL ('list-prod-admin') }}" --}}
                             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                                     <i class="flaticon-086-star"></i>
                                     <span class="nav-text">Productos</span>
@@ -379,64 +220,23 @@
                                         <a href="{{ URL('list-prod-admin/' . Crypt::encryptString($empresas->id_empresa)) }}">
                                             Por publicar</a>
                                     </li>
-
                                     <li>
                                         <a
                                             href="{{ URL('list-prod-rechazadas/' . Crypt::encryptString($empresas->id_empresa)) }}">
                                             Rechazadas</a>
                                     </li>
-
                                     <li>
                                         <a
                                             href="{{ URL('list-prod-publicados/' . Crypt::encryptString($empresas->id_empresa)) }}">
                                             Publicados</a>
                                     </li>
-
-                                    {{--@foreach ($empresas as $empresa)
-                                    @if ($empresa->estado == 'inactivo')
-                                    <li><a href="{{ URL('list-prod-admin/' . Crypt::encryptString($empresa->id_empresa)) }}">
-                                            {{ $empresa->razon_social }}
-                                            <span class="badge badge-warning">Pendiente</span>
-                                        </a>
-                                    </li>
-                                    @elseif ($empresa->id_estado_empresa == '4' && $empresa->estado == 'activo')
-                                    <li><a href="{{ URL('list-prod-admin/' . Crypt::encryptString($empresa->id_empresa)) }}">
-                                            {{ $empresa->razon_social }}
-                                            <span class="badge badge-success">Activo</span>
-                                        </a>
-                                    </li>
-                                    @else
-                                    <li><a href="#">
-                                            {{ $empresa->razon_social }}
-                                            <span class="badge badge-secondary">Rechazado</span>
-                                        </a>
-                                    </li>
-                                    @endif
-                                    @endforeach--}}
                                 </ul>
                             </li>
                             @break
-                        @endif
-
                     @endforeach
-
-
-
-
-
-
-
                 </ul>
-
-
             </div>
         </div>
-        <!--**********************************
-            Sidebar end
-        ***********************************-->
-        <!--**********************************
-            Content body start
-        ***********************************-->
         <div class="content-body">
             <blockquote class="blockquote text-center">
                 <p class="h2">Bienvenido a la Empresa</p>
@@ -444,60 +244,28 @@
             </blockquote>
             @yield('content')
         </div>
-        <!--**********************************
-            Content body end
-        ***********************************-->
-        <!--**********************************
-            Footer start
-        ***********************************-->
         <div class="footer">
-
             <div class="copyright">
                 <p>Copyright © Diseñado y desarrollado por <a href="https://senavex.gob.bo/" target="_blank">Senavex</a>
                     2022</p>
             </div>
         </div>
-        <!--**********************************
-            Footer end
-        ***********************************-->
-
-
     </div>
-    <!--**********************************
-        Main wrapper end
-    ***********************************-->
-
-    <!--**********************************
-        Scripts
-    ***********************************-->
-    <!-- Required admin/vendors -->
     <script src="{{ asset('admin/vendor/global/global.min.js') }}"></script>
     <script src="{{ asset('admin/vendor/chart.js/Chart.bundle.min.js') }}"></script>
     <script src="{{ asset('admin/vendor/bootstrap-datetimepicker/js/moment.js') }}"></script>
     <script src="{{ asset('admin/vendor/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js') }}"></script>
     <script src="{{ asset('admin/vendor/jquery-nice-select/js/jquery.nice-select.min.js') }}"></script>
-
-
     <script src="{{ asset('admin/vendor/sweetalert2/dist/sweetalert2.min.js') }}"></script>
     <script src="{{ asset('admin/js/plugins-init/sweetalert.init.js') }}"></script>
-
-    <!-- Chart piety plugin files -->
     <script src="{{ asset('admin/vendor/peity/jquery.peity.min.js') }}"></script>
-
-    <!-- Apex Chart -->
     <script src="{{ asset('admin/vendor/apexchart/apexchart.js') }}"></script>
-    <!-- Datatable -->
     <script src="{{ asset('admin/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('admin/js/plugins-init/datatables.init.js') }}"></script>
-
-    <!-- Dashboard 1 -->
     <script src="{{ asset('admin/js/dashboard/dashboard-1.js') }}"></script>
-
     <script src="{{ asset('admin/js/custom.min.js') }}"></script>
     <script src="{{ asset('admin/js/deznav-init.js') }}"></script>
     <script src="{{ asset('admin/js/demo.js') }}"></script>
-    {{--
-    <script src="admin/js/styleSwitcher.js"></script> --}}
 </body>
 <script>
     $(document).ready(function () {
@@ -507,18 +275,14 @@
                 $input.val($input.val().toUpperCase());
             }, 0);
         })
-
         $('.input-number').on('input', function () {
             this.value = this.value.replace(/[^0-9]/g, '');
         })
-
         $('.input-number-dec').on('input', function () {
             this.value = this.value.replace(/[^0-9,.]/g, '');
         })
-
         var validExtensions = ".png, .gif, .jpeg, .jpg";
         var allowedWeight = 1024;
-
         $('.input-image').change(function () {
             $('.text-image').text('');
             $('.img-src').attr('src', '');
@@ -530,20 +294,17 @@
                 }
             }
         });
-
         function validateExtensionEmpresa(data) {
             var rute = data.value;
-            var extension = rute.substring(rute.lastIndexOf('.') + 1).toLowerCase();
+            var extension = rute.ubstring(rute.lastIndexOf('.') + 1).toLowerCase();
             var extensionValida = validExtensions.indexOf(extension);
             if (extensionValida < 0) {
                 $('.text-image').text('La extensión no es válida Su fichero tiene de extensión: .' + extension);
                 return false;
             } else {
-                //console.log('OK EXTENSION')
                 return true;
             }
         }
-
         function validateWeightEmpresa(data) {
             if (data.files && data.files[0]) {
                 var fileWeight = data.files[0].size / 1024;
@@ -552,29 +313,22 @@
                         ' KBs Su fichero tiene: ' + fileWeight + ' KBs');
                     return false;
                 } else {
-                    //console.log('OK peso');
                     return true;
                 }
             }
         }
-
         function validateDimensionEmpresa(data) {
             var bandera = false
             var reader = new FileReader();
-            //Read the contents of Image File.
             reader.readAsDataURL(data.files[0]);
             reader.onload = function (e) {
-                //Initiate the JavaScript Image object.
                 var image = new Image();
-                //Set the Base64 string return from FileReader as source.
                 image.src = e.target.result;
-                //Validate the File Height and Width.
                 image.onload = function () {
                     var height = this.height;
                     var width = this.width;
                     console.log(height, width);
                     if (height == 650 && width == 550) {
-                        //show width and height to user
                         bandera = true;
                         console.log(bandera)
                         return bandera;
@@ -587,8 +341,6 @@
                 }
             }
         }
-
-
         function viewImage1(data) {
             if (data.files && data.files[0]) {
                 var reader = new FileReader();
@@ -598,10 +350,6 @@
                 reader.readAsDataURL(data.files[0]);
             }
         }
-
-
-
-
         $('.input-image-2').change(function () {
             $('.text-image-2').text('');
             $('.img-src-2').attr('src', '');
@@ -613,7 +361,6 @@
                 }
             }
         });
-
         function validateExtension(data) {
             var rute = data.value;
             var extension = rute.substring(rute.lastIndexOf('.') + 1).toLowerCase();
@@ -623,11 +370,9 @@
                     extension);
                 return false;
             } else {
-                //console.log('OK EXTENSION')
                 return true;
             }
         }
-
         function validateWeight(data) {
             if (data.files && data.files[0]) {
                 var fileWeight = data.files[0].size / 1024;
@@ -636,29 +381,22 @@
                         ' KBs Su fichero tiene: ' + fileWeight + ' KBs');
                     return false;
                 } else {
-                    //console.log('OK peso');
                     return true;
                 }
             }
         }
-
         function validateDimension(data) {
             var bandera = false
             var reader = new FileReader();
-            //Read the contents of Image File.
             reader.readAsDataURL(data.files[0]);
             reader.onload = function (e) {
-                //Initiate the JavaScript Image object.
                 var image = new Image();
-                //Set the Base64 string return from FileReader as source.
                 image.src = e.target.result;
-                //Validate the File Height and Width.
                 image.onload = function () {
                     var height = this.height;
                     var width = this.width;
                     console.log(height, width);
                     if ((height == 300 && width == 300) || (height == 400 && width == 300)) {
-                        //show width and height to user
                         bandera = true;
                         console.log(bandera)
                         return bandera;
@@ -671,9 +409,6 @@
                 }
             }
         }
-
-
-
         function viewImage(data) {
             if (data.files && data.files[0]) {
                 var reader = new FileReader();
@@ -684,7 +419,6 @@
             }
         }
     });
-
     function soloNumeros(event) {
         var charCode = (event.which) ? event.which : event.keyCode;
         if (charCode > 31 && (charCode < 48 || charCode > 57)) {
@@ -692,8 +426,5 @@
         }
         return true;
     }
-
 </script>
-<!-- Mirrored from Senavex.dexignzone.com/xhtml/index.html?theme=3 by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 05 Aug 2021 15:36:58 GMT -->
-
 </html>

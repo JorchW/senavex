@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,65 +8,35 @@
     <meta property="og:description" content="Senavex : Directorio Exportador" />
     <meta property="og:image" content="" />
     <meta name="format-detection" content="telephone=no">
-    <!-- Scripts -->
-    {{--
-    <script src="{{ asset('js/app.js') }}" defer></script> --}}
-
-    <!-- Fonts -->
     <link rel="shortcut icon" type="image/png" href="{{ asset('storage/images/vistas/icono.png') }}" />
-    <!-- Styles -->
-    {{--
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
-
-
-
-    <!-- PAGE TITLE HERE -->
     <title>Senavex : Directorio Exportador</title>
-
-    <!-- Fonts -->
-
-    <!-- Stylesheet -->
     <link href="{{ asset('vista/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('vista/css/jquery-ui.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('vista/css/animate.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('vista/css/css-plugin-collections.css') }}" rel="stylesheet" />
-    <!-- CSS | menuzord megamenu skins -->
     <link href="{{ asset('vista/css/menuzord-megamenu.css') }}" rel="stylesheet" />
-    {{--
-    <link id="menuzord-menu-skins" href="{{ asset('css/menuzord-skins/menuzord-boxed.css') }}" rel="stylesheet" /> --}}
-    <!-- CSS | Main style file -->
     <link href="{{ asset('vista/css/style-main.css') }}" rel="stylesheet" type="text/css">
-    <!-- CSS | Preloader Styles -->
     <link href="{{ asset('vista/css/preloader.css') }}" rel="stylesheet" type="text/css">
-    <!-- CSS | Custom Margin Padding Collection -->
     <link href="{{ asset('vista/css/custom-bootstrap-margin-padding.css') }}" rel="stylesheet" type="text/css">
-    <!-- CSS | Responsive media queries -->
     <link href="{{ asset('vista/css/responsive.css') }}" rel="stylesheet" type="text/css">
-    <!-- CSS | Theme Color -->
     <link href="{{ asset('vista/css/colors/theme-skin-color-set1.css') }}" rel="stylesheet" type="text/css">
-    <!-- CSS | Style css. This is the file where you can place your own custom css code. Just uncomment it and use it. -->
-    <!-- <link href="css/style.css" rel="stylesheet" type="text/css"> -->
     <link href="{{ asset('vista/js/revolution-slider/css/settings.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('vista/js/revolution-slider/css/layers.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('vista/js/revolution-slider/css/navigation.css') }}" rel="stylesheet" type="text/css" />
-
-    <!-- external javascripts -->
+    <link href="{{ asset('vista/css/logotipo.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('vista/css/carousel.css') }}" rel="stylesheet" type="text/css">
     <script src="{{ asset('vista/js/jquery-2.2.4.min.js') }}"></script>
     <script src="{{ asset('vista/js/jquery-ui.min.js') }}"></script>
     <script src="{{ asset('vista/js/bootstrap.min.js') }}"></script>
-    <!-- JS | jquery plugin collection for this theme -->
     <script src="{{ asset('vista/js/jquery-plugin-collection.js') }}"></script>
-
-    <!-- Revolution Slider 5.x SCRIPTS -->
     <script src="{{ asset('vista/js/revolution-slider/js/jquery.themepunch.tools.min.js') }}"></script>
     <script src="{{ asset('vista/js/revolution-slider/js/jquery.themepunch.revolution.min.js') }}"></script>
-
+    <script src="{{ asset('vista/js/carousel.js') }}"></script>
 </head>
 </head>
 
 <body class="">
     <div id="wrapper" class="header">
-        <!-- Header -->
         <header id="header" class="header header-floating">
             <div class="header-top bg-theme-coloredv sm-text-center">
                 <div class="container">
@@ -75,12 +44,14 @@
                         <div class="col-md-9">
                             <div class="widget text-white">
                                 <ul class="list-inline xs-text-center text-white">
-                                    <li class="m-0 pl-10 pr-10"> <a href="https://api.whatsapp.com/send?phone=59169907596" class="text-white">
-                                    <img src="{{ asset('storage/images/vistas/whatsapp.png') }}" alt="about" width="15" height="15"> Call Center 591 +69907596</a> </li>                                    
+                                    <li class="m-0 pl-10 pr-10"> <a
+                                            href="https://api.whatsapp.com/send?phone=59169907596" class="text-white">
+                                            <img src="{{ asset('storage/images/vistas/whatsapp.png') }}" alt="about"
+                                                width="15" height="15"> Call Center 591 +69907596</a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
-
                         <div class="col-md-2">
                             <ul class="list-inline sm-pull-none sm-text-center text-right text-white mb-sm-20 mt-10">
                                 <li class="m-0 pl-10">
@@ -123,31 +94,17 @@
                 </div>
             </div>
         </header>
-
-        <!--**********************************
-            Content body start
-        ***********************************-->
         <div>
             @yield('vista')
         </div>
-        <!--**********************************
-            Content body end
-        ***********************************-->
-
-
-
     </div>
-    <!-- end main-content -->
-    <!-- Footer -->
     <footer id="footer" class="footer bg-theme-coloredv">
         <div class="container pt-40 pb-10">
-
             <div class="row">
                 <div class="col-md-6">
                     <div class="widget dark">
                         <img class="mt-10" alt="" src="{{asset('storage/images/vistas/logob.png')}}">
                         <p class="text-white">Servicio Nacional de Verificación de Exportaciones</p>
-
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -155,16 +112,17 @@
                         <h4 class="widget-title">Contactos</h4>
                         <div class="latest-posts">
                             <ul class="list mt-5">
-                                <li class="m-0 pl-10 pr-10"> <img src="{{ asset('storage/images/vistas/whatsapp.png') }}" alt="about" width="15" height="15">
-                                    <a class="text-gray" href="https://api.whatsapp.com/send?phone=59169907596">Call Center 591 +69907596</a>
-                                </li>                                
+                                <li class="m-0 pl-10 pr-10"> <img
+                                        src="{{ asset('storage/images/vistas/whatsapp.png') }}" alt="about" width="15"
+                                        height="15">
+                                    <a class="text-gray" href="https://api.whatsapp.com/send?phone=59169907596">Call
+                                        Center 591 +69907596</a>
+                                </li>
                             </ul>
-
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
         <div class="footer-bottom bg-black-222">
             <div class="container pt-10 pb-10">
@@ -172,23 +130,13 @@
                     <div class="col-md-12 sm-text-center">
                         <p class="font-13 text-black-777 m-0">Derechos de autor &copy;2024. Senavex</p>
                     </div>
-
                 </div>
             </div>
         </div>
     </footer>
-
     <a class="scrollToTop" href="#"><i class="fa fa-angle-up"></i></a>
     </div>
-    <!-- end wrapper -->
-
-    <!-- Footer Scripts -->
-    <!-- JS | Custom script for all pages -->
     <script src="{{ asset('vista/js/custom.js') }}"></script>
-
-    <!-- SLIDER REVOLUTION 5.0 EXTENSIONS
-      (Load Extensions only on Local File Systems !
-       The following part can be removed on Server for On Demand Loading) -->
     <script type="text/javascript"
         src="{{ asset('vista/js/revolution-slider/js/extensions/revolution.extension.actions.min.js') }}"></script>
     <script type="text/javascript"
@@ -208,7 +156,5 @@
         src="{{ asset('vista/js/revolution-slider/js/extensions/revolution.extension.slideanims.min.js') }}"></script>
     <script type="text/javascript"
         src="{{ asset('vista/js/revolution-slider/js/extensions/revolution.extension.video.min.js') }}"></script>
-
 </body>
-
 </html>

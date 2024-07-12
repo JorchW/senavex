@@ -1,0 +1,9 @@
+.distintivo-img {
+    position: absolute;
+    top: 20px;
+    /* Ajusta la posición vertical según sea necesario */
+    right: 20px;
+    /* Ajusta la posición horizontal según sea necesario */
+    z-index: 10;
+    /* Ajusta el índice z para que esté por encima de las otras imágenes */
+}

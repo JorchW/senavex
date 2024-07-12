@@ -1,0 +1,45 @@
+.carousel {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.carousel .item {
+    display: none;
+}
+
+.carousel .item:first-child {
+    display: block;
+}
+
+.carousel img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.carousel button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.5);
+    border: none;
+    color: #333;
+    font-size: 1.5em;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.carousel button:hover {
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.arrow-prev {
+    left: 10px;
+}
+
+.arrow-next {
+    right: 10px;
+}

@@ -72,14 +72,6 @@
                 </div>
             </div>
         </div>
-        <!--**********************************
-            Nav header end
-        ***********************************-->
-
-
-        <!--**********************************
-            Header start
-        ***********************************-->
         <div class="header">
             <div class="header-content">
                 <nav class="navbar navbar-expand">
@@ -191,26 +183,6 @@
                                     <img src="{{ asset('admin/images/profile/pic1.jpg') }}" width="20" alt="" />
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end">
-                                    {{-- <a href="app-profile.html" class="dropdown-item ai-icon">
-                                        <svg id="icon-user1" xmlns="http://www.w3.org/2000/svg" class="text-primary"
-                                            width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                                            <circle cx="12" cy="7" r="4"></circle>
-                                        </svg>
-                                        <span class="ms-2">Profile </span>
-                                    </a>
-                                    <a href="email-inbox.html" class="dropdown-item ai-icon">
-                                        <svg id="icon-inbox" xmlns="http://www.w3.org/2000/svg" class="text-success"
-                                            width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path
-                                                d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
-                                            </path>
-                                            <polyline points="22,6 12,13 2,6"></polyline>
-                                        </svg>
-                                        <span class="ms-2">Inbox </span>
-                                    </a> --}}
                                     <a href="{{ route('logout') }}" onclick="event.preventDefault();
 												  document.getElementById('logout-form').submit();" class="dropdown-item
                                         ai-icon">
@@ -234,13 +206,6 @@
                 </nav>
             </div>
         </div>
-        <!--**********************************
-            Header end ti-comment-alt
-        ***********************************-->
-
-        <!--**********************************
-            Sidebar start
-        ***********************************-->
         <div class="deznav">
             <div class="deznav-scroll">
                 <ul class="metismenu" id="menu">
@@ -250,23 +215,41 @@
                 </ul>
             </div>
         </div>
-        <!--**********************************
-            Sidebar end
-        ***********************************-->
-        <!--**********************************
-            Content body start
-        ***********************************-->
+        <p>
+            
+        </p>
         <div class="content-body">
             <blockquote class="blockquote text-center">
                 <p class="h2">Empresas</p>
             </blockquote>
             <div class="row text-center">
+                @foreach ($empresasvencidas as $empresavencida)
+                @if ($empresavencida->descripcion_estado == 'Empresa con RUEX - Vencido' && $empresavencida->ruex_estado==false)
+                <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+                        <div class="card h-100 shadow-lg"
+                            style="background-color: #f8f9fa; border-radius: 40px;border: 1px solid #006400;">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">{{ Str::limit($empresavencida->nombre_comercial, 35, $end = '...') }}</h5>
+                                <p class="card-text"><strong>Nit:</strong> {{ $empresavencida->nit }}</p>
+                                <p class="card-text"><strong>Ruex:</strong> {{ $empresavencida->ruex }}</p>
+                                <p class="card-text"><strong>Estado:</strong> {{ $empresavencida->descripcion_estado }}</p>
+                                <div class="alert alert-danger">
+                                    <strong>Empresa con RUEX - Vencido</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endif    
+                @endforeach
                 @foreach($empresas as $empresa)
                     <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
-                        <div class="card h-100 shadow-lg" style="background-color: #f8f9fa; border-radius: 40px;border: 1px solid #006400;">
+                        <div class="card h-100 shadow-lg"
+                            style="background-color: #f8f9fa; border-radius: 40px;border: 1px solid #006400;">
                             <div class="card-body d-flex flex-column">
                                 <h5 class="card-title">{{ $empresa->nombre_comercial }}</h5>
-                                <p class="card-text">NIT: {{ $empresa->nit }}</p>
+                                <p class="card-text"><strong>Nit:</strong> {{ $empresa->nit }}</p>
+                                <p class="card-text"><strong>Ruex:</strong> {{ $empresa->ruex }}</p>
+                                <p class="card-text"><strong>Estado:</strong> {{$empresa->descripcion_estado}} </p>
                                 <a href="{{ URL('home/' . Crypt::encryptString($empresa->id_empresa)) }}"
                                     class="btn btn-outline-primary mt-auto">Entrar a Empresa</a>
                             </div>
@@ -276,60 +259,28 @@
             </div>
             @yield('content')
         </div>
-        <!--**********************************
-            Content body end
-        ***********************************-->
-        <!--**********************************
-            Footer start
-        ***********************************-->
         <div class="footer">
-
             <div class="copyright">
                 <p>Copyright © Diseñado y desarrollado por <a href="https://senavex.gob.bo/" target="_blank">Senavex</a>
                     2022</p>
             </div>
         </div>
-        <!--**********************************
-            Footer end
-        ***********************************-->
-
-
     </div>
-    <!--**********************************
-        Main wrapper end
-    ***********************************-->
-
-    <!--**********************************
-        Scripts
-    ***********************************-->
-    <!-- Required admin/vendors -->
     <script src="{{ asset('admin/vendor/global/global.min.js') }}"></script>
     <script src="{{ asset('admin/vendor/chart.js/Chart.bundle.min.js') }}"></script>
     <script src="{{ asset('admin/vendor/bootstrap-datetimepicker/js/moment.js') }}"></script>
     <script src="{{ asset('admin/vendor/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js') }}"></script>
     <script src="{{ asset('admin/vendor/jquery-nice-select/js/jquery.nice-select.min.js') }}"></script>
-
-
     <script src="{{ asset('admin/vendor/sweetalert2/dist/sweetalert2.min.js') }}"></script>
     <script src="{{ asset('admin/js/plugins-init/sweetalert.init.js') }}"></script>
-
-    <!-- Chart piety plugin files -->
     <script src="{{ asset('admin/vendor/peity/jquery.peity.min.js') }}"></script>
-
-    <!-- Apex Chart -->
     <script src="{{ asset('admin/vendor/apexchart/apexchart.js') }}"></script>
-    <!-- Datatable -->
     <script src="{{ asset('admin/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('admin/js/plugins-init/datatables.init.js') }}"></script>
-
-    <!-- Dashboard 1 -->
     <script src="{{ asset('admin/js/dashboard/dashboard-1.js') }}"></script>
-
     <script src="{{ asset('admin/js/custom.min.js') }}"></script>
     <script src="{{ asset('admin/js/deznav-init.js') }}"></script>
     <script src="{{ asset('admin/js/demo.js') }}"></script>
-    {{--
-    <script src="admin/js/styleSwitcher.js"></script> --}}
 </body>
 <script>
     $(document).ready(function () {
@@ -371,7 +322,6 @@
                 $('.text-image').text('La extensión no es válida Su fichero tiene de extensión: .' + extension);
                 return false;
             } else {
-                //console.log('OK EXTENSION')
                 return true;
             }
         }
@@ -384,7 +334,6 @@
                         ' KBs Su fichero tiene: ' + fileWeight + ' KBs');
                     return false;
                 } else {
-                    //console.log('OK peso');
                     return true;
                 }
             }
@@ -393,20 +342,15 @@
         function validateDimensionEmpresa(data) {
             var bandera = false
             var reader = new FileReader();
-            //Read the contents of Image File.
             reader.readAsDataURL(data.files[0]);
             reader.onload = function (e) {
-                //Initiate the JavaScript Image object.
                 var image = new Image();
-                //Set the Base64 string return from FileReader as source.
                 image.src = e.target.result;
-                //Validate the File Height and Width.
                 image.onload = function () {
                     var height = this.height;
                     var width = this.width;
                     console.log(height, width);
                     if (height == 650 && width == 550) {
-                        //show width and height to user
                         bandera = true;
                         console.log(bandera)
                         return bandera;
@@ -455,11 +399,9 @@
                     extension);
                 return false;
             } else {
-                //console.log('OK EXTENSION')
                 return true;
             }
         }
-
         function validateWeight(data) {
             if (data.files && data.files[0]) {
                 var fileWeight = data.files[0].size / 1024;
@@ -468,7 +410,6 @@
                         ' KBs Su fichero tiene: ' + fileWeight + ' KBs');
                     return false;
                 } else {
-                    //console.log('OK peso');
                     return true;
                 }
             }
@@ -477,20 +418,15 @@
         function validateDimension(data) {
             var bandera = false
             var reader = new FileReader();
-            //Read the contents of Image File.
             reader.readAsDataURL(data.files[0]);
             reader.onload = function (e) {
-                //Initiate the JavaScript Image object.
                 var image = new Image();
-                //Set the Base64 string return from FileReader as source.
                 image.src = e.target.result;
-                //Validate the File Height and Width.
                 image.onload = function () {
                     var height = this.height;
                     var width = this.width;
                     console.log(height, width);
                     if ((height == 300 && width == 300) || (height == 400 && width == 300)) {
-                        //show width and height to user
                         bandera = true;
                         console.log(bandera)
                         return bandera;
@@ -517,6 +453,4 @@
         }
     });
 </script>
-<!-- Mirrored from Senavex.dexignzone.com/xhtml/index.html?theme=3 by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 05 Aug 2021 15:36:58 GMT -->
-
 </html>

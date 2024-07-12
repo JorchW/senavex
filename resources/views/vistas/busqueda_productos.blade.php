@@ -1,18 +1,10 @@
 @extends('welcome')
 @section('vista')
-<!-- Start main-content -->
 <div class="main-content">
-    {{--<section class="inner-header divider parallax layer-overlay overlay-dark-5 pt-150"
-        data-bg-img="https://agronomia.upea.bo/assets/pagina/assets/images/bg/bg3.jpg" style="
-            background-image: url('https://agronomia.upea.bo/assets/pagina/assets/images/bg/bg3.jpg');
-            background-position: 50% 0px;
-          ">
-    </section>--}}
     <br>
     <br>
     <br>
     <br>
-    <!-- Section: Blog -->
     <section>
         <div class="container mt-30 mb-30 pt-30 pb-0">
             <div class="container mt-20">
@@ -22,7 +14,6 @@
                             Productos <span class="text-theme-colored3">Encontrados</span>
                         </h2>
                     </div>
-
                     <div class="col-md-4">
                         <div class="widget">
                             <div class="search-form">
@@ -43,36 +34,33 @@
                     </div>
                 </div>
             </div>
-
             <div class="row multi-row-clearfix">
                 <div id="blog-posts-wrapper" class="blog-posts">
                     @if (count($result_busqueda) > 0)
                         @foreach ($result_busqueda as $producto)
                             <div class="col-sm-3 col-md-3 col-lg-3">
+                                <div class="col-sm-12 col-md-12 text-center">
+                                    <img src="{{ asset('storage/images/vistas/distintivot.png') }}" alt="distintivo"
+                                        width="100px" class="distintivo-img">
+                                </div>
                                 <div class="services mb-sm-50 mt-20">
-                                    <div class="thumb">
-                                        <div class="owl-carousel-1col" data-dots="true">
-                                            <div class="item">
-                                                <img class="img-fullwidth" alt="Imagen"
-                                                    src="{{ $producto->path_file_photo1 }}" />
-                                            </div>
-                                            <div class="item">
-                                                <img class="img-fullwidth" alt="Imagen"
-                                                    src="{{ $producto->path_file_photo2 }}" />
-                                            </div>
-                                            <div class="item">
-                                                <img class="img-fullwidth" alt="Imagen"
-                                                    src="{{ $producto->path_file_photo3 }}" />
-                                            </div>
+                                    <div class="carousel">
+                                        <div class="item">
+                                            <img class="img-fullwidth" alt="Imagen 1" src="{{ $producto->path_file_photo1 }}" />
                                         </div>
+                                        <div class="item">
+                                            <img class="img-fullwidth" alt="Imagen 2" src="{{ $producto->path_file_photo2 }}" />
+                                        </div>
+                                        <div class="item">
+                                            <img class="img-fullwidth" alt="Imagen 3" src="{{ $producto->path_file_photo3 }}" />
+                                        </div>
+                                        <button class="arrow-prev">&#10094;</button>
+                                        <button class="arrow-next">&#10095;</button>
                                     </div>
-                                    {{--<div class="thumb">
-                                        <img class="img-fullwidth" alt="Imagen" src="{{ $producto->path_file_photo1 }}" />
-                                    </div>--}}
                                     <div class="services-details clearfix">
-                                        <div class="p-20 p-sm-15 bg-lighter">                                            
+                                        <div class="p-20 p-sm-15 bg-lighter">
                                             <h4 class="mt-0 line-height-1">
-                                                {{Str::limit( $producto->denominacion_comercial , 20, $end = ' ...') }}                                       
+                                                {{Str::limit($producto->denominacion_comercial, 20, $end = ' ...') }}
                                             </h4>
                                             <div class="col-sm-12 col-md-12 text-center">
                                                 <img src="{{ asset('storage/images/vistas/distintivo.png') }}" alt="distintivo">
@@ -80,7 +68,8 @@
                                             <div class="clearfix"></div>
                                             <ul class="list-inline mt-15 mb-10 clearfix">
                                                 <li class="pull-left flip pr-0 clearfix">
-                                                    Empresa: <span class="font-weight-700">{{Str::limit($producto->razon_social, 40,$end = '...')}}</span>
+                                                    Empresa: <span
+                                                        class="font-weight-700">{{Str::limit($producto->razon_social, 40, $end = '...')}}</span>
                                                 </li>
                                             </ul>
                                             <a class="btn btn-dark btn-theme-coloredv btn-sm text-uppercase mt-10"
@@ -107,11 +96,9 @@
                         <br>
                         <br>
                     @endif
-              </div>
+                </div>
             </div>
-
         </div>
     </section>
 </div>
-<!-- end main-content -->
 @endsection

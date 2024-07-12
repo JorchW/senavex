@@ -44,10 +44,37 @@ class HomeController extends Controller
             ->join('empresas_personas', 'empresas.id_empresa', '=', 'empresas_personas.id_empresa')
             ->join('personas', 'empresas_personas.id_persona', '=', 'personas.id_persona')
             ->join('users', 'personas.id_persona', '=', 'users.id_persona')
-            ->select('empresas.*', 'users.*')
-            ->where('id_user', Auth::id())->distinct()->get();
+            ->join('empresa_estados as ee', 'ee.id_estado_empresa', '=', 'empresas.id_estado_empresa')
+            ->join('ruexs as r', 'empresas.id_empresa', '=', 'r.id_empresa')
+            ->select('empresas.*', 'users.*', 'ee.*', 'r.*')
+            ->where('ee.descripcion_estado','like','Empresa con RUEX')
+            ->where('r.ruex_estado',[true])
+            ->where('id_user', Auth::id())->get();
+
+        $empresasvencida = DB::table('empresas')
+            ->join('empresas_personas', 'empresas.id_empresa', '=', 'empresas_personas.id_empresa')
+            ->join('personas', 'empresas_personas.id_persona', '=', 'personas.id_persona')
+            ->join('users', 'personas.id_persona', '=', 'users.id_persona')
+            ->join('empresa_estados as ee', 'ee.id_estado_empresa', '=', 'empresas.id_estado_empresa')
+            ->join('ruexs as r', 'empresas.id_empresa', '=', 'r.id_empresa')
+            ->select('empresas.*', 'users.*', 'ee.*', 'r.*')
+            ->where('ee.descripcion_estado','like','Empresa con RUEX - Vencido')
+            ->where('r.ruex_estado',[false])
+            ->where('id_user', Auth::id())->get();
+
+        //$ruexs = DB::table('empresas as e')
+        //    ->join('ruexs as r', 'e.id_empresa', '=', 'r.id_empresa')
+        //    ->join('empresas_personas', 'e.id_empresa', '=', 'empresas_personas.id_empresa')
+        //    ->join('personas', 'empresas_personas.id_persona', '=', 'personas.id_persona')
+        //    ->join('users', 'personas.id_persona', '=', 'users.id_persona')
+        //    ->select('r.ruex')
+        //    ->where('id_user',Auth::id())
+        //    ->whereIn('r.ruex_estado',[true])->get();
+
+
         return view('admin.select', [
-            'empresas' => $empresas
+            'empresas' => $empresas,
+            'empresasvencidas' => $empresasvencida
         ]);
     }
     public function index($id)
@@ -55,11 +82,10 @@ class HomeController extends Controller
         $idDes = Crypt::decryptString($id);
 
         $empresas = DB::table('empresas')
-            ->join('ruexs', 'empresas.id_empresa', '=', 'ruexs.id_empresa')
             ->join('empresas_personas', 'empresas.id_empresa', '=', 'empresas_personas.id_empresa')
             ->join('personas', 'empresas_personas.id_persona', '=', 'personas.id_persona')
             ->join('users', 'personas.id_persona', '=', 'users.id_persona')
-            ->select('empresas.*', 'users.*', 'ruexs.*')
+            ->select('empresas.*', 'users.*')
             ->where('empresas.id_empresa', $idDes)->first();
 
         $rol = DB::table('rols')
