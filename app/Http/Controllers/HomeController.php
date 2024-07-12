@@ -105,7 +105,10 @@ class HomeController extends Controller
             ->whereNull('dps.id_producto_solicitud')
             ->whereIn('dj.id_ddjj_estado', [6, 9, 10, 11])->get();
 
+        $enviarproducto = DB::table('directorio.directorio_productos')->get();
+
         return view('admin.listproducto', [
+            'enviarproducto' => $enviarproducto,
             'empresas' => $empresas,
             'roles' => $rol,
             'productos' => $productos,
@@ -157,6 +160,11 @@ class HomeController extends Controller
             ->whereIn('dj.id_ddjj_estado', [6, 9, 10, 11])
             ->orderBy('dj.updated_at', 'desc')->first();
 
+        $directorioproducto = DB::table('directorio.directorio_productos as dp')
+            ->join('ddjjs as dj', 'dp.id_ddjj', '=', 'dj.id_ddjj')
+            ->select('*')
+            ->where('dj.id_ddjj', $idDes)->first();
+
         $rol = DB::table('rols')
             ->join('empresas_personas', 'rols.id_rol', '=', 'empresas_personas.id_rol')
             ->join('personas', 'empresas_personas.id_persona', '=', 'personas.id_persona')
@@ -182,6 +190,7 @@ class HomeController extends Controller
 
         return view('admin.editproducto', [
             'empresas' => $empresas,
+            'directorioproducto' => $directorioproducto,
             'roles' => $rol,
             'imagen' => $imagen,
             'rubrosel' => $rubrosel,
@@ -265,32 +274,51 @@ class HomeController extends Controller
     public function updateProd($id, Request $data)
     {
         $idDes = Crypt::decryptString($id);
+
         $id_empresa = $data->input('id_empresa');
         $id_rubro = $data->input('id_rubro');
-        $data->validate([
+        $nombre_comercial = $data->input('nombre_comercial');
+        $descripcion = $data->input('descripcion');
+
+        $rules = [
             'id_empresa' => 'required|integer',
             'id_rubro' => 'required|integer',
-            'path_file_photo1' => 'required|image|dimensions:width=1920,height=1920',
-            'path_file_photo2' => 'required|image|dimensions:width=1920,height=1920',
-            'path_file_photo3' => 'required|image|dimensions:width=1920,height=1920',
-        ], [
-            'id_empresa.integer' => 'La empresa es Obligatorio.',
-            'id_rubro.integer' => 'El rubro es Obligatorio.',
-            'path_file_photo1.required' => 'La foto 1 es Obligatorio.',
-            'path_file_photo1.dimensions' => 'La foto 1 debe tener dimensiones de 1920x1920 píxeles.',
-            'path_file_photo2.required' => 'La foto 2 es Obligatorio.',
-            'path_file_photo2.dimensions' => 'La foto 2 debe tener dimensiones de 1920x1920 píxeles.',
-            'path_file_photo3.required' => 'La foto 3 es Obligatorio.',
-            'path_file_photo3.dimensions' => 'La foto 3 debe tener dimensiones de 1920x1920 píxeles.',
-        ]);
+            'nombre_comercial' => 'required',
+            'descripcion' => 'required',
+        ];
 
+        $messages = [
+            'id_rubro.integer' => 'El rubro es obligatorio.',
+            'nombre_comercial.required' => 'El nombre comercial es obligatorio.',
+            'descripcion.required' => 'La descripción es obligatoria.',
+        ];
 
+        // Verificar si hay imágenes existentes
+        $existingImages = DB::table('directorio.directorio_productos')
+            ->where('id_ddjj', $idDes)
+            ->select('path_file_photo1', 'path_file_photo2', 'path_file_photo3')
+            ->first();
+
+        // Validar imágenes solo si no existen imágenes previas
+        if (!$existingImages) {
+            $rules['path_file_photo1'] = 'required|image|dimensions:width=1920,height=1920';
+            $rules['path_file_photo2'] = 'required|image|dimensions:width=1920,height=1920';
+            $rules['path_file_photo3'] = 'required|image|dimensions:width=1920,height=1920';
+
+            $messages['path_file_photo1.required'] = 'La foto 1 es obligatoria.';
+            $messages['path_file_photo1.dimensions'] = 'La foto 1 debe tener dimensiones de 1920x1920 píxeles.';
+            $messages['path_file_photo2.required'] = 'La foto 2 es obligatoria.';
+            $messages['path_file_photo2.dimensions'] = 'La foto 2 debe tener dimensiones de 1920x1920 píxeles.';
+            $messages['path_file_photo3.required'] = 'La foto 3 es obligatoria.';
+            $messages['path_file_photo3.dimensions'] = 'La foto 3 debe tener dimensiones de 1920x1920 píxeles.';
+        }
+
+        // Validar los datos
+        $data->validate($rules, $messages);
+
+        // Procesar y guardar las imágenes si son nuevas
         if ($data->hasFile('path_file_photo1')) {
             $file = $data->file('path_file_photo1');
-            $dimensions = getimagesize($file);
-            if ($dimensions[0] != 1920 || $dimensions[1] != 1920) {
-                return redirect()->back()->withInput()->withErrors(['path_file_photo1' => 'La imagen debe tener dimensiones de 1920x1920 px. o formato no Valido!']);
-            }
             $endPath = public_path('/storage/images/productos/foto1/' . $idDes . '/');
             $filename = time() . '.' . $file->getClientOriginalExtension();
             $oldImagePath = DB::table('directorio.directorio_productos')
@@ -317,10 +345,6 @@ class HomeController extends Controller
         }
         if ($data->hasFile('path_file_photo2')) {
             $file = $data->file('path_file_photo2');
-            $dimensions = getimagesize($file);
-            if ($dimensions[0] != 1920 || $dimensions[1] != 1920) {
-                return redirect()->back()->withInput()->withErrors(['path_file_photo2' => 'La imagen debe tener dimensiones de 1920x1920 px. o formato no Valido!']);
-            }
             $endPath = public_path('/storage/images/productos/foto2/' . $idDes . '/');
             $filename = time() . '.' . $file->getClientOriginalExtension();
             $oldImagePath = DB::table('directorio.directorio_productos')
@@ -347,10 +371,6 @@ class HomeController extends Controller
         }
         if ($data->hasFile('path_file_photo3')) {
             $file = $data->file('path_file_photo3');
-            $dimensions = getimagesize($file);
-            if ($dimensions[0] != 1920 || $dimensions[1] != 1920) {
-                return redirect()->back()->withInput()->withErrors(['path_file_photo3' => 'La imagen debe tener dimensiones de 1920x1920 px. o formato no Valido!']);
-            }
             $endPath = public_path('/storage/images/productos/foto3/' . $idDes . '/');
             $filename = time() . '.' . $file->getClientOriginalExtension();
             $oldImagePath = DB::table('directorio.directorio_productos')
@@ -376,15 +396,21 @@ class HomeController extends Controller
             $direccionImagen3 = '';
         }
 
+        // Actualizar o insertar los datos del producto
         DB::table('directorio.directorio_productos')
-            ->where('id_ddjj', $idDes)
-            ->update([
-                'id_empresa' => $id_empresa,
-                'id_empresa_rubro' => $id_rubro,
-            ]);
+            ->updateOrInsert(
+                ['id_ddjj' => $idDes],
+                [
+                    'id_empresa' => $id_empresa,
+                    'id_empresa_rubro' => $id_rubro,
+                    'nombre_comercial' => $nombre_comercial,
+                    'descripcion' => $descripcion,
+                ]
+            );
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Se subieron los Datos con Exito!.');
     }
+
 
     /////////////////////////////////   //////////////////////////////  //////////////////////////////////
     public function listgrupRubEmp($id)
@@ -506,31 +532,38 @@ class HomeController extends Controller
         $mail = $data->input('mail');
         $paginaweb = $data->input('paginaweb');
 
-        $data->validate([
-            'mail' => 'email',
-            'path_file_foto1' => 'required|image|dimensions:width=1920,height=1080',
-            'path_file_foto2' => 'required|image|dimensions:width=1080,height=1080',
-        ], [
-            'telefono.required' => 'El Telefono es Obligatorio.',
-            'celular.required' => 'El Celular es Obligatorio.',
-            'facebook.required' => 'El facebook es Obligatorio.',
-            'instagram.required' => 'El Instagram es Obligatorio.',
-            'tiktok.required' => 'El Tiktok es Obligatorio.',
-            'mail.email' => 'Introduzca una direccion de correo Valida.',
-            'pag_web.required' => 'La Pagina Web es Obligatoria.',
-            'path_file_foto1.required' => 'Imagen de la Empresa Obligatorio',
-            'path_file_foto1.dimensions' => 'La imagen debe tener dimensiones de 1920x1080 px.',
-            'path_file_foto2.required' => 'El Logo de la Empresa es Obligatorio.',
-            'path_file_foto2.dimensions' => 'El Logo debe tener dimensiones de 1080x1080 px.',
-        ]);
+        $existingImage = DB::table('directorio.directorio_empresa_extras')
+            ->where('id_empresa', $idDes)
+            ->value('path_file_foto1');
 
+        $rules = [
+            'mail' => 'nullable|email',
+            'paginaweb' => 'nullable|url',
+            'telefono' => 'nullable|numeric|digits_between:7,10',
+            'celular' => 'nullable|numeric|digits_between:8,10',
+        ];
+        $messages = [
+            'telefono.numeric' => 'El teléfono debe contener solo números.',
+            'telefono.digits_between' => 'El teléfono debe tener entre 7 y 10 dígitos.',
+            'celular.numeric' => 'El celular debe contener solo números.',
+            'celular.digits_between' => 'El celular debe tener entre 8 y 10 dígitos.',
+            'mail.email' => 'Introduzca una dirección de correo válida.',
+            'paginaweb.url' => 'La dirección de la página web debe ser una URL válida.',
+        ];
+
+        if (!$existingImage) {
+            $rules['path_file_foto1'] = 'required|image|dimensions:width=1920,height=1080';
+            $rules['path_file_foto2'] = 'required|image|dimensions:width=1080,height=1080';
+            $messages['path_file_foto1.required'] = 'Imagen de la Empresa Obligatorio';
+            $messages['path_file_foto1.dimensions'] = 'La imagen debe tener dimensiones de 1920x1080 px.';
+            $messages['path_file_foto2.required'] = 'El Logo de la Empresa es Obligatorio.';
+            $messages['path_file_foto2.dimensions'] = 'El Logo debe tener dimensiones de 1080x1080 px.';
+        }
+
+        $data->validate($rules, $messages);
 
         if ($data->hasFile('path_file_foto1')) {
             $file = $data->file('path_file_foto1');
-            $dimensions = getimagesize($file);
-            if ($dimensions[0] != 1920 || $dimensions[1] != 1080) {
-                return redirect()->back()->withInput()->withErrors(['path_file_foto1' => 'La imagen debe tener dimensiones de 1920x1080 px. y formato no Valido!']);
-            }
             $endPath = public_path('/storage/images/empresas/empresa/' . $idDes . '/');
             $filename = time() . '.' . $file->getClientOriginalExtension();
             $oldImagePath = DB::table('directorio.directorio_empresa_extras')
@@ -550,15 +583,10 @@ class HomeController extends Controller
             } else {
                 $direccionImagen = '';
             }
-        } else {
-            $direccionImagen = '';
         }
+
         if ($data->hasFile('path_file_foto2')) {
             $file = $data->file('path_file_foto2');
-            $dimensions = getimagesize($file);
-            if ($dimensions[0] != 1080 || $dimensions[1] != 1080) {
-                return redirect()->back()->withInput()->withErrors(['path_file_foto1' => 'La imagen debe tener dimensiones de 1080x1080 px. o formato no Valido!']);
-            }
             $endPath = public_path('/storage/images/empresas/logo/' . $idDes . '/');
             $filename = time() . '.' . $file->getClientOriginalExtension();
             $oldImagePath = DB::table('directorio.directorio_empresa_extras')
@@ -578,27 +606,7 @@ class HomeController extends Controller
             } else {
                 $direccionImagen2 = '';
             }
-        } else {
-            $direccionImagen2 = '';
         }
-
-        $data->validate([
-            'mail' => 'email',
-            'path_file_foto1' => 'required|image|dimensions:width=1920,height=1080',
-            'path_file_foto2' => 'required|image|dimensions:width=1080,height=1080',
-        ], [
-            'telefono.required' => 'El Telefono es Obligatorio.',
-            'celular.required' => 'El Celular es Obligatorio.',
-            'facebook.required' => 'El facebook es Obligatorio.',
-            'instagram.required' => 'El Instagram es Obligatorio.',
-            'tiktok.required' => 'El Tiktok es Obligatorio.',
-            'mail.email' => 'Introduzca una direccion de correo Valida.',
-            'pag_web.required' => 'La Pagina Web es Obligatoria.',
-            'path_file_foto1.required' => 'Imagen de la Empresa Obligatorio',
-            'path_file_foto1.dimensions' => 'La imagen debe tener dimensiones de 1920x1080 px.',
-            'path_file_foto2.required' => 'El Logo de la Empresa es Obligatorio.',
-            'path_file_foto2.dimensions' => 'El Logo debe tener dimensiones de 1080x1080 px.',
-        ]);
 
         DB::table('directorio.directorio_empresa_extras')
             ->where('id_empresa', $idDes)
@@ -612,8 +620,9 @@ class HomeController extends Controller
                 'paginaweb' => $paginaweb,
             ]);
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Se actualizaron los Datos con Exito!.');
     }
+
 
     public function eliminarEmp($id)
     {

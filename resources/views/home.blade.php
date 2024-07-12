@@ -333,10 +333,10 @@
                                 <ul aria-expanded="false">
                                     <li>
                                         <a href="{{ URL('one-emp-admin/' . Crypt::encryptString($empresas->id_empresa)) }}">
-                                            @if ($empresas->razon_social=='')
-                                            {{$empresas->nombre_comercial}}
+                                            @if ($empresas->razon_social == '')
+                                                {{$empresas->nombre_comercial}}
                                             @else
-                                            {{$empresas->razon_social}}
+                                                {{$empresas->razon_social}}
                                             @endif
                                         </a>
                                     </li>
@@ -381,12 +381,14 @@
                                     </li>
 
                                     <li>
-                                        <a href="{{ URL('list-prod-rechazadas/' . Crypt::encryptString($empresas->id_empresa)) }}">
+                                        <a
+                                            href="{{ URL('list-prod-rechazadas/' . Crypt::encryptString($empresas->id_empresa)) }}">
                                             Rechazadas</a>
                                     </li>
 
                                     <li>
-                                        <a href="{{ URL('list-prod-publicados/' . Crypt::encryptString($empresas->id_empresa)) }}">
+                                        <a
+                                            href="{{ URL('list-prod-publicados/' . Crypt::encryptString($empresas->id_empresa)) }}">
                                             Publicados</a>
                                     </li>
 
@@ -682,10 +684,15 @@
             }
         }
     });
-    function soloNumeros(e) {
-        var key = window.Event ? e.which : e.keyCode;
-        return ((key >= 48 && key <= 57) || (key == 8)) && e.key !== "e";
+
+    function soloNumeros(event) {
+        var charCode = (event.which) ? event.which : event.keyCode;
+        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+            return false;
+        }
+        return true;
     }
+
 </script>
 <!-- Mirrored from Senavex.dexignzone.com/xhtml/index.html?theme=3 by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 05 Aug 2021 15:36:58 GMT -->
 

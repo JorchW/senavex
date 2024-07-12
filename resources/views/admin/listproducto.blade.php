@@ -1,5 +1,4 @@
 @extends('home')
-
 @section('content')
 <div class="container-fluid">
     <div class="form-head mb-4 d-flex flex-wrap align-items-center">
@@ -54,26 +53,36 @@
                         @foreach ($productos as $producto)
                             <tr>
                                 <td>
-                                    {{$producto->denominacion_comercial}}
+                                    {{ $producto->denominacion_comercial }}
                                 </td>
                                 <td>
-                                    {{$producto->numero_ddjj}}
+                                    {{ $producto->numero_ddjj }}
                                 </td>
                                 <td>
-                                    {{$producto->acuerdo}}
+                                    {{ $producto->acuerdo }}
                                 </td>
                                 <td>
-                                    {{$producto->sigla}}
+                                    {{ $producto->sigla }}
                                 </td>
                                 <td>
                                     <a href="{{ URL('one-prod-admin/' . Crypt::encryptString($producto->id_ddjj)) }}"
-                                        class="btn btn-outline-primary">Editar</a>
+                                        class="btn btn-outline-primary">Editar Producto</a>
                                     <br>
-                                    <a href="{{ URL('publicar-prod-admin/' . Crypt::encryptString($producto->id_ddjj)) }}"
-                                        class="btn btn-outline-primary">Enviar a revisión</a>
+                                    @if ($producto->path_file_photo1 && $producto->path_file_photo2 && $producto->path_file_photo3)
+                                        <a href="{{ URL('publicar-prod-admin/' . Crypt::encryptString($producto->id_ddjj)) }}"
+                                            class="btn btn-outline-primary">Enviar a revisión</a>
+                                        <div class="alert alert-success text-center">
+                                            <strong>Listo!.</strong>
+                                        </div>
+                                    @else
+                                        <div class="alert alert-danger text-center">
+                                            <strong>No listo!.</strong>
+                                        </div>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
+                    </tbody>
                 </table>
             </div>
         </div>
