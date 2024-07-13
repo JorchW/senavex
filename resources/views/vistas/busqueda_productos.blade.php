@@ -85,8 +85,10 @@
                         <br>
                         <br>
                         <br>
+                        <br>
                         <h1> Lo siento no se </h1>
                         <h1> encontraron productos </h1>
+                        <br>
                         <br>
                         <br>
                         <br>

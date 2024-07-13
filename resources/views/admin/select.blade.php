@@ -227,13 +227,13 @@
                 @if ($empresavencida->descripcion_estado == 'Empresa con RUEX - Vencido' && $empresavencida->ruex_estado==false)
                 <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
                         <div class="card h-100 shadow-lg"
-                            style="background-color: #f8f9fa; border-radius: 40px;border: 1px solid #006400;">
+                            style="background-color: #f8f9fa; border-radius: 40px;border: 1px solid #006400;margin: 20px;">
                             <div class="card-body d-flex flex-column">
                                 <h5 class="card-title">{{ Str::limit($empresavencida->nombre_comercial, 35, $end = '...') }}</h5>
                                 <p class="card-text"><strong>Nit:</strong> {{ $empresavencida->nit }}</p>
                                 <p class="card-text"><strong>Ruex:</strong> {{ $empresavencida->ruex }}</p>
                                 <p class="card-text"><strong>Estado:</strong> {{ $empresavencida->descripcion_estado }}</p>
-                                <div class="alert alert-danger">
+                                <div class="alert alert-danger mt-auto">
                                     <strong>Empresa con RUEX - Vencido</strong>
                                 </div>
                             </div>
@@ -244,7 +244,7 @@
                 @foreach($empresas as $empresa)
                     <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
                         <div class="card h-100 shadow-lg"
-                            style="background-color: #f8f9fa; border-radius: 40px;border: 1px solid #006400;">
+                            style="background-color: #f8f9fa; border-radius: 40px;border: 1px solid #006400;margin: 20px;">
                             <div class="card-body d-flex flex-column">
                                 <h5 class="card-title">{{ $empresa->nombre_comercial }}</h5>
                                 <p class="card-text"><strong>Nit:</strong> {{ $empresa->nit }}</p>

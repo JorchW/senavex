@@ -65,20 +65,21 @@
                                     {{ $producto->sigla }}
                                 </td>
                                 <td>
-                                    <a href="{{ URL('one-prod-admin/' . Crypt::encryptString($producto->id_ddjj)) }}"
-                                        class="btn btn-outline-primary">Editar Producto</a>
-                                    <br>
-                                    @if ($producto->path_file_photo1 && $producto->path_file_photo2 && $producto->path_file_photo3)
-                                        <a href="{{ URL('publicar-prod-admin/' . Crypt::encryptString($producto->id_ddjj)) }}"
-                                            class="btn btn-outline-primary">Enviar a revisión</a>
-                                        <div class="alert alert-success text-center">
-                                            <strong>Listo!.</strong>
-                                        </div>
-                                    @else
-                                        <div class="alert alert-danger text-center">
-                                            <strong>No listo!.</strong>
-                                        </div>
-                                    @endif
+                                    <div class="d-flex flex-column align-items-stretch w-100">
+                                        <a href="{{ URL('one-prod-admin/' . Crypt::encryptString($producto->id_ddjj)) }}"
+                                            class="btn btn-outline-primary mb-2">Editar Producto</a>
+                                        @if ($producto->path_file_photo1 && $producto->path_file_photo2 && $producto->path_file_photo3)
+                                            <a href="{{ URL('publicar-prod-admin/' . Crypt::encryptString($producto->id_ddjj)) }}"
+                                                class="btn btn-outline-primary mb-2">Enviar a revisión</a>
+                                            <div class="alert alert-success text-center">
+                                                <strong>Listo!.</strong>
+                                            </div>
+                                        @else
+                                            <div class="alert alert-danger text-center">
+                                                <strong>No listo!.</strong>
+                                            </div>
+                                        @endif
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach
