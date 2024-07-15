@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<!-- Mirrored from Senavex.dexignzone.com/xhtml/index.html?theme=3 by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 05 Aug 2021 15:36:19 GMT -->
-
 <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Senavex : Directorio Exportador" />
@@ -12,31 +8,16 @@
     <meta property="og:description" content="Senavex : Directorio Exportador" />
     <meta property="og:image" content="" />
     <meta name="format-detection" content="telephone=no">
-
-    <!-- PAGE TITLE HERE -->
     <title>Senavex : Directorio Exportador</title>
-
-    <!-- FAVICONS ICON -->
     <link rel="shortcut icon" type="image/png" href="{{ asset('storage/images/vistas/icono.png') }}" />
-
-    <!-- Datatable -->
     <link href="{{ asset('admin/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
-
     <link rel="stylesheet" href="{{ asset('admin/vendor/chartist/css/chartist.min.css') }}">
     <link href="{{ asset('admin/vendor/sweetalert2/dist/sweetalert2.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('admin/vendor/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css') }}"
-        rel="stylesheet">
+    <link href="{{ asset('admin/vendor/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet">
     <link href="{{ asset('admin/vendor/jquery-nice-select/css/nice-select.css') }}" rel="stylesheet">
-    <!-- Style css -->
     <link href="{{ asset('admin/css/style.css') }}" rel="stylesheet">
-
 </head>
-
 <body>
-
-    <!--*******************
-        Preloader start
-    ********************-->
     <div id="preloader">
         <div class="loader">
             <div class="loader--dot"></div>
@@ -48,18 +29,7 @@
             <div class="loader--text"></div>
         </div>
     </div>
-    <!--*******************
-        Preloader end
-    ********************-->
-
-    <!--**********************************
-        Main wrapper start
-    ***********************************-->
     <div id="main-wrapper">
-
-        <!--**********************************
-            Nav header start
-        ***********************************-->
         <div class="nav-header">
             <a href="{{ URL('select') }}" class="brand-logo">
                 <img src="{{ asset('/storage/images/vistas/icono.png') }}" height="50" width="50" alt="">
@@ -209,18 +179,40 @@
         <div class="deznav">
             <div class="deznav-scroll">
                 <ul class="metismenu" id="menu">
-                    <li>
-                        <h5 class="nav-text">Ninguna Empresa Seleccionada...</h5>
+                    <li><a class="ai-icon" aria-expanded="false">
+                            <i class="flaticon-025-dashboard"></i>
+                            <span class="nav-text">Seleccionar Otra</span>
+                            <div class="text-center">
+                                <span class="nav-text">Empresa</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                            <i class="bi bi-wrench"></i>
+                            <span class="nav-text">Editar Empresa</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li>
+                                <h5 class="text-center">Seleccione una empresa...</h5>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                            <i class="flaticon-086-star"></i>
+                            <span class="nav-text">Productos</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li>
+                                <h5 class="text-center">Seleccione una empresa...</h5>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </div>
         </div>
-        <p>
-            
-        </p>
         <div class="content-body">
             <blockquote class="blockquote text-center">
-                <p class="h2">Empresas</p>
+                <p class="h2">Seleccione una Empresa</p>
             </blockquote>
             <div class="row text-center">
                 @foreach ($empresasvencidas as $empresavencida)

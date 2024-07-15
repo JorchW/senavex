@@ -1,7 +1,6 @@
 @extends('home')
 @section('title', 'Lista Empresas')
 @section('content')
-    <!-- row -->
     <div class="container-fluid">
         <div class="page-titles">
             <ol class="breadcrumb">
@@ -14,10 +13,6 @@
                 <h2 class="font-w600 mb-0">Empresas</h2>
                 <p class="text-light"> </p>
             </div>
-            {{-- <div class="input-group search-area2 d-xl-inline-flex mb-2 me-4">
-                <button class="input-group-text"><i class="flaticon-381-search-2 text-primary"></i></button>
-                <input type="text" class="form-control" placeholder="Search here...">
-            </div> --}}
         </div>
         <div class="row">
             <div class="col-xl-12">
@@ -40,10 +35,6 @@
                                     </li>
                                 </ul>
                             </div>
-                            {{-- <div class="col-sm-12 col-md-5 text-md-end mt-md-0 mt-4">
-                                    <a href="javascript:void(0);" class="btn btn-secondary me-1 px-4">Publish</a>
-                                    <a href="javascript:void(0);" class="btn btn-danger px-4">Delete</a>
-                                </div> --}}
                         </div>
                     </div>
                 </div>

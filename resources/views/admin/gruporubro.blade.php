@@ -1,15 +1,12 @@
 @extends('home')
 @section('content')
     <div class="container-fluid">
-
         <div class="row page-titles">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item active"><a href="javascript:void(0)">Home</a></li>
                 <li class="breadcrumb-item"><a href="javascript:void(0)">Rubros Grupos</a></li>
             </ol>
         </div>
-        <!-- row -->
-
         <div class="row">
             <div class="col-12">
                 <div class="card">
@@ -18,13 +15,9 @@
                         <div class="col-xl-3 col-lg-4 mb-4 mb-lg-0">
                             <a href="javascript:void(0);" class="btn btn-secondary  btn-lg btn-block rounded text-white"
                                 data-bs-toggle="modal" data-bs-target="#addNewCustomer">+Nuevo Producto</a>
-                            <!-- Add Order -->
-
                         </div>
                     </div>
-
                     <div class="card-body">
-
                         <div class="table-responsive">
                             <table id="example3" class="display" style="min-width: 845px">
                                 <thead>
@@ -88,12 +81,7 @@
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
                         </div>
-                        {{-- <div class="form-group">
-                            <button type="button" class="btn btn-primary center">Create</button>
-                        </div> --}}
-
                     </form>
-
                 </div>
             </div>
         </div>

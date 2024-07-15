@@ -1,5 +1,4 @@
 @extends('home')
-
 @section('content')
 <div class="container-fluid">
     <div class="form-head mb-4 d-flex flex-wrap align-items-center">
@@ -93,7 +92,6 @@
                 </div>
                 <div class="modal-body">
                     ...
-                    <!-- Add your modal content here -->
                     ...
                 </div>
                 <div class="modal-footer">
@@ -102,17 +100,12 @@
             </div>
         </div>
     </div>
-
     <script>
-        // Get the modal element
         var modal = document.getElementById('exampleModal');
 
-        // Get the button that triggers the modal
         var button = document.querySelector('[data-bs-target="#exampleModal"]');
 
-        // Add an event listener to the button
         button.addEventListener('click', function () {
-            // Get the product ID and name from the data attributes
             var productSigla = button.getAttribute('data-product-sigla');
             var productObservaciones = button.getAttribute('data-product-observaciones');
 

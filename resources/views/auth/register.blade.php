@@ -1,7 +1,5 @@
 @extends('layouts.app')
-
 @section('content')
-    
     <div class="authincation h-100">
         <div class="container h-100">
             <div class="row justify-content-center h-100 align-items-center">
@@ -13,8 +11,6 @@
                                     <div class="text-center mb-3">
                                         <a href="index.html"><img src="admin/images/logo-full.png" alt=""></a>
                                     </div>
-                                    {{-- <div class="card-header">{{ __('Registro') }}</div> --}}
-
                                     <div class="card-body">
                                         <form method="POST" action="{{ redirect()->route('register') }}">
                                             @csrf
@@ -31,7 +27,6 @@
                                                     </span>
                                                 @enderror
                                             </div>
-
                                             <div class="mb-3 col-md-6">
                                                 <label for="nombres" class="mb-1">{{ __('Nombres') }}</label>
                                                 <input id="nombres" type="text" placeholder="__________________" value="{{ $dataPerson->nombres }}" disabled="disabled"
@@ -44,9 +39,7 @@
                                                         <strong>{{ $message }}</strong>
                                                     </span>
                                                 @enderror
-
                                             </div>
-                                            
                                             <div class="mb-3 col-md-6">
                                                 <label for="primerApellido"
                                                     class="mb-1">{{ __('Primer Apellido') }}</label>
@@ -91,7 +84,6 @@
                                                         </span>
                                                     @enderror
                                             </div>
-
                                             <div class="mb-3">
                                                 <label for="username"
                                                     class="mb-1">{{ __('Usuario') }}</label>
@@ -107,7 +99,6 @@
                                                         </span>
                                                     @enderror
                                             </div>
-
                                             <div class="mb-3">
                                                 <label for="password"
                                                     class="mb-1">{{ __('Contraseña') }}</label>
@@ -122,7 +113,6 @@
                                                         </span>
                                                     @enderror
                                             </div>
-
                                             <div class="mb-3">
                                                 <label for="password-confirm" placeholder=""
                                                     class="mb-1">{{ __('Confirmar Contraseña') }}</label>

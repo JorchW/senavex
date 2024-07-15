@@ -1,7 +1,6 @@
 @extends('home')
 @section('title', 'Lista prodresas')
 @section('content')
-    <!-- row -->
     <div class="container-fluid">
         <div class="page-titles">
             <ol class="breadcrumb">
@@ -14,10 +13,6 @@
                 <h2 class="font-w600 mb-0">Productos</h2>
                 <p class="text-light"> </p>
             </div>
-            {{-- <div class="input-group search-area2 d-xl-inline-flex mb-2 me-4">
-                <button class="input-group-text"><i class="flaticon-381-search-2 text-primary"></i></button>
-                <input type="text" class="form-control" placeholder="Search here...">
-            </div> --}}
         </div>
         <div class="row">
             <div class="col-xl-12">
@@ -44,10 +39,6 @@
                                     </li>
                                 </ul>
                             </div>
-                            {{-- <div class="col-sm-12 col-md-5 text-md-end mt-md-0 mt-4">
-                                    <a href="javascript:void(0);" class="btn btn-secondary me-1 px-4">Publish</a>
-                                    <a href="javascript:void(0);" class="btn btn-danger px-4">Delete</a>
-                                </div> --}}
                         </div>
                     </div>
                 </div>
@@ -59,7 +50,6 @@
                             <table class="table mb-4 dataTablesCard card-table p-0  review-table fs-14" id="example3">
                                 <thead>
                                     <tr>
-                                        
                                         <th>Titulo</th>
                                         <th style="width:250px;" class="d-none d-lg-table-cell">Imagen</th>
                                         <th>Descripcion</th>
@@ -69,8 +59,7 @@
                                 <tbody>
                                     @foreach ($prodTodos as $prodTod)
                                         @if ($prodTod->estado != 'eliminado')
-                                            <tr>
-                                                
+                                            <tr> 
                                                 <td>
                                                     <div class="media-body">
                                                         <h4 class="font-w600 mb-1 ">{{ $prodTod->nombre_producto }}</h4>
@@ -129,7 +118,6 @@
                             <table class="table mb-4 dataTablesCard card-table p-0  review-table fs-14" id="example3">
                                 <thead>
                                     <tr>
-                                       
                                         <th style="width:250px;">Titulo</th>
                                         <th class="d-none d-lg-table-cell">Imagen</th>
                                         <th>Descripcion</th>
@@ -140,7 +128,6 @@
                                     @foreach ($prodActivos as $prodAct)
                                         @if ($prodAct->estado != 'eliminado')
                                             <tr>
-                                                
                                                 <td>
                                                     <div class="media-body">
                                                         <h4 class="font-w600 mb-1 ">{{ $prodAct->nombre_producto }}</h4>
@@ -175,7 +162,6 @@
                                                             class="btn btn-warning btn-rounded text-white btn-sm ms-2  px-4">Observar</a>
                                                         <a href="{{ URL('one-prod-admin/'.Crypt::encryptString($prodAct->id_producto)) }}"
                                                             class="btn btn-primary btn-rounded text-white btn-sm ms-2  px-4">Editar</a>
-                                                        
                                                     </div>
                                                 </td>
                                             </tr>
@@ -190,7 +176,6 @@
                             <table class="table mb-4 dataTablesCard card-table p-0  review-table fs-14" id="example3">
                                 <thead>
                                     <tr>
-                                        
                                         <th style="width:250px;">Titulo</th>
                                         <th class="d-none d-lg-table-cell">Imagen</th>
                                         <th>Descripcion</th>
@@ -201,7 +186,6 @@
                                     @foreach ($prodInactivos as $prodInac)
                                         @if ($prodInac->estado != 'eliminado')
                                             <tr>
-                                                
                                                 <td>
                                                     <div class="media-body">
                                                         <h4 class="font-w600 mb-1 ">{{ $prodInac->nombre_producto }}</h4>
@@ -231,9 +215,7 @@
                                                         {{ $prodInac->descripcion_producto }}</p>
                                                 </td>
                                                 <td>
-                                                    
                                                     <div class="d-flex">
-                                                        
                                                         <a href="{{ URL('publicar-prod-admin/'.Crypt::encryptString($prodInac->id_producto)) }}"
                                                             class="btn btn-secondary btn-rounded text-white btn-sm px-4">Publicar</a>
                                                         <a href="{{ URL('observar-prod-admin/'.Crypt::encryptString($prodInac->id_producto)) }}"
@@ -252,7 +234,6 @@
                             <table class="table mb-4 dataTablesCard card-table p-0  review-table fs-14" id="example3">
                                 <thead>
                                     <tr>
-                                        
                                         <th style="width:250px;">Titulo</th>
                                         <th class="d-none d-lg-table-cell">Imagen</th>
                                         <th>Descripcion</th>
@@ -263,7 +244,6 @@
                                     @foreach ($prodObservados as $prodObs)
                                         @if ($prodObs->estado != 'eliminado')
                                             <tr>
-                                                
                                                 <td>
                                                     <div class="media-body">
                                                         <h4 class="font-w600 mb-1 ">{{ $prodObs->nombre_producto }}</h4>

@@ -1,17 +1,7 @@
 @extends('welcome')
 @section('vista')
-<!-- Start main-content -->
 <div class="main-content">
-    {{--<section class="inner-header divider parallax layer-overlay overlay-dark-5 pt-150"
-            data-bg-img="https://agronomia.upea.bo/assets/pagina/assets/images/bg/bg3.jpg"
-            style="
-            background-image: url('https://agronomia.upea.bo/assets/pagina/assets/images/bg/bg3.jpg');
-            background-position: 50% 0px;
-          ">
-    </section>--}}
-    <br>
-    <br>
-    <!-- Section: Event List -->
+    <br><br>
     <section>
         <div class="container">
             <div class="container mt-20">
@@ -21,7 +11,6 @@
                             Listado de <span class="text-theme-colored3">Empresas.</span>
                         </h2>
                     </div>
-
                     <div class="col-md-4">
                         <div class="widget">
                             <div class="search-form">
@@ -61,7 +50,6 @@
                                     <div class="col-sm-4 pl-0 pl-sm-15">
                                         <div class="event-details p-15 mt-20">
                                             <h4 class="media-heading text-uppercase font-weight-500">
-
                                                 <strong>{{ $empresa->razon_social}}</strong>
                                             </h4>
                                             <p>
@@ -84,18 +72,6 @@
                                                 <li class="text-theme-colored">
                                                     <i class="fa fa-map-marker mr-5"></i> {{$empresa->pag_web}}
                                                 </li>
-                                            </ul>
-
-                                            <ul class="styled-icons icon-sm icon-bordered icon-rounded clearfix mt-20 mb-10">
-                                                <li>
-                                                    {{--<a href="{{ $empresa->facebook }}"><i
-                                                            class="fa fa-facebook"></i></a>--}}
-                                                </li>
-                                                <li>
-                                                    {{--<a href="{{ $empresa->whatsapp }}"><i
-                                                            class="fa fa-whatsapp"></i></a>--}}
-                                                </li>
-
                                             </ul>
                                         </div>
                                     </div>
@@ -120,48 +96,8 @@
                     @endif
                     <div class="pagination"> {{ $empresas->links() }}</div>
                 </div>
-
-                {{--<div class="col-md-3">
-                    <div class="sidebar sidebar-left mt-sm-30">
-                        <div class="widget p-30">
-                            <div class="owl-carousel-1col" data-dots="true">
-                                <div class="item"><img src="{{ asset('storage/images/vistas/senavex.png') }}" alt="" />
-                                </div>
-                                <div class="item"><img src="{{ asset('storage/images/vistas/nuestro.png') }}" alt="" />
-                                </div>
-                                <div class="item"><img src="{{ asset('storage/images/vistas/ministerio.png') }}"
-                                        alt="" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="widget">
-                            <h5 class="widget-title line-bottom">
-                                <font style="vertical-align: inherit">
-                                    <font style="vertical-align: inherit">Informacion
-                                    </font>
-                                </font>
-                            </h5>
-                            <div class="product-list">
-                                <div class="categories">
-                                    <ul class="list-border">
-                                        <li>
-                                            <a href="{{ URL('productos') }}">Productos<span></span></a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ URL('rubros') }}">Rubros<span></span></a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ URL('empresas') }}">Empresas<span></span></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>                       
-                    </div>
-                </div>--}}
             </div>
         </div>
     </section>
 </div>
-<!-- end main-content -->
 @endsection

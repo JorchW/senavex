@@ -8,7 +8,6 @@
                 <li class="breadcrumb-item"><a href="javascript:void(0)">Categoria</a></li>
             </ol>
         </div>
-        <!-- row -->
         <div class="row">
             <div class="col-xl-12 col-lg-12">
                 <div class="card">
@@ -41,16 +40,10 @@
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </div>
                             </div>
-                            {{-- <div class="form-group">
-                                <button type="button" class="btn btn-primary center">Create</button>
-                            </div> --}}
-    
                         </form>
-    
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 @endsection

@@ -1,18 +1,6 @@
 @extends('welcome')
 @section('vista')
-    <!-- Start main-content -->
-    {{--<section class="inner-header divider parallax layer-overlay overlay-dark-5 pt-150"
-            data-bg-img="https://agronomia.upea.bo/assets/pagina/assets/images/bg/bg3.jpg"
-            style="
-            background-image: url('https://agronomia.upea.bo/assets/pagina/assets/images/bg/bg3.jpg');
-            background-position: 50% 0px;
-          ">
-    </section>--}}
-        <!-- Section: Event List -->
-        <br>
-        <br>
-        <br>
-        <br>
+        <br><br><br><br>
         <section>
             <div class="container mt-30 mb-30 pt-30 pb-0">
                 <div class="container mt-20">
@@ -50,13 +38,6 @@
                                 <div class="row">
                                     <div class="col-sm-4 pr-0 pr-sm-15">
                                         <div class="thumb pt-15 pb-15">
-                                            {{--@if (strlen($rubro->imagen_rubro) > 0)
-                                                <img class="img-fullwidth" src="{{ $rubro->imagen_rubro }}" height="150px"
-                                                    alt="..." />
-                                            @else
-                                                <img class="img-fullwidth" src="{{asset('storage/images/rubros/1.png')}}"
-                                                    alt="..." />
-                                            @endif--}}
                                         </div>
                                     </div>
                                     <div class="col-sm-8 pl-0 pl-sm-15">
@@ -88,27 +69,6 @@
                             <br>
                             <br>
                         @endif
-                        {{-- <div class="upcoming-events bg-white-f3 mb-20">
-                            <div class="row">
-                                <div class="col-sm-4 pr-0 pr-sm-15">
-                                    <div class="thumb pt-15 pb-15">
-                                        <img class="img-fullwidth" src="1.png" alt="..." />
-                                    </div>
-                                </div>
-                                <div class="col-sm-8 pl-0 pl-sm-15">
-                                    <div class="event-details p-15 mt-20">
-                                        <h4 class="text-theme-colored media-heading text-lowercase font-weight-500">
-                                            INSTRUMENTOS Y APARATOS DE OPTICA, FOTOGRAFIA O
-                                            CINEMATOGRAFIA, DE MEDIDA, CONTROL O PRECISION;
-                                            INSTRUMENTOS Y APARATOS MEDICOQUIRURGICOS; APARATOS...
-                                        </h4>
-                                        <a class="pull-right text-gray font-13 pb-5" href="#"><i
-                                                class="fa fa-angle-double-right text-theme-colored"></i>
-                                            Ver categorias</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> --}}
                         <div class="pagination theme-colored pull-right xs-pull-center mb-xs-40"> {!!$rubros->links()!!}</div>
                     </div>
                     <div class="col-md-3">
@@ -136,5 +96,4 @@
             </div>
         </section>
     </div>
-    <!-- end main-content -->
 @endsection

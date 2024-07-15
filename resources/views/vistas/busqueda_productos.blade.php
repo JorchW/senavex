@@ -1,10 +1,7 @@
 @extends('welcome')
 @section('vista')
 <div class="main-content">
-    <br>
-    <br>
-    <br>
-    <br>
+    <br><br><br><br>
     <section>
         <div class="container mt-30 mb-30 pt-30 pb-0">
             <div class="container mt-20">

@@ -1,5 +1,4 @@
 @extends('home')
-
 @section('content')
 <div class="container-fluid">
     <div class="form-head mb-4 d-flex flex-wrap align-items-center">

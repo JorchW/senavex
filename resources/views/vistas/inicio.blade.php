@@ -1,32 +1,22 @@
 @extends('welcome')
 @section('vista')
-
-<!-- Start main-content -->
 <div class="main-content">
-    <!-- Section: home -->
     <section id="home" class="divider">
         <div class="container-fluid p-0">
-
-            <!-- START REVOLUTION SLIDER 5.0.7 -->
             <div id="rev_slider_home_wrapper" class="rev_slider_wrapper fullwidthbanner-container"
                 data-alias="news-gallery34"
                 style="margin:0px auto;background-color:#ffffff;padding:0px;margin-top:0px;margin-bottom:0px;">
-                <!-- START REVOLUTION SLIDER 5.0.7 fullwidth mode -->
                 <div id="rev_slider_home" class="rev_slider fullwidthabanner" style="display:none;"
                     data-version="5.0.7">
                     <ul>
-                        <!-- SLIDE 1 -->
                         <li data-index="rs-1" data-transition="slidingoverlayhorizontal" data-slotamount="default"
                             data-easein="default" data-easeout="default" data-masterspeed="default"
                             data-thumb="{{ asset('storage/images/vistas/inicio1.png') }}" data-rotate="0"
                             data-fstransition="fade" data-fsmasterspeed="1500" data-fsslotamount="7"
                             data-saveperformance="off" data-title="Make an Impact">
-                            <!-- MAIN IMAGE -->
                             <img src="{{ asset('storage/images/vistas/inicio1.png') }}" alt=""
                                 data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat"
                                 data-bgparallax="10" class="rev-slidebg" data-no-retina>
-                            <!-- LAYERS -->
-                            <!-- LAYER NR. 1 -->
                             <div class="tp-caption tp-shape tp-shapewrapper tp-resizeme rs-parallaxlevel-0"
                                 id="slide-1-layer-1" data-x="['center','center','center','center']"
                                 data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']"
@@ -37,7 +27,6 @@
                                 data-start="1000" data-basealign="slide" data-responsive_offset="on"
                                 style="z-index: 5;background-color:rgba(0, 0, 0, 0.5);border-color:rgba(0, 0, 0, 1.00);">
                             </div>
-                            <!-- LAYER NR. 2 -->
                             <div class="tp-caption tp-resizeme text-white rs-parallaxlevel-0" id="slide-1-layer-2"
                                 data-x="['left','left','left','left']" data-hoffset="['50','50','50','30']"
                                 data-y="['top','top','top','top']" data-voffset="['220','200','170','190']"
@@ -52,7 +41,6 @@
                                 style="z-index: 6; min-width: 600px; max-width: 600px; white-space: normal;">
                                 Directorio de <span class="text-theme-coloredv">Exportadores</span>
                             </div>
-                            <!-- LAYER NR. 3 -->
                             <div  class="tp-caption tp-resizeme text-white rs-parallaxlevel-0 rounded-circle"  id="slide-1-layer-3"
                                 data-x="['left','left','left','left']" data-hoffset="['50','50','50','30']"
                                 data-y="['top','top','top','top']" data-voffset="['380','320','280','280']"
@@ -65,7 +53,6 @@
                                 data-mask_out="x:0;y:0;s:inherit;e:inherit;" data-start="1000" data-splitin="none"
                                 data-splitout="none" data-responsive_offset="on"
                                 style="z-index: 6; min-width: 600px; max-width: 600px; white-space: normal;">
-                                
                                 <form action="{{ route('productos') }}" method="GET" class="slider-search-form"
                                     style="max-width: 100%; margin: 0 auto; text-align: center;">
                                     <input class="btn-circled" type="text" name="descripcion_busqueda" id="descripcion_busqueda"
@@ -79,11 +66,8 @@
                             </div>
                         </li>
                     </ul>
-                    {{--<div class="tp-bannertimer tp-bottom"
-                        style="height: 5px; background-color: rgba(166, 216, 236, 1.00);"></div>--}}
                 </div>
             </div>
-            <!-- END REVOLUTION SLIDER -->
             <script type="text/javascript">
                 var tpj = jQuery;
                 var revapi34;
@@ -145,7 +129,6 @@
                                     h_offset: 0,
                                     v_offset: 30,
                                     space: 5,
-                                    //tmp: '<span class="tp-bullet-img-wrap"><span class="tp-bullet-image"></span></span>'
                                 }
                             },
                             viewPort: {
@@ -182,9 +165,8 @@
                             }
                         });
                     }
-                }); /*ready*/
+                });
             </script>
-            <!-- END REVOLUTION SLIDER -->
         </div>
     </section>
     <section id="about">
@@ -208,7 +190,6 @@
             </div>
         </div>
     </section>
-
     <section id="about">
         <div class="container pb-90 pb-sm-90">
             <div class="section-content">
@@ -216,37 +197,14 @@
                     <div class="col-sm-12 col-md-6">
                         <img src="{{ asset('storage/images/vistas/nuestro1.png') }}" alt="">
                     </div>
-
-                    {{--<div class="col-xs-12 col-sm-6 col-md-4 wow fadeInLeft ml-70" data-wow-duration="1s"
-                        data-wow-delay="0.3s"
-                        style="visibility: visible; animation-duration: 1s; animation-delay: 0.3s;">
-                        <div class="mt-15">
-                            <a href="#">
-                                <h2 class="line-bottom-edu text-muted">Empresas</h2>
-                            </a>
-                        </div>
-                        <div class="mt-15">
-                            <a href="#">
-                                <h2 class="line-bottom-edu text-muted">Productos</h2>
-                            </a>
-                        </div>
-                        <div class="mt-15">
-                            <a href="#">
-                                <h2 class="line-bottom-edu text-muted">Rubros</h2>
-                            </a>
-                        </div>
-                    </div>--}}
                 </div>
-
                 <div class="row mt-30 pt-15">
                     <div class="col-md-12 col-sm-6">
                         <img src="{{asset('storage/images/vistas/isos.png')}}" alt="">
-
                     </div>
                 </div>
             </div>
         </div>
     </section>
 </div>
-
 @endsection

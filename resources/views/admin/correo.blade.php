@@ -1,9 +1,6 @@
 @extends('home')
 @section('title', '')
 @section('content')
-    <!--**********************************
-            Content body start
-        ***********************************-->
     <div class="container-fluid">
         <div class="row page-titles">
             <ol class="breadcrumb">
@@ -15,8 +12,6 @@
                 </li>
             </ol>
         </div>
-
-        <!-- row -->
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
@@ -53,9 +48,6 @@
                                         <button class="btn btn-primary btn-sl-sm me-2" type="submit">
                                             <span class="me-2"><i class="fa fa-paper-plane"></i></span>Enviar
                                         </button>
-                                        {{-- <button class="btn btn-danger light btn-sl-sm" type="button">
-                                            <span class="me-2"><i class="fa fa-times"></i></span>Discard
-                                        </button> --}}
                                     </div>
                                 </form>
                                 </div>
@@ -70,7 +62,4 @@
             </div>
         </div>
     </div>
-    <!--**********************************
-            Content body end
-        ***********************************-->
 @endsection

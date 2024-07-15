@@ -182,7 +182,10 @@
                 <ul class="metismenu" id="menu">
                     <li><a class="ai-icon" href="{{ URL('select') }}" aria-expanded="false">
                             <i class="flaticon-025-dashboard"></i>
-                            <span class="nav-text">Seleccionar Otra Empresa</span>
+                            <span class="nav-text">Seleccionar Otra</span>
+                            <div class="text-center">
+                                <span class="nav-text">Empresa</span>
+                            </div>
                         </a>
                     </li>
                     @foreach ($roles as $rol)
