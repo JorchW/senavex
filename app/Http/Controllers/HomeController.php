@@ -2,23 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DirectorioEmpresaExtras;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\Productos;
 use App\Models\Rubro;
 use App\Models\Categoria;
-use App\Models\Monedas;
-use App\Models\UnidadMedidas;
 use App\Models\Empresas;
 use App\Models\GrupoRubro;
 use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\File;
-
-use Illuminate\Contracts\Encryption\DecryptException;
-use PHPUnit\Framework\Constraint\IsEmpty;
-use PHPUnit\Framework\MockObject\ReturnValueNotConfiguredException;
 
 
 class HomeController extends Controller

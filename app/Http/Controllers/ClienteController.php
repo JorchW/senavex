@@ -3,18 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Productos;
-use App\Models\Rubro;
-use App\Models\Categoria;
-use App\Models\Monedas;
-use App\Models\UnidadMedidas;
-use App\Models\Empresas;
-use App\Models\GrupoRubro;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Contracts\Support\Jsonable;
-use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Crypt;
-use Carbon\Carbon;
 
 class ClienteController extends Controller
 {
