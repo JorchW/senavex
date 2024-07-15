@@ -111,7 +111,7 @@ class ClienteController extends Controller
     {
         $idDes = Crypt::decryptString($id);
         $detEmpresa = DB::table('empresas as e')
-            ->join('directorio.directorio_empresa_extras as dee', 'e.id_empresa', '=', 'dee.id_empresa')
+            ->leftjoin('directorio.directorio_empresa_extras as dee', 'e.id_empresa', '=', 'dee.id_empresa')
             ->select('*')
             ->where('e.id_empresa', $idDes)->first();
 

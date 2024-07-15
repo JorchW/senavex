@@ -37,9 +37,6 @@
                         @foreach ($productos as $producto)
                             <div class="col-sm-3 col-md-3 col-lg-3">
                                 <div class="services mb-sm-50 mt-20">
-                                    <div class="thumb">
-                                        <img class="img-fullwidth" alt="" src="{{ $producto->imagen_producto }}" />
-                                    </div>
                                     <div class="services-details clearfix">
                                         <div class="p-20 p-sm-15 bg-lighter">
                                             <h4 class="mt-0 line-height-1">

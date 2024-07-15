@@ -35,35 +35,34 @@
                     @if (count($productos) > 0)
                         @foreach ($productos as $producto)
                             <div class="col-sm-3 col-md-3 col-lg-3">
+                                <div class="col-sm-12 col-md-12 text-center">
+                                    <img src="{{ asset('storage/images/vistas/distintivot.png') }}" alt="distintivo"
+                                        width="100px" class="distintivo-img">
+                                </div>
                                 <div class="services mb-sm-50 mt-20">
-                                    <div class="thumb">
-                                        <div class="owl-carousel-1col" data-dots="true">
-                                            <div class="item">
-                                                <img class="img-fullwidth" alt="Imagen"
-                                                    src="{{ $producto->path_file_photo1 }}" />
-                                            </div>
-                                            <div class="item">
-                                                <img class="img-fullwidth" alt="Imagen"
-                                                    src="{{ $producto->path_file_photo2 }}" />
-                                            </div>
-                                            <div class="item">
-                                                <img class="img-fullwidth" alt="Imagen"
-                                                    src="{{ $producto->path_file_photo3 }}" />
-                                            </div>
+                                    <div class="carousel">
+                                        <div class="item">
+                                            <img class="img-fullwidth" alt="Imagen 1" src="{{ $producto->path_file_photo1 }}" />
                                         </div>
+                                        <div class="item">
+                                            <img class="img-fullwidth" alt="Imagen 2" src="{{ $producto->path_file_photo2 }}" />
+                                        </div>
+                                        <div class="item">
+                                            <img class="img-fullwidth" alt="Imagen 3" src="{{ $producto->path_file_photo3 }}" />
+                                        </div>
+                                        <button class="arrow-prev">&#10094;</button>
+                                        <button class="arrow-next">&#10095;</button>
                                     </div>
                                     <div class="services-details clearfix">
                                         <div class="p-20 p-sm-15 bg-lighter">
                                             <h4 class="mt-0 line-height-1">
-                                                {{ $producto->denominacion_comercial }}
+                                                {{Str::limit($producto->denominacion_comercial, 20, $end = ' ...') }}
                                             </h4>
-                                            <div class="col-sm-12 col-md-12 text-center">
-                                                <img src="{{ asset('storage/images/vistas/distintivo.png') }}" alt="distintivo">
-                                            </div>
                                             <div class="clearfix"></div>
                                             <ul class="list-inline mt-15 mb-10 clearfix">
                                                 <li class="pull-left flip pr-0 clearfix">
-                                                    Empresa: <span class="font-weight-700">{{$producto->razon_social}}</span>
+                                                    Empresa: <span
+                                                        class="font-weight-700">{{Str::limit($producto->razon_social, 40, $end = '...')}}</span>
                                                 </li>
                                             </ul>
                                             <a class="btn btn-dark btn-theme-coloredv btn-sm text-uppercase mt-10"

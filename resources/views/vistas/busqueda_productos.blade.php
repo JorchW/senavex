@@ -59,9 +59,6 @@
                                             <h4 class="mt-0 line-height-1">
                                                 {{Str::limit($producto->denominacion_comercial, 20, $end = ' ...') }}
                                             </h4>
-                                            <div class="col-sm-12 col-md-12 text-center">
-                                                <img src="{{ asset('storage/images/vistas/distintivo.png') }}" alt="distintivo">
-                                            </div>
                                             <div class="clearfix"></div>
                                             <ul class="list-inline mt-15 mb-10 clearfix">
                                                 <li class="pull-left flip pr-0 clearfix">
