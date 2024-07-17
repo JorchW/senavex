@@ -12,7 +12,7 @@ class ClienteProductoController extends Controller
     {
         $descripcion_busqueda = $request->get('descripcion_busqueda');
 
-        $sql_busqueda = "SELECT d.id_ddjj, ddm.denominacion_comercial, e.id_empresa, e.razon_social, ddp.id_producto, ddp.path_file_photo1, ddp.path_file_photo2, ddp.path_file_photo3    
+        $sql_busqueda = "SELECT ddp.descripcion,ddp.nombre_comercial,d.id_ddjj, ddm.denominacion_comercial, e.id_empresa, e.razon_social, ddp.id_producto, ddp.path_file_photo1, ddp.path_file_photo2, ddp.path_file_photo3    
                             from ddjjs d
                             inner join empresas e on e.id_empresa = d.id_empresa
                             inner join ddjj_datos_mercancias ddm on ddm.id_ddjj = d.id_ddjj

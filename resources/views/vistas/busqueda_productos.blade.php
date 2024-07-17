@@ -36,6 +36,11 @@
                     @if (count($result_busqueda) > 0)
                         @foreach ($result_busqueda as $producto)
                             <div class="col-sm-3 col-md-3 col-lg-3">
+                                <div class="services-details text-center">
+                                    <h4 class="mt-0 line-height-1">
+                                        {{ $producto->nombre_comercial }}
+                                    </h4>
+                                </div>
                                 <div class="col-sm-12 col-md-12 text-center">
                                     <img src="{{ asset('storage/images/vistas/distintivot.png') }}" alt="distintivo"
                                         width="100px" class="distintivo-img">
@@ -61,6 +66,10 @@
                                             </h4>
                                             <div class="clearfix"></div>
                                             <ul class="list-inline mt-15 mb-10 clearfix">
+                                                <li class="pull-left flip pr-0 clearfix">
+                                                    Descripcion del producto: <span
+                                                        class="font-weight-700">{{Str::limit($producto->descripcion, 60, $end = '...')}}</span>
+                                                </li>
                                                 <li class="pull-left flip pr-0 clearfix">
                                                     Empresa: <span
                                                         class="font-weight-700">{{Str::limit($producto->razon_social, 40, $end = '...')}}</span>

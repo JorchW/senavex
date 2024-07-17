@@ -127,6 +127,7 @@ class EmpresaController extends Controller
             ->value('path_file_foto1');
 
         $rules = [
+            'facebook' => 'nullable|url',
             'mail' => 'nullable|email',
             'paginaweb' => 'nullable|url',
             'telefono' => 'nullable|numeric|digits_between:7,10',
@@ -137,6 +138,7 @@ class EmpresaController extends Controller
             'telefono.digits_between' => 'El teléfono debe tener entre 7 y 10 dígitos.',
             'celular.numeric' => 'El celular debe contener solo números.',
             'celular.digits_between' => 'El celular debe tener entre 8 y 10 dígitos.',
+            'facebook.url' => 'URL de facebook no es válida.',
             'mail.email' => 'Introduzca una dirección de correo válida.',
             'paginaweb.url' => 'La dirección de la página web debe ser una URL válida.',
         ];

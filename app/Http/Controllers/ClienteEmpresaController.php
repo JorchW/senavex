@@ -15,7 +15,7 @@ class ClienteEmpresaController extends Controller
 
         $empresas = DB::table('empresas as e')
             ->leftJoin('directorio.directorio_empresa_extras as de', 'e.id_empresa', '=', 'de.id_empresa')
-            ->select('e.*', 'de.path_file_foto1')
+            ->select('e.razon_social','e.descripcion_empresa','de.*')
             ->where([
                 ['e.razon_social', 'ILIKE', '%' . $buscador_empresa . '%']
             ])
@@ -42,7 +42,7 @@ class ClienteEmpresaController extends Controller
             ->join('ddjj_datos_mercancias as dm', 'dj.id_ddjj', '=', 'dm.id_ddjj')
             ->join('acuerdos as a', 'a.id_acuerdo', '=', 'dj.id_acuerdo')
             ->join('empresas as e', 'dj.id_empresa', '=', 'e.id_empresa')
-            ->select('*')
+            ->select('e.id_empresa','e.razon_social','dp.*','dm.*')
             ->where('e.id_empresa', $idDes)
             ->whereIn('dps.id_producto_solicitud_estado', [2])->get();
 
@@ -56,7 +56,7 @@ class ClienteEmpresaController extends Controller
         $idDes = Crypt::decryptString($id);
         $detEmpresa = DB::table('empresas as e')
             ->leftjoin('directorio.directorio_empresa_extras as dee', 'e.id_empresa', '=', 'dee.id_empresa')
-            ->select('*')
+            ->select('e.id_empresa','e.razon_social','e.descripcion_empresa','dee.*')
             ->where('e.id_empresa', $idDes)->first();
 
         $productos = DB::table('directorio.directorio_productos')

@@ -40,10 +40,10 @@
                                     <div class="col-sm-4 pr-0 pr-sm-15">
                                         <div class="event-details p-15 mt-20">
                                             @if (strlen($empresa->path_file_foto1) > 0)
-                                            <img  src="{{ $empresa->path_file_foto1 }}" alt="" />
+                                                <img src="{{ $empresa->path_file_foto1 }}" alt="" />
                                             @else
-                                            <img class="img-fullwidth" src="{{ asset('storage/images/vistas/senavex1.png') }}"
-                                                alt="" />
+                                                <img class="img-fullwidth" src="{{ asset('storage/images/vistas/senavex1.png') }}"
+                                                    alt="" />
                                             @endif
                                         </div>
                                     </div>
@@ -53,7 +53,7 @@
                                                 <strong>{{ $empresa->razon_social}}</strong>
                                             </h4>
                                             <p>
-                                                {{ ucfirst(mb_strtolower(Str::limit($empresa->descripcion_empresa, 100, $end = ' ...')))  }}
+                                                {{ ucfirst(mb_strtolower(Str::limit($empresa->descripcion_empresa, 140, $end = ' ...')))  }}
                                             </p>
                                             <a href="{{ URL('detalle-empresas/' . Crypt::encryptString($empresa->id_empresa)) }}"
                                                 class="btn btn-flat btn-dark btn-theme-colored btn-sm">Ver Más
@@ -66,11 +66,29 @@
                                     <div class="col-sm-4">
                                         <div class="event-count p-15 mt-15">
                                             <ul>
-                                                <li class="mb-10 text-theme-colored">
-                                                    <i class="fa fa-clock-o mr-5"></i> {{$empresa->telefono}} - {{$empresa->email}}
+                                                <li class="row pl-sm-15">
+                                                    <div class="text-theme-colored">
+                                                        <strong>TELEFONO </strong>
+                                                    </div>
+                                                    <i class="fa fa-phone mr-5"></i>{{$empresa->telefono ?? 'No Proporcionado!.'}}
                                                 </li>
-                                                <li class="text-theme-colored">
-                                                    <i class="fa fa-map-marker mr-5"></i> {{$empresa->pag_web}}
+                                                <li class="row pl-sm-15">
+                                                <div class="text-theme-colored">
+                                                        <strong>CELULAR </strong>
+                                                    </div>
+                                                    <i class="fa fa-mobile mr-5"></i> {{$empresa->celular ?? 'No Proporcionado!.'}}
+                                                </li>
+                                                <li class="row pl-sm-15">
+                                                <div class="text-theme-colored">
+                                                        <strong>CORREO </strong>
+                                                    </div>
+                                                    <i class="fa fa-envelope mr-5"></i> {{$empresa->mail ?? 'No Proporcionado!.'}}
+                                                </li>
+                                                <li class="row pl-sm-15">
+                                                <div class="text-theme-colored">
+                                                        <strong>PAGINA WEB </strong>
+                                                    </div>
+                                                    <i class="fa fa-globe mr-5"></i> {{$empresa->paginaweb ?? 'No Proporcionado!.'}}
                                                 </li>
                                             </ul>
                                         </div>

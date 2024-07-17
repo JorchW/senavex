@@ -31,6 +31,18 @@
                                 <table class="table table-striped">
                                     <tbody>
                                         <tr>
+                                            <th>NOMBRE:</th>
+                                            <td>
+                                                <p>{{$detProducto->nombre_comercial}}</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>DESCRIPCION:</th>
+                                            <td>
+                                                <p>{{$detProducto->descripcion}}</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
                                             <th>RUBRO:</th>
                                             <td>
                                                 <p>{{$detProducto->descripcion_rubro}}</p>
@@ -99,34 +111,45 @@
                                                 <tr>
                                                     <th>CELULAR:</th>
                                                     <td>
-                                                        <a class="text-theme-colored" target="_blank"
-                                                            href="https://wa.me/+591{{ $detProducto->celular }}?text=¡Estoy+interesado!">
-                                                            {{$detProducto->celular}}</a>
+                                                        <i class="fab fa-whatsapp"></i>
+                                                        @if ($detProducto->celular)
+                                                            <a class="text-theme-colored" target="_blank"
+                                                                href="https://wa.me/+591{{ $detProducto->celular}}?text=¡Estoy+interesado!">
+                                                                {{$detProducto->celular}}</a>
+                                                        @else
+                                                            <span>No proporcionado!.</span>
+                                                        @endif
+
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <th>TELEFONO:</th>
                                                     <td>
-                                                        <a class="text-theme-colored"
-                                                            href="tel:{{ $detProducto->telefono }}">{{ $detProducto->telefono }}</a>
+                                                        <i class="fas fa-phone"></i>
+                                                        {{ $detProducto->telefono ?? 'No proporcionado!.'}}
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <th>PAGINA WEB:</th>
                                                     <td>
                                                         <div>
-                                                            <a class="text-theme-colored"
-                                                                href="{{ $detProducto->pag_web }}"
-                                                                target="_blank">{{ $detProducto->pag_web }}</a>
+                                                            <i class="fas fa-globe"></i>
+                                                            @if ($detProducto->paginaweb)
+                                                                <a class="text-theme-colored"
+                                                                    href="{{ $detProducto->paginaweb }}"
+                                                                    target="_blank">{{ $detProducto->paginaweb}}</a>
+                                                            @else
+                                                                <span>No proporcionado!.</span>
+                                                            @endif
+
                                                         </div>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <th>CORREO ELECTRONICO:</th>
                                                     <td>
-                                                        <div>
-                                                            {{$detProducto->email}}
-                                                        </div>
+                                                        <i class="fas fa-envelope"></i>
+                                                        {{$detProducto->mail ?? 'No proporcionado!.'}}
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -138,10 +161,13 @@
                                                 <tr>
                                                     <th>LUGAR:</th>
                                                     <td>
-                                                        <a class="text-theme-colored"
-                                                            href="https://www.google.com/maps/search/?api=1&query={{$detProducto->latitud}},{{$detProducto->longitud}}" target="blank_">
+                                                        {{--<a class="text-theme-colored"
+                                                            href="https://www.google.com/maps/search/?api=1&query={{$detProducto->latitud}},{{$detProducto->longitud}}"
+                                                            target="blank_">
                                                             Ver ubicación en Google Maps
-                                                        </a>
+                                                        </a>--}}
+                                                        <i class="fas fa-map-marker-alt"></i>
+                                                        <span>No proporcionado!.</span>
                                                     </td>
                                                 </tr>
                                             </tbody>
