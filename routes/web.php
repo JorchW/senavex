@@ -1,4 +1,8 @@
 <?php
+use App\Http\Controllers\ClienteInicioController;
+use App\Http\Controllers\ClienteEmpresaController;
+use App\Http\Controllers\ClienteProductoController;
+use App\Http\Controllers\ClienteRubroController;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\ProductoController;
 use Illuminate\Support\Facades\Route;
@@ -8,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 Auth::routes();
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
+    //empresas
     Route::prefix('')->group(function () {
         Route::controller(EmpresaController::class)->group(function () {
             Route::get('/select', 'seleccionarEmpresa')->name('select');
@@ -16,7 +21,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
             Route::put('update-empr/{id}', 'actualizarEmpresa')->name('update-empr');
         });
     });
-
+    //productos
     Route::prefix('')->group(function () {
         Route::controller(ProductoController::class)->group(function () {
             Route::get('list-prod-admin/{id}', 'listaProducto')->name('list-prod-admin');
@@ -28,22 +33,31 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         });
     });
 });
-
+//inicio directorio exportador
 Route::prefix('')->group(function () {
-    Route::get('/', [App\Http\Controllers\ClienteInicioController::class, 'inicio'])->name('inicio');
+    Route::controller(ClienteInicioController::class)->group(function(){
+        Route::get('/','inicio')->name('inicio');
+    });
 });
+//empresas directorio exportador
 Route::prefix('')->group(function () {
-    Route::get('empresas', [App\Http\Controllers\ClienteEmpresaController::class, 'listaEmpresas'])->name('empresas');
-    Route::get('list-prod-empresas/{id}', [App\Http\Controllers\ClienteEmpresaController::class, 'listaProductosEmpresa'])->name('list-prod-empresas');
-    Route::get('detalle-empresas/{id}', [App\Http\Controllers\ClienteEmpresaController::class, 'unaEmpresa'])->name('detalle-empresas');
+    Route::controller(ClienteEmpresaController::class)->group(function(){
+    Route::get('empresas','listaEmpresas')->name('empresas');
+    Route::get('list-prod-empresas/{id}','listaProductosEmpresa')->name('list-prod-empresas');
+    Route::get('detalle-empresas/{id}','unaEmpresa')->name('detalle-empresas');
+    });
 });
-
+//rubros directorio exportador
 Route::prefix('')->group(function () {
-    Route::get('rubros', [App\Http\Controllers\ClienteRubroController::class, 'listaRubros'])->name('rubros');
-    Route::get('list-prod-rubros/{id_rubro}', [App\Http\Controllers\ClienteRubroController::class, 'listaProductosRubro'])->name('list-prod-rubros');
-
+    Route::controller(ClienteRubroController::class)->group(function(){
+    Route::get('rubros','listaRubros')->name('rubros');
+    Route::get('list-prod-rubros/{id_rubro}','listaProductosRubro')->name('list-prod-rubros');
+    });
 });
+//productos directorio exportador
 Route::prefix('')->group(function () {
-    Route::get('productos', [App\Http\Controllers\ClienteProductoController::class, 'productosBusqueda'])->name('productos');
-    Route::get('detalle-producto/{id}', [App\Http\Controllers\ClienteProductoController::class, 'unProducto'])->name('detalle-producto');
+    Route::controller(ClienteProductoController::class)->group(function(){
+    Route::get('productos','productosBusqueda')->name('productos');
+    Route::get('detalle-producto/{id}','unProducto')->name('detalle-producto');
+    });
 });

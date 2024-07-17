@@ -144,7 +144,7 @@
                                 @enderror
                             </div>
                             <div class="mb-3 col-md-4">
-                                <label class="text-black font-w500 ">Facebook de la Empresa (Agregue el link)</label>
+                                <label class="text-black font-w500 ">Facebook (Agregue el link)</label>
                                 <input type="text" class="form-control"
                                     style="font-weight:bolder; background-color:rgb(225, 225, 225);" name="facebook"
                                     id="facebook" value="{{ old('facebook', $directorioempresa->facebook ?? '') }}">
@@ -155,7 +155,7 @@
                                 @enderror
                             </div>
                             <div class="mb-3 col-md-4">
-                                <label class="text-black font-w500 ">Instagram de la Empresa (Nombre)</label>
+                                <label class="text-black font-w500 ">Instagram (Nombre)</label>
                                 <input type="text" class="form-control"
                                     style="font-weight:bolder; background-color:rgb(225, 225, 225);" name="instagram"
                                     id="instagram" value="{{ old('instagram', $directorioempresa->instagram ?? '') }}">
@@ -166,7 +166,7 @@
                                 @enderror
                             </div>
                             <div class="mb-3 col-md-4">
-                                <label class="text-black font-w500 ">Tiktok de la Empresa (Nombre)</label>
+                                <label class="text-black font-w500 ">Tiktok (Nombre)</label>
                                 <input type="text" class="form-control"
                                     style="font-weight:bolder; background-color:rgb(225, 225, 225);" name="tiktok"
                                     id="tiktok" value="{{ old('tiktok', $directorioempresa->tiktok ?? '') }}">
