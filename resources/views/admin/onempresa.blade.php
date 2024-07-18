@@ -177,8 +177,9 @@
                                 @enderror
                             </div>
                             <div class="mb-3 row text-center">
-                                <div class="">
+                                <div>
                                     <button type="submit" class="btn btn-primary">Subir Datos</button>
+                                    <a href="{{ URL('home/' . Crypt::encryptString($empresas->id_empresa)) }}" class="btn btn-danger">Volver Atras</a>
                                 </div>
                             </div>
                             <div class="mb-3 read-content">

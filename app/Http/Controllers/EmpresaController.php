@@ -70,7 +70,13 @@ class EmpresaController extends Controller
             ->select('rols.id_rol', 'rols.rol')
             ->where('id_user', Auth::id(), )->get();
 
+        $imagenempresa = DB::table('empresas as e')
+            ->join('directorio.directorio_empresa_extras as dde','e.id_empresa','=','dde.id_empresa')
+            ->select('dde.path_file_foto1','dde.path_file_foto2')
+            ->where('e.id_empresa', $idDes)->get();
+
         return view('admin.inicio', [
+            'imagenempresa' => $imagenempresa,
             'empresas' => $empresas,
             'roles' => $rol
         ]);
@@ -103,11 +109,17 @@ class EmpresaController extends Controller
             ->select('directorio_empresa_extras.*')
             ->where('empresas.id_empresa', $idDes, )->first();
 
+        $imagenempresa = DB::table('empresas as e')
+            ->join('directorio.directorio_empresa_extras as dde','e.id_empresa','=','dde.id_empresa')
+            ->select('dde.path_file_foto1','dde.path_file_foto2')
+            ->where('e.id_empresa', $idDes)->get();
+
         return view('admin.onempresa', [
             'empresas' => $empresas,
             'directorioempresa' => $directorioempresa,
             'roles' => $rol,
-            'imagen' => $imagen
+            'imagen' => $imagen,
+            'imagenempresa' => $imagenempresa,
         ]);
     }
     public function actualizarEmpresa($id, Request $data)

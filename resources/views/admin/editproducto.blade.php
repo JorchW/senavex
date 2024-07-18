@@ -22,12 +22,13 @@
                         <div class="row">
                             @if (session('success'))
                                 <div class="alert alert-success text-center">
-                                    <strong>{{ session('success') }}</strong>
-                                    <br>
-                                    <strong>Envie el producto a Revision</strong> ¡Para su Aprobacion y Publicacion!.
+                                <strong>{{ session('success') }}</strong>
                                 </div>
-                                <div class="alert alert-danger text-center">
-                                    Vuelva a la Lista <strong>Por Publicar</strong>
+                                <div class="alert alert-primary text-center">
+                                    Envie el producto a <strong>Revision</strong>
+                                    <br>
+                                    ¡Para su Aprobacion y Publicacion!.
+                                    <p><a href="{{ URL('list-prod-admin/' . Crypt::encryptString($empresas->id_empresa)) }}"><strong>Volver a la lista de productos</strong></a></p>
                                 </div>
                             @endif
                             <div class="mb-3">
@@ -174,6 +175,7 @@
                             <div class="mb-3 row text-center">
                                 <div class="">
                                     <button type="submit" class="btn btn-primary">Subir Datos</button>
+                                    <a href="{{ URL('list-prod-admin/' . Crypt::encryptString($empresas->id_empresa)) }}" class="btn btn-danger">Volver a la Lista</a>
                                 </div>
                             </div>
                             <br>

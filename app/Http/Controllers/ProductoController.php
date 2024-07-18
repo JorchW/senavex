@@ -45,9 +45,15 @@ class ProductoController extends Controller
             ->whereNull('dps.id_producto_solicitud')
             ->whereIn('dj.id_ddjj_estado', [6, 9, 10, 11])->get();
 
+        $imagenempresa = DB::table('empresas as e')
+            ->join('directorio.directorio_empresa_extras as dde','e.id_empresa','=','dde.id_empresa')
+            ->select('dde.path_file_foto1','dde.path_file_foto2')
+            ->where('e.id_empresa', $idDes)->get();
+
         $enviarproducto = DB::table('directorio.directorio_productos')->get();
 
         return view('admin.listproducto', [
+            'imagenempresa' => $imagenempresa,
             'enviarproducto' => $enviarproducto,
             'empresas' => $empresas,
             'roles' => $rol,
@@ -97,7 +103,14 @@ class ProductoController extends Controller
             ->select('er.*')
             ->where('ers.id_empresa', $empresas->id_empresa)->get();
 
+        $imagenempresa = DB::table('ddjjs as dj')
+            ->join('empresas as e','dj.id_empresa','=','e.id_empresa')
+            ->join('directorio.directorio_empresa_extras as dde','e.id_empresa','=','dde.id_empresa')
+            ->select('dde.path_file_foto1','dde.path_file_foto2')
+            ->where('dj.id_ddjj', $idDes)->get();
+
         return view('admin.editproducto', [
+            'imagenempresa' => $imagenempresa,
             'empresas' => $empresas,
             'directorioproducto' => $directorioproducto,
             'roles' => $rol,
@@ -450,7 +463,13 @@ class ProductoController extends Controller
             ->where('dj.id_empresa', $idDes)
             ->whereIn('dps.id_producto_solicitud_estado', [3])->get();
 
+        $imagenempresa = DB::table('empresas as e')
+            ->join('directorio.directorio_empresa_extras as dde','e.id_empresa','=','dde.id_empresa')
+            ->select('dde.path_file_foto1','dde.path_file_foto2')
+            ->where('e.id_empresa', $idDes)->get();
+
         return view('listas_exportador.rechazadas', [
+            'imagenempresa' => $imagenempresa,
             'empresas' => $empresas,
             'roles' => $rol,
             'productos' => $productos,
@@ -487,7 +506,13 @@ class ProductoController extends Controller
             ->where('dj.id_empresa', $idDes)
             ->whereIn('dps.id_producto_solicitud_estado', [2])->get();
 
+        $imagenempresa = DB::table('empresas as e')
+            ->join('directorio.directorio_empresa_extras as dde','e.id_empresa','=','dde.id_empresa')
+            ->select('dde.path_file_foto1','dde.path_file_foto2')
+            ->where('e.id_empresa', $idDes)->get();
+
         return view('listas_exportador.publicados', [
+            'imagenempresa' => $imagenempresa,
             'empresas' => $empresas,
             'roles' => $rol,
             'productos' => $productos,

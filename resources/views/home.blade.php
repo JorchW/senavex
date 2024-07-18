@@ -48,11 +48,6 @@
                 <nav class="navbar navbar-expand">
                     <div class="collapse navbar-collapse justify-content-between">
                         <div class="header-left">
-                            <div class="input-group search-area d-xl-inline-flex d-none">
-                                <button class="input-group-text"><i
-                                        class="flaticon-381-search-2 text-primary"></i></button>
-                                <input type="text" class="form-control" placeholder="Search here...">
-                            </div>
                         </div>
                         <ul class="navbar-nav header-right">
                             <li class="nav-item dropdown notification_dropdown">
@@ -219,6 +214,11 @@
                                     <span class="nav-text">Productos</span>
                                 </a>
                                 <ul aria-expanded="false">
+                                    @if ($imagenempresa->isEmpty())
+                                    <li>
+                                        <h5 class="text-center">Complete requisitos de la Empresa.</h5>
+                                    </li>
+                                    @else
                                     <li>
                                         <a href="{{ URL('list-prod-admin/' . Crypt::encryptString($empresas->id_empresa)) }}">
                                             Por publicar</a>
@@ -233,6 +233,7 @@
                                             href="{{ URL('list-prod-publicados/' . Crypt::encryptString($empresas->id_empresa)) }}">
                                             Publicados</a>
                                     </li>
+                                    @endif
                                 </ul>
                             </li>
                             @break
@@ -245,6 +246,43 @@
                 <p class="h2">Bienvenido a la Empresa</p>
                 <span class="breadcrumb-item active">{{$empresas->nombre_comercial}}</span>
             </blockquote>
+            @if ($imagenempresa->isEmpty())
+            <div class="text-center">
+                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Bienvenido Exportador<br>
+                    ¡Pulse aquí para comenzar!
+                </button>
+            </div>
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Bienvenido Exportador</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Bienvenido al Directorio Exportador.</p>
+                            <p>Antes de comenzar primero debe subir contenido en la parte de <strong>Editar Empresa.</strong></p>
+                            <p>Se requiere lo siguiente:</p>
+                            <ul>
+                                <strong>
+                                    <li>*Imagen de la Empresa*</li>
+                                    <li>*Logo de la Empresa*</li>
+                                </strong>
+                            </ul>
+                            <br>
+                            <p>Los demás datos serán opcionales para su Empresa, pero le ayudarán facilmente a contactarse con usted.</p>
+                            <p>Después se le habilitará la parte de <strong>Productos.</strong></p>
+                            <p class="text-danger text-center">*El mensaje desaparecera al completar el requisito*</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @else
+            @endif
             @yield('content')
         </div>
         <div class="footer">

@@ -47,11 +47,6 @@
                 <nav class="navbar navbar-expand">
                     <div class="collapse navbar-collapse justify-content-between">
                         <div class="header-left">
-                            <div class="input-group search-area d-xl-inline-flex d-none">
-                                <button class="input-group-text"><i
-                                        class="flaticon-381-search-2 text-primary"></i></button>
-                                <input type="text" class="form-control" placeholder="Search here...">
-                            </div>
                         </div>
                         <ul class="navbar-nav header-right">
                             <li class="nav-item dropdown notification_dropdown">
