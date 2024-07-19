@@ -15,7 +15,7 @@
             @endif
             <div class="card">
                 <div class="modal-body">
-                    <form method="POST" action="{{ URL('update-prod/' . Crypt::encryptString($empresas->id_ddjj)) }}"
+                    <form method="POST" action="{{ route('update-prod',['id' => Crypt::encryptString($empresas->id_ddjj)]) }}"
                         enctype="multipart/form-data" autocomplete="off">
                         @csrf
                         @method('PUT')
@@ -28,7 +28,7 @@
                                     Envie el producto a <strong>Revision</strong>
                                     <br>
                                     ¡Para su Aprobacion y Publicacion!.
-                                    <p><a href="{{ URL('list-prod-admin/' . Crypt::encryptString($empresas->id_empresa)) }}"><strong>Volver a la lista de productos</strong></a></p>
+                                    <p><a href="{{ route('list-prod-admin',['id' => Crypt::encryptString($empresas->id_empresa)]) }}"><strong>Volver a la lista de productos</strong></a></p>
                                 </div>
                             @endif
                             <div class="mb-3">
@@ -175,7 +175,7 @@
                             <div class="mb-3 row text-center">
                                 <div class="">
                                     <button type="submit" class="btn btn-primary">Subir Datos</button>
-                                    <a href="{{ URL('list-prod-admin/' . Crypt::encryptString($empresas->id_empresa)) }}" class="btn btn-danger">Volver a la Lista</a>
+                                    <a href="{{ route('list-prod-admin',['id' => Crypt::encryptString($empresas->id_empresa)]) }}" class="btn btn-danger">Volver a la Lista</a>
                                 </div>
                             </div>
                             <br>

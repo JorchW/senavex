@@ -31,7 +31,7 @@
     </div>
     <div id="main-wrapper">
         <div class="nav-header">
-            <a href="{{ URL('select') }}" class="brand-logo">
+            <a href="{{ route('select') }}" class="brand-logo">
                 <img src="{{ asset('/storage/images/vistas/icono.png') }}" height="50" width="50" alt="">
                 <img class="brand-title" src="{{ asset('/storage/images/vistas/senavex.png') }}" height="50" width="150"
                     alt="">
@@ -237,7 +237,7 @@
                                 <p class="card-text"><strong>Nit:</strong> {{ $empresa->nit }}</p>
                                 <p class="card-text"><strong>Ruex:</strong> {{ $empresa->ruex }}</p>
                                 <p class="card-text"><strong>Estado:</strong> {{$empresa->descripcion_estado}} </p>
-                                <a href="{{ URL('home/' . Crypt::encryptString($empresa->id_empresa)) }}"
+                                <a href="{{ route('home', ['id' => Crypt::encryptString($empresa->id_empresa)]) }}"
                                     class="btn btn-outline-primary mt-auto">Entrar a Empresa</a>
                             </div>
                         </div>

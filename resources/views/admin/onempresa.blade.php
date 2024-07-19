@@ -12,7 +12,7 @@
         <div class="col-xl-12 col-lg-12">
             <div class="card">
                 <div class="modal-body">
-                    <form method="POST" action="{{ URL('update-empr/' . Crypt::encryptString($empresas->id_empresa)) }}"
+                    <form method="POST" action="{{ route('update-empr',['id' => Crypt::encryptString($empresas->id_empresa)]) }}"
                         enctype="multipart/form-data" autocomplete="off">
                         @csrf
                         @method('PUT')
@@ -179,7 +179,7 @@
                             <div class="mb-3 row text-center">
                                 <div>
                                     <button type="submit" class="btn btn-primary">Subir Datos</button>
-                                    <a href="{{ URL('home/' . Crypt::encryptString($empresas->id_empresa)) }}" class="btn btn-danger">Volver Atras</a>
+                                    <a href="{{ route('home', ['id' => Crypt::encryptString($empresas->id_empresa)]) }}" class="btn btn-danger">Volver Atras</a>
                                 </div>
                             </div>
                             <div class="mb-3 read-content">

@@ -58,7 +58,7 @@
                                 <li class="m-0 pl-10">
                                     @if (Route::has('login'))
                                         @auth
-                                            <a href="{{ url('select') }}" target="_blank" class="text-white"><i
+                                            <a href="{{ route('select') }}" target="_blank" class="text-white"><i
                                                     class="fa fa-user-o mr-5 text-white"></i>
                                                 Home </a>
                                         @else
@@ -77,17 +77,17 @@
                 <div class="header-nav-wrapper">
                     <div class="container">
                         <nav id="menuzord-right" class="menuzord blue no-bg">
-                            <a class="menuzord-brand switchable-logo pull-left flip mb-15" href="{{URL('/') }}">
+                            <a class="menuzord-brand switchable-logo pull-left flip mb-15" href="{{route('inicio') }}">
                                 <img class="logo-default" src="{{asset('storage/images/vistas/logoc.png')}}" alt="">
                                 <img class="logo-scrolled-to-fixed" src="{{asset('storage/images/vistas/logoc.png')}}"
                                     alt="">
                             </a>
                             <ul class="menuzord-menu">
-                                <li><a href="{{ URL('empresas') }}">EMPRESAS</a>
+                                <li><a href="{{ route('empresas') }}">EMPRESAS</a>
                                 </li>
-                                <li><a href="{{ URL('rubros') }}">RUBROS</a>
+                                <li><a href="{{ route('rubros') }}">RUBROS</a>
                                 </li>
-                                <li><a href="{{ URL('productos') }}">PRODUCTOS</a>
+                                <li><a href="{{ route('productos') }}">PRODUCTOS</a>
                                 </li>
                             </ul>
                         </nav>

@@ -75,7 +75,7 @@
                                                 </li>
                                             </ul>
                                             <a class="btn btn-dark btn-theme-coloredv btn-sm text-uppercase mt-10"
-                                                href="{{ URL('detalle-producto/' . Crypt::encryptString($producto->id_producto)) }}">Ver
+                                                href="{{ route('detalle-producto', ['id' => Crypt::encryptString($producto->id_producto)]) }}">Ver
                                                 Producto</a>
                                         </div>
                                     </div>

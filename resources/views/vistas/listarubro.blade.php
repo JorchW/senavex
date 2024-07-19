@@ -13,7 +13,7 @@
                         <div class="col-md-4">
                             <div class="widget">
                                 <div class="search-form">
-                                    <form method="get" class="search-form" action="{{ URL('rubros/')}}">
+                                    <form method="get" class="search-form" action="{{ route('rubros')}}">
                                         <div class="input-group">
                                             <input type="text" placeholder="Haga clic para buscar"
                                                 id="buscador_rubro" name="buscador_rubro" value="{{ $buscador_rubro }}"
@@ -45,7 +45,7 @@
                                             <h4 class="text-theme-colored media-heading font-weight-500">
                                                 {{ $rubro->descripcion_rubro }}
                                             </h4>
-                                            <a class="pull-right text-gray font-13 pb-5" href="{{URL('list-prod-rubros/'.Crypt::encryptString($rubro->id_rubro))}}"><i
+                                            <a class="pull-right text-gray font-13 pb-5" href="{{route('list-prod-rubros', ['id_rubro' =>Crypt::encryptString($rubro->id_rubro)])}}"><i
                                                     class="fa fa-angle-double-right text-theme-colored"></i>
                                                 Ver productos</a>
                                         </div>

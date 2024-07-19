@@ -71,10 +71,10 @@
                                         👁️Leer motivo de rechazo
                                     </button>
 
-                                    <a href="{{ URL('one-prod-admin/' . Crypt::encryptString($producto->id_ddjj)) }}"
+                                    <a href="{{ route('one-prod-admin',['id' => Crypt::encryptString($producto->id_ddjj)]) }}"
                                         class="btn btn-outline-primary">✏️Editar</a>
 
-                                    <a href="{{ URL('list-prod-rechazadas/' . Crypt::encryptString($producto->id_empresa)) }}"
+                                    <a href="{{ route('list-prod-rechazadas',['id' => Crypt::encryptString($producto->id_empresa)]) }}"
                                         class="btn btn-outline-primary">✅Enviar a revisión</a>
                                 </td>
                             </tr>

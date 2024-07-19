@@ -32,7 +32,7 @@
     </div>
     <div id="main-wrapper">
         <div class="nav-header">
-            <a href="{{ URL('select') }}" class="brand-logo">
+            <a href="{{ route('select') }}" class="brand-logo">
                 <img src="{{ asset('/storage/images/vistas/icono.png') }}" height="50" width="50" alt="">
                 <img class="brand-title" src="{{ asset('/storage/images/vistas/senavex.png') }}" height="50" width="150"
                     alt="">
@@ -175,7 +175,7 @@
         <div class="deznav">
             <div class="deznav-scroll">
                 <ul class="metismenu" id="menu">
-                    <li><a class="ai-icon" href="{{ URL('select') }}" aria-expanded="false">
+                    <li><a class="ai-icon" href="{{ route('select') }}" aria-expanded="false">
                             <i class="flaticon-025-dashboard"></i>
                             <span class="nav-text">Seleccionar Otra</span>
                             <div class="text-center">
@@ -199,7 +199,7 @@
                                 </a>
                                 <ul aria-expanded="false">
                                     <li>
-                                        <a href="{{ URL('one-emp-admin/' . Crypt::encryptString($empresas->id_empresa)) }}">
+                                        <a href="{{ route('one-emp-admin',['id' => Crypt::encryptString($empresas->id_empresa)]) }}">
                                             @if ($empresas->razon_social == '')
                                                 {{$empresas->nombre_comercial}}
                                             @else
@@ -220,17 +220,17 @@
                                     </li>
                                     @else
                                     <li>
-                                        <a href="{{ URL('list-prod-admin/' . Crypt::encryptString($empresas->id_empresa)) }}">
+                                        <a href="{{ route('list-prod-admin',['id' => Crypt::encryptString($empresas->id_empresa)]) }}">
                                             Por publicar</a>
                                     </li>
                                     <li>
                                         <a
-                                            href="{{ URL('list-prod-rechazadas/' . Crypt::encryptString($empresas->id_empresa)) }}">
+                                            href="{{ route('list-prod-rechazadas',['id' => Crypt::encryptString($empresas->id_empresa)]) }}">
                                             Rechazadas</a>
                                     </li>
                                     <li>
                                         <a
-                                            href="{{ URL('list-prod-publicados/' . Crypt::encryptString($empresas->id_empresa)) }}">
+                                            href="{{ route('list-prod-publicados',['id' => Crypt::encryptString($empresas->id_empresa)]) }}">
                                             Publicados</a>
                                     </li>
                                     @endif

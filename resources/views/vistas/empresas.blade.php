@@ -14,7 +14,7 @@
                     <div class="col-md-4">
                         <div class="widget">
                             <div class="search-form">
-                                <form method="get" class="search-form" action="{{ URL('empresas/')}}">
+                                <form method="get" class="search-form" action="{{ route('empresas')}}">
                                     <div class="input-group">
                                         <input type="text" placeholder="Haga clic para buscar" id="buscador_empresa"
                                             name="buscador_empresa" value="{{$buscador_empresa}}"
@@ -55,10 +55,10 @@
                                             <p>
                                                 {{ ucfirst(mb_strtolower(Str::limit($empresa->descripcion_empresa, 140, $end = ' ...')))  }}
                                             </p>
-                                            <a href="{{ URL('detalle-empresas/' . Crypt::encryptString($empresa->id_empresa)) }}"
+                                            <a href="{{ route('detalle-empresas', ['id' => Crypt::encryptString($empresa->id_empresa)]) }}"
                                                 class="btn btn-flat btn-dark btn-theme-colored btn-sm">Ver Más
                                                 <i class="fa fa-angle-double-right"></i></a>
-                                            <a href="{{ URL('list-prod-empresas/' . Crypt::encryptString($empresa->id_empresa)) }}"
+                                            <a href="{{ route('list-prod-empresas',['id' => Crypt::encryptString($empresa->id_empresa)]) }}"
                                                 class="btn btn-flat btn-dark btn-theme-colored btn-sm">Productos
                                                 <i class="fa fa-angle-double-right"></i></a>
                                         </div>
