@@ -35,7 +35,7 @@ class LoginController extends Controller
         ]);
 
         if (Auth::attempt(['ci' => $request->ci, 'password' => $request->password])) {
-            return redirect()->intended($this->redirectPath());
+            return redirect()->route('select');
         } else {
             return redirect()->back()->withErrors(['ci' => 'Las credenciales no coinciden con el registro!']);
         }

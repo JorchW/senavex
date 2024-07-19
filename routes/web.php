@@ -42,7 +42,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 });
 
 
-Route::prefix('iniciodirectorio')->group(function () {
+Route::prefix('')->group(function () {
     Route::controller(ClienteInicioController::class)->group(function(){
         Route::get('/','inicio')->name('inicio');
     });
