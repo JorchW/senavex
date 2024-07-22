@@ -74,8 +74,8 @@
                                     <a href="{{ route('one-prod-admin',['id' => Crypt::encryptString($producto->id_ddjj)]) }}"
                                         class="btn btn-outline-primary">✏️Editar</a>
 
-                                    <a href="{{ route('list-prod-rechazadas',['id' => Crypt::encryptString($producto->id_empresa)]) }}"
-                                        class="btn btn-outline-primary">✅Enviar a revisión</a>
+                                    <a href="{{ route('publicar-prod-admin',['id' => Crypt::encryptString($producto->id_ddjj)]) }}"
+                                        class="btn btn-outline-primary mb-2">✅Enviar a revisión</a>
                                 </td>
                             </tr>
                         @endforeach

@@ -23,37 +23,45 @@ class RevisionController extends Controller
     public function publicarProd(Request $request,$id)
     {
 
-        $id_ddjj = Crypt::decryptString($id);
+        try {
+            $id_ddjj = Crypt::decryptString($id);
 
-        $productos = DB::table('directorio.directorio_productos as ddp')
-                    ->select('*')
-                    ->where('ddp.id_ddjj', $id_ddjj)->get()[0];
+            $productos = DB::table('directorio.directorio_productos as ddp')
+                        ->select('*')
+                        ->where('ddp.id_ddjj', $id_ddjj)->get()[0];
 
-        $asignacion = $this->asignarRevisor();
+            $asignacion = $this->asignarRevisor();
 
-        //**EXTRAYENDO ID_REVISOR PARA OBTENER ID_REGIONAL */
-        $query = "  SELECT a.id_regional from empresas_personas a
-                    where a.id_persona = ? and a.estado is true and a.id_rol in (5,6,7)
-                    order by a.id_empresa_persona desc";
-        $ddjj_solicituds_regional = DB::select($query, [$asignacion['id_revisor']])[0];
+            //**EXTRAYENDO ID_REVISOR PARA OBTENER ID_REGIONAL */
+            $query = "  SELECT a.id_regional from empresas_personas a
+                        where a.id_persona = ? and a.estado is true and a.id_rol in (5,6,7)
+                        order by a.id_empresa_persona desc";
+            $ddjj_solicituds_regional = DB::select($query, [$asignacion['id_revisor']])[0];
 
-        DirectorioProductoSolicituds::create([
-            'id_producto_solicitud_estado' => 1,
-            'id_producto' => $productos->id_producto,
-            'id_empresa' => $productos->id_empresa,
-            'id_revisor' => $asignacion['id_revisor'],
-            'id_regional' => $ddjj_solicituds_regional->id_regional,
-            'fecha_registro' => now(),
-            'fecha_asignacion' => $asignacion['f_inicio'],
-            'fecha_revision' => NULL,
-            'solicitud_observaciones' => '',
-            'fecha_limite' => $asignacion['f_fin'],
-            'id_persona' => Auth::id(),
-        ]);
+            DirectorioProductoSolicituds::create([
+                'id_producto_solicitud_estado' => 1,
+                'id_producto' => $productos->id_producto,
+                'id_empresa' => $productos->id_empresa,
+                'id_revisor' => $asignacion['id_revisor'],
+                'id_regional' => $ddjj_solicituds_regional->id_regional,
+                'fecha_registro' => now(),
+                'fecha_asignacion' => $asignacion['f_inicio'],
+                'fecha_revision' => NULL,
+                'solicitud_observaciones' => '',
+                'fecha_limite' => $asignacion['f_fin'],
+                'id_persona' => Auth::id(),
+            ]);
 
-        $encrypted_id_empresa = Crypt::encryptString($productos->id_empresa);
+            $encrypted_id_empresa = Crypt::encryptString($productos->id_empresa);
 
-        return redirect()->route('list-prod-admin', ['id' => $encrypted_id_empresa]);
+            return redirect()->route('list-prod-admin', ['id' => $encrypted_id_empresa]);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return response()->json([
+                'message' => 'Error al enviar producto a revisión.',
+                'errors' => ["throwable" => [$th->getMessage()]]
+            ], 400);
+        }
     }
 
     private function asignarRevisor()
@@ -198,45 +206,56 @@ class RevisionController extends Controller
 
     public function listProdRechazadas($id)
     {
-        $idDes = Crypt::decryptString($id);
+        try {
+            $id_empresa = Crypt::decryptString($id);
 
-        $empresas = DB::table('empresas')
-            ->join('ruexs', 'empresas.id_empresa', '=', 'ruexs.id_empresa')
-            ->join('empresas_personas', 'empresas.id_empresa', '=', 'empresas_personas.id_empresa')
-            ->join('personas', 'empresas_personas.id_persona', '=', 'personas.id_persona')
-            ->join('users', 'personas.id_persona', '=', 'users.id_persona')
-            ->select('empresas.*', 'users.*', 'ruexs.*')
-            ->where('empresas.id_empresa', $idDes)->first();
+            $empresas = DB::table('empresas')
+                ->join('ruexs', 'empresas.id_empresa', '=', 'ruexs.id_empresa')
+                ->join('empresas_personas', 'empresas.id_empresa', '=', 'empresas_personas.id_empresa')
+                ->join('personas', 'empresas_personas.id_persona', '=', 'personas.id_persona')
+                ->join('users', 'personas.id_persona', '=', 'users.id_persona')
+                ->select('empresas.*', 'users.*', 'ruexs.*')
+                ->where('empresas.id_empresa', $id_empresa)->first();
 
-        $rol = DB::table('rols')
-            ->join('empresas_personas', 'rols.id_rol', '=', 'empresas_personas.id_rol')
-            ->join('personas', 'empresas_personas.id_persona', '=', 'personas.id_persona')
-            ->join('users', 'personas.id_persona', '=', 'users.id_persona')
-            ->select('rols.id_rol', 'rols.rol')
-            ->where('id_user', Auth::id(), )->get();
+            $rol = DB::table('rols')
+                ->join('empresas_personas', 'rols.id_rol', '=', 'empresas_personas.id_rol')
+                ->join('personas', 'empresas_personas.id_persona', '=', 'personas.id_persona')
+                ->join('users', 'personas.id_persona', '=', 'users.id_persona')
+                ->select('rols.id_rol', 'rols.rol')
+                ->where('id_user', Auth::id(), )->get();
 
-        $productos = DB::table('ddjjs as dj')
-            ->leftjoin('directorio.directorio_productos as dp', 'dj.id_ddjj', '=', 'dp.id_ddjj')
-            ->join('directorio.producto_solicituds as dps', 'dps.id_producto', '=', 'dp.id_producto')
-            ->join('ddjj_datos_mercancias as dm', 'dj.id_ddjj', '=', 'dm.id_ddjj')
-            ->join('acuerdos as a', 'a.id_acuerdo', '=', 'dj.id_acuerdo')
-            ->join('empresas as e', 'dj.id_empresa', '=', 'e.id_empresa')
-            ->select('*')
-            ->where('dj.id_empresa', $idDes)
-            ->whereIn('dps.id_producto_solicitud_estado', [3])->get();
+            $query_productos = "  SELECT * from ddjjs d
+                            inner join ddjj_datos_mercancias ddm on ddm.id_ddjj = d.id_ddjj 
+                            inner join acuerdos a on a.id_acuerdo = d.id_acuerdo 
+                            inner join empresas e on e.id_empresa = d.id_empresa 
+                            inner join directorio.directorio_productos as ddp on ddp.id_ddjj = d.id_ddjj
+                            inner join (
+                                select distinct on (dps.id_producto) dps.id_producto, dps.id_producto_solicitud_estado 
+                                from directorio.producto_solicituds dps
+                                order by dps.id_producto, dps.id_producto_solicitud desc
+                            ) dpst on dpst.id_producto = ddp.id_producto
+                            where d.id_empresa = ? and dpst.id_producto_solicitud_estado = 3";
+            $result_productos = DB::select($query_productos, [$id_empresa]);
 
-        $imagenempresa = DB::table('empresas as e')
-            ->join('directorio.directorio_empresa_extras as dde','e.id_empresa','=','dde.id_empresa')
-            ->select('dde.path_file_foto1','dde.path_file_foto2')
-            ->where('e.id_empresa', $idDes)->get();
+            $imagenempresa = DB::table('empresas as e')
+                ->join('directorio.directorio_empresa_extras as dde','e.id_empresa','=','dde.id_empresa')
+                ->select('dde.path_file_foto1','dde.path_file_foto2')
+                ->where('e.id_empresa', $id_empresa)->get();
 
-        return view('listas_exportador.rechazadas', [
-            'imagenempresa' => $imagenempresa,
-            'empresas' => $empresas,
-            'roles' => $rol,
-            'productos' => $productos,
-            'idempresas' => $idDes
-        ]);
+            return view('listas_exportador.rechazadas', [
+                'imagenempresa' => $imagenempresa,
+                'empresas' => $empresas,
+                'roles' => $rol,
+                'productos' => $result_productos,
+                'idempresas' => $id_empresa
+            ]);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return response()->json([
+                'message' => 'Error al enviar producto a revisión.',
+                'errors' => ["throwable" => [$th->getMessage()]]
+            ], 400);
+        }
     }
 
     public function listProdPublicados($id)

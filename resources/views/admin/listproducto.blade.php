@@ -5,7 +5,7 @@
     </div>
     <div class="row mb-4 align-items-center">
         <div class="me-auto">
-            <h2 class="font-w600 mb-0">Lista de Productos</h2>
+            <h2 class="font-w600 mb-0">Lista de Productos 3</h2>
             <p class="text-light"> </p>
         </div>
         <div class="col-xl-9 col-lg-8">
